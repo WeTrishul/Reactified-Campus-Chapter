@@ -64,8 +64,7 @@ module.exports.dashboard = async (req,res)=>{
     try {
                 
         res.render('dashboard',{
-            title:'Dasboard',
-            result: eventsArray
+            title:'Dasboard'
         })
        
         
@@ -87,8 +86,8 @@ module.exports.upcomingevents = async (req,res)=>{
                 arr.push(event)
             }            
         });
-
-        const eventsArray= arr.reverse()
+        const arr1 = arr.reverse()
+        const eventsArray = arr
         console.log(eventsArray)
         
         res.render('UpcomingEvents',{

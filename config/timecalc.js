@@ -9,7 +9,7 @@ const startingTime = function(sec){
 
     var date = new Date();
     date.setTime(d.valueOf() - 60000 * d.getTimezoneOffset());
-    //console.log(date);
+    
 
     const newdate = moment.utc(date).format('MM/DD/YYYY')
     return newdate
