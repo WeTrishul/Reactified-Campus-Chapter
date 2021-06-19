@@ -4,22 +4,14 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const passport =require('passport')
 const passport_local = require('../config/passport-local-auth')
+const fetch = require('node-fetch')
+const moment = require('moment')
+const startingTime = require('../config/timecalc')
 
 
 
 
 module.exports.getlogin=(req,res)=>{
-
-   /* if(!req.cookies.username)
-    {
-        res.render('login',{
-            title:'Login'
-        })
-    }
-    else
-    {
-    res.redirect('back')
-    }*/
 
     if(req.isAuthenticated())
     {
@@ -34,39 +26,10 @@ else
 }
 
 module.exports.postlogin = (req,res)=>{
-    
-    /*const username=req.body.username
-    try {
-        const user = await User.findOne({username})
-        const password = user.password;
-            if(password===req.body.password)
-            {
-                console.log('Logged In successfully')
-                res.cookie('username',username)
-               res.redirect('/dashboard')
-            console.log('Dashboard from ejs')
-            }
-            else{
-                res.redirect('/login')
-            }
-        }
-        catch (error) {
-            res.redirect('/login')
-    }*/
     res.redirect('/dashboard')
 }
 
 module.exports.getsignup = (req,res)=>{
-   /* if(!req.cookies.username)
-    {
-    res.render('signup',{
-        title:'signup'
-    })
-}
-else
-{
-    res.redirect('back')
-}*/
 
 if(req.isAuthenticated())
 {
@@ -95,36 +58,51 @@ module.exports.postsignup = async (req,res)=>{
             res.redirect('back')
         }
     }
+    
 
-module.exports.dashboard =  (req,res)=>{
-    /*if(!req.cookies.username)
-    {
-        res.redirect('/login')
-    }*/
-   // else
-    //{
-       /* try {
-            const user = await User.findOne({username:req.cookies.username})
+module.exports.dashboard = async (req,res)=>{
+    try {
+                
         res.render('dashboard',{
-            title:'Dashboard',
-            value:user.name
+            title:'Dasboard',
+            result: eventsArray
         })
-        } catch (error) {
-            res.redirect('/login')
-        }*/
-        res.render('dashboard',{
-            title:'Dasboard'
+       
+        
+    } catch (error) {
+        console.log(error)
+    }
+    
+}
+
+module.exports.upcomingevents = async (req,res)=>{
+    try {
+        const UpcomingEvents = await fetch('https://codeforces.com/api/contest.list').then(response => response.json());
+
+        const arr=[]
+        UpcomingEvents.result.forEach(event => {
+            if(event.phase !=="FINISHED" && event.phase !=="PENDING_SYSTEM_TEST")
+            {
+                event.startTimeSeconds=startingTime(event.startTimeSeconds)
+                arr.push(event)
+            }            
+        });
+
+        const eventsArray= arr.reverse()
+        console.log(eventsArray)
+        
+        res.render('UpcomingEvents',{
+            result: eventsArray
         })
-   // }
-
-
+       
+        
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports.logout = (req,res)=>{
-    /*if(req.isAuthenticated())
-    {   res.clearCookie('user');
-        res.redirect('/login')
-    }*/
+        
     req.logout();
   res.redirect('/login');
 }

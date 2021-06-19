@@ -12,7 +12,11 @@ router.post('/login/createsession',passport.authenticate(
     ),UserController.postlogin)
 
 router.get('/dashboard',passport.checkAuthentication,UserController.dashboard)
+
+router.get('/UpcomingEvents',passport.checkAuthentication,UserController.upcomingevents)
+
 router.get('/logout',UserController.logout)
+
 
 
 
