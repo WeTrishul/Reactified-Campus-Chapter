@@ -4,6 +4,7 @@ const ejs = require('ejs')
 const bodyParser = require("body-parser")
 const cookieParser = require('cookie-parser')
 const UserRouter = require('./routes/user')
+const DiscussRouter = require('./routes/DiscussionForum')
 const passport = require('passport')
 const passport_local = require('./config/passport-local-auth')
 const db = require('./config/db')
@@ -51,7 +52,7 @@ app.use(passport.session())
 app.use(passport.setAuthenticatedUser)
 
 app.use(UserRouter)
-
+app.use(DiscussRouter)
 
 
 
