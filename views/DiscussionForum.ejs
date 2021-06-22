@@ -28,6 +28,23 @@
         </nav>
 
 
+        <div id="allposts">
+
+            <ul><% for(post of posts){ %>
+
+                <li><p><%=post.createdAt%></p>
+                    <p><%=post.userid.name%><p>
+                    <h3><%=post.postBody%></h3>
+
+                </li>
+                
+
+                <%}%>
+            
+            </ul>
+
+        </div>
+
         <div class="container row">
             <p><%=user.name%></p>
 
