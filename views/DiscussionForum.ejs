@@ -37,7 +37,11 @@
                     <h3><%=post.postBody%></h3>
 
                 </li>
-                
+                <form action="/commentit" method="POST">
+                    <input name="commentBody" placeholder="Comment here">
+                    <input name="postid" type="hidden" value="<%=post._id%>"> 
+                    <button type="submit" id="send-message">Post</button>
+                  </form>
 
                 <%}%>
             
@@ -50,8 +54,8 @@
 
             <div id="user-write-box">
                 <div >
-                <form action="/postit" method="POST">
-                  <input name="postBody" placeholder="Type here">
+                <form action="/postit" method="POST" >
+                  <input name="postBody" placeholder="Type here" style="height: 1 rem;">
                   <button type="submit" id="send-message">Post</button>
                 </form>
                 </div>

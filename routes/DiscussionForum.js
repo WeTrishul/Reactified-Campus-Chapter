@@ -8,5 +8,6 @@ router.get('/Discuss',DiscussController.discuss)
 
 router.post('/postit',DiscussController.postit)
 
+router.post('/commentit',DiscussController.commentit)
 
 module.exports = router

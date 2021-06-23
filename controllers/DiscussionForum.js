@@ -3,6 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const User = require('../models/user')
 const Post = require('../models/post')
+const Comment = require('../models/comments')
 const passport =require('passport')
 const passport_local = require('../config/passport-local-auth')
 const fetch = require('node-fetch')
@@ -34,4 +35,22 @@ module.exports.postit = (req,res)=>{
         
     })
 
+}
+
+module.exports.commentit = (req,res)=>{
+
+        Post.findById(req.body.postid,(error,post)=>{
+            if(post)
+            {
+                Comment.create({
+                    userid:req.user._id,
+                    postid:req.body.postid,
+                    commentBody : req.body.commentBody
+                },(error,comment)=>{
+                    post.comments.push(comment)
+                    post.save()
+                    return res.redirect('/Discuss')
+                })
+            }
+        })
 }
