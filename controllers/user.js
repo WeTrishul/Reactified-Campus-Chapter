@@ -88,7 +88,6 @@ module.exports.upcomingevents = async (req,res)=>{
         });
         const arr1 = arr.reverse()
         const eventsArray = arr
-        console.log(eventsArray)
         
         res.render('UpcomingEvents',{
             result: eventsArray

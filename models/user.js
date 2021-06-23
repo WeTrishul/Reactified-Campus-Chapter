@@ -2,13 +2,9 @@ const mongoose=require('mongoose')
 const db = require('../config/db')
 const bcrypt=require('bcrypt')
 const validator =require('validator')
-
-/*mongoose.connect('mongodb://127.0.0.1:27017/CodeChefCampusChapter',{
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-})*/
-
+const path = require('path')
+const multer = require('multer')
+const Questions_PATH =path.join('/uploads/questionsetters/questions')
 
 
 const userSchema = new mongoose.Schema({
@@ -75,9 +71,35 @@ const userSchema = new mongoose.Schema({
     UserType:{
         type: String,
         reuired:true
+    },
+    questions:{
+        type:String,
+        default:'Nhi hai'
     }
+},  {
+        timestamps:true
     })
 
+//defing disk configuration
+    let storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+          cb(null, path.join(__dirname,'..',Questions_PATH))
+        },
+        filename: function (req, file, cb) {
+          cb(null, file.fieldname + '-' + Date.now() + '.pdf')
+        }
+      })
+
+      userSchema.statics.uploadedQuestions = multer({ storage: storage,
+            fileFilter: function (req, file, callback) {
+            var ext = path.extname(file.originalname);
+            if(ext !== '.pdf') {
+                return callback(new Error('Only Pdf is allowed'))
+            }
+            callback(null, true)
+        }
+     }).array('questions',100)
+      userSchema.statics.questionsPath = Questions_PATH
 
 
 
