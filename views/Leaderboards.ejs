@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title><%=title%></title>
+        <title>Leaderboards</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
     <body class="container">
@@ -18,7 +18,7 @@
                         <li><a href="/dashboard">Dashboard</a></li>
                         <li><a href="/UpcomingEvents">Upcoming Events</a></li>
                         <li><a href="/Discuss">Discussion</a></li>
-                        <li><a href="/Leaderboards">Leaderboards</a></li>
+                      
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -29,8 +29,16 @@
             </div><!-- /.container-fluid -->
         </nav>
 
-        <div class="container row">
-           <h1>Hii, Welcome to your Dashboard</h1> <p><%=user.name%></p>
+        <div id="leaderboards">
+            <ol><% for(item of leaderboard){ %>
+                
+                    <p><%= item.userid.name%></p>
+
+                <%}%> 
+            </ol>
+
         </div>
+            
+
     </body>
 </html>

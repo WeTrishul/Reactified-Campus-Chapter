@@ -14,13 +14,15 @@ const startingTime = require('../config/timecalc')
 
 module.exports.discuss = (req,res)=>{
 
+    
+
     Post.find({}).populate('userid').populate({
         path:'comments',
         populate:{
             path:'userid'
         }
     }).exec((error,posts)=>{
-        console.log(posts)
+        // console.log(posts)
         return res.render('DiscussionForum',{
             posts:posts
         })

@@ -75,7 +75,13 @@ const userSchema = new mongoose.Schema({
     UserType:{
         type: String,
         reuired:true
-    }
+    },
+    CurrentRating:{
+        type:String
+    },
+    OverallRatings:[{
+        type:String
+    }]
     })
 
 
