@@ -17,7 +17,13 @@ const commentSchema = new mongoose.Schema({
     commentBody : {
             type:String,
             required:true
-    }
+    },
+    likes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Like'
+        }
+    ]
 },{
     timestamps:true
 })
