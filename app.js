@@ -7,6 +7,7 @@ const UserRouter = require('./routes/user')
 const passport = require('passport')
 const passport_local = require('./config/passport-local-auth')
 const passportGoogle = require('./config/passport-google-oauth2.0-strategy')
+const passportJWT = require('./config/passport-jwt-strategy')
 const db = require('./config/db')
 const MongoStore = require('connect-mongo')
 
