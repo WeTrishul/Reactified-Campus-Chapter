@@ -49,12 +49,13 @@ passport.checkAuthentication = (req,res,next)=>{
     return res.redirect('/login')
 }
 
-passport.setAuthenticatedUser = (req,res,next)=>{
+passport.setAuthenticatedUser = (req,res,done)=>{
     if(req.isAuthenticated())
     {
         res.locals.user = req.user
     }
-    next()
+    
+    done()
 }
 
 module.exports = passport;

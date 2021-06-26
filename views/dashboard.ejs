@@ -13,10 +13,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/home">Home</a></li>
                         <li><a href="/signup">Sign Up</a></li>
                         <li><a href="/dashboard">Dashboard</a></li>
                         <li><a href="/UpcomingEvents">Upcoming Events</a></li>
+                        <li><a href="/updatepage">Coder Handles</a></li>
                         <%if((locals.user) && (locals.user.UserType=="QuestionSetter")){%>
                             <li><a href="/fileupload">Set Questions</a></li>
                             <%}%>
@@ -31,7 +32,55 @@
         </nav>
 
         <div class="container row">
-           <h1>Hii, Welcome to your Dashboard</h1> <p><%=user.name%></p>
+            
         </div>
+        <%if(!locals.user){%>
+        <form action="\dashboard" >
+            <input class="btn btn-primary" type="submit" value="Update Handle"/>
+        </form>
+        <%}%>
+
+        <h1>Hii, Welcome to your Dashboard</h1>
+
+        <div class="container row">
+            <div class="jumbotron col-sm-4 pull-center">
+                <%if(locals.user){%>
+                <form action="/update/coderhandles/<%=locals.user.email%>" method="POST">
+                    <div class="form-group">
+                        <label>Username:</label>
+                        <input class="form-control" required type="text" name="username"/>
+                    </div>  
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input class="form-control" required type="password" name="password"/>
+                    </div>
+                    <div class="form-group">
+                        <label>CodeForces:</label>
+                        <input class="form-control" required type="text" name="codeforces"/>
+                    </div>
+                    <div class="form-group">
+                        <label>CodeChef:</label>
+                        <input class="form-control" required type="text" name="codechef"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Hackerrank:</label>
+                        <input class="form-control" required type="text" name="hackerrank"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Spoj:</label>
+                        <input class="form-control" required type="text" name="spoj"/>
+                    </div>
+                    <div class="form-group">
+                        <label>UserType:</label>
+                        <input class="form-control" required type="text" name="UserType"/>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="Update User"/>
+                    </div>
+                </form>                  
+            </div>          
+        </div>
+        <%}%>
+
     </body>
 </html>

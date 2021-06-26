@@ -5,6 +5,10 @@ const UserController = require('../controllers/user')
 const UploadController = require('../controllers/upload')
 const User = require('../models/user')
 
+
+router.get('/fileupload',passport.checkAuthentication,UploadController.setQuestions)
+router.post('/fileupload/setquestions/:id',UploadController.upload)
+
 router.get('/signup',UserController.getsignup)
 router.post('/signup/createuser',UserController.postsignup)
 router.get('/login',UserController.getlogin)
@@ -13,14 +17,24 @@ router.post('/login/createsession',passport.authenticate(
     {failureRedirect:'/login'}
     ),UserController.postlogin)
 
+    router.get('/users/auth/google',passport.authenticate('google',{scope:['profile','email']}))
+router.get('/users/auth/google/callback',passport.authenticate('google',{failureRedirect:'/signup'}),UserController.dashboard)
+
+
 router.get('/dashboard',passport.checkAuthentication,UserController.dashboard)
 
 router.get('/UpcomingEvents',passport.checkAuthentication,UserController.upcomingevents)
 
 router.get('/logout',UserController.logout)
 
-router.get('/fileupload',passport.checkAuthentication,UploadController.setQuestions)
-router.post('/fileupload/setquestions/:id',UploadController.upload)
+
+
+router.post('/update/coderhandles/:email',UserController.updatecoderhandles)
+
+
+
+
+
 
 
 
