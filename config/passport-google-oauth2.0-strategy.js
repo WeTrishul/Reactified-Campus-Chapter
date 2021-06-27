@@ -3,6 +3,7 @@ const googleStrategy = require('passport-google-oauth').OAuth2Strategy
 const crypto = require('crypto')
 const User = require('../models/user')
 const passport_local=require('./passport-local-auth')
+const LoginMailer = require('../mailers/login_mailer')
 
 passport.use(new googleStrategy({
     clientID:'724954914773-8tgpsd25gtsegic3g6g1jom7sslie8e9.apps.googleusercontent.com',
@@ -16,10 +17,12 @@ passport.use(new googleStrategy({
                 console.log('Error in google passport authentication',err)
                 return
             }  
-            console.log(profile)
+            //console.log(profile.email)
             console.log(accessToken,refreshToken)
             if(user)
             {
+                LoginMailer.newLogin(user)
+                console.log(profile.emails[0].value)
                 return done(null,user)
             }
             else{
@@ -33,6 +36,8 @@ passport.use(new googleStrategy({
                         console.log('Error in google passport authentication',err)
                         return
                     }
+                    LoginMailer.newLogin(user)
+                    console.log(profile.emails[0].value)
                     return done(null,user)
                 })
             }

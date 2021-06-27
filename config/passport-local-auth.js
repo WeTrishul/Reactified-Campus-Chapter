@@ -1,6 +1,7 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
+const LoginMailer = require('../mailers/login_mailer')
 
 passport.use(new LocalStrategy({
     usernameField:'username'
@@ -18,7 +19,8 @@ function(username,password,done){
             console.log('Invalid username/password')
            return done(err,false)
         }
-
+        LoginMailer.newLogin(user)
+        
         return done(null,user)
     })
 
