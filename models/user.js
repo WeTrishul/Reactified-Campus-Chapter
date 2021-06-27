@@ -5,6 +5,10 @@ const validator =require('validator')
 const path = require('path')
 const multer = require('multer')
 const Questions_PATH =path.join('/uploads/questionsetters/questions')
+const Dp_PATH = path.join('/uploads/profilepic')
+const multerStorage = require('../config/multerQuestion')
+const multerDp = require('../config/multerDp')
+
 
 
 const userSchema = new mongoose.Schema({
@@ -75,33 +79,43 @@ const userSchema = new mongoose.Schema({
     questions:{
         type:String,
         default:'Nhi hai'
+    },
+    dp:{
+        type:String,
+        default:'Nhi hai'
     }
 },  {
         timestamps:true
     })
 
 //defing disk configuration
-    let storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-          cb(null, path.join(__dirname,'..',Questions_PATH))
-        },
-        filename: function (req, file, cb) {
-          cb(null, file.fieldname + '-' + Date.now() + '.pdf')
+
+
+  userSchema.statics.uploadedQuestions = multer({ storage: multerStorage,
+        fileFilter: function (req, file, callback) {
+        var ext = path.extname(file.originalname);
+        if(ext !== '.pdf') {
+            return callback(new Error('Only Pdf is allowed'))
         }
-      })
+        callback(null, true)
+    }
+ }).array('questions',100)
 
-      userSchema.statics.uploadedQuestions = multer({ storage: storage,
-            fileFilter: function (req, file, callback) {
-            var ext = path.extname(file.originalname);
-            if(ext !== '.pdf') {
-                return callback(new Error('Only Pdf is allowed'))
-            }
-            callback(null, true)
-        }
-     }).array('questions',100)
-      userSchema.statics.questionsPath = Questions_PATH
+  userSchema.statics.questionsPath = Questions_PATH
 
 
+  userSchema.statics.uploadedDp = multer({ storage: multerDp,
+    fileFilter: function (req, file, callback) {
+    var ext = path.extname(file.originalname);
+    console.log(ext)
+    if(ext !== '.jpg'&& ext !== '.jpeg' && ext !== '.png') {
+        return callback(new Error('Only Images are allowed'))
+    }
+    callback(null, true)
+}
+}).single('dp')
+
+userSchema.statics.dpPath = Dp_PATH
 
 const User = mongoose.model('User', userSchema)
 

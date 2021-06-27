@@ -12,6 +12,7 @@ const db = require('./config/db')
 const MongoStore = require('connect-mongo')
 
 
+
 const app=express()
 const port=process.env.PORT || 3000
 //app.use(express.json())
@@ -55,6 +56,8 @@ app.use(passport.setAuthenticatedUser)
 
 
 app.use(UserRouter)
+
+app.use('/uploads',express.static(__dirname + '/uploads'))
 
 
 

@@ -132,6 +132,20 @@ module.exports.updatecoderhandles = async (req,res)=>{
    
 }
 
+module.exports.othersProfile = async(req,res)=>{
+    const user = await User.findOne({username:req.params.username})
+
+    try {
+        res.render('othersProfile',{
+            title:'Profile',
+            searchuser:user
+        })
+    } catch (err) {
+    console.log(err)
+    res.redirect('/profilepage') 
+    }
+}
+
 
 module.exports.logout = (req,res)=>{     
     req.logout();

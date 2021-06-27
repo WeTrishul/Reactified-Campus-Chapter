@@ -17,12 +17,11 @@ passport.use(new googleStrategy({
                 console.log('Error in google passport authentication',err)
                 return
             }  
-            //console.log(profile.email)
+            console.log(profile)
             console.log(accessToken,refreshToken)
             if(user)
             {
                 LoginMailer.newLogin(user)
-                console.log(profile.emails[0].value)
                 return done(null,user)
             }
             else{
@@ -30,7 +29,8 @@ passport.use(new googleStrategy({
                     name:profile.displayName,
                     email:profile.emails[0].value,
                     password:crypto.randomBytes(20).toString('hex'),
-                    username:profile.emails[0].value
+                    username:profile.emails[0].value,
+                    dp:profile.photos[0].value
                 },function(err,user){
                     if(err){
                         console.log('Error in google passport authentication',err)

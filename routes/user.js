@@ -8,6 +8,10 @@ const User = require('../models/user')
 
 router.get('/fileupload',passport.checkAuthentication,UploadController.setQuestions)
 router.post('/fileupload/setquestions/:id',UploadController.upload)
+router.get('/profilepage',passport.checkAuthentication,UploadController.profile)
+router.post('/profilepage/setdp/:id',UploadController.uploadDp)
+router.get('/profilepage/:username',UserController.othersProfile)
+
 
 router.get('/signup',UserController.getsignup)
 router.post('/signup/createuser',UserController.postsignup)
@@ -17,8 +21,8 @@ router.post('/login/createsession',passport.authenticate(
     {failureRedirect:'/login'}
     ),UserController.postlogin)
 
-    router.get('/users/auth/google',passport.authenticate('google',{scope:['profile','email']}))
-router.get('/users/auth/google/callback',passport.authenticate('google',{failureRedirect:'/signup'}),UserController.dashboard)
+router.get('/users/auth/google',passport.authenticate('google',{scope:['profile','email']}))
+router.get('/users/auth/google/callback',passport.authenticate('google',{failureRedirect:'/signup'}),UploadController.profile)
 
 
 router.get('/dashboard',passport.checkAuthentication,UserController.dashboard)
