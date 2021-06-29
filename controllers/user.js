@@ -7,6 +7,8 @@ const passport_local = require('../config/passport-local-auth')
 const fetch = require('node-fetch')
 const moment = require('moment')
 const startingTime = require('../config/timecalc')
+const passportLocal=require('../config/passport-local-auth')
+
 
 
 
@@ -61,8 +63,7 @@ module.exports.postsignup = async (req,res)=>{
     
 
 module.exports.dashboard = async (req,res)=>{
-    try {
-                
+    try {                
         res.render('dashboard',{
             title:'Dasboard'
         })
@@ -88,7 +89,6 @@ module.exports.upcomingevents = async (req,res)=>{
         });
         const arr1 = arr.reverse()
         const eventsArray = arr
-        console.log(eventsArray)
         
         res.render('UpcomingEvents',{
             result: eventsArray
@@ -100,8 +100,54 @@ module.exports.upcomingevents = async (req,res)=>{
     }
 }
 
-module.exports.logout = (req,res)=>{
+/*module.exports.updatepage = (req,res)=>{
+
+    res.render('updatecodershandles',{
+        title:"Update Coding handles"
+    })  
+}*/
+
+module.exports.updatecoderhandles = async (req,res)=>{
+    const user =  await User.findOne({email:req.params.email})
+    console.log(user)
+
+    try {
+        const updates = Object.keys(req.body)
+        updates.forEach((update) => user[update] = req.body[update])
+        await user.save()
+
+        req.login(user, function(err) {
+            if (err) {return console.log('node gandu hai')}      
+        })
+      
+        console.log(req.user.username)
+
+       res.redirect('/UpcomingEvents')
         
+    } catch (err) {
+       console.log(err) 
+       res.redirect('back')
+    }
+
+   
+}
+
+module.exports.othersProfile = async(req,res)=>{
+    const user = await User.findOne({username:req.params.username})
+
+    try {
+        res.render('othersProfile',{
+            title:'Profile',
+            searchuser:user
+        })
+    } catch (err) {
+    console.log(err)
+    res.redirect('/profilepage') 
+    }
+}
+
+
+module.exports.logout = (req,res)=>{     
     req.logout();
   res.redirect('/login');
 }

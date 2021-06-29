@@ -6,8 +6,11 @@ const cookieParser = require('cookie-parser')
 const UserRouter = require('./routes/user')
 const passport = require('passport')
 const passport_local = require('./config/passport-local-auth')
+const passportGoogle = require('./config/passport-google-oauth2.0-strategy')
+const passportJWT = require('./config/passport-jwt-strategy')
 const db = require('./config/db')
 const MongoStore = require('connect-mongo')
+
 
 
 const app=express()
@@ -20,9 +23,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 
 
-
 app.set('view engine','ejs')
 app.set('views','./views')
+
 
 app.use(session({
     name: 'CodechefCampusChapter',
@@ -50,7 +53,12 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(passport.setAuthenticatedUser)
 
+
+
 app.use(UserRouter)
+
+app.use('/uploads',express.static(__dirname + '/uploads'))
+
 
 
 
