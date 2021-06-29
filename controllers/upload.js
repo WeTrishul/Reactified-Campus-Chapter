@@ -73,16 +73,22 @@ module.exports.uploadDp = async(req,res)=>{
            if(req.file)
            { 
                console.log(req.file)
-            if(user.dp!=='Nhi hai')
+            if(user.dp!=='Nhi hai') 
             {
-                fs.unlinkSync(path.join(__dirname,'..',user.dp))
+                if(user.dp[0]!='h')
+                     fs.unlinkSync(path.join(__dirname,'..',user.dp))
+
+               
+                    let path1= User.dpPath+'/'+ req.file.filename
+                    user.dp = path1
+                    user.save()                
             }
-
-
-               let path1= User.dpPath+'/'+ req.file.filename
+            else
+            {
+                let path1= User.dpPath+'/'+ req.file.filename
                 user.dp = path1
                 user.save()
-                   
+            }            
            }
         })     
         const username = user.username
