@@ -4,12 +4,15 @@ const ejs = require('ejs')
 const bodyParser = require("body-parser")
 const cookieParser = require('cookie-parser')
 const UserRouter = require('./routes/user')
+const DiscussRouter = require('./routes/DiscussionForum')
+const LeaderboardsRouter = require('./routes/Leaderboards')
 const passport = require('passport')
 const passport_local = require('./config/passport-local-auth')
 const passportGoogle = require('./config/passport-google-oauth2.0-strategy')
 const passportJWT = require('./config/passport-jwt-strategy')
 const db = require('./config/db')
 const MongoStore = require('connect-mongo')
+const RatingsHandler = require('./config/RatingsHandler')
 
 
 
@@ -56,14 +59,24 @@ app.use(passport.setAuthenticatedUser)
 
 
 app.use(UserRouter)
+app.use(DiscussRouter)
+app.use(LeaderboardsRouter)
 
 app.use('/uploads',express.static(__dirname + '/uploads'))
 
 
 
 
-
-
 app.listen(port,()=>{
+
+   
+
+    setInterval( async ()=>{
+        // RatingsHandler.getRatings({codeforces:'coder_hk47'})
+        await RatingsHandler.updateRatingsOfAllUsers()
+        RatingsHandler.updateLeaderboards()
+    }, 60000);
+
+
     console.log('Server is up on port '+ port)
 })

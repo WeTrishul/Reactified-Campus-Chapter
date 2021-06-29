@@ -83,10 +83,18 @@ const userSchema = new mongoose.Schema({
     dp:{
         type:String,
         default:'Nhi hai'
-    }
-},  {
-        timestamps:true
-    })
+    },
+
+    CurrentRating:{
+        type:String
+    },
+    OverallRatings:[{
+        type:String
+    }]
+}, 
+{
+ timestamps:true
+})
 
 //defing disk configuration
 
