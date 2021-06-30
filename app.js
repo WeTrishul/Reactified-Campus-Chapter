@@ -75,8 +75,8 @@ app.listen(port,()=>{
         // RatingsHandler.getRatings({codeforces:'coder_hk47'})
         await RatingsHandler.updateRatingsOfAllUsers()
         RatingsHandler.updateLeaderboards()
-    }, 60000);
-
+    }, 604800000);
+    
 
     console.log('Server is up on port '+ port)
 })

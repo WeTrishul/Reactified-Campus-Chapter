@@ -28,7 +28,13 @@ module.exports.updateRatingsOfAllUsers = async ()=>{
   
   allusers.forEach(async (user)=>{
        const overallrating = await this.getRatings(user)
-       User.findById(user._id,(error,user)=>{
+       User.findById(user._id,async(error,user)=>{
+         if(user.OverallRatings.length>=4)
+          {
+            await User.update({username:user.username}, { $set: { OverallRatings: [] }}, function(err, affected){
+                console.log('affected: ', affected);
+            });
+          }
           user.OverallRatings.push(overallrating)
           user.CurrentRating=overallrating
           user.save()
