@@ -17,6 +17,10 @@
                         <li><a href="/signup">Sign Up</a></li>
                         <li><a href="/dashboard">Dashboard</a></li>
                         <li><a href="/UpcomingEvents">Upcoming Events</a></li>
+                        <li><a href="/profilepage">Profile</a></li>
+                        <%if((locals.user) && (user.UserType=="QuestionSetter")){%>
+                            <li><a href="/fileupload">Set Questions</a></li>
+                            <%}%>
                         <li><a href="/Discuss">Discussion</a></li>
                         <li><a href="/Leaderboards">Leaderboards</a></li>
                     </ul>
