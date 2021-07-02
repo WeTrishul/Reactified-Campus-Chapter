@@ -39,7 +39,7 @@
             <ul><% for(post of posts){ %>
 
                 <li>
-                    <%if(post.userid.id==locals.user.id){%>
+                    <%if((locals.user) && post.userid.id==locals.user.id){%>
                     <small><a href="/destroypost/<%= post.id %>">X</a></small>
                     <%}%>
                     <p style="font-size: x-small;"></p><%=post.createdAt%></p>
@@ -49,7 +49,7 @@
                 </li>
                 <br>
                 <% for(comment of post.comments){ %>
-                    <%if(comment.userid.id==locals.user.id){%>
+                    <%if((locals.user) && comment.userid.id==locals.user.id){%>
                         <small><a href="/destroycomment/<%= comment.id %>">X</a></small>
                         <%}%>
                         <p style="font-size: x-small;"><%=comment.userid.name%></p>
@@ -58,21 +58,21 @@
                         <br>
 
                     <%}%>
-
+                    <%if(locals.user){%>
                 <form action="/commentit" method="POST">
                     <input name="commentBody" placeholder="Comment here">
                     <input name="postid" type="hidden" value="<%=post._id%>"> 
                     <button type="submit" id="send-message">Post</button>
                   </form>
-
+                  <%}%>
                   <hr style="color: black;">
-
+                  
                 <%}%>
             
             </ul>
 
         </div>
-
+        <%if(locals.user){%>
         <div class="container row">
             <p><%=user.name%></p>
 
@@ -86,6 +86,7 @@
               
               </div>
         </div>
+        <%}%>
 
         
     </body>
