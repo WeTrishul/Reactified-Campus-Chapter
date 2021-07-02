@@ -10,6 +10,8 @@ router.post('/postit',DiscussController.postit)
 
 router.post('/commentit',DiscussController.commentit)
 
-router.get('/destroy/:id',DiscussController.deletepost)
+router.get('/destroypost/:id',DiscussController.deletepost)
+
+router.get('/destroycomment/:id',DiscussController.deletecomment)
 
 module.exports = router

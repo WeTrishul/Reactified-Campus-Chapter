@@ -78,3 +78,20 @@ module.exports.deletepost = (req,res)=>{
     })
 }
 
+module.exports.deletecomment = (req,res)=>{
+    Comment.findById(req.params.id,(error,comment)=>{
+        if(req.user.id==comment.userid)
+        {
+            var postid = comment.postid
+            comment.remove()
+
+            Post.findByIdAndUpdate(postid,{$pull : {comments:req.params.id}},(error,post)=>{
+                return res.redirect('back')
+            })
+        }
+        else{
+            return res.redirect('back')
+        }
+    })
+}
+
