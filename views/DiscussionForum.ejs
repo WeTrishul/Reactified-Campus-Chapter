@@ -39,6 +39,9 @@
             <ul><% for(post of posts){ %>
 
                 <li>
+                    <%if(post.userid.id==locals.user.id){%>
+                    <small><a href="/destroy/<%= post.id %>">X</a></small>
+                    <%}%>
                     <p style="font-size: x-small;"></p><%=post.createdAt%></p>
                     <p><%=post.userid.name%><p>
                     <h3><%=post.postBody%></h3>

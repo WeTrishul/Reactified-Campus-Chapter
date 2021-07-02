@@ -61,3 +61,20 @@ module.exports.commentit = (req,res)=>{
             }
         })
 }
+
+
+module.exports.deletepost = (req,res)=>{
+    Post.findById(req.params.id,(error,post)=>{
+        if(req.user.id==post.userid)
+        {
+            post.remove()
+            Comment.deleteMany({postid:req.params.id},(error)=>{
+                res.redirect('back')
+            })
+        }
+        else{
+            res.redirect('back')
+        }
+    })
+}
+
