@@ -8,6 +8,10 @@ const fetch = require('node-fetch')
 const moment = require('moment')
 const startingTime = require('../config/timecalc')
 const passportLocal=require('../config/passport-local-auth')
+const forgot = require('../mailers/forgotPassword_mailer')
+
+const jwt  = require('jsonwebtoken')
+
 
 
 
@@ -150,6 +154,71 @@ module.exports.othersProfile = async(req,res)=>{
 module.exports.logout = (req,res)=>{     
     req.logout();
   res.redirect('/login');
+}
+
+
+module.exports.forgotPasswordView = (req,res)=>{
+    res.render('forgotPassword',{
+        title:'Forgot page'
+    })
+}
+
+
+module.exports.forgotPassword = async(req,res)=>{
+    const forgotSecret = 'CampusChapter'
+    const email = req.body.email
+    console.log (email+'from forgot password post')
+             
+        try {
+            const user = await User.findOne({email})
+            console.log(user + ' from forgot password')
+            const token =  await jwt.sign({_id:user._id},'CampusChapter',{expiresIn:'20m'})
+            console.log(token)
+            forgot.forgot(user.email,token)
+            await User.updateOne({resetLink:token})
+            res.redirect('/signup')
+        } catch (error) {
+           console.log('Error from forgotPassword',error) 
+           res.redirect('/login')
+           return
+        }
+}
+
+module.exports.changePasswordPage = (req,res)=>{
+    const token = req.params.token
+    res.render('changePassword',{
+        title:'Change Password Page',
+        token:token
+    })
+}
+
+module.exports.changePassword = async (req,res)=>{
+    
+    const newPass =req.body.password
+    const token = req.params.token
+
+    const user = await User.findOne({resetLink:token})
+
+    try {
+        console.log(user.email)
+        jwt.verify(token,'CampusChapter',(error,decodedData)=>{
+            if(error)
+            {
+                console.log('Incorrect token or it is expired')
+                return
+            }
+            user.password = newPass
+             user.save()
+            res.redirect('/login')
+        })
+        
+    } catch (error) {
+        console.log('Error in change password',error)   
+        res.redirect('/forgot-password')     
+    }
+
+
+
 }
 
 

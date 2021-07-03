@@ -1,6 +1,5 @@
 const mongoose=require('mongoose')
 const db = require('../config/db')
-const bcrypt=require('bcrypt')
 const validator =require('validator')
 const path = require('path')
 const multer = require('multer')
@@ -90,7 +89,11 @@ const userSchema = new mongoose.Schema({
     },
     OverallRatings:[{
         type:String
-    }]
+    }],
+    resetLink:{
+        data:String,
+        default:''
+    }
 }, 
 {
  timestamps:true

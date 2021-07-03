@@ -35,6 +35,11 @@ router.get('/logout',UserController.logout)
 
 router.post('/update/coderhandles/:email',UserController.updatecoderhandles)
 
+router.get('/forgot-password',UserController.forgotPasswordView)
+router.post('/forgot-password',UserController.forgotPassword)
+router.get('/reset/password/:token',UserController.changePasswordPage)
+router.post('/reset/password/:token',UserController.changePassword)
+
 
 
 
