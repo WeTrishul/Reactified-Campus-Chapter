@@ -64,9 +64,11 @@ module.exports.commentit = (req,res)=>{
 
 
 module.exports.deletepost = (req,res)=>{
-    Post.findById(req.params.id,(error,post)=>{
+    Post.findById(req.params.id,async (error,post)=>{
         if(req.user.id==post.userid)
         {
+            await Like.deleteMany({likeable:post._id,onModel:'Post'})
+            await Like.deleteMany({likeable:{$in:post.comments}})
             post.remove()
             Comment.deleteMany({postid:req.params.id},(error)=>{
                 res.redirect('back')
@@ -79,7 +81,7 @@ module.exports.deletepost = (req,res)=>{
 }
 
 module.exports.deletecomment = (req,res)=>{
-    Comment.findById(req.params.id,(error,comment)=>{
+    Comment.findById(req.params.id,async (error,comment)=>{
         if(req.user.id==comment.userid)
         {
             var postid = comment.postid
@@ -88,6 +90,7 @@ module.exports.deletecomment = (req,res)=>{
             Post.findByIdAndUpdate(postid,{$pull : {comments:req.params.id}},(error,post)=>{
                 return res.redirect('back')
             })
+            await Like.deleteMany({likeable:comment._id,onModel:'Comment'})
         }
         else{
             return res.redirect('back')
