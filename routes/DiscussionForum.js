@@ -14,4 +14,6 @@ router.get('/destroypost/:id',passport.checkAuthentication,DiscussController.del
 
 router.get('/destroycomment/:id',passport.checkAuthentication,DiscussController.deletecomment)
 
+router.get('/Likehandler',DiscussController.likehandler)
+
 module.exports = router

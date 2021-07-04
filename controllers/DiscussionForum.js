@@ -3,6 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const User = require('../models/user')
 const Post = require('../models/post')
+const Like=require('../models/like')
 const Comment = require('../models/comments')
 const passport =require('passport')
 const passport_local = require('../config/passport-local-auth')
@@ -14,7 +15,6 @@ const startingTime = require('../config/timecalc')
 
 module.exports.discuss = (req,res)=>{
 
-    
 
     Post.find({}).populate('userid').populate({
         path:'comments',
@@ -95,3 +95,51 @@ module.exports.deletecomment = (req,res)=>{
     })
 }
 
+
+module.exports.likehandler= async (req,res)=>{
+    try{
+       
+        var likeable
+
+    if(req.query.type=='Post')
+    {
+        likeable=await Post.findById(req.query.id).populate('likes');
+    }else
+    {
+        likeable=await Comment.findById(req.query.id).populate('likes');
+    }
+
+
+    var ispresent=await Like.findOne({
+        userid:req.user._id,
+        likeable:req.query.id,
+        onModel:req.query.type
+
+    })
+
+    if(ispresent)
+    {
+        
+       likeable.likes.pull(ispresent._id)
+       likeable.save()
+       ispresent.remove()
+    }
+    else{
+        
+        var currlike = await Like.create({
+            userid:req.user._id,
+            likeable:req.query.id,
+            onModel:req.query.type
+        })
+        likeable.likes.push(currlike._id)
+        console.log(currlike._id)
+        likeable.save()
+    }
+
+    return res.redirect('back')
+
+    }catch(error){
+        return console.log(error)
+    }
+    
+}

@@ -40,18 +40,26 @@
 
                 <li>
                     <%if((locals.user) && post.userid.id==locals.user.id){%>
-                    <small><a href="/destroypost/<%= post.id %>">X</a></small>
+                    <small><a href="/destroypost/<%= post.id %>">delete</a></small>
+        
+                    <%}%>
+                    <%if(locals.user) {%>
+                    <small><%= post.likes.length %></small><small><a href="/Likehandler/?id=<%= post.id %>&type=Post">Like</a></small>
                     <%}%>
                     <p style="font-size: x-small;"></p><%=post.createdAt%></p>
                     <p><%=post.userid.name%><p>
                     <h3><%=post.postBody%></h3>
-
+                    
                 </li>
                 <br>
                 <% for(comment of post.comments){ %>
                     <%if((locals.user) && comment.userid.id==locals.user.id){%>
-                        <small><a href="/destroycomment/<%= comment.id %>">X</a></small>
+                        <small><a href="/destroycomment/<%= comment.id %>">delete</a></small>
+                       
                         <%}%>
+                        <%if(locals.user) {%>
+                            <small><%= comment.likes.length %></small><small><a href="/Likehandler/?id=<%= comment.id %>&type=Comment">Like</a></small>
+                            <%}%>
                         <p style="font-size: x-small;"><%=comment.userid.name%></p>
                         <p style="font-size: x-small;"><%=comment.commentBody%></p>
 
