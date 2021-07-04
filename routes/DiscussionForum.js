@@ -6,8 +6,14 @@ const DiscussController = require('../controllers/DiscussionForum')
 
 router.get('/Discuss',DiscussController.discuss)
 
-router.post('/postit',DiscussController.postit)
+router.post('/postit',passport.checkAuthentication,DiscussController.postit)
 
-router.post('/commentit',DiscussController.commentit)
+router.post('/commentit',passport.checkAuthentication,DiscussController.commentit)
+
+router.get('/destroypost/:id',passport.checkAuthentication,DiscussController.deletepost)
+
+router.get('/destroycomment/:id',passport.checkAuthentication,DiscussController.deletecomment)
+
+router.get('/Likehandler',DiscussController.likehandler)
 
 module.exports = router
