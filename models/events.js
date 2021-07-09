@@ -2,7 +2,7 @@ const mongoose=require('mongoose')
 const db = require('../config/db')
 
 
-const EventSchema = new  moongose.Schema({
+const EventSchema = new  mongoose.Schema({
 
     creatorid : {
         type:mongoose.Schema.Types.ObjectId,
@@ -40,3 +40,8 @@ const EventSchema = new  moongose.Schema({
 },{
     timestamps:true
 })
+
+
+const Event = mongoose.model('Event',EventSchema)
+
+module.exports = Event
