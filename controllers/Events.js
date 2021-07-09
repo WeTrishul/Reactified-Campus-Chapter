@@ -13,7 +13,26 @@ module.exports.eventform = (req,res)=>{
     res.render('EventForm')
 }
 
-module.exports.createevent = (req,res)=>{
+module.exports.createevent = async (req,res)=>{
     
+    try{
+
+        await Event.create({
+            creatorid:req.user._id,
+            eventname:req.body.eventname,
+            aboutevent:req.body.aboutevent,
+            eventStartTime:req.body.eventStartTime,
+            eventEndTime:req.body.eventEndTime,
+            eventDate:req.body.eventDate   
+        })
+
+        return res.redirect('back')
+
+    }catch(error)
+    {
+        console.log('some error occured')
+    }
+    
+
 }
 

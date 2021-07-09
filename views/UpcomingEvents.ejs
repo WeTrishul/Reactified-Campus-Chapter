@@ -43,7 +43,18 @@
             <%}%>
             <br>
         </div>
-
+<br><br>
+        <div id="myevents" style="border-style: solid;">
+            <%for( i of myevents){%>
+                <ul>
+                    <l1><%=i.eventname%></l1>
+                    <p>Start Time: <small><%=i.eventStartTime%></small></p>
+                    <p>End Time: <%=i.eventEndTime%></p>
+                    <p>Date:<%=i.eventDate%></p>
+                </ul>
+            <%}%>
+        </div>
+<br><br>
            <%for( i of result){%>
             <ul>
                 <l1><%=i.name%></l1>

@@ -2,6 +2,7 @@ const cookieParser = require('cookie-parser');
 const express = require('express')
 const mongoose = require('mongoose')
 const User = require('../models/user')
+const Event = require('../models/events')
 const passport =require('passport')
 const passport_local = require('../config/passport-local-auth')
 const fetch = require('node-fetch')
@@ -81,6 +82,12 @@ module.exports.dashboard = async (req,res)=>{
 
 module.exports.upcomingevents = async (req,res)=>{
     try {
+        
+        var myevents = []
+        await Event.find({},(error,event)=>{
+          myevents = event
+        }) 
+
         const UpcomingEvents = await fetch('https://codeforces.com/api/contest.list').then(response => response.json());
 
         const arr=[]
@@ -95,7 +102,8 @@ module.exports.upcomingevents = async (req,res)=>{
         const eventsArray = arr
         
         res.render('UpcomingEvents',{
-            result: eventsArray
+            result: eventsArray,
+            myevents:myevents
         })
        
         
