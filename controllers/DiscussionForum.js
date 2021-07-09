@@ -65,7 +65,7 @@ module.exports.commentit = (req,res)=>{
 
 module.exports.deletepost = (req,res)=>{
     Post.findById(req.params.id,async (error,post)=>{
-        if(req.user.id==post.userid)
+        if(req.user.id==post.userid || req.user.UserType=='Admin')
         {
             await Like.deleteMany({likeable:post._id,onModel:'Post'})
             await Like.deleteMany({likeable:{$in:post.comments}})
@@ -82,7 +82,7 @@ module.exports.deletepost = (req,res)=>{
 
 module.exports.deletecomment = (req,res)=>{
     Comment.findById(req.params.id,async (error,comment)=>{
-        if(req.user.id==comment.userid)
+        if(req.user.id==comment.userid || req.user.UserType=='Admin')
         {
             var postid = comment.postid
             comment.remove()
