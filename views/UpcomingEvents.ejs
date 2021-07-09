@@ -34,8 +34,16 @@
             </div><!-- /.container-fluid -->
         </nav>
 
+        
         <div class="container row">
            <h1><%=user.name%>,Your upcoming events are:</h1> 
+           <div>
+            <%if((locals.user) && (locals.user.UserType=="Admin")||(locals.user.UserType=="MediaLead") || (locals.user.UserType=="EventsLead") ){%>
+            <button>Create event</button>
+            <%}%>
+            <br>
+        </div>
+
            <%for( i of result){%>
             <ul>
                 <l1><%=i.name%></l1>
