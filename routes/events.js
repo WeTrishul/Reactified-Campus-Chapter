@@ -5,5 +5,15 @@ const EventController = require('../controllers/Events')
 
 
 router.get('/EventForm',EventController.eventform)
+
 router.post('/CreateEvent',EventController.createevent)
+
+router.get('/RegisterForEvent',EventController.registerForTheEvent)
+
+router.get('/EditForm',EventController.editeventform)
+
+router.post('/UpdateEvent',EventController.updateevent)
+
+router.get('/DeleteEvent',EventController.deleteevent)
+
 module.exports = router
