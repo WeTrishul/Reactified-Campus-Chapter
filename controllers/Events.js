@@ -67,7 +67,15 @@ module.exports.registerForTheEvent = async (req,res) =>{
     try{
         // console.log(req.query.id)
         var currevent= await Event.findById(req.query.id)
-  
+        
+        var arr = []
+
+        arr = currevent.Registeredusers
+
+        if(arr.includes(req.user._id))
+        {
+            return res.redirect('/UpcomingEvents')
+        }
             currevent.Registeredusers.push(req.user._id)
             currevent.save()
 
@@ -155,3 +163,12 @@ module.exports.deleteevent = async (req,res)=>{
 
 }
 
+
+module.exports.eventpage = async (req,res) =>{
+    console.log(req.params.eventname)
+    var curreve = await Event.findOne({eventname:req.params.eventname})
+
+    return res.render('EventPage',{
+        event:curreve
+    })
+}

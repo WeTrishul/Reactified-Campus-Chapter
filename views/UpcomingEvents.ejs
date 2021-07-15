@@ -55,12 +55,19 @@
                     <p>Date:<%=i.eventDate%></p>
                     <p>Total Registrations :<%=i.Registeredusers.length%> </p>
 
-                    <button><a href="/RegisterForEvent/?id=<%= i._id %>">Register</a></button>
+
+                    <%if(i.Registeredusers.includes(locals.user._id)){%>
+                    <button style="color: green;">Registered</button>
+                    <%}else{%>
+                        <button><a href="/RegisterForEvent/?id=<%= i._id %>">Register</a></button>
+                    <%}%>
+                    
                     <%if((locals.user) && (locals.user.UserType=="Admin")||(locals.user.UserType=="MediaLead") || (locals.user.UserType=="EventsLead") ){%>
                     <button><a href="/EditForm/?id=<%= i._id %>">Edit</a></button>
                     <button><a href="/DeleteEvent/?id=<%= i._id %>">Delete</a></button>
                     <%}%>
-                    <a href="#">more details</a>
+                    <a href="/EventPage/<%= i.eventname%>">more details</a>
+                   
                 </ul>
             <%}%>
         </div>

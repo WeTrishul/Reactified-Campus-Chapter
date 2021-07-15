@@ -16,4 +16,6 @@ router.post('/UpdateEvent',EventController.updateevent)
 
 router.get('/DeleteEvent',EventController.deleteevent)
 
+router.get('/EventPage/:eventname',EventController.eventpage)
+
 module.exports = router
