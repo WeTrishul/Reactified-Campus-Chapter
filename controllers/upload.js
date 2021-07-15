@@ -2,6 +2,7 @@ const cookieParser = require('cookie-parser');
 const express = require('express')
 const mongoose = require('mongoose')
 const User = require('../models/user')
+const Event = require('../models/events')
 const passport =require('passport')
 const passport_local = require('../config/passport-local-auth')
 const multer = require('multer')
@@ -99,4 +100,5 @@ module.exports.uploadDp = async(req,res)=>{
         res.redirect('/dashboard')
     }
 }
+
 

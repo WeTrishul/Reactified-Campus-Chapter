@@ -36,8 +36,8 @@
 
         <% if(event) {%>
 
-        <form action="/UpdateEvent" method="POST">
-
+        <form action="/UpdateEvent" method="POST" enctype="multipart/form-data" >
+            <input type="file" name="eventbanner" >
             <input type="text" name="eventname" value="<%=event.eventname%>" > <br><br>
             <input type="text" name="aboutevent" value="<%=event.aboutevent%>" style="height: 100px;width: 500px;"><br><br>
             <input type="text" name="eventStartTime" value="<%=event.eventStartTime%>"><br><br>
@@ -52,8 +52,10 @@
 
          else {%>
 
-        <form action="/CreateEvent" method="POST">
+           
 
+        <form action="/CreateEvent" method="POST" enctype="multipart/form-data">
+            <input type="file" name="eventbanner" required="true">
             <input type="text" name="eventname" placeholder="Event Name" > <br><br>
             <input type="text" name="aboutevent" placeholder="About Event" style="height: 100px;width: 500px;"><br><br>
             <input type="text" name="eventStartTime" placeholder="Start Time"><br><br>

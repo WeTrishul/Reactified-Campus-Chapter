@@ -47,6 +47,8 @@
         <div id="myevents" style="border-style: solid;">
             <%for( i of myevents){%>
                 <ul>
+                    <img src="<%=i.eventbanner%>" alt="banner" width="100">
+                   
                     <l1><%=i.eventname%></l1>
                     <p>Start Time: <small><%=i.eventStartTime%></small></p>
                     <p>End Time: <%=i.eventEndTime%></p>
@@ -58,7 +60,7 @@
                     <button><a href="/EditForm/?id=<%= i._id %>">Edit</a></button>
                     <button><a href="/DeleteEvent/?id=<%= i._id %>">Delete</a></button>
                     <%}%>
-                    <a href="">more details</a>
+                    <a href="#">more details</a>
                 </ul>
             <%}%>
         </div>

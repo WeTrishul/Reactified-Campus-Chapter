@@ -129,7 +129,7 @@ module.exports.updatecoderhandles = async (req,res)=>{
         await user.save()
 
         req.login(user, function(err) {
-            if (err) {return console.log('node gandu hai')}      
+            if (err) {return console.log('some error')}      
         })
       
         console.log(req.user.username)
