@@ -34,8 +34,44 @@
             </div><!-- /.container-fluid -->
         </nav>
 
+        
         <div class="container row">
            <h1><%=user.name%>,Your upcoming events are:</h1> 
+           <div>
+            <%if((locals.user) && (locals.user.UserType=="Admin")||(locals.user.UserType=="MediaLead") || (locals.user.UserType=="EventsLead") ){%>
+            <button><a href="/EventForm">Create event</a></button>
+            <%}%>
+            <br>
+        </div>
+<br><br>
+        <div id="myevents" style="border-style: solid;">
+            <%for( i of myevents){%>
+                <ul>
+                    <img src="<%=i.eventbanner%>" alt="banner" width="100">
+                   
+                    <l1><%=i.eventname%></l1>
+                    <p>Start Time: <small><%=i.eventStartTime%></small></p>
+                    <p>End Time: <%=i.eventEndTime%></p>
+                    <p>Date:<%=i.eventDate%></p>
+                    <p>Total Registrations :<%=i.Registeredusers.length%> </p>
+
+
+                    <%if(i.Registeredusers.includes(locals.user._id)){%>
+                    <button style="color: green;">Registered</button>
+                    <%}else{%>
+                        <button><a href="/RegisterForEvent/?id=<%= i._id %>">Register</a></button>
+                    <%}%>
+                    
+                    <%if((locals.user) && (locals.user.UserType=="Admin")||(locals.user.UserType=="MediaLead") || (locals.user.UserType=="EventsLead") ){%>
+                    <button><a href="/EditForm/?id=<%= i._id %>">Edit</a></button>
+                    <button><a href="/DeleteEvent/?id=<%= i._id %>">Delete</a></button>
+                    <%}%>
+                    <a href="/EventPage/<%= i.eventname%>">more details</a>
+                   
+                </ul>
+            <%}%>
+        </div>
+<br><br>
            <%for( i of result){%>
             <ul>
                 <l1><%=i.name%></l1>

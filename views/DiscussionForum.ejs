@@ -39,7 +39,7 @@
             <ul><% for(post of posts){ %>
 
                 <li>
-                    <%if((locals.user) && post.userid.id==locals.user.id){%>
+                    <%if((locals.user) && locals.user.UserType=='Admin' || post.userid.id==locals.user.id){%>
                     <small><a href="/destroypost/<%= post.id %>">delete</a></small>
         
                     <%}%>
@@ -53,7 +53,7 @@
                 </li>
                 <br>
                 <% for(comment of post.comments){ %>
-                    <%if((locals.user) && comment.userid.id==locals.user.id){%>
+                    <%if((locals.user) && locals.user.UserType=='Admin' || comment.userid.id==locals.user.id){%>
                         <small><a href="/destroycomment/<%= comment.id %>">delete</a></small>
                        
                         <%}%>

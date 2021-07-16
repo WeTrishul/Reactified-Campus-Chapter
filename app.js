@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const UserRouter = require('./routes/user')
 const DiscussRouter = require('./routes/DiscussionForum')
 const LeaderboardsRouter = require('./routes/Leaderboards')
+const EventRouter = require('./routes/events')
 const passport = require('passport')
 const passport_local = require('./config/passport-local-auth')
 const passportGoogle = require('./config/passport-google-oauth2.0-strategy')
@@ -57,6 +58,7 @@ app.use(passport.session())
 app.use(passport.setAuthenticatedUser)
 
 
+app.use(EventRouter)
 
 app.use(UserRouter)
 app.use(DiscussRouter)

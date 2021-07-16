@@ -3,6 +3,7 @@ const passport = require('passport')
 const router = new express.Router()
 const UserController = require('../controllers/user')
 const UploadController = require('../controllers/upload')
+
 const User = require('../models/user')
 
 
@@ -28,6 +29,7 @@ router.get('/users/auth/google/callback',passport.authenticate('google',{failure
 router.get('/dashboard',passport.checkAuthentication,UserController.dashboard)
 
 router.get('/UpcomingEvents',passport.checkAuthentication,UserController.upcomingevents)
+
 
 router.get('/logout',UserController.logout)
 
