@@ -245,6 +245,10 @@ module.exports.delete = async(req,res)=>{
     const username = req.params.username
     try {
         const user = await User.findOneAndDelete({username:username})
+        if(user.UserType==='Admin')
+        {
+            return res.redirect('/listUsers')
+        }
         console.log(user)
         return res.redirect('/listUsers')
     } catch (error) {
