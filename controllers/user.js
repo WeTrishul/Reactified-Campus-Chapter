@@ -10,7 +10,8 @@ const startingTime = require('../config/timecalc')
 const passportLocal=require('../config/passport-local-auth')
 const forgot = require('../mailers/forgotPassword_mailer')
 
-const jwt  = require('jsonwebtoken')
+const jwt  = require('jsonwebtoken');
+const { findOneAndDelete } = require('../models/user');
 
 
 
@@ -104,12 +105,6 @@ module.exports.upcomingevents = async (req,res)=>{
     }
 }
 
-/*module.exports.updatepage = (req,res)=>{
-
-    res.render('updatecodershandles',{
-        title:"Update Coding handles"
-    })  
-}*/
 
 module.exports.updatecoderhandles = async (req,res)=>{
     const user =  await User.findOne({email:req.params.email})
@@ -219,6 +214,57 @@ module.exports.changePassword = async (req,res)=>{
 
 
 
+}
+
+module.exports.listUsers = async (req,res)=>{
+
+    try {
+        const user = await User.find({})
+       // console.log(user)
+       return res.render('AllUsers',{
+            title:'All Users',
+            users:user
+        })
+        
+    } catch (error) {
+        console.log('Error from listUsers',error)
+        res.redirect('/dashboard')
+        return
+    }
+}
+
+module.exports.delete = async(req,res)=>{
+    const username = req.params.username
+    try {
+        const user = await User.findOneAndDelete({username:username})
+        console.log(user)
+        return res.redirect('/listUsers')
+    } catch (error) {
+        return console.log('Error from delete',error)
+        
+    }
+}
+
+module.exports.changeRole = async(req,res)=>{
+    const user = await User.findOne({username:req.query.username})
+    console.log('User from changeRole',user)
+    try {
+        if(req.query.role==='events')
+            {
+                user.UserType='Events Lead'
+                await user.save();
+         }
+         else{
+            user.UserType='Media Lead'
+            await user.save();
+         }
+         return res.redirect('/listUsers')
+    } catch (error) {
+        console.log('Error in changing role',error)
+    }
+    
+
+    
 }
 
 

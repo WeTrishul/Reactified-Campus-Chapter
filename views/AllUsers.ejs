@@ -13,14 +13,17 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/home">Home</a></li>
                         <li><a href="/signup">Sign Up</a></li>
                         <li><a href="/dashboard">Dashboard</a></li>
                         <li><a href="/UpcomingEvents">Upcoming Events</a></li>
                         <li><a href="/profilepage">Profile</a></li>
+                        <li><a href="/listUsers">All Users</a></li>
                         <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
                             <li><a href="/fileupload">Set Questions</a></li>
                             <%}%>
+                        <li><a href="/Discuss">Discussion</a></li>
+                        <li><a href="/Leaderboards">Leaderboards</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -31,28 +34,19 @@
             </div><!-- /.container-fluid -->
         </nav>
 
-        <div>
-            <img src="<%=searchuser.dp%>" alt="<%=searchuser.name%>" width="100">
-            <p><%=searchuser.name%></p>
-        </div>
-        <%if((locals.user) && (locals.user.username===searchuser.username) ){%>
-        <div class="container row">
-            <div class="jumbotron col-sm-4 pull-center">
-                        
-                    <form action="/profilepage/setdp/<%=locals.user._id%>" method="post" enctype="multipart/form-data">
-                    <input type="file" name="dp" >
-                    <div class="form-group">
-                        <input class="btn btn-primary" type="submit" value="UploadPic"/>
-                    </div>
-                </form>  
-                <%}%>                
-            </div>          
-        </div>
-        <div>
-            <a href="/userrole/?username=<%= searchuser.username %>&role=events">Events Lead</a>
-            <a href="/userrole/?username=<%= searchuser.username %>&role=medialead">Media Lead</a>
-        </div>
+        <h1>Here are the List of Users</h1>
 
+        <div class="container row">
+              <%for(var u of users){%> 
+                    <ul>
+                        <li><a href="/profilepage/<%=u.username%>"><%=u.name%></a></li>
+                        <small><a href="/delete/<%= u.username %>">delete</a></small>                            
+                    </ul>
+                <%}%>
+        </div>
+        
+
+        
 
     </body>
 </html>

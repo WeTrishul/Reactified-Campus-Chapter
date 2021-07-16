@@ -18,7 +18,10 @@
                         <li><a href="/dashboard">Dashboard</a></li>
                         <li><a href="/UpcomingEvents">Upcoming Events</a></li>
                         <li><a href="/profilepage">Profile</a></li>
-                        <%if((locals.user) && (user.UserType=="QuestionSetter")){%>
+                        <%if((locals.user) && (user.UserType=="Admin")){%>
+                        <li><a href="/listUsers">All Users</a></li>
+                        <%}%>
+                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
                             <li><a href="/fileupload">Set Questions</a></li>
                             <%}%>
                         <li><a href="/Discuss">Discussion</a></li>
@@ -83,6 +86,9 @@
             </div>          
         </div>
         <%}%>
+
+
+        
 
     </body>
 </html>

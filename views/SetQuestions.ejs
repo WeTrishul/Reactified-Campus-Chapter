@@ -18,7 +18,7 @@
                         <li><a href="/dashboard">Dashboard</a></li>
                         <li><a href="/UpcomingEvents">Upcoming Events</a></li>
                         <li><a href="/profilepage">Profile</a></li>
-                        <%if((locals.user) && (user.UserType=="QuestionSetter")){%>
+                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
                             <li><a href="/fileupload">Set Questions</a></li>
                             <%}%>
 
@@ -36,7 +36,7 @@
 
         <div class="container row">
             <div class="jumbotron col-sm-4 pull-center">
-                        <%if((locals.user) && (locals.user.UserType=="QuestionSetter")){%>
+                        <%if((locals.user) && (locals.user.UserType=="QuestionSetter")||(locals.user.UserType=="Admin")){%>
                     <form action="/fileupload/setquestions/<%=locals.user._id%>" method="post" enctype="multipart/form-data">
                     <input type="file" name="questions" multiple>
                     <div class="form-group">

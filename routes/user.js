@@ -41,6 +41,10 @@ router.get('/reset/password/:token',UserController.changePasswordPage)
 router.post('/reset/password/:token',UserController.changePassword)
 
 
+router.get('/listUsers',UserController.listUsers)
+router.get('/delete/:username',UserController.delete)
+router.get('/userrole',UserController.changeRole)
+
 
 
 

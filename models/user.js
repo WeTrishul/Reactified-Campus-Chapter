@@ -73,7 +73,7 @@ const userSchema = new mongoose.Schema({
     },
     UserType:{
         type: String,
-        reuired:true
+        default:"Student"
     },
     questions:{
         type:String,
