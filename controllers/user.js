@@ -10,6 +10,10 @@ const moment = require('moment')
 const startingTime = require('../config/timecalc')
 const passportLocal=require('../config/passport-local-auth')
 const forgot = require('../mailers/forgotPassword_mailer')
+const multer = require('multer')
+const path=require('path')
+const fs =require('fs')
+
 
 const jwt  = require('jsonwebtoken');
 const { findOneAndDelete } = require('../models/user');
@@ -244,16 +248,23 @@ module.exports.listUsers = async (req,res)=>{
 module.exports.delete = async(req,res)=>{
     const username = req.params.username
     try {
-        const user = await User.findOneAndDelete({username:username})
+        const user = await User.findOne({username:username})
         if(user.UserType==='Admin')
         {
             return res.redirect('/listUsers')
         }
+
+        if(user.dp!=='Nhi hai') 
+        {
+            if(user.dp[0]!='h')
+                 fs.unlinkSync(path.join(__dirname,'..',user.dp))             
+        }
+        await User.deleteOne({username:username})
+        
         console.log(user)
         return res.redirect('/listUsers')
     } catch (error) {
         return console.log('Error from delete',error)
-        
     }
 }
 

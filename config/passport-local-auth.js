@@ -2,6 +2,8 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
 const LoginMailer = require('../mailers/login_mailer')
+const kue = require('./kue')
+const loginEmailsWorker = require('../workers/login_emails_workers')
 
 passport.use(new LocalStrategy({
     usernameField:'username'
@@ -19,7 +21,16 @@ function(username,password,done){
             console.log('Invalid username/password')
            return done(err,false)
         }
-        LoginMailer.newLogin(user)
+       // LoginMailer.newLogin(user)
+       let job = queue.create('emails',user).save(function(err){
+        if(err)
+        {
+            console.log('Error in sending to the queue',err)
+            return
+        }  
+        console.log('job enqueued',job.id)
+
+      })
         
         return done(null,user)
     })
