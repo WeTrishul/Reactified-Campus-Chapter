@@ -13,6 +13,8 @@ const forgot = require('../mailers/forgotPassword_mailer')
 const multer = require('multer')
 const path=require('path')
 const fs =require('fs')
+const queue = require('../config/kue')
+const otpWorkers = require('../workers/otp_workers')
 
 
 const jwt  = require('jsonwebtoken');
@@ -181,7 +183,20 @@ module.exports.forgotPassword = async(req,res)=>{
             console.log(user + ' from forgot password')
             const token =  await jwt.sign({_id:user._id},'CampusChapter',{expiresIn:'20m'})
             console.log(token)
-            forgot.forgot(user.email,token)
+            //forgot.forgot(user.email,token)
+            const obj = {
+                token:token,
+                email:user.email
+            }
+            let job = queue.create('otp',obj).priority('high').save(function(err){
+                if(err)
+                {
+                    console.log('Error in sending Otp ',err)
+                    return
+                }
+                console.log('otp enqueued successfully',job.id)
+            })
+
             await User.updateOne({resetLink:token})
             res.redirect('/signup')
         } catch (error) {
@@ -192,7 +207,7 @@ module.exports.forgotPassword = async(req,res)=>{
 }
 
 module.exports.changePasswordPage = (req,res)=>{
-    const token = req.params.token
+    let token = req.params.token
     res.render('changePassword',{
         title:'Change Password Page',
         token:token

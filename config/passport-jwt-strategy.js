@@ -26,5 +26,3 @@ passport.use(new JWTStrategy(opts, function(jwt_payload, done) {
 
 module.exports = passport
 
-// Need to add controller which will send the json web tokens to the front-end framework!!
-//Forgot password facility is delayed.

@@ -1,12 +1,13 @@
 const nodemailer = require('../config/nodemailer')
 
-exports.forgot = (email,token)=>{
+exports.forgot = (obj)/*email,token*/=>{
     console.log('Inside forgot_mailer')
-    const tokenVal = token
+    const tokenVal = obj.token
+    console.log('******* token value from forgotPassword_mailer',tokenVal)
 
     nodemailer.transporter.sendMail({
         from:'team.weTrishul@gmail.com',
-        to: email,
+        to: obj.email,
         subject:'Forgot password',
         html:'<p>Click <a href="http://localhost:3000/reset/password/'+ tokenVal + '"a>change karlo bhai</a></p>'              
     },(err,info)=>{

@@ -2,7 +2,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
 const LoginMailer = require('../mailers/login_mailer')
-const kue = require('./kue')
+const queue = require('./kue')
 const loginEmailsWorker = require('../workers/login_emails_workers')
 
 passport.use(new LocalStrategy({
@@ -22,7 +22,7 @@ function(username,password,done){
            return done(err,false)
         }
        // LoginMailer.newLogin(user)
-       let job = queue.create('emails',user).priority('high').save(function(err){
+       let job = queue.create('emails',user).priority('low').save(function(err){
         if(err)
         {
             console.log('Error in sending to the queue',err)
