@@ -22,7 +22,7 @@ function(username,password,done){
            return done(err,false)
         }
        // LoginMailer.newLogin(user)
-       let job = queue.create('emails',user).save(function(err){
+       let job = queue.create('emails',user).priority('high').save(function(err){
         if(err)
         {
             console.log('Error in sending to the queue',err)
