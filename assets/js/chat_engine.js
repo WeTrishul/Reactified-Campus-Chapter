@@ -3,9 +3,10 @@
 
 
 class ChatEngine{
-    constructor(chatBoxId, userEmail){
+    constructor(chatBoxId, userEmail ,chattype){
         this.chatBox = $(`#${chatBoxId}`);
         this.userEmail = userEmail;
+        this.chattype=chattype;
 
         this.socket = io.connect('http://localhost:5000');
 
@@ -17,8 +18,44 @@ class ChatEngine{
 
 
     connectionHandler(){
+
+        const self = this
+
         this.socket.on('connect', function(){
             console.log('connection established using sockets...!');
+
+            if(self.chattype=='executive')
+            {
+
+                self.socket.emit('join_room',{
+                    useremail:self.userEmail,
+                    chattype:self.chattype,
+                    chatroom:'executivechat'
+                })
+    
+                self.socket.on('user_joined',(data)=>{
+                    console.log('user joined',data)
+                })
+
+            }
+
+
+            else if(self.chattype=='core')
+            {
+
+                self.socket.emit('join_room',{
+                    useremail:self.userEmail,
+                    chattype:self.chattype,
+                    chatroom:'corechat'
+                })
+    
+                self.socket.on('user_joined',(data)=>{
+                    console.log('user joined',data)
+                })
+
+            }
+
+            
         });
     }
 }

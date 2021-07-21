@@ -14,3 +14,11 @@ const startingTime = require('../config/timecalc')
 module.exports.teamchatpage = (req,res) =>{
    return res.render('ExecutiveTeamChat')
 }
+
+module.exports.executiveschatpage = (req,res) =>{
+   return res.render('executivechat')
+}
+
+module.exports.leadschatpage = (req,res) =>{
+   return res.render('coreteamchat')
+}

@@ -5,5 +5,8 @@ const TeamChatController = require('../controllers/TeamChat')
 
 router.get('/executiveteamchat',TeamChatController.teamchatpage)
 
+router.get('/executivechat',TeamChatController.executiveschatpage)
+
+router.get('/coreteam',TeamChatController.leadschatpage)
 
 module.exports = router

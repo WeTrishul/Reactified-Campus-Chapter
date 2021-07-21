@@ -34,12 +34,23 @@
             </div><!-- /.container-fluid -->
         </nav>
 
-        <button><a href="/executivechat">Executive Team</a></button>
-        <button><a href="/coreteam">Core Team</a></button>
-
        
+        
+        <div id="user-chat-box">
+            <div id="chat-message-input-container">
+              <input id="chat-message-input" placeholder="Type message here">
+              <button id="send-message">Send</button>
+            </div>
+          
+          </div>
 
-     
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script src="https://cdn.socket.io/4.1.2/socket.io.min.js" integrity="sha384-toS6mmwu70G0fw54EGlWWeA4z3dyJ+dlXBtSURSKN4vyRFOcxd3Bzjj/AoOwY+Rg" crossorigin="anonymous"></script>
+        <script src='/js/chat_engine.js' ></script>
+
+        <script>
+            new ChatEngine('user-chat-box','<%=user.email%>','executive')
+        </script>
        
     </body>
 </html>
