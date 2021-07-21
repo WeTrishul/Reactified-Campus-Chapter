@@ -7,6 +7,7 @@ const UserRouter = require('./routes/user')
 const DiscussRouter = require('./routes/DiscussionForum')
 const LeaderboardsRouter = require('./routes/Leaderboards')
 const EventRouter = require('./routes/events')
+const TeamChatRouter = require('./routes/TeamChat')
 const passport = require('passport')
 const passport_local = require('./config/passport-local-auth')
 const passportGoogle = require('./config/passport-google-oauth2.0-strategy')
@@ -14,10 +15,13 @@ const passportJWT = require('./config/passport-jwt-strategy')
 const db = require('./config/db')
 const MongoStore = require('connect-mongo')
 const RatingsHandler = require('./config/RatingsHandler')
-
+const cors = require('cors')
 
 
 const app=express()
+app.use(cors({
+    origin:'*'
+}))
 const port=process.env.PORT || 3000
 //app.use(express.json())
 
@@ -57,15 +61,21 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(passport.setAuthenticatedUser)
 
-
+app.use(express.static('./assets'))
 app.use(EventRouter)
 
 app.use(UserRouter)
 app.use(DiscussRouter)
 app.use(LeaderboardsRouter)
+app.use(TeamChatRouter)
 
 app.use('/uploads',express.static(__dirname + '/uploads'))
 
+
+const ChatServer = require('http').Server(app)
+const ChatSocket = require('./config/chatsocket').chat(ChatServer)
+
+ChatServer.listen(5000)
 
 
 
