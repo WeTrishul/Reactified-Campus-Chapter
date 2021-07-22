@@ -3,14 +3,14 @@
 
 
 class ChatEngine{
-    constructor(chatBoxId, userEmail ,chattype){
+    constructor(chatBoxId, username ,chattype){
         this.chatBox = $(`#${chatBoxId}`);
-        this.userEmail = userEmail;
+        this.username = username;
         this.chattype=chattype;
 
         this.socket = io.connect('http://localhost:5000');
 
-        if (this.userEmail){
+        if (this.username){
             this.connectionHandler();
         }
 
@@ -28,9 +28,9 @@ class ChatEngine{
             {
 
                 self.socket.emit('join_room',{
-                    useremail:self.userEmail,
+                    username:self.username,
                     chattype:self.chattype,
-                    chatroom:'executivechat'
+                    chatroom:'executive'
                 })
     
                 self.socket.on('user_joined',(data)=>{
@@ -39,14 +39,15 @@ class ChatEngine{
 
             }
 
+            
 
             else if(self.chattype=='core')
             {
 
                 self.socket.emit('join_room',{
-                    useremail:self.userEmail,
+                    username:self.username,
                     chattype:self.chattype,
-                    chatroom:'corechat'
+                    chatroom:'core'
                 })
     
                 self.socket.on('user_joined',(data)=>{
@@ -57,18 +58,38 @@ class ChatEngine{
 
             
         });
+
+
+        $('#send-message').click(()=>{
+            
+            let msg = $('#chat-message-input').val();
+            console.log(msg)
+            if (msg != ''){
+                self.socket.emit('send_message', {
+                    message: msg,
+                    username: self.username,
+                    chatroom: self.chattype
+                });
+            }
+        });
+
+        self.socket.on('receive_message',(data)=>{
+            console.log('message recieved',data.message)
+
+            let newMessage = $('<li>');
+
+            newMessage.append($('<span>', {
+                'html': data.message
+            }));
+
+            newMessage.append($('<sub>', {
+                'html': data.username
+            }));
+
+
+            $('#chat-messages-list').append(newMessage);
+        })
+
     }
 }
 
-// class ss {
-
-//     constructor(email){
-//         this.email=email
-
-//         this.printer(email)
-//     }
-
-//     printer(email){
-//         console.log('Connected bro2'+email)
-//     }
-// }

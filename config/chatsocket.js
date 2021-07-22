@@ -20,6 +20,12 @@ module.exports.chat = (socketserver) =>{
 
           io.in(data.chatroom).emit('user_joined',data)
         })
+
+        socket.on('send_message', (data)=>{
+          console.log(data)
+          io.in(data.chatroom).emit('receive_message', data);
+      })
+
     })
 
 }
