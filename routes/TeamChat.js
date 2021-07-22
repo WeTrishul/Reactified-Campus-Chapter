@@ -3,10 +3,10 @@ const passport = require('passport')
 const router = new express.Router()
 const TeamChatController = require('../controllers/TeamChat')
 
-router.get('/executiveteamchat',TeamChatController.teamchatpage)
+router.get('/teamchat',passport.checkAuthentication,TeamChatController.teamchatpage)
 
-router.get('/executivechat',TeamChatController.executiveschatpage)
+router.get('/executivechat',passport.checkAuthentication,TeamChatController.executiveschatpage)
 
-router.get('/coreteam',TeamChatController.leadschatpage)
+router.get('/coreteam',passport.checkAuthentication,TeamChatController.leadschatpage)
 
 module.exports = router

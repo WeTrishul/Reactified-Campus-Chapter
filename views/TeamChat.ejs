@@ -34,9 +34,15 @@
             </div><!-- /.container-fluid -->
         </nav>
 
+        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
         <button><a href="/executivechat">Executive Team</a></button>
-        <button><a href="/coreteam">Core Team</a></button>
+        <%}%>
 
+        <%if((locals.user) && (user.UserType=="Admin")
+        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+        <button><a href="/coreteam">Core Team</a></button>
+        <%}%>
        
 
      

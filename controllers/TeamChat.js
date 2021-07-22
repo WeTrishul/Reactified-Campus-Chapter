@@ -12,13 +12,29 @@ const moment = require('moment')
 const startingTime = require('../config/timecalc')
 
 module.exports.teamchatpage = (req,res) =>{
-   return res.render('ExecutiveTeamChat')
+   if(req.user.UserType=='Admin' || req.user.UserType=='Executive'||
+   req.user.UserType=='MediaLead' || req.user.UserType=='EventsLead')
+   {
+      return res.render('TeamChat')
+   }
+   
 }
 
 module.exports.executiveschatpage = (req,res) =>{
-   return res.render('executivechat')
+   if(req.user.UserType=='Admin' || req.user.UserType=='Executive'||
+   req.user.UserType=='MediaLead' || req.user.UserType=='EventsLead')
+   {
+      return res.render('executivechat')
+   }
+   
 }
 
 module.exports.leadschatpage = (req,res) =>{
-   return res.render('coreteamchat')
+   if(req.user.UserType=='Admin' || 
+   req.user.UserType=='MediaLead' || req.user.UserType=='EventsLead')
+   {
+      return res.render('coreteamchat')
+   }
+   
+   
 }

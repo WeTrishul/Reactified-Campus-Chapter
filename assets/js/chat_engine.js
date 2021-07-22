@@ -24,38 +24,14 @@ class ChatEngine{
         this.socket.on('connect', function(){
             console.log('connection established using sockets...!');
 
-            if(self.chattype=='executive')
-            {
-
                 self.socket.emit('join_room',{
                     username:self.username,
-                    chattype:self.chattype,
-                    chatroom:'executive'
+                    chatroom:self.chattype
                 })
     
                 self.socket.on('user_joined',(data)=>{
                     console.log('user joined',data)
                 })
-
-            }
-
-            
-
-            else if(self.chattype=='core')
-            {
-
-                self.socket.emit('join_room',{
-                    username:self.username,
-                    chattype:self.chattype,
-                    chatroom:'core'
-                })
-    
-                self.socket.on('user_joined',(data)=>{
-                    console.log('user joined',data)
-                })
-
-            }
-
             
         });
 
