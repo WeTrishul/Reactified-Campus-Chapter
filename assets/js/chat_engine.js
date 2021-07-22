@@ -66,6 +66,24 @@ class ChatEngine{
             $('#chat-messages-list').append(newMessage);
         })
 
+        self.socket.on('old_messages',(data)=>{
+            console.log(data)
+
+            data.forEach((element) => {
+
+                let newMessage = $('<li>');
+                newMessage.append($('<span>', {
+                    'html': element.message
+                }));
+                newMessage.append($('<sub>', {
+                    'html': element.username
+                }));
+                $('#chat-messages-list').append(newMessage);
+
+            });
+          
+        })
+
     }
 }
 
