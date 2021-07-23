@@ -19,12 +19,20 @@
                         <li><a href="/UpcomingEvents">Upcoming Events</a></li>
                         <li><a href="/profilepage">Profile</a></li>
                         <li><a href="/listUsers">All Users</a></li>
+
+                        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+                        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+                        <li><a href="/teamchat">Team Chat</a></li>
+                        <%}%>
+
                         <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
                             <li><a href="/fileupload">Set Questions</a></li>
                             <%}%>
                         <li><a href="/Discuss">Discussion</a></li>
                         <li><a href="/Leaderboards">Leaderboards</a></li>
+                        
                     </ul>
+                    
 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/login">Log In</a></li>

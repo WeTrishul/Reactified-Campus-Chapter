@@ -50,16 +50,20 @@ class ChatEngine{
         });
 
         self.socket.on('receive_message',(data)=>{
-            console.log('message recieved',data.message)
+            // console.log('message recieved',data.message)
 
             let newMessage = $('<li>');
 
-            newMessage.append($('<span>', {
-                'html': data.message
-            }));
-
-            newMessage.append($('<sub>', {
+            newMessage.append($('<strong>', {
                 'html': data.username
+            }));
+            newMessage.append($('<sub>', {
+                'html': data.createdAt
+            }));
+            newMessage.append($('<br>'));
+            
+            newMessage.append($('<small>', {
+                'html': data.message
             }));
 
 
@@ -72,11 +76,16 @@ class ChatEngine{
             data.forEach((element) => {
 
                 let newMessage = $('<li>');
-                newMessage.append($('<span>', {
-                    'html': element.message
+                newMessage.append($('<strong>', {
+                    'html': element.username
                 }));
                 newMessage.append($('<sub>', {
-                    'html': element.username
+                    'html': element.createdAt
+                }));
+                newMessage.append($('<br>'));
+                
+                newMessage.append($('<small>', {
+                    'html': element.message
                 }));
                 $('#chat-messages-list').append(newMessage);
 

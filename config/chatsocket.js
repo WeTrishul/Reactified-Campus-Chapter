@@ -32,10 +32,10 @@ module.exports.chat = (socketserver) =>{
 
         socket.on('send_message', (data)=>{
           Chat.create(data,(error,chat)=>{
-
+            io.in(data.chatroom).emit('receive_message', chat);
           })
-          console.log(data)
-          io.in(data.chatroom).emit('receive_message', data);
+          // console.log(data)
+          
       })
 
     })
