@@ -30,14 +30,23 @@ module.exports.discuss = (req,res)=>{
     
 }
 
-module.exports.postit = (req,res)=>{
+module.exports.postit =  (req,res)=>{
     
     Post.create({
         userid:req.user._id,
         postBody:req.body.postBody
-    },(error,post)=>{
+    },async (error,post)=>{
         if(error){return res.redirect('back')}
-      
+        
+        if (req.xhr){
+            post = await post.populate('userid').execPopulate();
+            return res.status(200).json({
+                data: {
+                    post: post
+                },
+                message: "Post created!"
+            });
+        }
         return res.redirect('/Discuss')
         
     })
@@ -46,16 +55,28 @@ module.exports.postit = (req,res)=>{
 
 module.exports.commentit = (req,res)=>{
 
-        Post.findById(req.body.postid,(error,post)=>{
+        Post.findById(req.body.postid, (error,post)=>{
             if(post)
             {
-                Comment.create({
+                 Comment.create({
                     userid:req.user._id,
                     postid:req.body.postid,
                     commentBody : req.body.commentBody
-                },(error,comment)=>{
+                },async(error,comment)=>{
                     post.comments.push(comment)
                     post.save()
+                    
+                    comment = await comment.populate('userid').execPopulate();
+                    if (req.xhr){
+                
+                        console.log('yahan pohoch gya')
+                        return res.status(200).json({
+                            data: {
+                                comment: comment
+                            },
+                            message: "Post created!"
+                        });
+                    }
                     return res.redirect('/Discuss')
                 })
             }
@@ -71,8 +92,17 @@ module.exports.deletepost = (req,res)=>{
             await Like.deleteMany({likeable:{$in:post.comments}})
             post.remove()
             Comment.deleteMany({postid:req.params.id},(error)=>{
-                res.redirect('back')
+               
             })
+
+            if (req.xhr){
+                return res.status(200).json({
+                    data: {
+                        post_id: req.params.id
+                    },
+                    message: "Post deleted"
+                });
+            }
         }
         else{
             res.redirect('back')
@@ -82,19 +112,39 @@ module.exports.deletepost = (req,res)=>{
 
 module.exports.deletecomment = (req,res)=>{
     Comment.findById(req.params.id,async (error,comment)=>{
-        if(req.user.id==comment.userid || req.user.UserType=='Admin')
-        {
-            var postid = comment.postid
-            comment.remove()
 
-            Post.findByIdAndUpdate(postid,{$pull : {comments:req.params.id}},(error,post)=>{
+        try {
+
+            if(req.user.id==comment.userid || req.user.UserType=='Admin')
+            {
+                var postid = comment.postid
+                comment.remove()
+    
+                Post.findByIdAndUpdate(postid,{$pull : {comments:req.params.id}},(error,post)=>{
+                    // return res.redirect('back')
+                })
+                await Like.deleteMany({likeable:comment._id,onModel:'Comment'})
+    
+                if (req.xhr){
+                    console.log('aagya')
+                    return res.status(200).json({
+                        data: {
+                            comment_id: req.params.id
+                        },
+                        message: "Post deleted"
+                    });
+                }
+                return res.redirect('/Discuss')
+    
+            }
+            else{
                 return res.redirect('back')
-            })
-            await Like.deleteMany({likeable:comment._id,onModel:'Comment'})
-        }
-        else{
+            }
+            
+        } catch (error) {
             return res.redirect('back')
         }
+       
     })
 }
 

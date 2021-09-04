@@ -34,7 +34,7 @@ router.get('/UpcomingEvents',passport.checkAuthentication,UserController.upcomin
 router.get('/logout',UserController.logout)
 
 
-
+router.get('/update',UserController.updatepage)
 router.post('/update/coderhandles/:email',UserController.updatecoderhandles)
 
 router.get('/forgot-password',UserController.forgotPasswordView)
