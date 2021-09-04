@@ -121,6 +121,19 @@ module.exports.upcomingevents = async (req,res)=>{
 }
 
 
+module.exports.updatepage = (req,res)=>{
+    if(req.isAuthenticated())
+    {
+    res.render('updatecodershandles')  
+    }
+else
+{
+    res.render('login',{
+        title:'login'
+    })
+}
+}
+
 module.exports.updatecoderhandles = async (req,res)=>{
     const user =  await User.findOne({email:req.params.email})
     console.log(user)
