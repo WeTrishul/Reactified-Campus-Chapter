@@ -10,6 +10,12 @@ const moment = require('moment')
 const startingTime = require('../config/timecalc')
 const passportLocal=require('../config/passport-local-auth')
 const forgot = require('../mailers/forgotPassword_mailer')
+const multer = require('multer')
+const path=require('path')
+const fs =require('fs')
+const queue = require('../config/kue')
+const otpWorkers = require('../workers/otp_workers')
+
 
 const jwt  = require('jsonwebtoken');
 const { findOneAndDelete } = require('../models/user');
@@ -54,6 +60,7 @@ else
 
 module.exports.postsignup = async (req,res)=>{
 
+    console.log(req.body)
     
         const user = new User(req.body)
 
@@ -177,7 +184,20 @@ module.exports.forgotPassword = async(req,res)=>{
             console.log(user + ' from forgot password')
             const token =  await jwt.sign({_id:user._id},'CampusChapter',{expiresIn:'20m'})
             console.log(token)
-            forgot.forgot(user.email,token)
+            //forgot.forgot(user.email,token)
+            const obj = {
+                token:token,
+                email:user.email
+            }
+            let job = queue.create('otp',obj).priority('high').save(function(err){
+                if(err)
+                {
+                    console.log('Error in sending Otp ',err)
+                    return
+                }
+                console.log('otp enqueued successfully',job.id)
+            })
+
             await User.updateOne({resetLink:token})
             res.redirect('/signup')
         } catch (error) {
@@ -188,7 +208,7 @@ module.exports.forgotPassword = async(req,res)=>{
 }
 
 module.exports.changePasswordPage = (req,res)=>{
-    const token = req.params.token
+    let token = req.params.token
     res.render('changePassword',{
         title:'Change Password Page',
         token:token
@@ -244,16 +264,23 @@ module.exports.listUsers = async (req,res)=>{
 module.exports.delete = async(req,res)=>{
     const username = req.params.username
     try {
-        const user = await User.findOneAndDelete({username:username})
+        const user = await User.findOne({username:username})
         if(user.UserType==='Admin')
         {
             return res.redirect('/listUsers')
         }
+
+        if(user.dp!=='Nhi hai') 
+        {
+            if(user.dp[0]!='h')
+                 fs.unlinkSync(path.join(__dirname,'..',user.dp))             
+        }
+        await User.deleteOne({username:username})
+        
         console.log(user)
         return res.redirect('/listUsers')
     } catch (error) {
         return console.log('Error from delete',error)
-        
     }
 }
 

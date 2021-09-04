@@ -4,6 +4,8 @@ const crypto = require('crypto')
 const User = require('../models/user')
 const passport_local=require('./passport-local-auth')
 const LoginMailer = require('../mailers/login_mailer')
+const queue = require('./kue')
+const loginEmailsWorker = require('../workers/login_emails_workers')
 
 passport.use(new googleStrategy({
     clientID:'724954914773-8tgpsd25gtsegic3g6g1jom7sslie8e9.apps.googleusercontent.com',
@@ -21,7 +23,16 @@ passport.use(new googleStrategy({
             console.log(accessToken,refreshToken)
             if(user)
             {
-                LoginMailer.newLogin(user)
+                //LoginMailer.newLogin(user)
+                let job = queue.create('emails',user).priority('low').save(function(err){
+                    if(err)
+                    {
+                        console.log('Error in sending to the queue',err)
+                        return
+                    }  
+                    console.log('job enqueued',job.id)
+
+                  })
                 return done(null,user)
             }
             else{
@@ -36,7 +47,16 @@ passport.use(new googleStrategy({
                         console.log('Error in google passport authentication',err)
                         return
                     }
-                    LoginMailer.newLogin(user)
+                   // LoginMailer.newLogin(user)
+                   let job = queue.create('emails',user).priority('low').save(function(err){
+                     if(err)
+                     {
+                         console.log('Error in sending to the queue',err)
+                         return
+                     }  
+                     console.log('job enqueued',job.id)
+                   })
+                   
                     console.log(profile.emails[0].value)
                     return done(null,user)
                 })

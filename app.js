@@ -22,11 +22,19 @@ const app=express()
 app.use(cors({
     origin:'*'
 }))
+const pollRouter = require('./routes/Polling')
+
+
+
+
+
+const app=express()
+
 const port=process.env.PORT || 3000
 //app.use(express.json())
 
 
-
+app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 
@@ -68,6 +76,7 @@ app.use(UserRouter)
 app.use(DiscussRouter)
 app.use(LeaderboardsRouter)
 app.use(TeamChatRouter)
+app.use(pollRouter)
 
 app.use('/uploads',express.static(__dirname + '/uploads'))
 
