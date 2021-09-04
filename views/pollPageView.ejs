@@ -17,42 +17,38 @@
                         <li><a href="/signup">Sign Up</a></li>
                         <li><a href="/dashboard">Dashboard</a></li>
                         <li><a href="/UpcomingEvents">Upcoming Events</a></li>
-                        <li><a href="/profilepage">Profile</a></li>
-                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
-                            <li><a href="/fileupload">Set Questions</a></li>
-                            <%}%>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/login">Log In</a></li>
+                        <li><a href="/users/auth/google">G</a></li>
                         <li><a href="/logout">Log Out</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-
-        <div>
-            <img src="<%=searchuser.dp%>" alt="<%=searchuser.name%>" width="100">
-            <p><%=searchuser.name%></p>
-        </div>
-        <%if((locals.user) && (locals.user.username===searchuser.username) ){%>
+    
+        <% if(!backid){%>
         <div class="container row">
             <div class="jumbotron col-sm-4 pull-center">
-                        
-                    <form action="/profilepage/setdp/<%=locals.user._id%>" method="post" enctype="multipart/form-data">
-                    <input type="file" name="dp" >
-                    <div class="form-group">
-                        <input class="btn btn-primary" type="submit" value="UploadPic"/>
-                    </div>
-                </form>  
-                <%}%>                
+                <form action="/poll/sendpoll/<%=locals.user.id%>" method="POST">
+
+                    <p><%=myPoll.pollName%></p>
+                    
+
+                    <label><%=myPoll.optionA%></label>
+                    <input type="radio"  id="javascript" name="Option" value="A">
+                    <label><%=myPoll.optionB%></label>
+                    <input type="radio" label="<%=myPoll.optionB%>"id="javascript" name="Option" value="B">
+                    <label><%=myPoll.optionC%></label>
+                    <input type="radio" label="<%=myPoll.optionC%>"id="javascript" name="Option" value="C">
+                    <label><%=myPoll.optionD%></label>
+                    <input type="radio" label="<%=myPoll.optionD%>"id="javascript" name="Option" value="D">
+                    <input type="hidden" name="pollID"  value="<%=myPoll._id%>">
+                    <input type="submit" value="Submit">               
+                </form>                  
             </div>          
         </div>
-        <div>
-            <a href="/userrole/?username=<%= searchuser.username %>&role=events">Events Lead</a>
-            <a href="/userrole/?username=<%= searchuser.username %>&role=medialead">Media Lead</a>
-        </div>
-
-
+        <%}%>
     </body>
 </html>

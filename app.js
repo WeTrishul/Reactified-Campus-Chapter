@@ -14,15 +14,19 @@ const passportJWT = require('./config/passport-jwt-strategy')
 const db = require('./config/db')
 const MongoStore = require('connect-mongo')
 const RatingsHandler = require('./config/RatingsHandler')
+const pollRouter = require('./routes/Polling')
+
+
 
 
 
 const app=express()
+
 const port=process.env.PORT || 3000
 //app.use(express.json())
 
 
-
+app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 
@@ -63,6 +67,7 @@ app.use(EventRouter)
 app.use(UserRouter)
 app.use(DiscussRouter)
 app.use(LeaderboardsRouter)
+app.use(pollRouter)
 
 app.use('/uploads',express.static(__dirname + '/uploads'))
 

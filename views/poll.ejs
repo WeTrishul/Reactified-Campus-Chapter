@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title><%= title%></title>
+        <title><%=title%></title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
     <body class="container">
@@ -22,7 +22,6 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/login">Log In</a></li>
                         <li><a href="/users/auth/google">G</a></li>
-                        <l1><a href="/forgot-password">forgot</a></l1>
                         <li><a href="/logout">Log Out</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -31,21 +30,55 @@
 
         <div class="container row">
             <div class="jumbotron col-sm-4 pull-center">
-                <form action="/login/createsession" method="POST">
+                <form action="/poll/createpoll" method="POST">
                     <div class="form-group">
-                        <label>Username:</label>
-                        <input class="form-control" required type="text" name="username"/>
+                        <label>Poll Name:</label>
+                        <input class="form-control" required type="text" name="pollName"/>
                     </div>
                     <div class="form-group">
-                        <label>Password:</label>
-                        <input class="form-control" required type="password" name="password"/>
+                        <label>question:</label>
+                        <input class="form-control" required type="text" name="question"/>
                     </div>
-                    
                     <div class="form-group">
-                        <input class="btn btn-primary" type="submit" value="Log In"/>
+                        <label>optionA:</label>
+                        <input class="form-control" required type="text" name="optionA"/>
+                    </div>    
+                    <div class="form-group">
+                        <label>optionB:</label>
+                        <input class="form-control" required type="text" name="optionB"/>
+                    </div>
+                    <div class="form-group">
+                        <label>optionC</label>
+                        <input class="form-control" required type="text" name="optionC"/>
+                    </div>
+                    <div class="form-group">
+                        <label>optionD</label>
+                        <input class="form-control" required type="text" name="optionD"/>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="POll Up"/>
                     </div>
                 </form>                  
             </div>          
         </div>
+
+
+
+
+        <div class="container row">
+            <div class="jumbotron col-sm-4 pull-center">
+                <form action="/viewAllPolls" method="POST">
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="Show All Polls"/>
+                    </div>
+                </form>                  
+            </div>          
+        </div>
+
+
+
+
+
+
     </body>
 </html>

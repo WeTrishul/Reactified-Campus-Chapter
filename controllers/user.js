@@ -60,6 +60,7 @@ else
 
 module.exports.postsignup = async (req,res)=>{
 
+    console.log(req.body)
     
         const user = new User(req.body)
 
