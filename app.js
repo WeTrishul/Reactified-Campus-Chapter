@@ -15,6 +15,7 @@ const passportJWT = require('./config/passport-jwt-strategy')
 const db = require('./config/db')
 const MongoStore = require('connect-mongo')
 const RatingsHandler = require('./config/RatingsHandler')
+const pollRouter = require('./routes/Polling')
 const cors = require('cors')
 
 
@@ -22,13 +23,8 @@ const app=express()
 app.use(cors({
     origin:'*'
 }))
-const pollRouter = require('./routes/Polling')
 
 
-
-
-
-const app=express()
 
 const port=process.env.PORT || 3000
 //app.use(express.json())
