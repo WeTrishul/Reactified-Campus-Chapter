@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
     <head>
         <title><%=title%></title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -10,7 +10,7 @@
 
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <!-- Collect the nav links, forms, and other content for toggling -->
+                
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="/home">Home</a></li>
@@ -38,8 +38,8 @@
                         <li><a href="/login">Log In</a></li>
                         <li><a href="/logout">Log Out</a></li>
                     </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </div>
+            </div>
         </nav>
 
         <h1>Here are the List of Users</h1>
@@ -57,4 +57,106 @@
         
 
     </body>
+</html> -->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <style>
+        html,
+        body {
+          height: 100%;
+        }
+      
+        @media (min-width: 640px) {
+          table {
+            display: inline-table !important;
+          }
+      
+          thead tr:not(:first-child) {
+            display: none;
+          }
+        }
+      
+        td:not(:last-child) {
+          border-bottom: 0;
+        }
+      
+        th:not(:last-child) {
+          border-bottom: 2px solid rgba(0, 0, 0, .1);
+        }
+      </style>
+  
+
+</head>
+<body class="bg-gray-200">
+    
+<!-- component -->
+<%- include('_navbar') -%>
+
+
+
+
+<!----------------------------###################  Navbar ends  ###############------------------------------------------------>
+
+<!----------------------------###################  ------------  ###############------------------------------------------------>
+
+<!----------------------------###################  Table starts  ###############------------------------------------------------>
+
+
+<body class="flex items-center justify-center">
+	<div class="container">
+       
+		<table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+			<thead class="text-white">
+				<tr class="bg-green-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+					<th class="p-3 text-left">Name</th>
+					
+					<th class="p-3 text-left" width="110px">Actions</th>
+				</tr>
+				<tr class="bg-green-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+					<th class="p-3 text-left">Name</th>
+				
+					<th class="p-3 text-left" width="110px">Actions</th>
+				</tr>
+                <tr class="bg-green-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                  <th class="p-3 text-left">Name</th>
+                 
+                  <th class="p-3 text-left" width="110px">Actions</th>
+              </tr>
+                <tr class="bg-green-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                  <th class="p-3 text-left">Name</th>
+                 
+                  <th class="p-3 text-left" width="110px">Actions</th>
+              </tr>
+			</thead>
+			<tbody class="flex-1 sm:flex-none">
+                <%for(var u of users){%> 
+				<tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+					<td class="border-grey-light border hover:bg-gray-100 p-3"><a href="/profilepage/<%=u.username%>"><%=u.name%></a></td>
+					<td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer"><a href="/delete/<%= u.username %>">delete</a></td>
+				</tr>
+				<%}%>
+			</tbody>
+		</table>
+        
+	</div>
+</body>
+
+
+
+</div>
+
+</body>
 </html>

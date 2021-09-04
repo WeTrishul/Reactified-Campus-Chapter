@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
     <head>
         <title>Upcoming Events</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -10,7 +10,7 @@
 
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <!-- Collect the nav links, forms, and other content for toggling -->
+                <
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="/home">Home</a></li>
@@ -39,8 +39,8 @@
                         <li><a href="/login">Log In</a></li>
                         <li><a href="/logout">Log Out</a></li>
                     </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </div>
+            </div>
         </nav>
 
         
@@ -90,4 +90,280 @@
             <%}%>
         </div>
     </body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+
+    <style>
+        html,
+        body {
+          height: 100%;
+          
+        }
+      
+        @media (min-width: 640px) {
+          table {
+            display: inline-table !important;
+          }
+      
+          thead tr:not(:first-child) {
+            display: none;
+          }
+        }
+      
+        td:not(:last-child) {
+          border-bottom: 0;
+        }
+      
+        th:not(:last-child) {
+          border-bottom: 2px solid rgba(0, 0, 0, .1);
+        }
+      </style>
+
+</head>
+<body class="bg-gray-200 ">
+    
+<!-- component -->
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<div class="min-h-screen">
+  <div class="antialiased bg-gray-100 dark-mode:bg-gray-900">
+  <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
+    <div x-data="{ open: true }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+      <div class="flex flex-row items-center justify-between p-4">
+        <a href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Campus Chapter</a>
+        <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
+          <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+            <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+            <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+      <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="index.html">Dashboard</a>
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="upcoming-events.html">Upcoming Events</a>
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="team-chat.html">Team Chat</a>
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="discuss.html">Discuss</a>
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="leaderboards.html">Leaderboard</a>
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="allusers.html">All users</a>
+
+
+        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+          <button @click="open = !open" class="flex flex-row text-gray-900 bg-gray-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <span>Myself</span>
+            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+          <div  x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right">
+            <div class="px-2 pt-2 pb-4 bg-gray-100 rounded-md shadow-lg dark-mode:bg-gray-700  text-black">
+              <div class=" gap-4">
+                <a class="flex flex row items-start rounded-lg bg-transparent p-2  dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="profile.html">
+                  <div class="bg-teal-500 text-black rounded-lg p-3">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="md:h-6 md:w-6 h-4 w-4"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="font-semibold">Profile</p>
+                    
+                  </div>
+                </a>
+
+                <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="editprofile.html">
+                  <div class="bg-teal-500 text-black rounded-lg p-3">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="md:h-6 md:w-6 h-4 w-4"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="font-semibold">Edit Profile</p>
+                    <!-- <p class="text-sm">Check your latest comments</p> -->
+                  </div>
+                </a>
+
+                <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">
+                  <div class="bg-teal-500 text-black rounded-lg p-3">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="md:h-6 md:w-6 h-4 w-4"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="font-semibold">Logout</p>
+                    
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>    
+      </nav>
+    </div>
+  </div>
+</div>
+<!-------------------------------------------------------------###################------------------------------------------->
+<!------------------------------------------------------------- navbar ends------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+  
+<!-------------------------------------------------------------###################------------------------------------------->
+<!------------------------------------------------------------- college events starts------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+  
+<!-- component -->
+
+
+
+<!-- component -->
+<!-- This is an example component -->
+<!-- <div style="@media(max-width:998px){
+
+html{
+  font-size:55%;
+}
+
+}
+@media(max-width:768px){
+
+html{
+  font-size:45%;
+}
+
+}
+"> -->
+<br>
+
+<%if((locals.user) && (locals.user.UserType=="Admin")||(locals.user.UserType=="MediaLead") || (locals.user.UserType=="EventsLead") ){%>
+   
+    <a href="/EventForm" class="bg-indigo-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6">
+      Create Event
+  </a>
+    <%}%>
+    <br>
+    <br>
+    <%for( i of myevents){%>
+<div class="container mx-auto my-5">
+
+    <div style="z-index: -1;" class="relative rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2">
+        
+        <div  class=" order-1 md:order-2 relative w-full md:w-2/5 h-80 md:h-full overflow-hidden rounded-lg md:rounded-none md:rounded-r-lg">
+            <div class="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom" style="background-image: url( <%=i.eventbanner%> ); background-blend-mode: multiply;"></div>
+            <div class="md:hidden absolute inset-0 h-full p-6 pb-6 flex flex-col-reverse justify-start items-start bg-gradient-to-b from-transparent via-transparent to-gray-900">
+                <h3 class="w-full font-bold text-2xl text-white leading-tight mb-2"><%=i.eventname%></h3>
+                <!-- <h4 class="w-full text-xl text-gray-100 leading-tight">Hiring Challenge</h4> -->
+            </div>
+            <svg class="hidden md:block absolute inset-y-0 h-full w-24 fill-current text-white -ml-12" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <polygon points="50,0 100,0 50,100 0,100" />
+            </svg>
+        </div>
+
+        <div class="z-10 order-2 md:order-1 w-full h-full md:w-3/5 flex items-center -mt-6 md:mt-0">
+            <div class="w-full p-8 md:pr-18 md:pl-14 md:py-12 mx-2 md:mx-0 h-full bg-white rounded-lg md:rounded-none md:rounded-l-lg shadow-xl md:shadow-none">
+                <!-- <h4 class="hidden md:block text-xl text-gray-400">Hiring Challenge</h4> -->
+                <h3 class="hidden md:block font-bold text-2xl text-gray-700"><%=i.eventname%></h3>
+                <p class="text-gray-600 text-justify"><%=i.aboutevent%></p>
+                <a class="flex items-baseline mt-3 text-blue-600 hover:text-blue-900 focus:text-blue-900" href="">
+                    <p> <%=i.eventDate%> </p> 
+                    <p class="ml-10"><%=i.eventStartTime%> - </p> 
+
+                    <p> <%=i.eventEndTime%></p>
+                   
+                    <p class="ml-10"> Total Registrations :<%=i.Registeredusers.length%> </p>
+                    <!-- <span>Conocer más de Amanee</span> -->
+                    <!-- component -->
+<!-- <button class="block uppercase -ml-1 mx-auto shadow bg-red-600 hover:bg-red-500 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded">Register</button>
+<button class="block uppercase -ml-20 mx-auto shadow bg-indigo-600 hover:bg-indigo-500 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded">Edit</button>
+<button class="block uppercase -ml-20 mx-auto shadow bg-red-600 hover:bg-red-500 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded">Delete</button> -->
+<div class="flex flex-col">
+  <div class="flex justify-center">
+    <%if(i.Registeredusers.includes(locals.user._id)){%>
+        <a  class="bg-green-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6">
+            Registered
+            
+        </a>
+        <%}else{%>
+            <a href="/RegisterForEvent/?id=<%= i._id %>" class="bg-indigo-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6">
+                Register
+            </a>
+
+            
+            
+        <%}%>
+
+
+
+        <%if((locals.user) && (locals.user.UserType=="Admin")||(locals.user.UserType=="MediaLead") || (locals.user.UserType=="EventsLead") ){%>
+            
+            <a href="/EditForm/?id=<%= i._id %>" class="bg-blue-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6">
+                Edit
+            </a>
+            <a href="/DeleteEvent/?id=<%= i._id %>" class="bg-red-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6">
+                Delete
+            </a>
+           
+            <%}%>
+            <a style="cursor: pointer;" href="/EventPage/<%= i.eventname%>">more details</a>
+
+
+
+   
+  
+ 
+  </div>
+ 
+  </div>
+
+
+
+
+                    <!-- <span class="text-xs ml-1">&#x279c;</span> -->
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<%}%>
+<%for( i of result){%>
+    <ul>
+        <l1><%=i.name%></l1>
+        <p>Duration: <small><%=i.durationSeconds/3600%>hrs</small></p>
+        <p>Starting on: <%=i.startTimeSeconds%></p>
+    </ul>
+    <%}%>
+</div>
+
+<!-------------------------------------------------------------###################------------------------------------------->
+<!------------------------------------------------------------- college events ends------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+  
+<!-------------------------------------------------------------###################------------------------------------------->
+<!------------------------------------------------------------- other site events starts------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+  
+
+<!-- component -->
+
+<!-- component -->
+
+
+
+
+
+
+<!-- 
+</div> -->
+
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
