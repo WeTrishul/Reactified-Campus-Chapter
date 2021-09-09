@@ -121,7 +121,21 @@
   }
 
 
+
+  let convertPostsToAjax = function(){
+    $('#posts-list-container').each(function(){
+        let self = $(this);
+        let deleteButton = $(' .delete-post-button', self);
+        deletePost(deleteButton);
+
+        let postId = self.prop('id').split("-")[1]
+        console.log(postId)
+        new PostComments(postId);
+    });
+}
    
 
+
     createPost();
+    convertPostsToAjax();
 }

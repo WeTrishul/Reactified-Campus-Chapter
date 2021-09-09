@@ -9,7 +9,7 @@ class PostComments{
 
         this.createComment(postId);
 
-        console.log('done1')
+        console.log(postId)
 
         let self = this;
       
