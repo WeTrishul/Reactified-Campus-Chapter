@@ -3,6 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const User = require('../models/user')
 const Event = require('../models/events')
+const Blog = require('../models/blog')
 const passport =require('passport')
 const passport_local = require('../config/passport-local-auth')
 const fetch = require('node-fetch')
@@ -15,7 +16,19 @@ const fs =require('fs')
 
 
 module.exports.allblogs = async (req,res) =>{
-    res.render('Allblogs')
+
+    try {
+        const allblogs = await Blog.find({}).populate('userid')
+       
+       
+        res.render('Allblogs',{
+            allblogs
+        })
+    } catch (error) {
+        console.log(error)
+        res.redirect('back')
+    }
+    
 }
 
 module.exports.blogform = async (req,res) =>{
@@ -25,5 +38,46 @@ module.exports.blogform = async (req,res) =>{
 module.exports.saveblog = async (req,res) =>{
     // console.log(req.body)
 
-    res.send(req.body.content)
+    try {
+        await Blog.create(req.body)
+        res.redirect('/Allblogs')
+    } catch (error) {
+        console.log(error)
+    }
+   
+    
 }
+
+module.exports.showblog = async (req,res) =>{
+    try {
+        const blog = await Blog.findById(req.params.id)
+        console.log(blog)
+       res.render('BlogPage',{blog})
+
+    // res.send(blog.content)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+module.exports.deleteblog =  async (req,res) =>{
+    try {
+       
+        const blog = await Blog.findById(req.params.id)
+        if(req.user.id==blog.userid)
+        {
+            await blog.remove()
+           
+        }
+        res.redirect('/Allblogs')
+
+    // res.send(blog.content)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+

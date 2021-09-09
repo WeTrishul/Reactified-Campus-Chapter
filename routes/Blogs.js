@@ -9,6 +9,8 @@ router.get('/writeblog',passport.checkAuthentication,BlogController.blogform)
 
 router.post('/saveblog',passport.checkAuthentication,BlogController.saveblog)
 
+router.get('/showblog/:id',BlogController.showblog)
 
+router.get('/deleteblog/:id',passport.checkAuthentication,BlogController.deleteblog)
 
 module.exports = router
