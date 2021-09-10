@@ -22,8 +22,11 @@ module.exports.allblogs = async (req,res) =>{
        
        
         res.render('Allblogs',{
+            
             allblogs
         })
+
+
     } catch (error) {
         console.log(error)
         res.redirect('back')
@@ -32,7 +35,27 @@ module.exports.allblogs = async (req,res) =>{
 }
 
 module.exports.blogform = async (req,res) =>{
-    res.render('blogform')
+    res.render('blogform',{
+        blog:undefined
+    })
+}
+
+module.exports.editblogform = async (req,res) =>{
+
+    try {
+
+        const blog = await Blog.findById(req.query.id,req.body)
+        
+        res.render('blogform',{blog})
+
+    } catch (error) {
+
+        console.log(error)
+
+    }
+    
+
+
 }
 
 module.exports.saveblog = async (req,res) =>{
@@ -50,7 +73,8 @@ module.exports.saveblog = async (req,res) =>{
 
 module.exports.showblog = async (req,res) =>{
     try {
-        const blog = await Blog.findById(req.params.id)
+        const blog = await Blog.findById(req.params.id).populate('userid')
+        
         console.log(blog)
        res.render('BlogPage',{blog})
 
@@ -79,5 +103,18 @@ module.exports.deleteblog =  async (req,res) =>{
 }
 
 
+
+module.exports.editblog =  async (req,res) =>{
+    try {
+       
+        const blog = await Blog.findByIdAndUpdate(req.params.id,req.body)
+        blog.save()
+        res.redirect('/Allblogs')
+
+    // res.send(blog.content)
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 

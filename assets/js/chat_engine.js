@@ -50,10 +50,16 @@ class ChatEngine{
         });
 
         self.socket.on('receive_message',(data)=>{
-            // console.log('message recieved',data.message)
+            console.log('message recieved',data.message)
+            let newMessage
+            if(self.username==data.username)
+            {
+                newMessage = $('<li class=" justify-end bg-yellow-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 mr-4 mt-3">');
+            }
+            else{
+                newMessage = $('<li class=" bg-green-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 ml-4 mt-3">');
 
-            let newMessage = $('<li class="rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 ml-4 mt-3">');
-
+            }
             newMessage.append($('<strong>', {
                 'html': data.username
             }));
@@ -72,10 +78,17 @@ class ChatEngine{
 
         self.socket.on('old_messages',(data)=>{
            
-
+            console.log(self.username)
             data.forEach((element) => {
+                let newMessage
+                if(self.username==element.username)
+                {
+                    newMessage = $('<li class=" justify-end bg-yellow-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 mr-4 mt-3">');
+                }
+                else{
+                    newMessage = $('<li class=" bg-green-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 ml-4 mt-3">');
 
-                let newMessage = $('<li class=" bg-green-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 ml-4 mt-3">');
+                }
                 newMessage.append($('<strong>', {
                     'html': element.username
                 }));
@@ -87,6 +100,7 @@ class ChatEngine{
                 newMessage.append($('<small>', {
                     'html': element.message
                 }));
+               
                 $('#chat-messages-list').append(newMessage);
             });
           
