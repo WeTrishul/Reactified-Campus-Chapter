@@ -24,15 +24,16 @@
                     console.log(error.responseText);
                 }
             });
+            
         });
     }
 
-
+    
     // method to create a post in DOM
     // ${ post.content }
 
     let newPostDom = function(post){
-      
+        console.log(post.id)
         return $(`<div id="post-${ post._id }">
         <div class=" bg-gray-200 shadow-lg rounded-lg  md:max-w-2xl "><!--horizantil margin is just for display-->
             <div class="flex items-start px-4 py-6">
@@ -49,7 +50,7 @@
                   <div class="mt-4 flex items-center">
                   
                       
-                    <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/Likehandler/?id=${ post.id }&type=Post" class='toggle-like-button'>
+                    <a class="toggle-like-button" data-likes="0" href="/Likehandler/?id=${ post._id }&type=Post" class='toggle-like-button'>
                      <div class="flex mr-2 text-gray-700 text-sm mr-3">
                         <svg fill="none" viewBox="0 0 24 24"  class="w-4 h-4 mr-1" stroke="currentColor">
                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
@@ -132,10 +133,11 @@
 
         let postId = self.prop('id').split("-")[1]
         console.log(postId)
+
         new PostComments(postId);
     });
 }
-   
+// 613b941a3213305c7ca04945
 
 
     createPost();

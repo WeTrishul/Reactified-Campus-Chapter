@@ -183,7 +183,7 @@
 <div id="posts-list-container">
 
 <% for(post of posts){ %>
-  <div id="post-<%= post.id %>">
+  <div id="post-<%= post._id %>">
         <div class=" bg-gray-200 shadow-lg rounded-lg  md:max-w-2xl "><!--horizantil margin is just for display-->
             <div class="flex items-start px-4 py-6">
                <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src="<%=post.userid.dp%>" alt="avatar">
@@ -215,7 +215,7 @@
                         <span><%=post.comments.length%></span>
                      </div>
                      <%if((locals.user) && locals.user.UserType=='Admin' || post.userid.id==locals.user.id){%>
-                     <a class="delete-post-button" href="/destroypost/<%= post.id %>">
+                     <a class="delete-post-button" href="/destroypost/<%= post._id %>">
                      <div class="flex mr-2 text-gray-700 text-sm mr-4">
                       
                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -326,9 +326,9 @@
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 
 
-
-<script src='/js/posts.js' ></script>
 <script src='/js/comment.js' ></script>
+<script src='/js/posts.js' ></script>
+
 
 <script src="js/toggle_likes.js"></script>
 <script>

@@ -1,7 +1,6 @@
 
 
 class PostComments{
-    // constructor is used to initialize the instance of the class whenever a new instance is created
     constructor(postId){
         this.postId = postId;
         this.postContainer = $(`#post-${postId}`);
@@ -34,17 +33,7 @@ class PostComments{
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($('.delete-comment-button', newComment));
                     new ToggleLike($(' .toggle-like-button', newComment));
-                    // CHANGE :: enable the functionality of the toggle like button on the new comment
-                    // new ToggleLike($(' .toggle-like-button', newComment));
-                    // new Noty({
-                    //     theme: 'relax',
-                    //     text: "Comment published!",
-                    //     type: 'success',
-                    //     layout: 'topRight',
-                    //     timeout: 1500
-                        
-                    // }).show();
-
+                 
                 }, error: function(error){
                     console.log(error.responseText);
                 }
