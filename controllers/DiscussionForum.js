@@ -39,6 +39,7 @@ module.exports.postit =  (req,res)=>{
         if(error){return res.redirect('back')}
         
         if (req.xhr){
+            
             post = await post.populate('userid').execPopulate();
             return res.status(200).json({
                 data: {
@@ -91,11 +92,10 @@ module.exports.deletepost = (req,res)=>{
             await Like.deleteMany({likeable:post._id,onModel:'Post'})
             await Like.deleteMany({likeable:{$in:post.comments}})
             post.remove()
-            Comment.deleteMany({postid:req.params.id},(error)=>{
-               
-            })
+            await Comment.deleteMany({postid:req.params.id})
 
             if (req.xhr){
+                console.log('hi')
                 return res.status(200).json({
                     data: {
                         post_id: req.params.id
@@ -103,6 +103,8 @@ module.exports.deletepost = (req,res)=>{
                     message: "Post deleted"
                 });
             }
+
+            res.redirect('back')
         }
         else{
             res.redirect('back')
@@ -153,6 +155,7 @@ module.exports.likehandler= async (req,res)=>{
     try{
        
         var likeable
+        let deleted = false;
 
     if(req.query.type=='Post')
     {
@@ -176,6 +179,7 @@ module.exports.likehandler= async (req,res)=>{
        likeable.likes.pull(ispresent._id)
        likeable.save()
        ispresent.remove()
+       deleted = true;
     }
     else{
         
@@ -189,7 +193,15 @@ module.exports.likehandler= async (req,res)=>{
         likeable.save()
     }
 
-    return res.redirect('back')
+    return res.json(200, {
+        message: "Request successful!",
+        data: {
+            deleted: deleted
+        }
+    })
+
+
+    // return res.redirect('back')
 
     }catch(error){
         return console.log(error)

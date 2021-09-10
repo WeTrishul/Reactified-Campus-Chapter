@@ -22,7 +22,7 @@ module.exports.chat = (socketserver) =>{
           console.log('joining request by ' , data)
           let chats = []
           chats = await Chat.find({chatroom:data.chatroom})
-          console.log(chats)
+          // console.log(chats)
           socket.join(data.chatroom)
 
           socket.emit('old_messages',chats)
@@ -34,7 +34,7 @@ module.exports.chat = (socketserver) =>{
           Chat.create(data,(error,chat)=>{
             io.in(data.chatroom).emit('receive_message', chat);
           })
-          // console.log(data)
+          console.log(data)
           
       })
 

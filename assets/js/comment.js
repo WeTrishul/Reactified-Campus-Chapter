@@ -1,7 +1,6 @@
 
 
 class PostComments{
-    // constructor is used to initialize the instance of the class whenever a new instance is created
     constructor(postId){
         this.postId = postId;
         this.postContainer = $(`#post-${postId}`);
@@ -9,7 +8,7 @@ class PostComments{
 
         this.createComment(postId);
 
-        console.log('done1')
+        console.log(postId)
 
         let self = this;
       
@@ -33,18 +32,8 @@ class PostComments{
                     let newComment = pSelf.newCommentDom(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($('.delete-comment-button', newComment));
-
-                    // CHANGE :: enable the functionality of the toggle like button on the new comment
-                    // new ToggleLike($(' .toggle-like-button', newComment));
-                    // new Noty({
-                    //     theme: 'relax',
-                    //     text: "Comment published!",
-                    //     type: 'success',
-                    //     layout: 'topRight',
-                    //     timeout: 1500
-                        
-                    // }).show();
-
+                    new ToggleLike($(' .toggle-like-button', newComment));
+                 
                 }, error: function(error){
                     console.log(error.responseText);
                 }
@@ -83,7 +72,7 @@ class PostComments{
                  <div class="flex justify-start items-center text-xs w-full">
                    <div class="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
                     
-                     <a href="/Likehandler/?id=${ comment._id }&type=Comment" class="hover:underline">
+                     <a class="toggle-like-button hover:underline" data-likes="0" href="/Likehandler/?id=${ comment._id }&type=Comment" >
                        <small>Like</small>
                      </a>
                    
