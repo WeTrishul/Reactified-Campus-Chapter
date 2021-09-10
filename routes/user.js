@@ -51,6 +51,12 @@ router.get('/userrole',UserController.changeRole)
 
 
 
+router.get('/seeQ/:id',UserController.listUserQuestions)
+
+
+
+
+
 
 
 

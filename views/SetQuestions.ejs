@@ -43,7 +43,22 @@
                         <input class="btn btn-primary" type="submit" value="Upload"/>
                     </div>
                 </form>  
-                <%}%>                
+                <%}%>
+            
+            </div>          
+        </div>
+
+
+        <div class="container row">
+            <div class="jumbotron col-sm-4 pull-center">
+                        <%if((locals.user) && (locals.user.UserType=="QuestionSetter")||(locals.user.UserType=="Admin")){%>
+                    <form action="/seeQ/<%=locals.user._id%>">
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="View Ques"/>
+                    </div>
+                </form>  
+                <%}%>
+            
             </div>          
         </div>
 

@@ -76,8 +76,7 @@ const userSchema = new mongoose.Schema({
         default:"Student"
     },
     questions:{
-        type:String,
-        default:'Nhi hai'
+        type:String
     },
     dp:{
         type:String,
@@ -93,6 +92,9 @@ const userSchema = new mongoose.Schema({
     resetLink:{
         data:String,
         default:''
+    },
+    arr:{
+        type:Array
     }
 }, 
 {

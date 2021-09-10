@@ -314,9 +314,23 @@ module.exports.changeRole = async(req,res)=>{
     } catch (error) {
         console.log('Error in changing role',error)
     }
-    
+ 
+}
 
-    
+module.exports.listUserQuestions = async (req,res)=>{
+    const _id = req.params.id
+    const user = await User.findById(_id)
+
+    try {
+        const arr = user.arr;
+        res.render('questionlist',{
+            title:'question list',
+            l: user.arr.length,
+            arr: arr
+        })
+    } catch (error) {
+        res.redirect('back')
+    }
 }
 
 

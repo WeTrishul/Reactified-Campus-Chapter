@@ -129,13 +129,9 @@
 					<th class="p-3 text-left">Name</th>
 				
 					<th class="p-3 text-left" width="110px">Actions</th>
+          <th class="p-3 text-left" width="110px"></th>
 				</tr>
-                <tr class="bg-green-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                  <th class="p-3 text-left">Name</th>
-                 
-                  <th class="p-3 text-left" width="110px">Actions</th>
-              </tr>
-                <tr class="bg-green-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                <tr class=" w-full bg-green-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
                   <th class="p-3 text-left">Name</th>
                  
                   <th class="p-3 text-left" width="110px">Actions</th>
@@ -144,8 +140,14 @@
 			<tbody class="flex-1 sm:flex-none">
                 <%for(var u of users){%> 
 				<tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+          
 					<td class="border-grey-light border hover:bg-gray-100 p-3"><a href="/profilepage/<%=u.username%>"><%=u.name%></a></td>
+          <div>
 					<td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer"><a href="/delete/<%= u.username %>">delete</a></td>
+          <%if(locals.user.UserType==='Admin'){%>
+          <td class=" w-2 border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer"><a href="/seeQ/<%= u._id %>">View Ques</a></td>
+          <%}%>
+        </div>
 				</tr>
 				<%}%>
 			</tbody>

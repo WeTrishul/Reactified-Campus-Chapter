@@ -5,6 +5,7 @@ const User = require('../models/user')
 const Event = require('../models/events')
 const passport =require('passport')
 const passport_local = require('../config/passport-local-auth')
+const cloudinary = require('../config/cloudinary')
 const multer = require('multer')
 const path=require('path')
 const fs =require('fs')
@@ -26,33 +27,50 @@ else
 module.exports.upload = async(req,res)=>{
     const _id = req.params.id
     let user = await User.findOne({_id})
+    
     try {
-        User.uploadedQuestions(req,res,function(error){
+        var paths,arr=[];
+        User.uploadedQuestions(req,res,async function(error){
             if(error)
             {
                 console.log('******Multer Error*****'+error)  
             }
            if(req.files[0])
            { 
-               let path = User.questionsPath+'/'+ req.files[0].filename+','
+                paths = User.questionsPath+'/'+ req.files[0].filename+','
                for(var i=1;i<req.files.length;i++)
             {
-                    path = path + User.questionsPath+'/'+ req.files[i].filename + ','
+                    paths = paths + User.questionsPath+'/'+ req.files[i].filename + ','
             }    
-                var LastIndexOfComma = path.lastIndexOf(',')
-                path = path.substr(0,LastIndexOfComma)
-                user.questions = path
-                user.save()
-                   
+                var LastIndexOfComma = paths.lastIndexOf(',')
+                paths = paths.substr(0,LastIndexOfComma)
+                user.questions = paths
+                console.log(paths,'bhai node hai yeh')
+                await user.save()
+
+                arr = await paths.split(',')
+                arr.forEach(ele => user.arr.push(ele))
+
+                await user.save()
+
+                console.log(user.arr)
            }
         })     
-        return res.redirect('/fileupload')   
-                    
+     /* res.render('questionlist',{
+           title:'question list',
+           l: user.arr.length,
+           arr: user.arr
+       }) */ 
+
+       res.redirect('/fileupload')
     }catch (error) {
         console.log('Error'+error)
         res.redirect('/dashboard')
     }
 }
+
+
+
 
 module.exports.profile = async(req,res)=>{
 
@@ -92,7 +110,6 @@ module.exports.uploadDp = async(req,res)=>{
             }            
            }
         })     
-        const username = user.username
         return res.redirect('/profilepage')
                     
     }catch (error) {
@@ -100,5 +117,22 @@ module.exports.uploadDp = async(req,res)=>{
         res.redirect('/dashboard')
     }
 }
+
+
+/*module.exports.listQuestions = (req,res)=>{
+    const id = req.params.id
+    const user = User.findById({_id:id})
+
+    try {
+            res.render('questionlist',{
+                title:'question list',
+                paths: user.arr
+            })
+        }
+     catch (error) {
+        res.redirect('back')
+    }
+
+}*/
 
 
