@@ -155,6 +155,7 @@ module.exports.likehandler= async (req,res)=>{
     try{
        
         var likeable
+        let deleted = false;
 
     if(req.query.type=='Post')
     {
@@ -178,6 +179,7 @@ module.exports.likehandler= async (req,res)=>{
        likeable.likes.pull(ispresent._id)
        likeable.save()
        ispresent.remove()
+       deleted = true;
     }
     else{
         
@@ -191,7 +193,15 @@ module.exports.likehandler= async (req,res)=>{
         likeable.save()
     }
 
-    return res.redirect('back')
+    return res.json(200, {
+        message: "Request successful!",
+        data: {
+            deleted: deleted
+        }
+    })
+
+
+    // return res.redirect('back')
 
     }catch(error){
         return console.log(error)
