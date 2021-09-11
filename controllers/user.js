@@ -1,8 +1,11 @@
 const cookieParser = require('cookie-parser');
 const express = require('express')
+const db = require('../config/db')
 const mongoose = require('mongoose')
 const User = require('../models/user')
 const Event = require('../models/events')
+const Blog = require('../models/blog')
+const Post = require('../models/post')
 const passport =require('passport')
 const passport_local = require('../config/passport-local-auth')
 const fetch = require('node-fetch')
@@ -76,9 +79,21 @@ module.exports.postsignup = async (req,res)=>{
     
 
 module.exports.dashboard = async (req,res)=>{
-    try {                
+    try { 
+        
+        const posts = await Post.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(8)
+        
+        const events = await Event.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(4)
+
+        const blog = await Blog.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(8)
+
+        console.log(posts)
+
         res.render('dashboard',{
-            title:'Dasboard'
+            title:'Dasboard',
+            posts : posts,
+            events : events,
+            blogs : blog
         })
        
         
