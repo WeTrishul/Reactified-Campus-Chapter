@@ -8,10 +8,14 @@ module.exports.getRatings=async (user)=>{
         // for codeforces 
         const codeforcesData = await fetch('https://codeforces.com/api/user.info?handles='+user.codeforces).then(response=>response.json())
         const codeforcesRatings = codeforcesData.result[0].rating
-        // console.log(codeforcesRatings)  
+       
+        //for codechef
+        const codechefRatings = 0
+        //for hackkerank
+        const hackerrankRatings = 0
 
 
-        return codeforcesRatings
+        return codeforcesRatings + codechefRatings + hackerrankRatings
 
     }catch(error)
     {

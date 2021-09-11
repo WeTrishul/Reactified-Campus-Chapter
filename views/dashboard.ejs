@@ -241,8 +241,12 @@
 	  <!--Slide 1-->
 		<input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
 		<div class=" alund carousel-item absolute opacity-0"  >
-      <!-- <img src="https://cdn.codechef.com/download/banner/1627746015.png" class="lg: w-full h-full" alt=""> -->
+            <% if(!events[0]) { %>
+                      <img src="https://cdn.codechef.com/download/banner/1627746015.png" class="lg: w-full h-full" alt="">
+
+                <%} else {%>
       <img src="<%=events[0].eventbanner%>"  class=" anand w-full h-full"  alt="">
+      <%}%>
 
       <div class="block h-full w-full bg-indigo-500 text-white text-5xl text-center">Slide 1</div>
 		</div>
@@ -252,7 +256,12 @@
 		<!--Slide 2-->
 		<input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
 		<div class=" alund carousel-item absolute opacity-0" >
-      <img src="<%=events[1].eventbanner%>" class=" anand w-full h-full" alt="">
+            <% if(!events[1]) { %>
+                <img src="https://cdn.codechef.com/download/banner/1627746015.png" class="lg: w-full h-full" alt="">
+
+          <%} else {%>
+<img src="<%=events[1].eventbanner%>"  class=" anand w-full h-full"  alt="">
+<%}%>
 			<div class="block h-full w-full bg-orange-500 text-white text-5xl text-center">Slide 2</div>
 		</div>
 		<label for="carousel-1" class="prev control-2 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
@@ -261,7 +270,12 @@
 		<!--Slide 3-->
 		<input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
 		<div class=" alund carousel-item absolute opacity-0" >
-      <img src="https://cdn.codechef.com/download/banner/1628600419.png" class=" anand w-full h-full" alt="">
+            <% if(!events[2]) { %>
+                <img src="https://cdn.codechef.com/download/banner/1628600419.png" class=" anand w-full h-full" alt="">
+
+          <%} else {%>
+<img src="<%=events[2].eventbanner%>"  class=" anand w-full h-full"  alt="">
+<%}%>
 			<div class="block h-full w-full bg-green-500 text-white text-5xl text-center">Slide 3</div>
 		</div>
 		<label for="carousel-2" class="prev control-3 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
@@ -311,7 +325,7 @@
           <div class="-mt-6 relative">
             <br />
             <% for(event of events) {%>
-            <p class="text-white text-xl 2xl:text-4xl font-bold px-7 lg:px-9 2xl:pt-6 2xl:mx-2"> <%=event.eventname%></p>
+           <a href="/UpcomingEvents/#event-<%=event._id%>"> <p class="hover:text-red-400 text-white text-xl 2xl:text-4xl font-bold px-7 lg:px-9 2xl:pt-6 2xl:mx-2"> <%=event.eventname%></p></a>
             <%}%>
           </div>
         </div>
@@ -385,7 +399,7 @@
           <div class="px-3 lg:px-5 lg:-mt-4 mb-5 lg:mb-0">
             <% for(blog of blogs) {%>
             
-            <p class="primary-color-blackish-blue text-xl 2xl:text-4xl font-semibold px-4 lg:px-0 -mt-2 lg:-mt-0"><%=blog.title%></p><br>
+           <a href="/showblog/<%=blog._id%>"> <p class="hover:text-white primary-color-blackish-blue text-xl 2xl:text-4xl font-semibold px-4 lg:px-0 -mt-2 lg:-mt-0"><%=blog.title%></p></a><br>
             <%}%>
             <!-- <p class="primary-color-blackish-blue-opacity font-medium md:text-sm 2xl:text-3xl px-4 lg:px-0 2xl:px-4 lg:pr-3 mt-2 lg:-mt-1 2xl:mt-2 2xl:pb-64">“ Before joining the bootcamp, I’ve never written a line of code. I needed some structure from professionals who can help me learn programming step by step. I was encouraged to enroll by a former student of theirs who can only say wonderful things about the program. The entire curriculum and staff did not disappoint. They were very hands-on and I never had to wait long for assistance. The agile team project, in particular, was outstanding. It took my learning to the next level in a way that no tutorial could ever have. In fact, I’ve often referred to it during interviews as an example of my developent experience. It certainly helped me land a job as a full-stack developer after receiving multiple offers. 100% recommend! ”</p> -->
           </div>

@@ -1,14 +1,15 @@
  <html>
     <head>
         <title><%=title%></title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    </head>
-    <body class="container">
-        <div class="page-header">
-            <h1>Login System</h1>
-        </div>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
-        <nav class="navbar navbar-default">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    </head>
+    <body class="bg-gray-300">
+      
+        <%- include('_navbar') -%>   
+
+        <!-- <nav class="navbar navbar-default">
             <div class="container-fluid">
                 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -40,14 +41,14 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> -->
 
         <h1>Here are the List of Questions : <%=(arr.length)%></h1>
 
         <div >
             <ol>
             <%for(var i=l-1;i>=0;i--){%>
-                    <li><a href ="<%=arr[i]%>"><%=locals.user.username%></a></li>
+                    <li><a class="hover:text-indigo-500 mt-2" style="text-decoration: underline;" href ="<%=arr[i]%>"><%=locals.user.username%></a></li>
                 <%}%>
             </ol>
         </div>

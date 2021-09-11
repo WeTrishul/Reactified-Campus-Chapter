@@ -87,7 +87,7 @@ module.exports.dashboard = async (req,res)=>{
 
         const blog = await Blog.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(8)
 
-        console.log(posts)
+    
 
         res.render('dashboard',{
             title:'Dasboard',

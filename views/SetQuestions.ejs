@@ -15,9 +15,10 @@
             <div class="jumbotron col-sm-4 pull-center">
                         <%if((locals.user) && (locals.user.UserType=="QuestionSetter")||(locals.user.UserType=="Admin")){%>
                     <form action="/fileupload/setquestions/<%=locals.user._id%>" method="post" enctype="multipart/form-data">
-                    <input type="file" name="questions" multiple>
-                    <div class="form-group">
-                        <input class="btn btn-primary" type="submit" value="Upload"/>
+                    <input class="bg-indigo-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6" type="file" name="questions" multiple>
+                   
+                    <div class="form-group mt-4">
+                        <input class="bg-indigo-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-400 mr-6" type="submit" value="Upload"/>
                     </div>
                 </form>  
                 <%}%>
@@ -31,7 +32,7 @@
                         <%if((locals.user) && (locals.user.UserType=="QuestionSetter")||(locals.user.UserType=="Admin")){%>
                     <form action="/seeQ/<%=locals.user._id%>">
                     <div class="form-group">
-                        <input class="btn btn-primary" type="submit" value="View Ques"/>
+                        <input class="bg-green-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6" type="submit" value="View Ques"/>
                     </div>
                 </form>  
                 <%}%>
