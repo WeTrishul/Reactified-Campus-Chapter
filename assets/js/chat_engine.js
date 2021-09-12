@@ -54,10 +54,10 @@ class ChatEngine{
             let newMessage
             if(self.username==data.username)
             {
-                newMessage = $('<li class=" justify-end bg-yellow-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 mr-4 mt-3">');
+                newMessage = $('<li class="float-right table clear-both bg-yellow-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 mr-4 mt-3">');
             }
             else{
-                newMessage = $('<li class=" bg-green-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 ml-4 mt-3">');
+                newMessage = $('<li class="float-left table  clear-both bg-green-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 ml-4 mt-3">');
 
             }
             newMessage.append($('<strong>', {
@@ -83,10 +83,11 @@ class ChatEngine{
                 let newMessage
                 if(self.username==element.username)
                 {
-                    newMessage = $('<li class=" justify-end bg-yellow-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 mr-4 mt-3">');
+                    newMessage = $('<li class="float-right table clear-both justify-end bg-yellow-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 mr-4 mt-3">');
+                    
                 }
                 else{
-                    newMessage = $('<li class=" bg-green-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 ml-4 mt-3">');
+                    newMessage = $('<li class="float-left table clear-both bg-green-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 ml-4 mt-3">');
 
                 }
                 newMessage.append($('<strong>', {

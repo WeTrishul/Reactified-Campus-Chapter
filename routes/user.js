@@ -30,6 +30,8 @@ router.get('/dashboard',passport.checkAuthentication,UserController.dashboard)
 
 router.get('/UpcomingEvents',passport.checkAuthentication,UserController.upcomingevents)
 
+router.get('/globalevents/:platform',passport.checkAuthentication,UserController.globaleventpage)
+
 
 router.get('/logout',UserController.logout)
 

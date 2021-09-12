@@ -1,96 +1,4 @@
-<!-- <html>
-    <head>
-        <title>Upcoming Events</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    </head>
-    <body class="container">
-        <div class="page-header">
-            <h1>Login System</h1>
-        </div>
 
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/home">Home</a></li>
-                        <li><a href="/signup">Sign Up</a></li>
-                        <li><a href="/dashboard">Dashboard</a></li>
-                        <li><a href="/UpcomingEvents">Upcoming Events</a></li>
-                        <li><a href="/profilepage">Profile</a></li>
-                        <%if((locals.user) && (user.UserType=="Admin")){%>
-                            <li><a href="/listUsers">All Users</a></li>
-                            
-                            <%}%>
-
-                        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
-                        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
-                        <li><a href="/teamchat">Team Chat</a></li>
-                        <%}%>
-                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
-                            <li><a href="/fileupload">Set Questions</a></li>
-                            <%}%>
-
-                        <li><a href="/Discuss">Discussion</a></li>
-                        <li><a href="/Leaderboards">Leaderboards</a></li>
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/login">Log In</a></li>
-                        <li><a href="/logout">Log Out</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        
-        <div class="container row">
-           <h1><%=user.name%>,Your upcoming events are:</h1> 
-           <div>
-            <%if((locals.user) && (locals.user.UserType=="Admin")||(locals.user.UserType=="MediaLead") || (locals.user.UserType=="EventsLead") ){%>
-            <button><a href="/EventForm">Create event</a></button>
-            <%}%>
-            <br>
-        </div>
-<br><br>
-        <div id="myevents" style="border-style: solid;">
-            <%for( i of myevents){%>
-                <ul>
-                    <img src="<%=i.eventbanner%>" alt="banner" width="100">
-                   
-                    <l1><%=i.eventname%></l1>
-                    <p>Start Time: <small><%=i.eventStartTime%></small></p>
-                    <p>End Time: <%=i.eventEndTime%></p>
-                    <p>Date:<%=i.eventDate%></p>
-                    <p>Total Registrations :<%=i.Registeredusers.length%> </p>
-
-
-                    <%if(i.Registeredusers.includes(locals.user._id)){%>
-                    <button style="color: green;">Registered</button>
-                    <%}else{%>
-                        <button><a href="/RegisterForEvent/?id=<%= i._id %>">Register</a></button>
-                    <%}%>
-                    
-                    <%if((locals.user) && (locals.user.UserType=="Admin")||(locals.user.UserType=="MediaLead") || (locals.user.UserType=="EventsLead") ){%>
-                    <button><a href="/EditForm/?id=<%= i._id %>">Edit</a></button>
-                    <button><a href="/DeleteEvent/?id=<%= i._id %>">Delete</a></button>
-                    <%}%>
-                    <a href="/EventPage/<%= i.eventname%>">more details</a>
-                   
-                </ul>
-            <%}%>
-        </div>
-<br><br>
-           <%for( i of result){%>
-            <ul>
-                <l1><%=i.name%></l1>
-                <p>Duration: <small><%=i.durationSeconds/3600%>hrs</small></p>
-                <p>Starting on: <%=i.startTimeSeconds%></p>
-            </ul>
-            <%}%>
-        </div>
-    </body>
-</html> -->
 
 
 
@@ -128,6 +36,27 @@
         th:not(:last-child) {
           border-bottom: 2px solid rgba(0, 0, 0, .1);
         }
+
+        .tab {
+    overflow: hidden;
+    }
+    .tab-content {
+    max-height: 0;
+    transition: all 0.5s;
+    }
+    input:checked + .tab-label .test {
+        background-color: #000;
+    }
+    input:checked + .tab-label .test svg {
+        transform: rotate(180deg);
+        stroke: #fff;
+    }
+    input:checked + .tab-label::after {
+    transform: rotate(90deg);
+    }
+    input:checked ~ .tab-content {
+    max-height: 100vh;
+    }
       </style>
 
 </head>
@@ -170,91 +99,66 @@ html{
 
 <%if((locals.user) && (locals.user.UserType=="Admin")||(locals.user.UserType=="MediaLead") || (locals.user.UserType=="EventsLead") ){%>
    
-    <a href="/EventForm" class="bg-indigo-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6">
+    <!-- <a href="/EventForm" class="items-center bg-indigo-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6">
       Create Event
-  </a>
-    <%}%>
-    <br>
-    <br>
-    <%for( i of myevents){%>
-        <!-- <div id="event-<%=myevents._id%>">
-<div class="container mx-auto my-5">
+  </a> -->
 
-    <div style="z-index: -1;" class="relative rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2">
+  <a href="/EventForm">
+  <div  class=" bg-center items-center justify-center bg-blue-lighter">
+    <label  class="ml-auto mr-auto w-64 flex grid place-items-center flex-col justify-center text-center items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-indigo-600 hover:text-white">
+        <svg class="w-8 h-8" fill="#5a67d8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+        </svg>
+        <span class="mt-2 text-base leading-normal">Create New Event</span>
+       
         
-        <div  class=" order-1 md:order-2 relative w-full md:w-2/5 h-80 md:h-full overflow-hidden rounded-lg md:rounded-none md:rounded-r-lg">
-            <div class="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom" style="background-image: url( <%=i.eventbanner%> ); background-blend-mode: multiply;"></div>
-            <div class="md:hidden absolute inset-0 h-full p-6 pb-6 flex flex-col-reverse justify-start items-start bg-gradient-to-b from-transparent via-transparent to-gray-900">
-                <h3 class="w-full font-bold text-2xl text-white leading-tight mb-2"><%=i.eventname%></h3>
-            </div>
-            <svg class="hidden md:block absolute inset-y-0 h-full w-24 fill-current text-white -ml-12" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <polygon points="50,0 100,0 50,100 0,100" />
-            </svg>
-        </div>
-
-        <div class="z-10 order-2 md:order-1 w-full h-full md:w-3/5 flex items-center -mt-6 md:mt-0">
-            <div class="w-full p-8 md:pr-18 md:pl-14 md:py-12 mx-2 md:mx-0 h-full bg-white rounded-lg md:rounded-none md:rounded-l-lg shadow-xl md:shadow-none">
-                <h3 class="hidden md:block font-bold text-2xl text-gray-700"><%=i.eventname%></h3>
-                <p class="text-gray-600 text-justify"><%=i.aboutevent%></p>
-                <a class="flex items-baseline mt-3 text-blue-600 hover:text-blue-900 focus:text-blue-900" href="">
-                    <p> <%=i.eventDate%> </p> 
-                    <p class="ml-10"><%=i.eventStartTime%> - </p> 
-
-                    <p> <%=i.eventEndTime%></p>
-                   
-                    <p class="ml-10"> Total Registrations :<%=i.Registeredusers.length%> </p>
-                   
-<div class="flex flex-col">
-  <div class="flex justify-center">
-    <%if(i.Registeredusers.includes(locals.user._id)){%>
-        <a  class="z-50 bg-green-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6">
-            Registered
-            
-        </a>
-        <%}else{%>
-            <a href="/RegisterForEvent/?id=<%= i._id %>" class="z-0 bg-indigo-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6">
-                Register
-            </a>
-
-            
-            
-        <%}%>
-
-
-
-        <%if((locals.user) && (locals.user.UserType=="Admin")||(locals.user.UserType=="MediaLead") || (locals.user.UserType=="EventsLead") ){%>
-            
-            <a href="/EditForm/?id=<%= i._id %>" class="bg-blue-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6">
-                Edit
-            </a>
-            <a href="/DeleteEvent/?id=<%= i._id %>" class="bg-red-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6">
-                Delete
-            </a>
-           
-            <%}%>
-            <a  href="/EventPage/<%= i.eventname%>">more details</a>
-
-
-
+    </label>
+</div>
+</a>
+    <%}%>
+    
    
+
+    <%if(myevents.length==0){%>
+<!-- component -->
+<div class="flex flex-col mt-4  bg-center bg-cover bg-no-repeat bg-gray-200">
+    <div class="grid place-items-center w-4/5 mx-auto p-10 my-20 sm:my-auto bg-white-600 border-4 border-indigo-600 bg-opacity-70 rounded-xl shadow-2xl space-y-5 text-center cursor-pointer">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="h-24 w-24 text-indigo-600" viewBox="0 0 16 16">
+<path d="M4.968 9.75a.5.5 0 1 0-.866.5A4.498 4.498 0 0 0 8 12.5a4.5 4.5 0 0 0 3.898-2.25.5.5 0 1 0-.866-.5A3.498 3.498 0 0 1 8 11.5a3.498 3.498 0 0 1-3.032-1.75zM7 5.116V5a1 1 0 0 0-1-1H3.28a1 1 0 0 0-.97 1.243l.311 1.242A2 2 0 0 0 4.561 8H5a2 2 0 0 0 1.994-1.839A2.99 2.99 0 0 1 8 6c.393 0 .74.064 1.006.161A2 2 0 0 0 11 8h.438a2 2 0 0 0 1.94-1.515l.311-1.242A1 1 0 0 0 12.72 4H10a1 1 0 0 0-1 1v.116A4.22 4.22 0 0 0 8 5c-.35 0-.69.04-1 .116z"/>
+<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-1 0A7 7 0 1 0 1 8a7 7 0 0 0 14 0z"/>
+</svg>
+
+        <h1 class="text-4xl font-bold uppercase text-indigo-600 transition duration-500">Coming Soon</h1>
+<h2 class="text-xl text-gray-700 transition duration-500">We are almost there to introduce our new event.</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
   
- 
-  </div>
- 
-  </div>
-
-
-
-
-                </a>
-            </div>
-        </div>
-
+    <!-- <a href="https://www.facebook.com/QuickToolz" title="Quicktoolz On Facebook"
+      class="md:w-32 tracking-wide font-bold rounded border-2 border-indigo-500 hover:text-white hover:border-blue-600 hover:bg-blue-600 shadow-md py-2 px-6 inline-flex items-center transition duration-500">
+      <span class="mx-auto">Facebook</span>
+    </a>
+  
+  
+    <a href="https://twitter.com/quicktoolz" title="Quicktoolz On Twitter"
+      class="md:w-32 tracking-wide font-bold rounded border-2 border-indigo-500 hover:text-white hover:border-blue-500 hover:bg-blue-500 shadow-md py-2 px-6 inline-flex items-center transition duration-500">
+      <span class="mx-auto">Twitter</span>
+    </a>
+  
+  
+    <a href="https://pinterest.com/quicktoolz/" title="Quicktoolz On Pinterest"
+      class="md:w-32 tracking-wide font-bold rounded border-2 border-indigo-500 hover:text-white hover:border-red-600 hover:bg-red-600 shadow-md py-2 px-6 inline-flex items-center transition duration-500">
+      <span class="mx-auto">Pintrest</span>
+    </a>
+  
+  
+    <a href="https://www.reddit.com/user/quicktoolz/" title="Quicktoolz On Facebook"
+      class="md:w-32 tracking-wide font-bold rounded border-2 border-indigo-500 hover:text-white hover:border-yellow-600 hover:bg-yellow-600 shadow-md py-2 px-6 inline-flex items-center transition duration-500">
+      <span class="mx-auto">Reddit</span>
+    </a> -->
+  
+</div>
     </div>
 </div>
-</div> -->
-
-
+        <%}%>
 
 <section class="text-gray-600 body-font">
     <div class="container px-5 mx-auto max-w-7x1">
@@ -263,7 +167,7 @@ html{
         </div>
       </div>
       <div class="flex flex-wrap -m-4">
-     
+        <%for( i of myevents){%>
         <div class="xl:w-1/3 md:w-1/2 p-4">
           <div class="bg-white p-6 rounded-lg">
             <img class="lg:h-60 xl:h-56 md:h-64 sm:h-72 xs:h-72 h-72 rounded w-full object-cover object-center mb-6" src="<%= i.eventbanner %>" alt="Image Size 720x400">
@@ -292,21 +196,21 @@ html{
                     <%}%>
         </div>
         </div>
-    
+        <%}%>
       
       </div>
     </div>
   </section>
-<%}%>
+
 <br><br>
-<%for( i of result){%>
-    <ul>
-        <l1><%=i.name%></l1>
-        <p>Duration: <small><%=i.durationSeconds/3600%>hrs</small></p>
-        <p>Starting on: <%=i.startTimeSeconds%></p>
-    </ul>
-    <%}%>
+
 </div>
+
+
+
+<!-- component -->
+
+
 
 <!-------------------------------------------------------------###################------------------------------------------->
 <!------------------------------------------------------------- college events ends------------------------------------------->
