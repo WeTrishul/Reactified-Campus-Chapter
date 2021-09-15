@@ -1,27 +1,27 @@
 <html>
     <head>
         <title>Upcoming Events</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
     </head>
-    <body class="container">
-        <div class="page-header">
-            <h1>Login System</h1>
-        </div>
+    <body class="bg-gray-200 font-sans leading-normal tracking-normal">
+      
 
         <%- include('_navbar') -%>
 
-
+        <br>
+        <div class="mt-4 ml-5">
         <% if(event) {%>
 
         <form action="/UpdateEvent" method="POST" enctype="multipart/form-data" >
-            <input type="file" name="eventbanner" >
-            <input type="text" name="eventname" value="<%=event.eventname%>" > <br><br>
-            <input type="text" name="aboutevent" value="<%=event.aboutevent%>" style="height: 100px;width: 500px;"><br><br>
-            <input type="text" name="eventStartTime" value="<%=event.eventStartTime%>"><br><br>
-            <input type="text" name="eventEndTime" value="<%=event.eventEndTime%>"><br><br>
-            <input type="text" name="eventDate" value="<%=event.eventDate%>"><br><br>
-            <input name="id" type="hidden" value="<%=event._id%>"> 
-            <input type="submit" value="Save">
+            <input type="file" name="eventbanner" ><br><br>
+            <input class="border-2 border-black p-4" type="text" name="eventname" value="<%=event.eventname%>" > <br><br>
+            <input class="border-2 border-black p-4" type="text" name="aboutevent" value="<%=event.aboutevent%>" style="height: 100px;width: 500px;"><br><br>
+            <input class="border-2 border-black p-4" type="text" name="eventStartTime" value="<%=event.eventStartTime%>"><br><br>
+            <input class="border-2 border-black p-4" type="text" name="eventEndTime" value="<%=event.eventEndTime%>"><br><br>
+            <input class="border-2 border-black p-4" type="text" name="eventDate" value="<%=event.eventDate%>"><br><br>
+            <input class="border-2 border-black p-4" name="id" type="hidden" value="<%=event._id%>"> 
+            <input class="border-2 border-black p-4" type="submit" value="Save">
            
 
         </form>
@@ -32,17 +32,17 @@
     
 
         <form action="/CreateEvent" method="POST" enctype="multipart/form-data">
-            <input type="file" name="eventbanner" required="true">
-            <input type="text" name="eventname" placeholder="Event Name" > <br><br>
-            <input type="text" name="aboutevent" placeholder="About Event" style="height: 100px;width: 500px;"><br><br>
-            <input type="text" name="eventStartTime" placeholder="Start Time"><br><br>
-            <input type="text" name="eventEndTime" placeholder="End Time"><br><br>
-            <input type="text" name="eventDate" placeholder="Event Date"><br><br>
-            <input type="submit" value="Create">
+            <input type="file" name="eventbanner" required="true"><br><br>
+            <input class="border-2 border-black p-4" type="text" name="eventname" placeholder="Event Name" > <br><br>
+            <input class="border-2 border-black p-4" type="text" name="aboutevent" placeholder="About Event" style="height: 100px;width: 500px;"><br><br>
+            <input class="border-2 border-black p-4" type="text" name="eventStartTime" placeholder="Start Time"><br><br>
+            <input class="border-2 border-black p-4" type="text" name="eventEndTime" placeholder="End Time"><br><br>
+            <input class="border-2 border-black p-4" type="text" name="eventDate" placeholder="Event Date"><br><br>
+            <input class="border-2 border-black p-4" type="submit" value="Create">
            
 
         </form>
         <%}%>
-       
+    </div>
     </body>
 </html>

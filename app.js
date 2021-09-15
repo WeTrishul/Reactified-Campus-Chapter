@@ -93,8 +93,9 @@ app.listen(port,()=>{
 
     setInterval( async ()=>{
         // RatingsHandler.getRatings({codeforces:'coder_hk47'})
-        await RatingsHandler.updateRatingsOfAllUsers()
-        RatingsHandler.updateLeaderboards()
+        const k = await RatingsHandler.updateRatingsOfAllUsers()
+        
+        setTimeout(() => RatingsHandler.updateLeaderboards(), 60000) 
     }, 604800000);
     
 

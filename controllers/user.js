@@ -18,6 +18,7 @@ const path=require('path')
 const fs =require('fs')
 const queue = require('../config/kue')
 const otpWorkers = require('../workers/otp_workers')
+const globaleventsmethods = require('../config/GlobaleventMethods')
 
 
 const jwt  = require('jsonwebtoken');
@@ -87,7 +88,7 @@ module.exports.dashboard = async (req,res)=>{
 
         const blog = await Blog.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(8)
 
-        console.log(posts)
+    
 
         res.render('dashboard',{
             title:'Dasboard',
@@ -111,21 +112,9 @@ module.exports.upcomingevents = async (req,res)=>{
           myevents = event
         }) 
 
-        const UpcomingEvents = await fetch('https://codeforces.com/api/contest.list').then(response => response.json());
-
-        const arr=[]
-        UpcomingEvents.result.forEach(event => {
-            if(event.phase !=="FINISHED" && event.phase !=="PENDING_SYSTEM_TEST")
-            {
-                event.startTimeSeconds=startingTime(event.startTimeSeconds)
-                arr.push(event)
-            }            
-        });
-        const arr1 = arr.reverse()
-        const eventsArray = arr
-        
+       
         res.render('UpcomingEvents',{
-            result: eventsArray,
+          
             myevents:myevents
         })
        
@@ -133,6 +122,33 @@ module.exports.upcomingevents = async (req,res)=>{
     } catch (error) {
         console.log(error)
     }
+}
+
+
+module.exports.globaleventpage = async (req,res) =>{
+
+    try {
+       let eventsArray = []
+
+     if(req.params.platform=='CodeForces')
+     {
+         eventsArray = await globaleventsmethods.codeforcesevents ()
+     }
+     console.log(eventsArray)
+
+     res.render('globalevents',{
+         result : eventsArray
+     })
+        
+    } catch (error) {
+        
+        // res.redirect('back')
+
+        console.log(error)
+    }
+    
+   
+    
 }
 
 
