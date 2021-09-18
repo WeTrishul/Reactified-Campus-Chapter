@@ -1,8 +1,6 @@
 
-
-
-
-class ChatEngine{
+let socketgiver
+class NotiEngine{
     constructor(chatBoxId, username ,chattype){
         this.chatBox = $(`#${chatBoxId}`);
         this.username = username;
@@ -28,9 +26,21 @@ class ChatEngine{
                     
                     chatroom:self.username
                 })
-    
-                self.socket.on('user_joined',()=>{
-                    console.log('Acknowledged by server')
+                
+                socketgiver=self.socket
+               
+
+                self.socket.on('notification',(data)=>{
+                    console.log(data)
+
+                    new Noty({
+                        theme: 'relax',
+                        text: data,
+                        type: 'success',
+                        layout: 'centerRight',
+                        timeout: 1500
+                        
+                    }).show();
                 })
 
     
@@ -38,4 +48,27 @@ class ChatEngine{
         });
 
     }
+
+  
 }
+
+
+class Notihandler {
+    constructor(notifieruser){
+      
+        this.notifieruser=notifieruser
+      
+    }
+
+    notify(to,msg)
+    {
+        console.log('imported')
+        socketgiver.emit('notify',{
+            to : to,
+            from:this.notifieruser,
+            msg : msg
+        })
+       
+    }
+}
+

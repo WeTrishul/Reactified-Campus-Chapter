@@ -71,12 +71,16 @@ module.exports.commentit = (req,res)=>{
                     post.save()
                     
                     comment = await comment.populate('userid').execPopulate();
+                    
+                    post_user = await post.populate('userid').execPopulate()
+                    // console.log(post_user.userid.username)
                     if (req.xhr){
                 
                         console.log('yahan pohoch gya')
                         return res.status(200).json({
                             data: {
-                                comment: comment
+                                comment: comment,
+                                postuser:post_user.userid.username
                             },
                             message: "Post created!"
                         });

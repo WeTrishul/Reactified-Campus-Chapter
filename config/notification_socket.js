@@ -1,5 +1,4 @@
 
-
 module.exports.notification = (socketserver) =>{
 
 
@@ -14,10 +13,11 @@ module.exports.notification = (socketserver) =>{
 
     io.sockets.on('connection',(socket)=>{
         console.log('notification engine running')
-
         
-      socket.on('heyserver',(data)=>{
-            console.log('hello ' + data)
+        
+      socket.on('notify',(data)=>{
+            console.log('hello ')
+            io.in(data.to).emit('notification',data.from+' ' + data.msg)
       })
         socket.on('join_room',async(data)=>{
          
