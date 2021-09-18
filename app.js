@@ -85,7 +85,10 @@ const ChatSocket = require('./config/chatsocket').chat(ChatServer)
 
 ChatServer.listen(5000)
 
+const NotificationServer = require('http').Server(app)
+const NotificationSocket = require('./config/notification_socket').notification(NotificationServer)
 
+NotificationServer.listen(7000)
 
 app.listen(port,()=>{
 
