@@ -19,6 +19,16 @@
                     deletePost($('.delete-post-button', newPost));
                     console.log('doind')
                     new PostComments(data.data.post._id);
+
+                    new Noty({
+                        theme: 'relax',
+                        text: "Post published!",
+                        type: 'success',
+                        layout: 'centerRight',
+                        timeout: 1500
+                        
+                    }).show();
+
                     new ToggleLike($(' .toggle-like-button', newPost));
                 }, error: function(error){
                     console.log(error.responseText);
@@ -115,6 +125,16 @@
               url: $(deleteLink).prop('href'),
               success: function(data){
                   $(`#post-${data.data.post_id}`).remove();
+
+                  new Noty({
+                    theme: 'relax',
+                    text: "Post deleted!",
+                    type: 'success',
+                    layout: 'centerRight',
+                    timeout: 1500
+                    
+                }).show();
+
               },error: function(error){
                   console.log(error.responseText);
               }

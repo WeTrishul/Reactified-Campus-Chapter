@@ -29,32 +29,68 @@ module.exports.upload = async(req,res)=>{
     let user = await User.findOne({_id})
     
     try {
+        
         var paths,arr=[];
         User.uploadedQuestions(req,res,async function(error){
-            if(error)
-            {
-                console.log('******Multer Error*****'+error)  
-            }
-           if(req.files[0])
-           { 
-                paths = User.questionsPath+'/'+ req.files[0].filename+','
-               for(var i=1;i<req.files.length;i++)
-            {
-                    paths = paths + User.questionsPath+'/'+ req.files[i].filename + ','
-            }    
-                var LastIndexOfComma = paths.lastIndexOf(',')
-                paths = paths.substr(0,LastIndexOfComma)
-                user.questions = paths
-                console.log(paths,'bhai node hai yeh')
-                await user.save()
+            try {
+                if(error)
+                {
+                    console.log('******Multer Error*****'+error) 
 
-                arr = await paths.split(',')
-                arr.forEach(ele => user.arr.push(ele))
+                    if (req.body){
+                
+                        console.log('yahan aagya')
+                        return res.status(200).json({
+                            data: {
+                                done: 'no'
+                            },
+                            message: "nhi hua!"
+                        });
+                    }
+                   
+                }
+               if(req.files[0])
+               { 
+                    paths = User.questionsPath+'/'+ req.files[0].filename+','
+                   for(var i=1;i<req.files.length;i++)
+                {
+                        paths = paths + User.questionsPath+'/'+ req.files[i].filename + ','
+                        
+                }    
+                    var LastIndexOfComma = paths.lastIndexOf(',')
+                    paths = paths.substr(0,LastIndexOfComma)
+                    user.questions = paths
+                    console.log(paths,'bhai node hai yeh')
+                    await user.save()
+    
+                    arr = await paths.split(',')
+                    arr.forEach(ele => user.arr.push(ele))
+    
+                    await user.save()
+    
+                    console.log('Idhar aagya')
+    
+                    if (req.body.flag){
+                
+                        console.log('yahan aagya')
+                        return res.status(200).json({
+                            data: {
+                                done: 'yes'
+                            },
+                            message: "uploaded!"
+                        });
+                    }
+                    
+               }  
 
-                await user.save()
+               
+                
+            } 
+            
 
-                console.log(user.arr)
-           }
+           catch (error) {
+                console.log(error)
+        }
         })     
      /* res.render('questionlist',{
            title:'question list',
@@ -62,7 +98,7 @@ module.exports.upload = async(req,res)=>{
            arr: user.arr
        }) */ 
 
-       res.redirect('/fileupload')
+    //    res.redirect('/fileupload')
     }catch (error) {
         console.log('Error'+error)
         res.redirect('/dashboard')

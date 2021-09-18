@@ -3,6 +3,11 @@
         <title><%=title%></title>
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+
 
     </head>
     <body class="bg-gray-200 ">
@@ -37,13 +42,13 @@
                     <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                 </svg>
                 <span class="mt-2 text-base leading-normal">Upload Question</span>
-                <input class="hidden" type="file" name="questions" multiple>
+                <input id="fi" class="hidden" type="file" name="questions" multiple>
 
                 
             </label>
 
             <div class="form-group mt-4 text-center">
-                <input class="bg-indigo-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-400 mr-6" type="submit" value="Upload"/>
+                <input id="b" class="bg-indigo-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-400 mr-6" type="submit" value="Upload"/>
             </div>
         </div>
     </form>   -->
@@ -58,16 +63,16 @@
 
 
 
+<input type="hidden" value="<%=locals.user._id%>" id="userid">
 
 
 
-
-    <form class="mt-40" action="/fileupload/setquestions/<%=locals.user._id%>" method="post" enctype="multipart/form-data">
+    <form id="file-form" class="mt-40" action="/fileupload/setquestions/<%=locals.user._id%>" method="post" enctype="multipart/form-data">
 <div class="bg-white p7 rounded w-9/12 mx-auto">
     <div x-data="dataFileDnD()" class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
         <div x-ref="dnd"
             class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer">
-            <input type="file" name="questions" multiple
+            <input id="multiFiles" type="file" name="questions" multiple
                 class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
                 @change="addFiles($event)"
                 @dragover="$refs.dnd.classList.add('border-blue-400'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"
@@ -126,7 +131,7 @@
     </div>
     </div>
     <div class="form-group mt-4 text-center">
-        <input class="bg-indigo-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-400 mr-6" type="submit" value="Upload"/>
+        <input id="fm" class="bg-indigo-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-400 mr-6" type="submit" value="Upload"/>
     </div>
 </form> 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
@@ -196,11 +201,7 @@
     </script>
 
 
-
-
-
-
-
+    <script src="/js/setquestion.js"></script>
 
     <%}%>
 

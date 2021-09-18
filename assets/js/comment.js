@@ -33,6 +33,15 @@ class PostComments{
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($('.delete-comment-button', newComment));
                     new ToggleLike($(' .toggle-like-button', newComment));
+
+                    new Noty({
+                      theme: 'relax',
+                      text: "Comment published!",
+                      type: 'success',
+                      layout: 'centerRight',
+                      timeout: 1500
+                      
+                  }).show();
                  
                 }, error: function(error){
                     console.log(error.responseText);
@@ -113,14 +122,14 @@ class PostComments{
                     
                     // $(`#comments-${data.data.comment_id}`).prepend('<h1>Hi</h1>');
                     console.log('yup')
-                    // new Noty({
-                    //     theme: 'relax',
-                    //     text: "Comment Deleted",
-                    //     type: 'success',
-                    //     layout: 'topRight',
-                    //     timeout: 1500
+                    new Noty({
+                        theme: 'relax',
+                        text: "Comment Deleted",
+                        type: 'success',
+                        layout: 'centerRight',
+                        timeout: 1500
                         
-                    // }).show();
+                    }).show();
                 },error: function(error){
                     console.log(error.responseText);
                 }

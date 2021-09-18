@@ -48,7 +48,10 @@ module.exports.postit =  (req,res)=>{
                 message: "Post created!"
             });
         }
-        return res.redirect('/Discuss')
+        req.flash('success', 'Post published!');
+        return res.redirect('back');
+
+        // return res.redirect('/Discuss')
         
     })
 
