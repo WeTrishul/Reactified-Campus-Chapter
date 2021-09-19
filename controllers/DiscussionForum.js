@@ -200,7 +200,7 @@ module.exports.likehandler= async (req,res)=>{
         likeable.save()
     }
     const likeablepop = await  likeable.populate('userid').execPopulate()
-    console.log(likeablepop)
+   
     return res.json(200, {
         message: "Request successful!",
         data: {

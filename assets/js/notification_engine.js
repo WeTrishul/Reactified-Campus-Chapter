@@ -32,7 +32,7 @@ class NotiEngine{
 
                 self.socket.on('notification',(data)=>{
                     console.log(data)
-
+                    
                     new Noty({
                         theme: 'relax',
                         text: data,
@@ -41,6 +41,8 @@ class NotiEngine{
                         timeout: 1500
                         
                     }).show();
+
+                    
                 })
 
     

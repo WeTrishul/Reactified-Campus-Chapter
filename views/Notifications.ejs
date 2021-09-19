@@ -1,0 +1,112 @@
+<!-- <html>
+    <head>
+        <title><%=title%></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body class="container">
+        <div class="page-header">
+            <h1>Login System</h1>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/UpcomingEvents">Upcoming Events</a></li>
+                        <li><a href="/profilepage">Profile</a></li>
+                        <li><a href="/listUsers">All Users</a></li>
+
+                        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+                        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+                        <li><a href="/teamchat">Team Chat</a></li>
+                        <%}%>
+
+                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
+                            <li><a href="/fileupload">Set Questions</a></li>
+                            <%}%>
+                        <li><a href="/Discuss">Discussion</a></li>
+                        <li><a href="/Leaderboards">Leaderboards</a></li>
+                        
+                    </ul>
+                    
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">Log In</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <h1>Here are the List of Users</h1>
+
+        <div class="container row">
+              <%for(var u of users){%> 
+                    <ul>
+                        <li><a href="/profilepage/<%=u.username%>"><%=u.name%></a></li>
+                        <small><a href="/delete/<%= u.username %>">delete</a></small>                            
+                    </ul>
+                <%}%>
+        </div>
+        
+
+        
+
+    </body>
+</html> -->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <style>
+        html,
+        body {
+          height: 100%;
+        }
+      
+      </style>
+  
+
+</head>
+<body class="bg-gray-200">
+    
+<!-- component -->
+<%- include('_navbar') -%>
+
+
+
+
+<!----------------------------###################  Navbar ends  ###############------------------------------------------------>
+
+<!----------------------------###################  ------------  ###############------------------------------------------------>
+
+<!----------------------------###################  Table starts  ###############------------------------------------------------>
+
+
+<body class="flex items-center justify-center">
+	
+</body>
+
+
+
+</div>
+
+</body>
+</html>
