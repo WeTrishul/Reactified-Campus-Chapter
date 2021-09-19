@@ -26,10 +26,17 @@ class ToggleLike{
                     likesCount += 1;
                 }
 
+                console.log(data)
 
                 $(self).attr('data-likes', likesCount);
                 
                 $(self).html(`${likesCount} Likes`);
+
+                if(data.data.deleted==false)
+                {
+                
+                notifier.notify(data.data.likeableowner,'liked your ' + data.data.likeabletype)
+                }
 
             })
             .fail(function(errData) {

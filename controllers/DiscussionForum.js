@@ -199,11 +199,14 @@ module.exports.likehandler= async (req,res)=>{
         console.log(currlike._id)
         likeable.save()
     }
-
+    const likeablepop = await  likeable.populate('userid').execPopulate()
+    console.log(likeablepop)
     return res.json(200, {
         message: "Request successful!",
         data: {
-            deleted: deleted
+            deleted: deleted,
+            likeableowner:likeablepop.userid.username,
+            likeabletype:req.query.type
         }
     })
 
