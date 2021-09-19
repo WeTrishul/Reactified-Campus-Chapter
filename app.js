@@ -18,6 +18,7 @@ const MongoStore = require('connect-mongo')
 const RatingsHandler = require('./config/RatingsHandler')
 const pollRouter = require('./routes/Polling')
 const cors = require('cors')
+const Noticleaner = require('./config/Noti_cleaner')
 
 
 
@@ -92,7 +93,11 @@ NotificationServer.listen(7000)
 
 app.listen(port,()=>{
 
-   
+    setInterval( async ()=>{
+        
+       await Noticleaner.cleanit()
+        
+    }, 86400000);
 
     setInterval( async ()=>{
         // RatingsHandler.getRatings({codeforces:'coder_hk47'})
