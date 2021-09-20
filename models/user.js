@@ -67,7 +67,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "nhi hai",
         },
-    spoj:{
+    leetcode:{
         type: String,
         default: "nhi hai",
     },

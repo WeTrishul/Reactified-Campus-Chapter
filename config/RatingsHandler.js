@@ -1,22 +1,21 @@
 const Leaderboards = require('../models/Leaderboards')
 const User = require('../models/user')
 const fetch = require('node-fetch')
+const fetchRatings = require('./fetchRatings')
 
 
 module.exports.getRatings=async (user)=>{
     try{
         // for codeforces 
-        const codeforcesData = await fetch('https://codeforces.com/api/user.info?handles='+user.codeforces).then(response=>response.json())
-        const codeforcesRatings = codeforcesData.result[0].rating
+        const codeforcesRatings = await fetchRatings.codeforecesRating(user)
        
         //for codechef
-        const codechefRatings = 0
-        //for hackkerank
-        const hackerrankRatings = 0
+        const codechefRatings = await fetchRatings.codeChefRating(user)
+        //for leetcode
+        const leetcodeRatings = await fetchRatings.leetCodeRating(user)
 
 
-        return codeforcesRatings + codechefRatings + hackerrankRatings
-
+        return codeforcesRatings + codechefRatings + leetcodeRatings
     }catch(error)
     {
         console.log('Could not fetch' + error)       

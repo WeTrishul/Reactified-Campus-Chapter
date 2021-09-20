@@ -3,6 +3,9 @@ const passport = require('passport')
 const router = new express.Router()
 const UserController = require('../controllers/user')
 const UploadController = require('../controllers/upload')
+const codechef = require('../config/codeChef')
+const CodechefController = require('../controllers/CodechefController')
+const fetch = require('node-fetch')
 
 const User = require('../models/user')
 
@@ -54,6 +57,38 @@ router.get('/userrole',UserController.changeRole)
 
 
 router.get('/seeQ/:id',UserController.listUserQuestions)
+
+
+//codechef routing
+clientId = codechef.clientId
+
+
+router.get('https://api.codechef.com/oauth/authorize?response_type=code&client_id=504ef030a3d0d8456e73a83f62b1cd72&redirect_uri=http://localhost:3000/getGrantCode&state=xyz')
+router.get('/getGrantCode',CodechefController.getGrantCode)
+router.get('/helloworld',async (req,res)=>{
+    tokenUrl = 'https://api.codechef.com/oauth/token'
+    const data = {
+        'grant_type': 'authorization_code',
+        'code': 'fe0f7e0293eb0d7d9069ddde02fbfff09f309559',
+        'client_id': '504ef030a3d0d8456e73a83f62b1cd72',
+        'client_secret': '8576906e0da74991d05f9b7d12a9dd4a',
+        'redirect_uri': 'http://localhost:3000/getGrantCode'
+      }
+
+      fetch(tokenUrl, { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' } })
+      .then(res => res.json())
+      .then(res => {
+        if (res.status !== 'OK') return console.log('Error hai')
+        const tokens = res.result.data
+
+        console.log(tokens)
+
+      })
+      .catch(err => console.log('Can not get the token from codechef', err))
+
+})
+
+router.get('/getToken',CodechefController.getToken)
 
 
 
