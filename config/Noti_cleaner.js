@@ -2,7 +2,7 @@
 const User = require('../models/user')
 
 
-module.exports.cleanit=()=>{
+module.exports.cleanit=async()=>{
 
 
 const allusers = await User.find({})
