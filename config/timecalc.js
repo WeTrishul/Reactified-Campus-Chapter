@@ -1,7 +1,7 @@
 const express = require('express')
 const moment = require('moment')
 
-const startingTime = function(sec){
+module.exports.startingTime = (sec)=>{
 
     var utcSeconds = sec;
     var d = new Date(0); 
@@ -14,4 +14,15 @@ const startingTime = function(sec){
     const newdate = moment.utc(date).format('MM/DD/YYYY')
     return newdate
 }
-module.exports = startingTime
+
+
+module.exports.convertUTCDateToLocalDate= (date)=>{
+    var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+
+    var offset = date.getTimezoneOffset() / 60;
+    var hours = date.getHours();
+
+    newDate.setHours(hours - offset);
+
+    return newDate;   
+}

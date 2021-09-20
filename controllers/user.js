@@ -19,6 +19,8 @@ const fs =require('fs')
 const queue = require('../config/kue')
 const otpWorkers = require('../workers/otp_workers')
 const globaleventsmethods = require('../config/GlobaleventMethods')
+const Hackerrank = require('../config/Hackerank')
+const resourses = require('../models/resourses')
 
 
 const jwt  = require('jsonwebtoken');
@@ -88,7 +90,6 @@ module.exports.dashboard = async (req,res)=>{
 
         const blog = await Blog.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(8)
 
-    
 
         res.render('dashboard',{
             title:'Dasboard',
@@ -129,15 +130,30 @@ module.exports.globaleventpage = async (req,res) =>{
 
     try {
        let eventsArray = []
+       let eventsTiming = []
 
      if(req.params.platform=='CodeForces')
      {
          eventsArray = await globaleventsmethods.codeforcesevents ()
      }
+
+   else if(req.params.platform=='CodeChef')
+     {
+         eventsArray = await globaleventsmethods.codeChefEvents ()
+     }
+     else if(req.params.platform=='hackerrank')
+     {
+         let obj = await Hackerrank.scrapeProduct('https://www.hackerrank.com/contests')
+
+          eventsArray = obj.services
+          eventsTiming = obj.services1
+     }
      console.log(eventsArray)
 
      res.render('globalevents',{
-         result : eventsArray
+         result : eventsArray,
+         query: req.params.platform,
+         resultTiming:eventsTiming
      })
         
     } catch (error) {
@@ -145,10 +161,7 @@ module.exports.globaleventpage = async (req,res) =>{
         // res.redirect('back')
 
         console.log(error)
-    }
-    
-   
-    
+    } 
 }
 
 
@@ -185,9 +198,7 @@ module.exports.updatecoderhandles = async (req,res)=>{
     } catch (err) {
        console.log(err) 
        res.redirect('back')
-    }
-
-   
+    }   
 }
 
 module.exports.othersProfile = async(req,res)=>{

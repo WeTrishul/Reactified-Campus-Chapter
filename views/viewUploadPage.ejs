@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title><%=title%></title>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    </head>
+    <body class="container">
+        <div class="page-header">
+            <h1>Login System</h1>
+        </div>
+
+        <%- include('_navbar') -%>
+
+    
+        <div class="container row">
+
+                    <input type="hidden" value="<%=locals.user._id%>" id="userid">
+                    <label>DSA</label>   
+                    <input type="radio"  class="javascript" name="Option" value="DSA">
+                    <label>APTI</label>
+                    <input type="radio" class="javascript" name="Option" value="APTI">
+                    <label>CP</label>
+                    <input type="radio" class="javascript" name="Option" value="CP">
+                    <label>PLACEMENTS</label>
+                    <input type="radio"  class="javascript" name="Option" value="PLACEMENTS">
+                    <label>GATE</label>
+                    <input type="radio"  class="javascript" name="Option" value="GATE">
+                    <label>CORE</label>
+                    <input type="radio"  class="javascript" name="Option" value="CORE">
+                    <label>DEV</label>
+                    <input type="radio"  class="javascript" name="Option" value="DEV">
+
+                    <input type="text"  id="name" name="name" placeholder="name">
+                    
+
+            <div class="jumbotron col-sm-4 pull-center">
+
+                <form id="file-form" action="/resourses/<%=locals.user.id%>" method="POST" enctype="multipart/form-data">
+                                       
+                    <input type="file" id="multiFiles" name="resources" multiple> 
+                    
+                    <input id="fm" type="submit" value="Submit">              
+                </form>                  
+            </div>          
+        </div>
+
+        <script src="/js/resources.js"></script>
+
+    </body>
+</html>

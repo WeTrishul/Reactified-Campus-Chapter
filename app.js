@@ -17,6 +17,7 @@ const db = require('./config/db')
 const MongoStore = require('connect-mongo')
 const RatingsHandler = require('./config/RatingsHandler')
 const pollRouter = require('./routes/Polling')
+const resourceRouter = require('./routes/resources')
 const cors = require('cors')
 
 
@@ -76,6 +77,7 @@ app.use(LeaderboardsRouter)
 app.use(TeamChatRouter)
 app.use(pollRouter)
 app.use(BlogsRouter)
+app.use(resourceRouter)
 
 app.use('/uploads',express.static(__dirname + '/uploads'))
 

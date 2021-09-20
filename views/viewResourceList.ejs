@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title><%=title%></title>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    </head>
+    <body class="bg-gray-300">
+      
+        <%- include('_navbar') -%>   
+
+        <!-- <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/UpcomingEvents">Upcoming Events</a></li>
+                        <li><a href="/profilepage">Profile</a></li>
+                        <li><a href="/listUsers">All Users</a></li>
+
+                        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+                        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+                        <li><a href="/teamchat">Team Chat</a></li>
+                        <%}%>
+
+                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
+                            <li><a href="/fileupload">Set Questions</a></li>
+                            <%}%>
+                        <li><a href="/Discuss">Discussion</a></li>
+                        <li><a href="/Leaderboards">Leaderboards</a></li>
+                        
+                    </ul>
+                    
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">Log In</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav> -->
+
+        <h1>Here are the List of Resources : <%=(arr.length)%></h1>
+
+        <div >
+            <ol>
+            <%for(var i=l-1;i>=0;i--){%>
+                    <li><a class="hover:text-indigo-500 mt-2" style="text-decoration: underline;" href ="<%=arr[i].ele%>"><%=arr[i].user%><%=arr[i].name%></a></li>
+                <%}%>
+            </ol>
+        </div>
+     
+    </body>
+</html> 

@@ -1,5 +1,7 @@
 const fetch = require('node-fetch')
-const startingTime = require('../config/timecalc')
+const timecalc = require('../config/timecalc');
+const { events } = require('../models/user');
+
 
 
 module.exports.codeforcesevents = async () =>{
@@ -9,7 +11,7 @@ module.exports.codeforcesevents = async () =>{
     UpcomingEvents.result.forEach(event => {
         if(event.phase !=="FINISHED" && event.phase !=="PENDING_SYSTEM_TEST")
         {
-            event.startTimeSeconds=startingTime(event.startTimeSeconds)
+            event.startTimeSeconds=timecalc.startingTime(event.startTimeSeconds)
             arr.push(event)
         }            
     });
@@ -21,4 +23,23 @@ module.exports.codeforcesevents = async () =>{
     // })
 
     return eventsArray
+}
+
+
+module.exports.codeChefEvents = async () =>{
+
+  const UpcomingEvents = await fetch('https://kontests.net/api/v1/code_chef').then(response => response.json());
+  var arr=[]
+  UpcomingEvents.forEach(event => {
+        if(event.status==='BEFORE')
+        {
+            var date = timecalc.convertUTCDateToLocalDate(new Date(event.start_time))
+            event.start_time=date.toLocaleString()
+            arr.push(event)  
+        }
+                   
+  });
+  const eventsArray = arr
+  
+  return eventsArray
 }
