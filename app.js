@@ -19,6 +19,7 @@ const RatingsHandler = require('./config/RatingsHandler')
 const pollRouter = require('./routes/Polling')
 const resourceRouter = require('./routes/resources')
 const cors = require('cors')
+const Noticleaner = require('./config/Noti_cleaner')
 
 
 
@@ -87,11 +88,18 @@ const ChatSocket = require('./config/chatsocket').chat(ChatServer)
 
 ChatServer.listen(5000)
 
+const NotificationServer = require('http').Server(app)
+const NotificationSocket = require('./config/notification_socket').notification(NotificationServer)
 
+NotificationServer.listen(7000)
 
 app.listen(port,()=>{
 
-   
+    setInterval( async ()=>{
+        
+       await Noticleaner.cleanit()
+        
+    }, 86400000);
 
     setInterval( async ()=>{
         // RatingsHandler.getRatings({codeforces:'coder_hk47'})

@@ -89,6 +89,13 @@ const userSchema = new mongoose.Schema({
     OverallRatings:[{
         type:String
     }],
+    Notifications :[{
+        type:String
+    }],
+    seenAllNotifications : {
+        type:String,
+        default:'yes'
+    },
     resetLink:{
         data:String,
         default:''

@@ -29,6 +29,7 @@ class PostComments{
                 url: '/commentit',
                 data: $(self).serialize(),
                 success: function(data){
+                  
                     let newComment = pSelf.newCommentDom(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($('.delete-comment-button', newComment));
@@ -42,6 +43,24 @@ class PostComments{
                       timeout: 1500
                       
                   }).show();
+
+                  // console.log(data.data.comment.userid.username)
+
+                  // console.log(data.data.postuser)
+
+                  if(data.data.comment.userid.username!=data.data.postuser)
+                  {
+
+
+                  // const notifier = new Notihandler(data.data.comment.userid.username)
+                  notifier.notify(data.data.postuser,'commented on your post')
+
+                  
+
+                  
+
+                  }
+
                  
                 }, error: function(error){
                     console.log(error.responseText);
