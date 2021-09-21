@@ -80,7 +80,7 @@ const userSchema = new mongoose.Schema({
     },
     dp:{
         type:String,
-        default:'Nhi hai'
+        default:'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png'
     },
 
     CurrentRating:{
@@ -89,9 +89,7 @@ const userSchema = new mongoose.Schema({
     OverallRatings:[{
         type:String
     }],
-    Notifications :[{
-        type:String
-    }],
+    Notifications :[],
     seenAllNotifications : {
         type:String,
         default:'yes'

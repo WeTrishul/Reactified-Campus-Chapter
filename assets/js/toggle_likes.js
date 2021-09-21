@@ -35,7 +35,7 @@ class ToggleLike{
                 if(data.data.deleted==false && notifier.notifieruser!=data.data.likeableowner)
                 {
                 
-                notifier.notify(data.data.likeableowner,'liked your ' + data.data.likeabletype)
+                notifier.notify(data.data.likeableowner,'liked your ' + data.data.likeabletype,data.data.likeabletype)
                 }
 
             })

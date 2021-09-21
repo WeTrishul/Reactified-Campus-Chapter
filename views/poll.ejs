@@ -1,14 +1,15 @@
 <html>
     <head>
         <title><%=title%></title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
     </head>
     <body class="container">
-        <div class="page-header">
-            <h1>Login System</h1>
-        </div>
+       
 
         <!-- <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -33,7 +34,7 @@
         <%- include('_navbar') -%>
 
 
-        <div class="container row">
+        <!-- <div class="container row">
             <div class="jumbotron col-sm-4 pull-center">
                 <form action="/poll/createpoll" method="POST">
                     <div class="form-group">
@@ -65,20 +66,61 @@
                     </div>
                 </form>                  
             </div>          
+        </div> -->
+
+
+
+            <!-- component -->
+            <form action="/poll/createpoll" method="POST">
+
+<div class="min-h-screen bg-gray-100 flex items-center">
+    <div class="container mx-auto max-w-md shadow-md hover:shadow-lg transition duration-300">
+      <div class="py-12 p-10 bg-white rounded-xl">
+        <div class="mb-6">
+          <label class="mr-4 text-gray-700 font-bold inline-block mb-2"  for="name">Poll Name</label>
+          <input type="text" name="pollName" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="ex: Survey Poll" />
         </div>
+        <div class="">
+          <label class="mr-4 text-gray-700 font-bold inline-block mb-2"  for="name">Question</label>
+          <input type="text" name="question" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="ex: Which platform is good for beginners ?" />
+        </div>
+        <div class="">
+            <label class="mr-4 text-gray-700 font-bold inline-block mb-2"  for="name">Option A</label>
+            <input type="text" name="optionA" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="ex: Codeforces" />
+          </div>
+          <div class="">
+            <label class="mr-4 text-gray-700 font-bold inline-block mb-2"  for="name">Option B</label>
+            <input type="text" name="optionB" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="ex: Codechef" />
+          </div>
+          <div class="">
+            <label class="mr-4 text-gray-700 font-bold inline-block mb-2"  for="name">Option C</label>
+            <input type="text" name="optionC" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="ex: Gfg" />
+          </div>
+          <div class="">
+            <label class="mr-4 text-gray-700 font-bold inline-block mb-2"  for="name">Option D</label>
+            <input type="text" name="optionD" class="border bg-gray-100 py-2 px-4 w-96 outline-none focus:ring-2 focus:ring-indigo-400 rounded" placeholder="ex: Hackerrank" />
+          </div>
+        <input type="submit" class="w-full mt-6 text-indigo-50 font-bold bg-indigo-600 py-3 rounded-md hover:bg-indigo-500 transition duration-300" value="POLL UP">
+      </div>
+    </div>
+  </div>
+
+</form>   
 
 
 
-
-        <div class="container row">
+        <!-- <div class="container row">
             <div class="jumbotron col-sm-4 pull-center">
-                <form action="/viewAllPolls" method="POST">
+                <a href="/viewAllPolls">
+                
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" value="Show All Polls"/>
                     </div>
-                </form>                  
+
+                </a>
+                                
             </div>          
-        </div>
+        </div> -->
 
 
 

@@ -11,6 +11,6 @@ router.get('/viewPagePoll/:id',passport.checkAuthentication,pollController.showP
 router.post('/poll/sendpoll/:id',pollController.storeUserResponse)//passport.checkAuthentication
 
 
-router.post('/viewAllPolls',pollController.showAllPolls)
+router.get('/viewAllPolls',pollController.showAllPolls)
 
 module.exports  = router

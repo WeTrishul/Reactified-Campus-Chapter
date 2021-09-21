@@ -29,10 +29,18 @@ class NotiEngine{
                 
                 socketgiver=self.socket
                
+               
 
                 self.socket.on('notification',(data)=>{
                     console.log(data)
                     
+                    $("#bll").css("fill", '#FF0000');
+
+                    let currcoti = $('#notis')
+
+                    currcoti.append('<a href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2"><img class="h-8 w-8 rounded-full object-cover mx-1" src="https://cdn.staticcrate.com/stock-hd/effects/footagecrate-4k-bell-icon-prev-full.png" alt="avatar"><p class="text-gray-600 text-sm mx-2"><span class="font-bold" href="#">'+data +'</span></p></a>')
+                    
+
                     new Noty({
                         theme: 'relax',
                         text: data,
@@ -43,6 +51,13 @@ class NotiEngine{
                     }).show();
 
                     
+                    
+                })
+
+                self.socket.on('changedbell',()=>{
+                    let bell = $('#bll')
+
+                    $("#bll").css("fill", '#000000');
                 })
 
     
@@ -62,15 +77,26 @@ class Notihandler {
       
     }
 
-    notify(to,msg)
+    notify(to,msg,placetogo)
     {
         console.log('imported')
         socketgiver.emit('notify',{
             to : to,
             from:this.notifieruser,
-            msg : msg
+            msg : msg,
+            placetogo:placetogo
         })
        
     }
+
+    changebell()
+    {
+        socketgiver.emit('changebell',{
+
+            userid:this.notifieruser
+
+        })
+    }
+
 }
 

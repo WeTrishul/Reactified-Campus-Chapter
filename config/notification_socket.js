@@ -15,7 +15,7 @@ module.exports.notification = (socketserver) =>{
 
 
     io.sockets.on('connection',(socket)=>{
-        console.log('notification engine running')
+        // console.log('notification engine running')
         
         
       socket.on('notify',async(data)=>{
@@ -24,7 +24,11 @@ module.exports.notification = (socketserver) =>{
           console.log('hello ')
             const user = await User.find({username:data.to})
             console.log(user[0].name)
-             user[0].Notifications.push(data.from+' ' + data.msg)
+            const notific = {
+              msg : data.from+' ' + data.msg,
+              placetogo:data.placetogo
+            }
+             user[0].Notifications.push(notific)
             user[0].seenAllNotifications='no'
              user[0].save()
             io.in(data.to).emit('notification',data.from+' ' + data.msg)
@@ -34,6 +38,17 @@ module.exports.notification = (socketserver) =>{
         }
             
       })
+
+      socket.on('changebell',async(data)=>{
+
+        const user = await User.find({username:data.userid})
+        user[0].seenAllNotifications='yes'
+        user[0].save()
+
+        socket.emit('changedbell')
+
+      })
+
         socket.on('join_room',async(data)=>{
          
           socket.join(data.chatroom)

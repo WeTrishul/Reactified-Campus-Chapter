@@ -23,7 +23,7 @@
         </style>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
-<body class="bg-gray-200" >
+<body class="bg-gray" >
     
 
 
@@ -52,13 +52,17 @@
 
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<div class="w-full">
 <div x-data="{ open1: false, open2: false }">
-  <div class="h-screen bg-gray-100 " >
-      <div class="space-x-2">
+  <!-- <div class="h-screen bg-gray-100 " > -->
+      <div class="sm:ml-0 md:ml-20 lg: xl:ml-20 2xl:ml-20 space-x-2">
 
 
 
 <br>
+<div style=" overflow-y: auto; height: 75vh;">
+
+
 
 <div id="posts-list-container">
 
@@ -70,7 +74,7 @@
                <div class="">
                   <div class="flex items-center justify-between">
                      <h2 class="text-lg font-semibold text-gray-900 -mt-1"><%=post.userid.username%> </h2>
-                     <small class="text-sm text-gray-700">22h ago</small>
+                     <!-- <small class="text-sm text-gray-700">22h ago</small> -->
                   </div>
                   <p class="mt-3 text-gray-700 text-sm">
                     <%=post.postBody%>
@@ -169,7 +173,7 @@
     </div>
 
         <br>
-        <div class="px-20">
+        <div class="">
         <form id="post-<%= post._id %>-comments-form" action="/commentit" method="POST">
           <input name="commentBody" placeholder="Comment here" class="bg-gray-300 w-auto rounded-xl px-2 p-2">
           <input name="postid" type="hidden" value="<%=post._id%>"> 
@@ -185,22 +189,34 @@
       </div>
       <!-- New Comment Paste Here -->
 
-      <div >
+      <!-- <div>
         <form action="/postit" method="POST" id="new-post-form">
           <input name="postBody" placeholder="Post here" class="bg-gray-300 w-auto rounded-xl px-2 p-2">
           <button class="bg-green-200 rounded-xl p-2" type="submit" id="send-message">Post</button>
         </form>
-      </div>
+      </div> -->
 
 
-      
+</div>
     
+<form action="/postit" method="POST" id="new-post-form">
+  <div style="  position: fixed;
+bottom: 0;
+width: 100%;" >
+<div id="chat-message-input-container" class="m-4 flex">
+<input name="postBody" class="w-full bg-gray-300 rounded-l-lg p-4 border-t mr-0 border-b border-gray-400 border-l text-gray-800 border-gray-200 bg-white" placeholder="Type post content here">
+<button type="submit" id="send-message"  class="bg-green-200 px-8 rounded-r-lg bg-yellow-400  text-gray-800 font-bold p-4 uppercase border-yellow-500 border-t border-b border-r" >Post</button>
+</div>
+
+</div>
+</form>
     
   </div>
 </div>
+</div>
 
 
-
+</div>
 
   <!-- component -->
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
@@ -220,7 +236,7 @@
 </script>
 
 
-</div>
+<!-- </div> -->
 
 
 

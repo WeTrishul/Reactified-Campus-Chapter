@@ -20,7 +20,7 @@
 
         <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
         ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
-        <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/teamchat">Team Chat</a>
+        <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/teamchat">Chat</a>
         <%}%>
 
         <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
@@ -33,11 +33,21 @@
             <%}%>
 
         <% if((locals.user) && (user.UserType=="Admin")){ %>
-        <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/listUsers">All users</a>
+        <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/listUsers">Users</a>
         <%}%>
         
         <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/Discuss">Discuss</a>
+        <%- include('_resources') -%>
         <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/Leaderboards">Leaderboard</a>
+
+        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+
+          <%- include('_polling') -%>
+
+          <%}%>
+
+
 
         <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/allblogs">Blogs</a>
           
@@ -98,4 +108,17 @@
 <script>
     new NotiEngine('user-chat-box','<%=user.username%>','executive')
     const notifier = new Notihandler('<%=user.username%>')
+
+    $('#bll').click(()=>{
+     
+      if('<%=locals.user.seenAllNotifications%>'!='yes')
+      {
+        console.log('hi')
+        notifier.changebell()
+      }
+      
+    })
+
+
+
 </script>

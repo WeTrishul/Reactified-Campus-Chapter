@@ -1,65 +1,3 @@
-<!-- <html>
-    <head>
-        <title><%=title%></title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    </head>
-    <body class="container">
-        <div class="page-header">
-            <h1>Login System</h1>
-        </div>
-
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/home">Home</a></li>
-                        <li><a href="/signup">Sign Up</a></li>
-                        <li><a href="/dashboard">Dashboard</a></li>
-                        <li><a href="/UpcomingEvents">Upcoming Events</a></li>
-                        <li><a href="/profilepage">Profile</a></li>
-                        <li><a href="/listUsers">All Users</a></li>
-
-                        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
-                        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
-                        <li><a href="/teamchat">Team Chat</a></li>
-                        <%}%>
-
-                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
-                            <li><a href="/fileupload">Set Questions</a></li>
-                            <%}%>
-                        <li><a href="/Discuss">Discussion</a></li>
-                        <li><a href="/Leaderboards">Leaderboards</a></li>
-                        
-                    </ul>
-                    
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/login">Log In</a></li>
-                        <li><a href="/logout">Log Out</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <h1>Here are the List of Users</h1>
-
-        <div class="container row">
-              <%for(var u of users){%> 
-                    <ul>
-                        <li><a href="/profilepage/<%=u.username%>"><%=u.name%></a></li>
-                        <small><a href="/delete/<%= u.username %>">delete</a></small>                            
-                    </ul>
-                <%}%>
-        </div>
-        
-
-        
-
-    </body>
-</html> -->
-
-
 
 
 
@@ -118,9 +56,9 @@
 
 
 <body class="flex items-center justify-center">
-	<div class="container">
+	<div class="bg-gray-200">
        
-		<table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+		<!-- <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
 			<thead class="text-white">
 				<tr class="bg-green-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
 					<th class="p-3 text-left">Name</th>
@@ -153,7 +91,44 @@
 				</tr>
 				<%}%>
 			</tbody>
-		</table>
+		</table> -->
+
+
+
+
+
+
+
+
+
+
+    <!-- component -->
+<div class="w-2/3 mx-auto">
+  <div class="bg-white shadow-md rounded my-6">
+    <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+      <thead class="bg-green-300">
+        <tr>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">User</th>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%for(var u of users){%> 
+        <tr class="hover:bg-grey-lighter">
+          <td class="py-4 px-6 border-b border-grey-light"><a href="/profilepage/<%=u.username%>"> <%=u.name%></a></td>
+          <td class="py-4 px-6 border-b border-grey-light">
+            <%if(locals.user.UserType==='Admin'){%>
+            <a href="/seeQ/<%= u._id %>" class="text-white font-bold py-1 px-3 rounded text-xs bg-blue-400 hover:bg-green-dark">Questions</a>
+            
+            <a href="/delete/<%= u.username %>" class="ml-4 text-white font-bold py-1 px-3 rounded text-xs bg-red-400 hover:bg-blue-dark">Delete</a>
+            <%}%>
+          </td>
+        </tr>
+        <%}%>
+      </tbody>
+    </table>
+  </div>
+</div>
         
 	</div>
 </body>

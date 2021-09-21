@@ -53,7 +53,7 @@ class PostComments{
 
 
                   // const notifier = new Notihandler(data.data.comment.userid.username)
-                  notifier.notify(data.data.postuser,'commented on your post')
+                  notifier.notify(data.data.postuser,'commented on your post','comment')
 
                   
 

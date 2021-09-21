@@ -132,23 +132,51 @@ module.exports.postresourses = async(req,res)=>{
                         })
                         break;
                         case 'APTI':
-                        arr.forEach(ele => catData[0].apti.push({ele,user:user.username,name:name}))
-                        break;
+                            arr.forEach((ele,i=1) =>{
+                                var fileName= name+' '+i;
+                                catData[0].apti.push({ele,user:user.username,name:fileName})
+                                i++;
+                            })                      
                         case 'DEV':
-                        arr.forEach(ele => catData[0].dev.push({ele,user:user.username,name:name}))
-                        break;
+                           
+                                arr.forEach((ele,i=1) =>{
+                                    var fileName= name+' '+i;
+                                    catData[0].dev.push({ele,user:user.username,name:fileName})
+                                    i++;
+                                })       
+                            break;
                         case 'PLACEMENTS':
-                        arr.forEach(ele => catData[0].placements.push({ele,user:user.username,name:name}))
-                        break;
+                         
+                                arr.forEach((ele,i=1) =>{
+                                    var fileName= name+' '+i;
+                                    catData[0].placements.push({ele,user:user.username,name:fileName})
+                                    i++;
+                                })    
+                               break;
                         case 'CP':
-                        arr.forEach(ele => catData[0].cp.push({ele,user:user.username,name:name}))
-                        break;
+                       
+                                arr.forEach((ele,i=1) =>{
+                                    var fileName= name+' '+i;
+                                    catData[0].cp.push({ele,user:user.username,name:fileName})
+                                    i++;
+                                })     
+                                break;
                         case 'GATE':
-                        arr.forEach(ele => catData[0].gate.push({ele,user:user.username,name:name}))
-                        break;
+                        
+                                arr.forEach((ele,i=1) =>{
+                                    var fileName= name+' '+i;
+                                    catData[0].gate.push({ele,user:user.username,name:fileName})
+                                    i++;
+                                })       
+                                break;
                         case 'CORE':
-                        arr.forEach(ele => catData[0].coresub.push({ele,user:user.username,name:name}))
-                        break;
+                         
+                                arr.forEach((ele,i=1) =>{
+                                    var fileName= name+' '+i;
+                                    catData[0].coresub.push({ele,user:user.username,name:fileName})
+                                    i++;
+                                })      
+                                break;
                     default:
                         console.log(category)
                         break;

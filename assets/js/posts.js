@@ -51,7 +51,7 @@
                <div class="">
                   <div class="flex items-center justify-between">
                      <h2 class="text-lg font-semibold text-gray-900 -mt-1">${ post.userid.name } </h2>
-                     <small class="text-sm text-gray-700">22h ago</small>
+                    
                   </div>
                   <p class="mt-3 text-gray-700 text-sm">
                   ${ post.postBody }
@@ -102,7 +102,7 @@
     </div>
 
         <br>
-        <div class="px-20">
+        <div class="">
         <form id="post-${ post._id }-comments-form" action="/commentit" method="POST">
           <input name="commentBody" placeholder="Comment here" class="bg-gray-300 w-auto rounded-xl px-2 p-2">
           <input name="postid" type="hidden" value="${ post._id }"> 

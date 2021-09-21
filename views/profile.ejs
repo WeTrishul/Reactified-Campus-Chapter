@@ -135,6 +135,8 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <!-- component -->
 <style>
+
+
     :root {
         --main-color: #4a76a8;
     }
@@ -150,6 +152,16 @@
     .border-main-color {
         border-color: var(--main-color);
     }
+
+    @media screen and (max-width: 968px) {
+        #chart-rkhnewala{
+            position: relative;
+        height: 40vh;
+        width: 80vw;
+        }
+        
+    }
+
 </style>
 </head>
 <body class="bg-gray-200">
@@ -373,12 +385,12 @@
                                 </li> -->
                             </ul>
                         </div>
-                        <div class="bg-white p-1 shadow-sm rounded-sm">
+                        <div id="chart-rkhnewala" class=" bg-white p-1 shadow-sm rounded-sm">
 
                             <p>Performance graph this month</p>
-
+                           
                             <canvas id="myChart" width="25" height="10"></canvas>
-
+                           
                             <script>
                     
                     
@@ -394,6 +406,7 @@
                                         datasets: [{
                                             label: '# of rating',
                                             data: res,
+                                            // data: [800,1200,0,400],
                                             backgroundColor: [
                                                 'rgba(255, 99, 132, 0.2)',
                                                 'rgba(54, 162, 235, 0.2)',

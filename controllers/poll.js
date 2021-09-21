@@ -55,10 +55,13 @@ module.exports.storeUserResponse = async (req,res)=>{
        if(repeat)
        {
           console.log('kitna baar karega tm!')
+
+          const arr = [PollName.A,PollName.B,PollName.C,PollName.D]
+        console.log(arr)
           return res.render('pollPageView',{
               title:"Ha bol bhai",
-              backid:_id
-
+              backid:_id,
+              arr:arr
           })
        }
         const pair = {
@@ -94,7 +97,8 @@ module.exports.storeUserResponse = async (req,res)=>{
 
         return res.render('pollPageView',{
             title:"Ha bol bhai",
-            backid:_id
+            backid:_id,
+            arr: [PollName.A,PollName.B,PollName.C,PollName.D]
         })
         
             
