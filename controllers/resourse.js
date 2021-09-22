@@ -61,7 +61,7 @@ module.exports.getresoursePage = async(req,res)=>{
         })
     } catch (error) {
         console.log('resources nhi dikha pa rha hai',error)
-        res.redirect('back')
+        res.render('error_page')
     }
 }
 
@@ -198,10 +198,11 @@ module.exports.postresourses = async(req,res)=>{
            }
             } catch (error) {
                 console.log('ajax ka natak',error)
+                res.redirect('/back')
             }  
         })     
     }catch (error) {
         console.log('Error'+error)
-        res.redirect('/dashboard')
+        res.redirect('back')
     }
 }

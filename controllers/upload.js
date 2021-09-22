@@ -20,7 +20,7 @@ module.exports.setQuestions= (req,res)=>{
 }
 else
 {
-    res.redirect('back')  
+   res.redirect('back')  
 }
 }
 
@@ -90,6 +90,7 @@ module.exports.upload = async(req,res)=>{
 
            catch (error) {
                 console.log(error)
+                res.render('error_page')
         }
         })     
      /* res.render('questionlist',{
@@ -101,7 +102,8 @@ module.exports.upload = async(req,res)=>{
     //    res.redirect('/fileupload')
     }catch (error) {
         console.log('Error'+error)
-        res.redirect('/dashboard')
+        //res.redirect('/dashboard')
+        res.render('error_page')
     }
 }
 
@@ -150,7 +152,7 @@ module.exports.uploadDp = async(req,res)=>{
                     
     }catch (error) {
         console.log('Error'+error)
-        res.redirect('/dashboard')
+        res.redirect('back')
     }
 }
 

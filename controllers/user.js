@@ -100,7 +100,7 @@ module.exports.dashboard = async (req,res)=>{
        
         
     } catch (error) {
-        console.log(error)
+        res.render('error_page')
     }
     
 }
@@ -122,6 +122,7 @@ module.exports.upcomingevents = async (req,res)=>{
         
     } catch (error) {
         console.log(error)
+        res.render('error_page')
     }
 }
 
@@ -161,6 +162,7 @@ module.exports.globaleventpage = async (req,res) =>{
         // res.redirect('back')
 
         console.log(error)
+        res.render('error_page')
     } 
 }
 
@@ -211,7 +213,7 @@ module.exports.othersProfile = async(req,res)=>{
         })
     } catch (err) {
     console.log(err)
-    res.redirect('/profilepage') 
+    res.render('error_page') 
     }
 }
 
@@ -311,7 +313,7 @@ module.exports.listUsers = async (req,res)=>{
         
     } catch (error) {
         console.log('Error from listUsers',error)
-        res.redirect('/dashboard')
+        res.render('error_page')
         return
     }
 }
@@ -335,7 +337,8 @@ module.exports.delete = async(req,res)=>{
         console.log(user)
         return res.redirect('/listUsers')
     } catch (error) {
-        return console.log('Error from delete',error)
+         console.log('Error from delete',error)
+         res.render('error_page')
     }
 }
 
@@ -355,6 +358,7 @@ module.exports.changeRole = async(req,res)=>{
          return res.redirect('/listUsers')
     } catch (error) {
         console.log('Error in changing role',error)
+        res.render('error_page')
     }
  
 }
@@ -371,7 +375,7 @@ module.exports.listUserQuestions = async (req,res)=>{
             arr: arr
         })
     } catch (error) {
-        res.redirect('back')
+        res.render('error_page')
     }
 }
 

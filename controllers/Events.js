@@ -58,6 +58,7 @@ module.exports.createevent = async (req,res)=>{
     }catch(error)
     {
         console.log('some error occured' + error)
+        res.redirect('/UpcomingEvents')
     }
     
 

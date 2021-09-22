@@ -22,6 +22,7 @@ module.exports.savePoll = async (req,res)=>{
 
     } catch (error) {
         console.log('had hai ',error)
+        res.redirect('back')
     }
     
 }
@@ -37,6 +38,7 @@ module.exports.showPollPage =async (req,res)=>{
         
     } catch (error) {
         console.log(error)
+        res.render('error_page')
     }
 }
 
@@ -104,6 +106,7 @@ module.exports.storeUserResponse = async (req,res)=>{
             
     } catch(e){
         console.log(e)
+        res.redirect('back')
     }
 }
 
@@ -122,7 +125,7 @@ module.exports.showAllPolls = async (req,res)=>{
         
         
     } catch (error) {
-        res.redirect('back')
+        res.render('error_page')
     }
 
 }

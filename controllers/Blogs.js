@@ -29,7 +29,7 @@ module.exports.allblogs = async (req,res) =>{
 
     } catch (error) {
         console.log(error)
-        res.redirect('back')
+        res.render('error_page')
     }
     
 }
@@ -50,12 +50,9 @@ module.exports.editblogform = async (req,res) =>{
 
     } catch (error) {
 
-        console.log(error)
+        res.render('back')
 
     }
-    
-
-
 }
 
 module.exports.saveblog = async (req,res) =>{
@@ -65,10 +62,9 @@ module.exports.saveblog = async (req,res) =>{
         await Blog.create(req.body)
         res.redirect('/Allblogs')
     } catch (error) {
-        console.log(error)
+        res.render('back')
     }
-   
-    
+  
 }
 
 module.exports.showblog = async (req,res) =>{
@@ -80,7 +76,7 @@ module.exports.showblog = async (req,res) =>{
 
     // res.send(blog.content)
     } catch (error) {
-        console.log(error)
+        res.render('error_page')
     }
 }
 
@@ -98,7 +94,7 @@ module.exports.deleteblog =  async (req,res) =>{
 
     // res.send(blog.content)
     } catch (error) {
-        console.log(error)
+        res.render('error_page')
     }
 }
 
@@ -113,7 +109,7 @@ module.exports.editblog =  async (req,res) =>{
 
     // res.send(blog.content)
     } catch (error) {
-        console.log(error)
+       res.redirect('back')
     }
 }
 

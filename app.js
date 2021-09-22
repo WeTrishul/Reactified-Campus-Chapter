@@ -115,9 +115,6 @@ app.listen(port,()=>{
         
     },604800000 ); 
     
-    
-
-
 
     console.log('Server is up on port '+ port)
 })
