@@ -105,31 +105,33 @@
     <!-- component -->
 <div class="w-2/3 mx-auto">
   <div class="bg-white shadow-md rounded my-6">
-    <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
-      <thead class="bg-green-300">
-        <tr>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">User</th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
         <%for(var u of users){%> 
-        <tr class="hover:bg-grey-lighter">
-          <td class="py-4 px-6 border-b border-grey-light"><a href="/profilepage/<%=u.username%>"> <%=u.name%></a></td>
-          <td class="py-4 px-6 border-b border-grey-light">
-            <%if(locals.user.UserType==='Admin'){%>
-            <a href="/seeQ/<%= u._id %>" class="text-white font-bold py-1 px-3 rounded text-xs bg-blue-400 hover:bg-green-dark">Questions</a>
+        <!-- component -->
+    <a href="/profilepage/<%=u.username%>">
+      <div class="flex flex-col p-8 bg-white shadow-md hover:shodow-lg rounded-2xl">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
             
-            <a href="/delete/<%= u.username %>" class="ml-4 text-white font-bold py-1 px-3 rounded text-xs bg-red-400 hover:bg-blue-dark">Delete</a>
-            <%}%>
-          </td>
-        </tr>
-        <%}%>
-      </tbody>
-    </table>
-  </div>
-</div>
-        
+            <img src="<%=u.dp%>" alt="avatar"
+              class="w-16 h-16 rounded-2xl p-3 border border-blue-100 text-blue-400 bg-blue-50">
+            <div class="flex flex-col ml-3">
+              <div class="font-medium leading-none"><%=u.name%></div>
+              <p class="text-sm text-gray-600 leading-none mt-1"><%=u.UserType%>
+              </p>
+            </div>
+          </div>
+          <div>
+    
+          <%if((locals.user) && locals.user.UserType=='Admin'){%>
+        <a href="/seeQ/<%= u._id %>"> <button  class="flex-no-shrink bg-green-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-500 text-white rounded-full">Ques</button></a> 
+          <a href="/delete/<%= u.username %>"><button  class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Delete</button></a>
+          <%}%>
+        </div>
+        </div>
+      </div>
+    </a>
+      <br> 
+        <%}%>        
 	</div>
 </body>
 

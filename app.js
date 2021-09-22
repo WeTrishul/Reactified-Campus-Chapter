@@ -106,7 +106,7 @@ app.listen(port,()=>{
         const k = await RatingsHandler.updateRatingsOfAllUsers()
         
         setTimeout(() => RatingsHandler.updateLeaderboards(), 60000) 
-    }, 604800000);
+    },120000);//604800000
     
 
     console.log('Server is up on port '+ port)
