@@ -84,12 +84,12 @@
                     <%if(locals.user) {%>
                       
                     <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/Likehandler/?id=<%= post.id %>&type=Post">
-                     <div class="flex mr-2 text-gray-700 text-sm mr-3">
+                     <!-- <div class="flex mr-2 text-gray-700 text-sm mr-3">
                         <svg fill="none" viewBox="0 0 24 24"  class="w-4 h-4 mr-1" stroke="currentColor">
                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                          </svg>
                         <span><%=post.likes.length%></span>
-                     </div>
+                     </div> --> <%=post.likes.length%> likes
                     </a>
                     <%}%>
                      <div class="flex mr-2 text-gray-700 text-sm mr-8">
@@ -145,7 +145,7 @@
                     <div class="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
                       <%if(locals.user) {%>
                       <a class="toggle-like-button hover:underline" data-likes="<%= comment.likes.length %>" href="/Likehandler/?id=<%= comment.id %>&type=Comment"  >
-                        <small>Like</small>
+                        <%=comment.likes.length%> likes
                       </a>
                       <%}%>  
                                            
@@ -155,8 +155,8 @@
                         <small>Delete</small>
                       </a>
                       <%}%>
-                    <small class="self-center">.</small>
-                        <small><%= comment.likes.length %> Likes</small>
+                    <!-- <small class="self-center">.</small>
+                        <small><%= comment.likes.length %> Likes</small> -->
                      
                     </div>
                   </div>

@@ -101,7 +101,7 @@ class PostComments{
                    <div class="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
                     
                      <a class="toggle-like-button hover:underline" data-likes="0" href="/Likehandler/?id=${ comment._id }&type=Comment" >
-                       <small>Like</small>
+                     ${ comment.likes.length } likes
                      </a>
                    
                                           
@@ -110,8 +110,7 @@ class PostComments{
                        <small>Delete</small>
                      </a>
                      
-                   <small class="self-center">.</small>
-                       <small>${ comment.likes.length } Likes</small>
+                  
                     
                    </div>
                  </div>

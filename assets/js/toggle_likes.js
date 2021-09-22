@@ -30,7 +30,7 @@ class ToggleLike{
 
                 $(self).attr('data-likes', likesCount);
                 
-                $(self).html(`${likesCount} Likes`);
+                $(self).html(`${likesCount} likes`);
 
                 if(data.data.deleted==false && notifier.notifieruser!=data.data.likeableowner)
                 {

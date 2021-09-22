@@ -19,6 +19,7 @@ const RatingsHandler = require('./config/RatingsHandler')
 const pollRouter = require('./routes/Polling')
 const resourceRouter = require('./routes/resources')
 const cors = require('cors')
+const User = require('./models/user')
 const Noticleaner = require('./config/Noti_cleaner')
 
 
@@ -103,11 +104,20 @@ app.listen(port,()=>{
 
     setInterval( async ()=>{
         // RatingsHandler.getRatings({codeforces:'coder_hk47'})
+        console.log('Fired')
+        const user = await User.find({})
+
         const k = await RatingsHandler.updateRatingsOfAllUsers()
         
-        setTimeout(() => RatingsHandler.updateLeaderboards(), 60000) 
-    }, 604800000);
+        const t = (user.length)*25000
+
+        setTimeout(() => RatingsHandler.updateLeaderboards(), t) 
+        
+    },604800000 ); 
     
+    
+
+
 
     console.log('Server is up on port '+ port)
 })

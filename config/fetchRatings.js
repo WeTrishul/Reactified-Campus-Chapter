@@ -13,7 +13,7 @@ module.exports.codeforecesRating = async(user)=>{
 
 module.exports.codeChefRating = async(user)=>{
     try {
-        const codechefData = await fetch('https://competitive-coding-api.herokuapp.com/api/codechef'+user.codechef).then(response=>response.json())
+        const codechefData = await fetch('https://competitive-coding-api.herokuapp.com/api/codechef/'+user.codechef).then(response=>response.json())
         const codechefRatings = codechefData.rating
         return codechefRatings
     } catch (error) {
@@ -24,7 +24,7 @@ module.exports.codeChefRating = async(user)=>{
 
 module.exports.leetCodeRating = async(user)=>{
     try {
-        const leetcodeData = await fetch('https://competitive-coding-api.herokuapp.com/api/leetcode'+user.leetcode).then(response=>response.json())
+        const leetcodeData = await fetch('https://competitive-coding-api.herokuapp.com/api/leetcode/'+user.leetcode).then(response=>response.json())
         const leetcodeRatings = leetcodeData.contribution_points
         return leetcodeRatings
     } catch (error) {
