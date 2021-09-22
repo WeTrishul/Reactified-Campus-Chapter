@@ -148,7 +148,7 @@ module.exports.uploadDp = async(req,res)=>{
             }            
            }
         })     
-        return res.redirect('/profilepage')
+        return res.redirect('back')
                     
     }catch (error) {
         console.log('Error'+error)

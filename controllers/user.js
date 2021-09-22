@@ -21,6 +21,7 @@ const otpWorkers = require('../workers/otp_workers')
 const globaleventsmethods = require('../config/GlobaleventMethods')
 const Hackerrank = require('../config/Hackerank')
 const resourses = require('../models/resourses')
+const upcomingEvents = require('../models/UpcomingEvents')
 
 
 const jwt  = require('jsonwebtoken');
@@ -133,14 +134,27 @@ module.exports.globaleventpage = async (req,res) =>{
        let eventsArray = []
        let eventsTiming = []
 
+       var events =  await upcomingEvents.find({})
+
+       console.log('pura events',events[0])
+
      if(req.params.platform=='CodeForces')
      {
-         eventsArray = await globaleventsmethods.codeforcesevents ()
+          eventsArray= events[0].codeforces
+          console.log('function me se',eventsArray)
      }
 
    else if(req.params.platform=='CodeChef')
      {
-         eventsArray = await globaleventsmethods.codeChefEvents ()
+         /*eventsArray = await globaleventsmethods.codeChefEvents ()
+
+         eventsData[0].codechef=eventsArray
+
+         await eventsData[0].save()
+
+         eventsArray = eventsData[0].codeforces*/
+
+         eventsArray= events[0].codechef
      }
      else if(req.params.platform=='hackerrank')
      {
@@ -158,9 +172,6 @@ module.exports.globaleventpage = async (req,res) =>{
      })
         
     } catch (error) {
-        
-        // res.redirect('back')
-
         console.log(error)
         res.render('error_page')
     } 
@@ -350,6 +361,11 @@ module.exports.changeRole = async(req,res)=>{
             {
                 user.UserType='Events Lead'
                 await user.save();
+         }
+         else if(req.query.role==='questionsetter')
+         {
+            user.UserType='Question Setter'
+            await user.save();
          }
          else{
             user.UserType='Media Lead'

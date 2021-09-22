@@ -1,5 +1,6 @@
 const fetch = require('node-fetch')
 const timecalc = require('../config/timecalc');
+const upcomingEvents = require('../models/UpcomingEvents')
 const { events } = require('../models/user');
 
 
@@ -17,12 +18,20 @@ module.exports.codeforcesevents = async () =>{
     });
     const arr1 = arr.reverse()
     const eventsArray = arr
-    
-    // res.render('globalevents',{
-    //     result: eventsArray
-    // })
 
-    return eventsArray
+
+    let eventsData = await upcomingEvents.find({})
+
+       if(!eventsData.length)
+          {
+              const temp = await upcomingEvents.create({})
+              eventsData.push(temp)
+          }
+
+      eventsData[0].codeforces=eventsArray
+
+      await eventsData[0].save()
+      console.log('Ghusane k baad codeForces',eventsData[0].codeforces)
 }
 
 
@@ -40,6 +49,18 @@ module.exports.codeChefEvents = async () =>{
                    
   });
   const eventsArray = arr
-  
-  return eventsArray
+
+  let eventsData = await upcomingEvents.find({})
+
+  if(!eventsData.length)
+          {
+              const temp = await upcomingEvents.create({})
+              eventsData.push(temp)
+          }
+      
+      eventsData[0].codechef=eventsArray
+
+      await eventsData[0].save()
+
+      console.log('Ghusane k baad codeChef',eventsData[0].codeforces)
 }

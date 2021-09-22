@@ -45,14 +45,6 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    /*number:{
-        type:String,
-        required:true,
-        minlength:10,
-        validate(value){
-        if(value.length <10 || value.length >10) {  throw new Error('Enter 10 digits phone number')  }
-        }
-    },*/
     codeforces: {
         type: String,
         default: "nhi hai ",

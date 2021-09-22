@@ -200,7 +200,7 @@
 			
 			}
 
-      @media only screen and (max-width: 768px) {
+      @media only screen , (max-width:968px) {
 
     
   .anand {
@@ -214,7 +214,7 @@
    width: 100%;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1440px) {
+@media only screen , (min-width: 968px) , (max-width: 1440px) {
   .anand {
     
     height: 60vh;
@@ -333,11 +333,11 @@
         </div>
         <!-- Ending of the component about Daniel Clifford -->
 
-        <!-- Beginning of the component about Jonathan Walters -->
+        <!-- Announcements -->
         <div class="bg-gray-900 lg:order-2 lg:row-span-1 2xl:row-span-1 lg:col-span-1 rounded-lg shadow-xl pb-4 mb-5 lg:mb-0">
           <div class="mx-8 2xl:mx-10 my-10 ">
            
-            <h1 class="text-white text-xs md:text-base 2xl:text-2xl pl-11 md:pl-12 2xl:pl-24 -mt-8 md:-mt-10 2xl:-mt-16">Announcements</h1>
+            <h1 class="text-white text-xs md:text-base 2xl:text-2xl pl-11 md:pl-12 2xl:pl-24 -mt-8 md:-mt-10 2xl:-mt-13">Announcements</h1>
             <div class="text-white text-xs md:text-base 2xl:text-2xl text-opacity-50 pl-11 md:pl-12 2xl:pl-24"></div>
           </div>
           <div class="-mt-8 mx-1 lg:mx-2">
@@ -371,7 +371,7 @@
           <div class="mx-8 my-8 ">
             <div class="w-8 md:w-9 lg:w-10 2xl:w-20 h-8 md:h-9 lg:h-10 2xl:h-20  lg:-mt-3"></div>
             <h1 class="text-white text-xs md:text-base 2xl:text-2xl pl-12 md:pl-14 2xl:pl-24 -mt-8 md:-mt-10 lg:-mt-11 2xl:-mt-16">Recent Discussion</h1>
-            <div class="text-white text-xs md:text-base 2xl:text-2xl text-opacity-50 pl-12 md:pl-14 2xl:pl-24"></div>
+            <div class="text-white text-xs md:text-base 2xl:text-xs text-opacity-50 pl-12 md:pl-14 2xl:pl-24"></div>
           </div>
           <div class="px-3 -mt-3 mb-5 lg:mb-0">
             <!-- <p class="text-white text-lg 2xl:text-4xl font-semibold px-4 -mt-3 lg:-mt-6 2xl:mt-8">Which is the best IDE ?</p>
@@ -383,7 +383,7 @@
                 %>
                 
 
-          <a href="/Discuss/#post-<%= post._id %>"><p class="text-white hover:text-red-400 text-lg 2xl:text-4xl font-semibold px-4 -mt-3 lg:-mt-6 2xl:mt-8"><%=post.postBody%></p><br></a>
+          <a href="/Discuss/#post-<%= post._id %>"><p class="text-white hover:text-red-400 text-lg 2xl:text-2xl font-semibold px-4 -mt-3 lg:-mt-6 2xl:mt-10"><%=post.postBody%></p></a>
             <!-- <p class="text-white text-lg 2xl:text-4xl font-semibold px-4 -mt-3 lg:-mt-6 2xl:mt-8">Hackerank vs codeforces Hackerank vs codeforces Hackerank vs codeforces Hackerank vs codeforces</p> -->
             <%}%>
 

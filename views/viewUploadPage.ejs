@@ -33,12 +33,10 @@
                     <input type="radio"  class="javascript" name="Option" value="CORE">
                     <label>DEV</label>
                     <input type="radio"  class="javascript" name="Option" value="DEV">
-
                     <input type="text"  id="name" name="name" placeholder="name">
                      -->
 
             <!-- <div class="jumbotron col-sm-4 pull-center">
-
                 <form id="file-form" action="/resourses/<%=locals.user.id%>" method="POST" enctype="multipart/form-data">
                                        
                     <input type="file" id="multiFiles" name="resources" multiple> 
@@ -71,7 +69,7 @@
 
 
         <form id="file-form" class="mt-40 " action="/resourses/<%=locals.user.id%>" method="post" enctype="multipart/form-data">
-    <div class="bg-indigo-500 p7 rounded w-9/12 mx-auto shadow-xl">
+    <div class="bg-white p7 rounded w-9/12 mx-auto shadow-xl">
         <div x-data="dataFileDnD()" class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
             <div x-ref="dnd"
                 class="relative flex  flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer">
@@ -135,9 +133,7 @@
         </div>
 
 <!-- <div id="and" class="flex justify-center  items-center">
-
 <input class="shadow-xl shadow appearance-none border p-6 rounded text-grey-darker" id="name" name="name" placeholder="name">
-
 </div> -->
 
 
@@ -153,7 +149,7 @@
         <div class="main flex border border-gray-300 rounded-full overflow-hidden m-4 select-none">
           <div class="title  py-3 my-auto px-5 bg-blue-500 text-white text-sm font-semibold mr-3">Select Category</div>
           <label class="flex radio p-2 cursor-pointer">
-           <!----> <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="DSA" />
+            <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="DSA" />
             <div class=" title px-2" >Dsa</div>
           </label>
         
@@ -295,36 +291,29 @@
 <!-- <style>
     body{background:white !important;}
 </style>
-
 <input type="hidden" value="<%=locals.user._id%>" id="userid">
-
 <div class="main flex border rounded-full overflow-hidden m-4 select-none">
   <div class="title py-3 my-auto px-5 bg-blue-500 text-white text-sm font-semibold mr-3">Select Category</div>
   <label class="flex radio p-2 cursor-pointer">
     <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="DSA" />
     <div class=" title px-2" >Dsa</div>
   </label>
-
   <label class="flex radio p-2 cursor-pointer">
     <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="CP" />
     <div class="title px-2" >Cp</div>
   </label>
-
   <label class="flex radio p-2 cursor-pointer">
     <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="DEV" />
     <div class=" title px-2" >Dev </div>
   </label>
-
   <label class="flex radio p-2 cursor-pointer">
     <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="APTI" />
     <div class="title px-2">Apti</div>
   </label>
-
   <label class="flex radio p-2 cursor-pointer">
     <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="GATE" />
     <div class="title px-2" >Gate</div>
   </label>
-
   <label class="flex radio p-2 cursor-pointer">
     <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="CORE" />
     <div class="title px-2">Core</div>
@@ -333,7 +322,6 @@
     <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="PLACEMENTS" />
     <div class="title px-2">Placements</div>
   </label>
-
 </div> -->
 
 
@@ -343,199 +331,4 @@
         <script src="/js/resources.js"></script>
 
     </body>
-</html>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .outer_wrap {
-  width: 80vw;
-  height: 80vh;
-  position: relative;
-  margin: 4% auto;
-  background: #fff;
-  border-radius: 7px;
-  padding: 5px;
-}
-
-.fileUpload {
-  height: 30vh;
-  background-color:#fff;
-}
-
-.form h2 {
-  margin-left: 2rem;
-  margin-bottom: 20px;
-}
-
-.formElement {
-  margin: 5px;
-  border-radius: 10px;
-  padding: 5px;
-  cursor: pointer;
-}
-
-.formElement label {
-  cursor: pointer;
-}
-
-.fileName {
-  margin-top: 20px;
-  height: 5vh;
-  border-radius: 10px;
-}
-
-.fileText {
-  width: 50%;
-  height: 4vh;
-  border-radius: 10px;
-  border-style: none;
-  padding-left: 7px;
-}
-
-.btnContainer {
-  margin-top: 10px;
-  text-align: center;
-  align-items: center;
-}
-
-.btn {
-  width: 80px;
-  height: 5vh;
-  border-style: none;
-  border-radius: 10px;
-  border: 1px solid grey;
-  background-color: #5995fd;
-}
-    </style>
-    
-</head>
-<body>
-    <div class="outer_wrap">
-        <div class="form">
-            <h2></h2>
-            <div class="fileUpload ">
-                <form id="file-form" class="mt-40 " action="/resourses/<%=locals.user.id%>" method="post" enctype="multipart/form-data">
-                    <div class="bg-indigo-500 p7 rounded w-9/12 mx-auto shadow-xl">
-                        <div x-data="dataFileDnD()" class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
-                            <div x-ref="dnd"
-                                class="relative flex  flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer">
-                                <input id="multiFiles" type="file" name="resources" multiple
-                                    class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
-                                    @change="addFiles($event)"
-                                    @dragover="$refs.dnd.classList.add('border-blue-400'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"
-                                    @dragleave="$refs.dnd.classList.remove('border-blue-400'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
-                                    @drop="$refs.dnd.classList.remove('border-blue-400'); $refs.dnd.classList.remove('ring-4'); $refs.dnd.classList.remove('ring-inset');"
-                                    title="" />
-                        
-                                <div class="flex flex-col items-center justify-center py-10 text-center">
-                                    <svg class="w-6 h-6 mr-1 text-current-50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                    <p class="m-0">Drag your files here or click in this area.</p>
-                                </div>
-                            </div>
-                        
-                            <template x-if="files.length > 0">
-                                <div class="grid grid-cols-2 gap-4 mt-4 md:grid-cols-6" @drop.prevent="drop($event)"
-                                    @dragover.prevent="$event.dataTransfer.dropEffect = 'move'">
-                                    <template x-for="(_, index) in Array.from({ length: files.length })">
-                                        <div class="relative flex flex-col items-center overflow-hidden text-center bg-gray-100 border rounded cursor-move select-none"
-                                            style="padding-top: 100%;" @dragstart="dragstart($event)" @dragend="fileDragging = null"
-                                            :class="{'border-blue-600': fileDragging == index}" draggable="true" :data-index="index">
-                                            <button class="absolute top-0 right-0 z-50 p-1 bg-white rounded-bl focus:outline-none" type="button" @click="remove(index)">
-                                                <svg class="w-4 h-4 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                          
-                                            <template x-if="files[index].type.includes('application/') || files[index].type === ''">
-                                                <svg class="absolute w-12 h-12 text-gray-400 transform top-1/2 -translate-y-2/3"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                                </svg>
-                                            </template>
-                                         
-                        
-                                            <div class="absolute bottom-0 left-0 right-0 flex flex-col p-2 text-xs bg-white bg-opacity-50">
-                                                <span class="w-full font-bold text-gray-900 truncate"
-                                                    x-text="files[index].name">Loading</span>
-                                                <span class="text-xs text-gray-900" x-text="humanFileSize(files[index].size)">...</span>
-                                            </div>
-                        
-                                            <div class="absolute inset-0 z-40 transition-colors duration-300" @dragenter="dragenter($event)"
-                                                @dragleave="fileDropping = null"
-                                                :class="{'bg-blue-200 bg-opacity-80': fileDropping == index && fileDragging != index}">
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </template>
-                        </div>
-                        </div>
-                
-                <!-- <div id="and" class="flex justify-center  items-center">
-                
-                <input class="shadow-xl shadow appearance-none border p-6 rounded text-grey-darker" id="name" name="name" placeholder="name">
-                
-                </div> -->
-                
-                        
-                        </div>
-                    </form> 
-            </div>
-            <div class="formElement" id='option-A'>
-                <h2>OPTIONS</h2>
-                <input type="radio" name='post'  >
-                <label for="option-A" class="andy">Option A</label>
-
-                <input type="radio" name='post'  >
-                <label for="option-A" class="andy">Option B</label>
-
-                <input type="radio" name='post'  >
-                <label for="option-A" class="andy">Option C</label>
-
-                <input type="radio" name='post'  >
-                <label for="option-A" class="andy">Option D</label>
-
-                <input type="radio" name='post'  >
-                <label for="option-A" class="andy">Option E</label>
-
-                <input type="radio" name='post'  >
-                <label for="option-A" class="andy">Option F</label>
-
-                <input type="radio" name='post'  >
-                <label for="option-A" class="andy">Option G</label>
-
-                <div class="fileName">
-                    File Name: 
-                    <input type="text" class='fileText'>
-                </div>
-
-                <div class="btnContainer">
-                   
-                    <button class='btn'>Upload</button>
-                    
-                </div>
-
-
-            </div>
-            
-        </div>
-    </div>
-</body>>
-
-</html>
+</html

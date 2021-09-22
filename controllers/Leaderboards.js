@@ -11,14 +11,27 @@ const fetch = require('node-fetch')
 const moment = require('moment')
 const startingTime = require('../config/timecalc')
 
-module.exports.leaderboards=(req,res)=>{
+module.exports.leaderboards= async (req,res)=>{
 
 
+    try {
+        const leaderBoards = await Leaderboards.find({}).populate('userid').exec()
 
-    Leaderboards.find({}).populate('userid').exec((error,lboards)=>{
+        
+        console.log(leaderBoards)
+         res.render('Leaderboards',{
+            leaderboard:leaderBoards
+        })
+
+    } catch (error) {
+        res.redirect('back')
+    }
+
+
+    /*Leaderboards.find({}).populate('userid').exec((error,lboards)=>{
         return res.render('Leaderboards',{
             leaderboard:lboards
         })
-    })
+    })*/
 
 }

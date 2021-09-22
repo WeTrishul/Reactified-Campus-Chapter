@@ -21,6 +21,7 @@ const resourceRouter = require('./routes/resources')
 const cors = require('cors')
 const User = require('./models/user')
 const Noticleaner = require('./config/Noti_cleaner')
+const globalEventMethods = require('./config/GlobaleventMethods')
 
 
 
@@ -94,16 +95,21 @@ const NotificationSocket = require('./config/notification_socket').notification(
 
 NotificationServer.listen(7000)
 
+
+
+
+
 app.listen(port,()=>{
 
     setInterval( async ()=>{
         
-       await Noticleaner.cleanit()
-        
+        await Noticleaner.cleanit()
+        await globalEventMethods.codeforcesevents()
+        await globalEventMethods.codeChefEvents()
+
     }, 86400000);
 
     setInterval( async ()=>{
-        // RatingsHandler.getRatings({codeforces:'coder_hk47'})
         console.log('Fired')
         const user = await User.find({})
 
@@ -113,7 +119,7 @@ app.listen(port,()=>{
 
         setTimeout(() => RatingsHandler.updateLeaderboards(), t) 
         
-    },604800000 ); 
+    },604800000); //
     
 
     console.log('Server is up on port '+ port)
