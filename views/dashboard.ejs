@@ -200,7 +200,7 @@
 			
 			}
 
-      @media only screen , (max-width:968px) {
+      @media  (max-width:968px) {
 
     
   .anand {
@@ -214,9 +214,10 @@
    width: 100%;
   }
 }
-@media only screen , (min-width: 968px) , (max-width: 1440px) {
+@media  (min-width: 968px) and (max-width: 1440px) {
   .anand {
-    
+
+
     height: 60vh;
    width: 100%;
   }
@@ -233,6 +234,7 @@
 				color: #2b6cb0;  /*Set to match the Tailwind colour you want the active one to be */
 			}
 		</style>
+        
 
 </head>
 
@@ -242,12 +244,12 @@
 	<div class="carousel-inner relative overflow-hidden w-full" >
 	  <!--Slide 1-->
 		<input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
-		<div class=" alund carousel-item absolute opacity-0"  >
+		<div class=" alund carousel-item absolute opacity-0 h-auto overflow-hidden  object-cover"  >
             <% if(!events[0]) { %>
-                      <img src="https://cdn.codechef.com/download/banner/1627746015.png" class="lg: w-full h-full" alt="">
+                      <img src="https://cdn.codechef.com/download/banner/1627746015.png" class="lg: w-full h-full " alt="">
 
                 <%} else {%>
-      <img src="<%=events[0].eventbanner%>"  class=" anand w-full h-full"  alt="">
+      <img src="<%=events[0].eventbanner%>"  class=" anand w-full h-full object-fit"  alt="">
       <%}%>
 
       <div class="block h-full w-full bg-indigo-500 text-white text-5xl text-center">Slide 1</div>

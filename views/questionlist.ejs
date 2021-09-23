@@ -46,15 +46,44 @@
             </div>
         </nav> -->
 
-        <h1>Here are the List of Questions : <%=(arr.length)%></h1>
 
-        <div >
+        <!-- <div >
             <ol>
-            <%for(var i=l-1;i>=0;i--){%>
+          
                     <li><a class="hover:text-indigo-500 mt-2" style="text-decoration: underline;" href ="<%=arr[i]%>"><%=locals.user.username%></a></li>
-                <%}%>
+               
             </ol>
+        </div> -->
+      
+        <!-- <h1 class=" font-semibold text-2xl mt-5 ml-60">Here are the List of Questions : <%=(arr.length)%></h1> -->
+        
+<br><br>
+        <div class="flex justify-center items-center -mt-20 h-full lg:h-screen overflow-auto">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+               
+                <%for(var i=l-1;i>=0;i--){%>
+                    <a href="<%=arr[i]%>">
+                <div class="bg-blue-600 pt-1 px-2 bg-gradient-to-b from-indigo-400 to-indigo-500 rounded-xl shadow-lg w-52 transition duration-500 ease-in-out bg-blue-600 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 ...">
+                    <div class="flex justify-center">
+                        <div class="flex justify-center p-4 bg-indigo-300 ring-2 ring-indigo-200 rounded-lg shadow-xl w-32" >
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-white font-semibold"><%=locals.user.name%></p>
+                        <div class="flex justify-between mt-2">
+                            <p class="text-gray-200"><%=i%></p>
+                            <p class="text-white" >Question</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+                <%}%>
+                <!--End Card -->
+            </div>
         </div>
-     
+  
     </body>
 </html> 

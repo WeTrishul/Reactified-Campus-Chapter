@@ -13,11 +13,45 @@
         <%- include('_navbar') -%>
 
 
-        <%for(poll of allPolls){%>
+        <!-- <%for(poll of allPolls){%>
             <ul>
                 <li><a href="/viewPagePoll/<%=poll._id%>"><%=poll.pollName%></a></li>
             </ul>
-            <%}%>
+            <%}%> -->
+
+<!-- component -->
+
+  
+    <div class=" mt-20 w-full bg-gray-300 h-1/2 overflow-auto">
+        <br>
+        <%for(poll of allPolls){%>
+        
+        <div class="flex max-w-sm  w-full bg-indigo-500 shadow-md rounded-lg overflow-hidden mx-auto transition duration-500 ease-in-out cursor-pointer hover:bg-indigo-700  transform hover:-translate-y-1 hover:scale-110 ...">
+            <div class="w-2 bg-indigo-700 ">
+            </div>
+            <a href="/viewPagePoll/<%=poll._id%>">
+            <div class="w-full flex justify-between items-start px-2 py-2">
+                <div class="flex flex-col ml-2">
+                    <label class="text-white font-semibold "><%=poll.pollName%></label>
+                    <p class="text-white ">Poll is live feel free to put your opinion
+                </div>
+                <a href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </a>
+            </div>
+        </a>
+        </div>
+    
+        <br>
+        <%}%>
+    </div>
+ 
+
+
+
+
 
     </body>
 </html>

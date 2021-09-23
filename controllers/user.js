@@ -136,6 +136,11 @@ module.exports.globaleventpage = async (req,res) =>{
 
        var events =  await upcomingEvents.find({})
 
+       if(!events.length)
+       {
+           const temp = await upcomingEvents.create({})
+           events.push(temp)
+       }
        console.log('pura events',events[0])
 
      if(req.params.platform=='CodeForces')
