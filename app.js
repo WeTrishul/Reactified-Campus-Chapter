@@ -22,7 +22,7 @@ const cors = require('cors')
 const User = require('./models/user')
 const Noticleaner = require('./config/Noti_cleaner')
 const globalEventMethods = require('./config/GlobaleventMethods')
-
+const applyrouter = require('./routes/applyRouter')
 
 
 const app=express()
@@ -81,6 +81,7 @@ app.use(TeamChatRouter)
 app.use(pollRouter)
 app.use(BlogsRouter)
 app.use(resourceRouter)
+app.use(applyrouter)
 
 app.use('/uploads',express.static(__dirname + '/uploads'))
 

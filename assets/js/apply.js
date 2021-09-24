@@ -3,59 +3,49 @@
 
     let createPost = function(){
 
+      
+
         let newPostForm = $('#file-form');
 
-        const inpfiles = document.getElementById('multiFiles')
 
         let _id = $('#userid').val()
         
         newPostForm.submit(function(e){
             e.preventDefault();
-            
-            var form_data = new FormData();
-            
-
-            console.log(inpfiles.files)
-
-            for(var f of inpfiles.files)
-            {
-                form_data.append('questions',f)
-            }
-
-            form_data.append('flag',true)
+            console.log('Hiiiiii')
+           
 
        
-            var url = '/fileupload/setquestions/'+_id
+            var url = '/applied/'+_id
             $.ajax({
                 type: 'post',
                 url: url,
-                data: form_data,
-                processData:false,
-                async: true,
-                cache: false,
-          contentType:false,
-          crossDomain:true,
+                data:newPostForm.serialize() ,
                 success: function(data){
                    console.log(data);
-                    if(data.data.done=="yes")
+                    if(data.data.done==="yes")
                     {
 
                     
                     new Noty({
                         theme: 'relax',
-                        text: "Question uploaded!",
+                        text: "Applied Successfully!",
                         type: 'success',
                         layout: 'centerRight',
                         timeout: 1500
                         
                     }).show();
+
                     document.getElementById("file-form").reset();
 
+                    console.log(data)
+
+              
                 }
                 else {
                     new Noty({
                         theme: 'relax',
-                        text: "Only pdf allowed",
+                        text: "Ekbar apply krke shaanti nhi h ?",
                         type: 'error',
                         layout: 'centerRight',
                         timeout: 1500

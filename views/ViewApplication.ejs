@@ -1,0 +1,117 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <style>
+        html,
+        body {
+          height: 100%;
+        }
+      
+        @media (min-width: 640px) {
+          table {
+            display: inline-table !important;
+          }
+      
+          thead tr:not(:first-child) {
+            display: none;
+          }
+        }
+      
+        td:not(:last-child) {
+          border-bottom: 0;
+        }
+      
+        th:not(:last-child) {
+          border-bottom: 2px solid rgba(0, 0, 0, .1);
+        }
+      </style>
+  
+
+</head>
+<body class="bg-gray-200">
+    
+<!-- component -->
+<%- include('_navbar') -%>
+
+
+
+
+<!----------------------------###################  Navbar ends  ###############------------------------------------------------>
+
+<!----------------------------###################  ------------  ###############------------------------------------------------>
+
+<!----------------------------###################  Table starts  ###############------------------------------------------------>
+
+
+<body class="flex items-center justify-center">
+	<div class="bg-gray-200">
+
+    <!-- component -->
+<div class="w-2/3 mx-auto">
+  <div class="bg-white shadow-md rounded my-6">
+        <%for(i of arr){%> 
+        <!-- component -->
+        <div id="rolereq-<%=i.userid._id%>">
+    <a href="/profilepage/<%=i.userid.username%>" >
+      <div class="flex flex-col p-8 bg-white shadow-md hover:shodow-lg rounded-2xl">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            
+            <img src="<%=i.userid.dp%>" alt="avatar"
+              class="w-16 h-16 rounded-2xl p-3 border border-blue-100 text-blue-400 bg-blue-50">
+            <div class="flex flex-col ml-3">
+              <div class="font-medium leading-none"><%=i.userid.username%></div>
+              <p class="text-sm text-gray-600 leading-none mt-1"><%=i.appliedRole%>
+              </p>
+            </div>
+          </div>
+          <div>
+    
+          <%if((locals.user) && locals.user.UserType=='Admin'){%>
+            <a href="<%=i.link1%>"><button  class="flex-no-shrink text-blue-400 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider  text-white rounded-full">Link</button></a>
+
+        
+        <a class="accept-user" href="/accept/<%=i.appliedRole%>/<%=i.userid.id%>" > <button  class="flex-no-shrink bg-green-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-500 text-white rounded-full">Accept</button></a> 
+            
+        <a class="delete-user" href="/reject/<%=i.appliedRole%>/<%=i.userid.id%>" ><button  class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Delete</button></a>
+        
+
+        <%}%>
+        </div>
+        </div>
+      </div>
+    </a>
+</div>
+      <br> 
+        <%}%>        
+	</div>
+</body>
+
+  
+  <!-- Priviledge Conditions
+  Resource Upload Page 
+  Change roles
+  user update page 
+  others profile 
+  Add proper view to question list
+
+-->
+
+
+</div>
+<script src='/js/viewapplication.js' ></script>
+<script src='/js/Noty.js' ></script>
+</body>
+</html>

@@ -48,12 +48,14 @@
                     {
                     new Noty({
                         theme: 'relax',
-                        text: "Question uploaded!",
+                        text: "Resource uploaded!",
                         type: 'success',
                         layout: 'centerRight',
                         timeout: 1500
                         
                     }).show();
+                    document.getElementById("file-form").reset();
+
                 }
                 else {
                     new Noty({

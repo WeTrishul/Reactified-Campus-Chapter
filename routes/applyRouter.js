@@ -15,5 +15,8 @@ router.post('/applied/:id',passport.checkAuthentication,applyController.appliedF
 
 //Admin Routes
 router.get('/applications',passport.checkAuthentication,applyController.viewApplications)
-router.post('/accept/:id',passport.checkAuthentication,applyController.accept)
-router.post('/reject/:id',passport.checkAuthentication,applyController.reject)
+router.get('/accept/:role/:id',passport.checkAuthentication,applyController.accept)
+router.get('/reject/:role/:id',passport.checkAuthentication,applyController.reject)
+
+
+module.exports = router
