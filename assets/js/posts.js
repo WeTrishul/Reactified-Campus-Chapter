@@ -50,7 +50,7 @@
                <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src="${ post.userid.dp }" alt="avatar">
                <div class="">
                   <div class="flex items-center justify-between">
-                     <h2 class="text-lg font-semibold text-gray-900 -mt-1">${ post.userid.name } </h2>
+                     <h2 class="text-lg font-semibold text-gray-900 -mt-1">${ post.userid.username } </h2>
                     
                   </div>
                   <p class="mt-3 text-gray-700 text-sm">
@@ -60,7 +60,7 @@
                   <div class="mt-4 flex items-center">
                   
                       
-                    <a class="toggle-like-button" data-likes="0" href="/Likehandler/?id=${ post._id }&type=Post" class='toggle-like-button'>
+                    <a class="toggle-like-button" data-likes="0" href="/Likehandler/?id=${ post._id }&type=post" class='toggle-like-button'>
                      
                         
                     ${ post.likes.length } likes

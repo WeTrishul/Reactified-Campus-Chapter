@@ -96,7 +96,7 @@ module.exports.deletepost = (req,res)=>{
     Post.findById(req.params.id,async (error,post)=>{
         if(req.user.id==post.userid || req.user.UserType=='Admin')
         {
-            await Like.deleteMany({likeable:post._id,onModel:'Post'})
+            await Like.deleteMany({likeable:post._id,onModel:'post'})
             await Like.deleteMany({likeable:{$in:post.comments}})
             post.remove()
             await Comment.deleteMany({postid:req.params.id})
@@ -132,7 +132,7 @@ module.exports.deletecomment = (req,res)=>{
                 Post.findByIdAndUpdate(postid,{$pull : {comments:req.params.id}},(error,post)=>{
                     // return res.redirect('back')
                 })
-                await Like.deleteMany({likeable:comment._id,onModel:'Comment'})
+                await Like.deleteMany({likeable:comment._id,onModel:'comment'})
     
                 if (req.xhr){
                     console.log('aagya')
@@ -164,7 +164,7 @@ module.exports.likehandler= async (req,res)=>{
         var likeable
         let deleted = false;
 
-    if(req.query.type=='Post')
+    if(req.query.type=='post')
     {
         likeable=await Post.findById(req.query.id).populate('likes');
     }else
@@ -200,13 +200,14 @@ module.exports.likehandler= async (req,res)=>{
         likeable.save()
     }
     const likeablepop = await  likeable.populate('userid').execPopulate()
-   
+   console.log(likeable._id)
     return res.json(200, {
         message: "Request successful!",
         data: {
             deleted: deleted,
             likeableowner:likeablepop.userid.username,
-            likeabletype:req.query.type
+            likeabletype:req.query.type,
+            likeable:likeable._id
         }
     })
 

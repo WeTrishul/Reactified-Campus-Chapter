@@ -28,10 +28,11 @@ module.exports.notification = (socketserver) =>{
               msg : data.from+' ' + data.msg,
               placetogo:data.placetogo
             }
+            console.log(data.placetogo)
              user[0].Notifications.push(notific)
             user[0].seenAllNotifications='no'
              user[0].save()
-            io.in(data.to).emit('notification',data.from+' ' + data.msg)
+            io.in(data.to).emit('notification',notific)
           
         } catch (error) {
           console.log(error)

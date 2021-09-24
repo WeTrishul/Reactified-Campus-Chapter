@@ -67,7 +67,7 @@
 <div id="posts-list-container">
   
 
-<% for(post of posts){ %>
+<% for(post of posts.reverse()){ %>
   <div id="post-<%= post._id %>">
         <div class=" bg-gray-200 shadow-lg rounded-lg  md:max-w-2xl ">
             <div class="flex items-start px-4 py-6">
@@ -84,7 +84,7 @@
                   <div class="mt-4 flex items-center">
                     <%if(locals.user) {%>
                       
-                    <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/Likehandler/?id=<%= post.id %>&type=Post">
+                    <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/Likehandler/?id=<%= post.id %>&type=post">
                      <!-- <div class="flex mr-2 text-gray-700 text-sm mr-3">
                         <svg fill="none" viewBox="0 0 24 24"  class="w-4 h-4 mr-1" stroke="currentColor">
                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
@@ -145,7 +145,7 @@
                   <div class="flex justify-start items-center text-xs w-full">
                     <div class="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
                       <%if(locals.user) {%>
-                      <a class="toggle-like-button hover:underline" data-likes="<%= comment.likes.length %>" href="/Likehandler/?id=<%= comment.id %>&type=Comment"  >
+                      <a class="toggle-like-button hover:underline" data-likes="<%= comment.likes.length %>" href="/Likehandler/?id=<%= comment.id %>&type=comment"  >
                         <%=comment.likes.length%> likes
                       </a>
                       <%}%>  
@@ -267,8 +267,8 @@ class ToggleLike{
 
                 if(data.data.deleted==false && notifier.notifieruser!=data.data.likeableowner)
                 {
-                
-                notifier.notify(data.data.likeableowner,'liked your ' + data.data.likeabletype,data.data.likeabletype)
+                let linktonoti = '/Discuss/#'+data.data.likeabletype+'-'+data.data.likeable
+                notifier.notify(data.data.likeableowner,'liked your ' + data.data.likeabletype,linktonoti)
                 }
 
             })

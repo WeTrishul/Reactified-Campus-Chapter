@@ -31,7 +31,7 @@ class PostComments{
                 success: function(data){
                   
                     let newComment = pSelf.newCommentDom(data.data.comment);
-                    $(`#post-comments-${postId}`).prepend(newComment);
+                    $(`#post-comments-${postId}`).append(newComment);
                     pSelf.deleteComment($('.delete-comment-button', newComment));
                     new ToggleLike($(' .toggle-like-button', newComment));
 
@@ -53,7 +53,8 @@ class PostComments{
 
 
                   // const notifier = new Notihandler(data.data.comment.userid.username)
-                  notifier.notify(data.data.postuser,'commented on your post','comment')
+                  let linktonoti = '/Discuss/#comment-'+data.data.comment._id
+                  notifier.notify(data.data.postuser,'commented on your post',linktonoti)
 
                   
 
@@ -100,7 +101,7 @@ class PostComments{
                  <div class="flex justify-start items-center text-xs w-full">
                    <div class="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
                     
-                     <a class="toggle-like-button hover:underline" data-likes="0" href="/Likehandler/?id=${ comment._id }&type=Comment" >
+                     <a class="toggle-like-button hover:underline" data-likes="0" href="/Likehandler/?id=${ comment._id }&type=comment" >
                      ${ comment.likes.length } likes
                      </a>
                    
