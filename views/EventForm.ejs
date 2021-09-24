@@ -31,18 +31,27 @@
 
     
 
-        <form action="/CreateEvent" method="POST" enctype="multipart/form-data">
-            <input type="file" name="eventbanner" required="true"><br><br>
-            <input class="border-2 border-black p-4" type="text" name="eventname" placeholder="Event Name" > <br><br>
-            <input class="border-2 border-black p-4" type="text" name="aboutevent" placeholder="About Event" style="height: 100px;width: 500px;"><br><br>
-            <input class="border-2 border-black p-4" type="text" name="eventStartTime" placeholder="Start Time"><br><br>
-            <input class="border-2 border-black p-4" type="text" name="eventEndTime" placeholder="End Time"><br><br>
-            <input class="border-2 border-black p-4" type="text" name="eventDate" placeholder="Event Date"><br><br>
-            <input class="border-2 border-black p-4" type="submit" value="Create">
+        <form action="/CreateEvent" method="POST" id="file-form" enctype="multipart/form-data">
+            <input type="file" name="eventbanner" id="multiFiles" required="true"><br><br>
+            <input type="hidden" value="<%=locals.user._id%>" id="userid">
+            <input class="border-2 border-black p-4" id="a" type="text" name="eventname" placeholder="Event Name" > <br><br>
+            <input class="border-2 border-black p-4" id="b" type="text" name="aboutevent" placeholder="About Event" style="height: 100px;width: 500px;"><br><br>
+            <input class="border-2 border-black p-4" id="c" type="text" name="eventStartTime" placeholder="Start Time"><br><br>
+            <input class="border-2 border-black p-4" id="d" type="text" name="eventEndTime" placeholder="End Time"><br><br>
+            <input class="border-2 border-black p-4" id="e" type="text" name="eventDate" placeholder="Event Date"><br><br>
+            <input id="fm" class="border-2 border-black p-4" type="submit" value="Create">
            
 
         </form>
         <%}%>
     </div>
+
+
+
+
+
+
+
+    <script src="/js/events.js"></script>
     </body>
 </html>

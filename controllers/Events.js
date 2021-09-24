@@ -23,12 +23,28 @@ module.exports.createevent = async (req,res)=>{
     try{
         // console.log(req.file.filename)
 
-
+        
         var dest
       Event.uploadBanner(req,res,async function(error){
+
+        console.log(req.body)
+
+        try {
+
             if(error)
             {
-                console.log('Error aaya '+error)  
+                console.log('Error aaya '+error)
+                
+                if (req.body){
+                
+                    console.log('yahan aagya')
+                    return res.status(200).json({
+                        data: {
+                            done: 'no'
+                        },
+                        message: "nhi hua!"
+                    });
+                }
             }
            if(req.file)
            { 
@@ -38,7 +54,7 @@ module.exports.createevent = async (req,res)=>{
                 dest = path
                 console.log('HI')   
            }
-           await Event.create({
+          const eve =  await Event.create({
             creatorid:req.user._id,
             eventname:req.body.eventname,
             aboutevent:req.body.aboutevent,
@@ -47,7 +63,29 @@ module.exports.createevent = async (req,res)=>{
             eventDate:req.body.eventDate,
             eventbanner: dest  
         })
-        return res.redirect('/UpcomingEvents')
+
+        if (req.body.flag){
+                
+            console.log('yahan aagya')
+            return res.status(200).json({
+                data: {
+                    done: 'yes',
+                    eventid:eve._id,
+                    eventname:eve.eventname,
+                    eventdate:eve.eventDate
+                },
+                message: "uploaded!"
+            });
+        }
+            
+        } catch (error) {
+
+            console.log(error)
+            return res.redirect('/UpcomingEvents')
+            
+        }
+           
+        // return res.redirect('/UpcomingEvents')
         })   
 
 

@@ -38,6 +38,8 @@ class NotiEngine{
 
                     let currcoti = $('#notis')
 
+                    $('#nothing').remove()
+
                     currcoti.prepend('<a href="'+data.placetogo +'" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2"><img class="h-8 w-8 rounded-full object-cover mx-1" src="https://cdn.staticcrate.com/stock-hd/effects/footagecrate-4k-bell-icon-prev-full.png" alt="avatar"><p class="text-gray-600 text-sm mx-2"><span class="font-bold" href="#">'+data.msg +'</span></p></a>')
                     
 

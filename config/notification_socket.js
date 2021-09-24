@@ -20,19 +20,44 @@ module.exports.notification = (socketserver) =>{
         
       socket.on('notify',async(data)=>{
         try {
+          if(!data.to)
+          {
+            // notifying all users
 
-          console.log('hello ')
-            const user = await User.find({username:data.to})
-            console.log(user[0].name)
+            console.log('hello ')
+            const user = await User.find({})
             const notific = {
-              msg : data.from+' ' + data.msg,
+              msg : data.msg,
               placetogo:data.placetogo
             }
-            console.log(data.placetogo)
-             user[0].Notifications.push(notific)
-            user[0].seenAllNotifications='no'
-             user[0].save()
-            io.in(data.to).emit('notification',notific)
+            user.forEach((user)=>{
+               user.Notifications.push(notific)
+              user.seenAllNotifications='no'
+               user.save()
+            })
+
+            io.emit('notification',notific)
+
+          }
+
+          else{
+
+             // notifying specific users
+          console.log('hello ')
+          const user = await User.find({username:data.to})
+          console.log(user[0].name)
+          const notific = {
+            msg : data.from+' ' + data.msg,
+            placetogo:data.placetogo
+          }
+          console.log(data.placetogo)
+           user[0].Notifications.push(notific)
+          user[0].seenAllNotifications='no'
+           user[0].save()
+          io.in(data.to).emit('notification',notific)
+            
+          }
+
           
         } catch (error) {
           console.log(error)
