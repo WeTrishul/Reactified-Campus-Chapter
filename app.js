@@ -29,6 +29,9 @@ const applyrouter = require('./routes/applyRouter')
 
 
 const app=express()
+require('./config/view-helpers')(app)
+
+
 app.use(cors({
     origin:'*'
 }))
