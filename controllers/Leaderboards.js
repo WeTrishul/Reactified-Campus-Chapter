@@ -15,6 +15,12 @@ module.exports.leaderboards= async (req,res)=>{
 
 
     try {
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
+
         const leaderBoards = await Leaderboards.find({}).populate('userid').exec()
 
         
@@ -26,12 +32,5 @@ module.exports.leaderboards= async (req,res)=>{
     } catch (error) {
         res.redirect('back')
     }
-
-
-    /*Leaderboards.find({}).populate('userid').exec((error,lboards)=>{
-        return res.render('Leaderboards',{
-            leaderboard:lboards
-        })
-    })*/
 
 }

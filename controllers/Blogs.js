@@ -18,6 +18,12 @@ const fs =require('fs')
 module.exports.allblogs = async (req,res) =>{
 
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
         const allblogs = await Blog.find({}).populate('userid')
        
        
@@ -35,6 +41,12 @@ module.exports.allblogs = async (req,res) =>{
 }
 
 module.exports.blogform = async (req,res) =>{
+
+    if(!req.isAuthenticated())
+    {
+      return   res.redirect('/login')
+    }
+
     res.render('blogform',{
         blog:undefined
     })
@@ -43,6 +55,11 @@ module.exports.blogform = async (req,res) =>{
 module.exports.editblogform = async (req,res) =>{
 
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
 
         const blog = await Blog.findById(req.query.id,req.body)
         
@@ -59,6 +76,12 @@ module.exports.saveblog = async (req,res) =>{
     // console.log(req.body)
 
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
         await Blog.create(req.body)
         res.redirect('/Allblogs')
     } catch (error) {
@@ -69,6 +92,12 @@ module.exports.saveblog = async (req,res) =>{
 
 module.exports.showblog = async (req,res) =>{
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
         const blog = await Blog.findById(req.params.id).populate('userid')
         
         console.log(blog)
@@ -83,6 +112,12 @@ module.exports.showblog = async (req,res) =>{
 
 module.exports.deleteblog =  async (req,res) =>{
     try {
+
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
        
         const blog = await Blog.findById(req.params.id)
         if(req.user.id==blog.userid)
@@ -102,6 +137,11 @@ module.exports.deleteblog =  async (req,res) =>{
 
 module.exports.editblog =  async (req,res) =>{
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
        
         const blog = await Blog.findByIdAndUpdate(req.params.id,req.body)
         blog.save()

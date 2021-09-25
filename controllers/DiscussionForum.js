@@ -15,22 +15,34 @@ const startingTime = require('../config/timecalc')
 
 module.exports.discuss = (req,res)=>{
 
-
-    Post.find({}).populate('userid').populate({
-        path:'comments',
-        populate:{
-            path:'userid'
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
         }
-    }).exec((error,posts)=>{
-        // console.log(posts)
-        return res.render('DiscussionForum',{
-            posts:posts
-        })
-    })
-    
+        else
+        {
+            Post.find({}).populate('userid').populate({
+                path:'comments',
+                populate:{
+                    path:'userid'
+                }
+            }).exec((error,posts)=>{
+                // console.log(posts)
+                return res.render('DiscussionForum',{
+                    posts:posts
+                })
+            })
+        }
+
 }
 
 module.exports.postit =  (req,res)=>{
+
+
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
     
     Post.create({
         userid:req.user._id,
@@ -58,6 +70,12 @@ module.exports.postit =  (req,res)=>{
 }
 
 module.exports.commentit = (req,res)=>{
+
+
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
 
         Post.findById(req.body.postid, (error,post)=>{
             if(post)
@@ -93,6 +111,13 @@ module.exports.commentit = (req,res)=>{
 
 
 module.exports.deletepost = (req,res)=>{
+
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
+
     Post.findById(req.params.id,async (error,post)=>{
         if(req.user.id==post.userid || req.user.UserType=='Admin')
         {
@@ -120,6 +145,12 @@ module.exports.deletepost = (req,res)=>{
 }
 
 module.exports.deletecomment = (req,res)=>{
+
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
     Comment.findById(req.params.id,async (error,comment)=>{
 
         try {
@@ -160,6 +191,11 @@ module.exports.deletecomment = (req,res)=>{
 
 module.exports.likehandler= async (req,res)=>{
     try{
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
        
         var likeable
         let deleted = false;

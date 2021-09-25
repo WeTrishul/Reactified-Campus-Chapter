@@ -351,7 +351,10 @@ module.exports.listUsers = async (req,res)=>{
 module.exports.delete = async(req,res)=>{
     const username = req.params.username
     try {
-        const user = await User.findOne({username:username})
+
+        if(req.isAuthenticated())
+        {
+            const user = await User.findOne({username:username})
         if(user.UserType==='Admin')
         {
             return res.redirect('/listUsers')
@@ -366,6 +369,10 @@ module.exports.delete = async(req,res)=>{
         
         console.log(user)
         return res.redirect('/listUsers')
+        }
+        else
+        res.redirect('/login')
+        
     } catch (error) {
          console.log('Error from delete',error)
          res.render('error_page')
@@ -373,9 +380,18 @@ module.exports.delete = async(req,res)=>{
 }
 
 module.exports.changeRole = async(req,res)=>{
-    const user = await User.findOne({username:req.query.username})
-    console.log('User from changeRole',user)
+
+
+    
     try {
+
+        if(!req.isAuthenticated())
+        {
+            res.redirect('/login')
+        }
+
+        const user = await User.findOne({username:req.query.username})
+        console.log('User from changeRole',user)
         if(req.query.role==='events')
             {
                 user.UserType='Events Lead'
@@ -399,10 +415,17 @@ module.exports.changeRole = async(req,res)=>{
 }
 
 module.exports.listUserQuestions = async (req,res)=>{
-    const _id = req.params.id
-    const user = await User.findById(_id)
+   
 
     try {
+        if(!req.isAuthenticated())
+        {
+            res.redirect('/login')
+        }
+
+        const _id = req.params.id
+        const user = await User.findById(_id)
+
         const arr = user.arr;
         res.render('questionlist',{
             title:'question list',

@@ -28,6 +28,12 @@ const apply = require('../models/apply')
 module.exports.viewApplyForm =async (req,res)=>{
 
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
         res.render('ApplicationForm')
     } catch (error) {
         res.render('error_page')
@@ -37,6 +43,12 @@ module.exports.viewApplyForm =async (req,res)=>{
 
 module.exports.appliedForm=async (req,res)=>{
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
     console.log(req.body)
     const id =req.params.id
     // console.log(id)
@@ -93,9 +105,16 @@ module.exports.appliedForm=async (req,res)=>{
 }
 
 module.exports.viewApplications = async(req,res)=>{
-    const AllUsers = await apply.find({}).populate('userid')
 
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
+        const AllUsers = await apply.find({}).populate('userid')
+
         res.render('ViewApplication',{
             arr:AllUsers,
             l:AllUsers.length
@@ -107,12 +126,21 @@ module.exports.viewApplications = async(req,res)=>{
 
 
 module.exports.accept = async(req,res)=>{
-    const id = req.params.id
-    const appliedUser =  await User.findById(id)
-    const role=req.params.role
-
-    // console.log(appliedUser)
+    
     try {
+
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
+
+        const id = req.params.id
+        const appliedUser =  await User.findById(id)
+         const role=req.params.role
+
+
         if(appliedUser.UserType=='Student')
         {
             console.log('done')
@@ -159,10 +187,18 @@ module.exports.accept = async(req,res)=>{
 }
 
 module.exports.reject = async(req,res)=>{
-    const id = req.params.id
-    const appliedUser =  await User.findById(id)
-    // const role=req.body.role
+    
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+        
+
+        const id = req.params.id
+        const appliedUser =  await User.findById(id)
+
             const selectedUser = await apply.deleteOne({userid:id})
 
             if (req.xhr){
@@ -175,8 +211,6 @@ module.exports.reject = async(req,res)=>{
                     message: "user deleted"
                 });
             }
-
-            // res.redirect('back')
     } catch (error) {
         res.render('error_page')
         console.log('error_page')

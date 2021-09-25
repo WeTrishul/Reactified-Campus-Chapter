@@ -3,6 +3,12 @@ const poll = require('../models/poll')
 const User = require('../models/user')
 
 module.exports.getPoll = (req,res)=>{
+
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
     return res.render('poll',{
         title: 'Create your poll'
     })
@@ -10,6 +16,12 @@ module.exports.getPoll = (req,res)=>{
 
 module.exports.savePoll = async (req,res)=>{
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return  res.redirect('/login')
+        }
+
         const newPoll = new poll(req.body)
         console.log('poll saved successfully')
         const savedPoll = await newPoll.save()
@@ -29,6 +41,12 @@ module.exports.savePoll = async (req,res)=>{
 
 module.exports.showPollPage =async (req,res)=>{    
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
         const findPoll = await poll.findById(req.params.id)
         res.render('pollPageView',{
             myPoll:findPoll,
@@ -44,10 +62,18 @@ module.exports.showPollPage =async (req,res)=>{
 
 
 module.exports.storeUserResponse = async (req,res)=>{
-    const _id = req.params.id
-    console.log(_id)
+    
 
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
+        const _id = req.params.id
+        console.log(_id)
+
         const PollName = await poll.findById(req.body.pollID)
         const option = req.body.Option
         console.log(option)
@@ -115,6 +141,12 @@ module.exports.showAllPolls = async (req,res)=>{
 
     
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
         const allPolls = await poll.find({})
         console.log(allPolls)
 

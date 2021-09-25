@@ -20,10 +20,11 @@ module.exports.eventform = (req,res)=>{
 
 module.exports.createevent = async (req,res)=>{
     
-    try{
-        // console.log(req.file.filename)
-
-        
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+    try{        
         var dest
       Event.uploadBanner(req,res,async function(error){
 
@@ -106,6 +107,13 @@ module.exports.createevent = async (req,res)=>{
 module.exports.registerForTheEvent = async (req,res) =>{
     try{
         // console.log(req.query.id)
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
+
         var currevent= await Event.findById(req.query.id)
         
         var arr = []
@@ -129,6 +137,11 @@ module.exports.registerForTheEvent = async (req,res) =>{
 }
 
 module.exports.editeventform = async (req,res) =>{
+
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
     
     var event = await Event.findById(req.query.id)
 
@@ -140,7 +153,11 @@ module.exports.editeventform = async (req,res) =>{
 
 module.exports.updateevent = async(req,res)=>{
     try{
-        
+     
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
        
 
         Event.uploadBanner(req,res,async(error)=>{
@@ -171,9 +188,6 @@ module.exports.updateevent = async(req,res)=>{
            
         return res.redirect('/UpcomingEvents')
         })     
-
-     
-
     }catch(error){
         console.log(error)
         return res.redirect('back')
@@ -184,17 +198,17 @@ module.exports.updateevent = async(req,res)=>{
 module.exports.deleteevent = async (req,res)=>{
     try{
 
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
     var currevent = await Event.findById(req.query.id,(error,eve)=>{
         console.log(eve.eventname)
         fs.unlinkSync(path.join(__dirname,'..',eve.eventbanner))
         eve.remove()
         return res.redirect('/UpcomingEvents')
-    })
-    
-    // await Event.findByIdAndDelete(req.query.id)
-  
-
-    
+    })  
 
     }catch(error){
         console.log(error)
@@ -205,6 +219,12 @@ module.exports.deleteevent = async (req,res)=>{
 
 
 module.exports.eventpage = async (req,res) =>{
+
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
     console.log(req.params.eventname)
     var curreve = await Event.findOne({eventname:req.params.eventname})
 

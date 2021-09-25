@@ -4,7 +4,7 @@ const dotenv = require('dotenv')
 
 const path = require('path')
 
-dotenv.config()
+
 
 const logDirectory = path.join(__dirname,'../production_logs')
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
@@ -39,7 +39,7 @@ const development = {
     }
 }
 
-
+dotenv.config()
 
 const production = {
     name:'production',
@@ -68,4 +68,4 @@ const production = {
 
 console.log(eval(process.env.NODE_ENV))
 
-module.exports = eval(process.env.CAMPUS_CHAPTER_ENVIRONMENT) === undefined ? development : eval(process.env.CAMPUS_CHAPTER_ENVIRONMENT)
+module.exports = development //eval(process.env.CAMPUS_CHAPTER_ENVIRONMENT) === undefined ? development : eval(process.env.CAMPUS_CHAPTER_ENVIRONMENT)

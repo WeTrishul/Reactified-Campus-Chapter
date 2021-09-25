@@ -13,6 +13,12 @@ const path=require('path')
 const fs =require('fs')
 
 module.exports.getresoursePage = async(req,res)=>{
+
+    if(!req.isAuthenticated())
+        {
+      return   res.redirect('/login')
+    }
+
     const category = req.params.category
     let cat_data = await resourses.find({})
 
@@ -67,6 +73,12 @@ module.exports.getresoursePage = async(req,res)=>{
 
 
 module.exports.getuploadPage =  (req,res)=>{
+
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+       }
+
     res.render('viewUploadPage',{
         title:'hello'
     })
@@ -75,6 +87,12 @@ module.exports.getuploadPage =  (req,res)=>{
 module.exports.postresourses = async(req,res)=>{
         
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
         var paths,arr=[];
         resourses.uploadedResources(req,res,async function(error){
 

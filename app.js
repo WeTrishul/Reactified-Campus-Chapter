@@ -1,5 +1,7 @@
 const express = require('express')
 const Env = require('./config/environment')
+const app=express()
+require('./config/view-helpers')(app)
 const session = require('express-session')
 const logger = require('morgan')
 const ejs = require('ejs')
@@ -28,8 +30,7 @@ const applyrouter = require('./routes/applyRouter')
 
 
 
-const app=express()
-require('./config/view-helpers')(app)
+
 
 
 app.use(cors({

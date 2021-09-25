@@ -25,10 +25,17 @@ else
 }
 
 module.exports.upload = async(req,res)=>{
-    const _id = req.params.id
-    let user = await User.findOne({_id})
+    
     
     try {
+
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
+        const _id = req.params.id
+        let user = await User.findOne({_id})
         
         var paths,arr=[];
         User.uploadedQuestions(req,res,async function(error){
@@ -93,16 +100,8 @@ module.exports.upload = async(req,res)=>{
                 res.render('error_page')
         }
         })     
-     /* res.render('questionlist',{
-           title:'question list',
-           l: user.arr.length,
-           arr: user.arr
-       }) */ 
-
-    //    res.redirect('/fileupload')
     }catch (error) {
         console.log('Error'+error)
-        //res.redirect('/dashboard')
         res.render('error_page')
     }
 }
@@ -112,6 +111,11 @@ module.exports.upload = async(req,res)=>{
 
 module.exports.profile = async(req,res)=>{
 
+        if(!req.isAuthenticated())
+            {
+            return res.redirect('/login')
+            }
+
             res.render('profile',{
                 title:'Profile Page',
                 user:req.user
@@ -119,6 +123,13 @@ module.exports.profile = async(req,res)=>{
     }
 
 module.exports.uploadDp = async(req,res)=>{
+
+
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
     const _id = req.params.id
     let user = await User.findOne({_id})
     try {
@@ -156,21 +167,5 @@ module.exports.uploadDp = async(req,res)=>{
     }
 }
 
-
-/*module.exports.listQuestions = (req,res)=>{
-    const id = req.params.id
-    const user = User.findById({_id:id})
-
-    try {
-            res.render('questionlist',{
-                title:'question list',
-                paths: user.arr
-            })
-        }
-     catch (error) {
-        res.redirect('back')
-    }
-
-}*/
 
 
