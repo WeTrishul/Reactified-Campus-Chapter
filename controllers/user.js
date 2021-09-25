@@ -364,16 +364,16 @@ module.exports.changeRole = async(req,res)=>{
     try {
         if(req.query.role==='events')
             {
-                user.UserType='Events Lead'
+                user.UserType='EventsLead'
                 await user.save();
          }
          else if(req.query.role==='questionsetter')
          {
-            user.UserType='Question Setter'
+            user.UserType='QuestionSetter'
             await user.save();
          }
          else{
-            user.UserType='Media Lead'
+            user.UserType='MediaLead'
             await user.save();
          }
          return res.redirect('/listUsers')

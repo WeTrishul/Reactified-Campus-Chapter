@@ -8,7 +8,7 @@
         newPostForm.submit(function(e){
             e.preventDefault();
 
-            document.getElementById('new-post-form').reset()
+            // document.getElementById('new-post-form').reset()
             
 
             $.ajax({

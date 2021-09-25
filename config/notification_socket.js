@@ -46,6 +46,12 @@ module.exports.notification = (socketserver) =>{
           console.log('hello ')
           const user = await User.find({username:data.to})
           console.log(user[0].name)
+          const str = data.msg
+          if(str[2]=='n')
+          {
+              data.from = ''
+          }
+        
           const notific = {
             msg : data.from+' ' + data.msg,
             placetogo:data.placetogo

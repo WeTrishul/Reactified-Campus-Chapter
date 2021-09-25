@@ -261,16 +261,15 @@
 <div class="container">
   <div class="table">
     <div class="heading">
-      <h1>All Users</h1>
     </div>
    
   </div>
   <table>
     <thead>
-      <th>username</th>
-      <th>role</th>
+      <th class="bg-indigo-500">username</th>
+      <th class="bg-indigo-500">role</th>
       
-      <th>Action</th>
+      <th class="bg-indigo-500">Action</th>
     </thead>
     <tbody>
       <%for(u of users){%> 
@@ -282,6 +281,9 @@
         <td data-label="Action">
           <%if((locals.user) && locals.user.UserType=='Admin'){%>
 
+			<%if((locals.user) && u.UserType=='QuestionSetter'){%>
+				<a  href="/seeQ/<%= u._id %>" ><button  class="flex-no-shrink bg-green-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2  text-white rounded-full">View Ques</button></a>
+				<%}%>  
             
           <a  href="/delete/<%= u.username %>" ><button  class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Delete</button></a>
           <%}%>  
