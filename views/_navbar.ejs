@@ -147,7 +147,8 @@
     const notifier = new Notihandler('<%=user.username%>')
 
     $('#bll').click(()=>{
-     
+    
+      $("#bll").css("fill", '#000000')
       if('<%=locals.user.seenAllNotifications%>'!='yes')
       {
         console.log('hi')

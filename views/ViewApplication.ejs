@@ -13,31 +13,164 @@
 
 
     <!-- <link rel="stylesheet" href="index.css"> -->
-    <style>
-        html,
-        body {
-          height: 100%;
-        }
-      
-        @media (min-width: 640px) {
-          table {
-            display: inline-table !important;
-          }
-      
-          thead tr:not(:first-child) {
-            display: none;
-          }
-        }
-      
-        td:not(:last-child) {
-          border-bottom: 0;
-        }
-      
-        th:not(:last-child) {
-          border-bottom: 2px solid rgba(0, 0, 0, .1);
-        }
-      </style>
   
+  <style>
+    *{
+			margin:0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body{
+			background-color: #e4ecf0;
+		}
+		.container{
+			width: 70%;
+			margin:2rem auto;
+		}
+		.table{
+			width: 100%;
+			padding:1rem 20px;
+			display: flex;
+			justify-content: space-between; 
+		}
+		.heading{
+			flex-basis: 50%;
+			text-align: left;
+
+		}
+		h1{
+			font-size: 2.5rem;
+			font-weight: 900;
+			color: forestgreen;
+			text-shadow: 1px 2px 1px #fff;
+			font-family: sans-serif;
+
+		}
+		.search-box{
+			flex-basis: 20%;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			position: relative;
+			padding-right: 3px;
+		}
+		input{
+			width: 0;
+			height: 50px;
+			border:none;
+			outline: none;
+			background-color: #fff;
+			color: green;
+			font-size: 20px;
+			padding:0px 20px;
+			box-shadow: 0 0 15px 1px #b6bbc0;
+			transition: 1s linear;
+			border-radius: 50px;
+
+		}
+
+		.search-btn{
+			position: absolute;
+			top:50%;
+			transform: translateY(-50%);
+			right: 0;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background-color: forestgreen;
+
+		}
+
+		.fas{
+			position: absolute;
+			top:50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			color: #fff;
+			font-size: 20px; 
+		}
+
+		.active{
+			width: 100%;
+		}
+
+		table{
+			width: 100%;
+			border-collapse: collapse;
+			text-align: center;
+		}
+
+		th,td{
+			padding: 1rem 20px;
+			border:1px solid #bbb;
+		}
+
+		th{
+			font-size: 15px;
+			font-weight: bold;
+			color: #fff;
+			background-color: forestgreen;
+			font-family: sans-serif;
+
+		}
+		td{
+			font-size: 18px;
+			font-family: sans-serif;
+			font-weight: lighter;
+
+		}
+
+		thead th:nth-child(1){
+			padding:1rem 5px;
+		}
+
+		tbody tr:nth-child(even){
+			background-color: #f5f5f5;
+		}
+		tbody tr:nth-child(odd){
+			background-color: #fff;
+		}
+
+		@media(max-width: 500px){
+			.container{
+				width: 90%
+			}
+			.table{
+				flex-direction: column-reverse;
+			}
+			.heading{
+				width: 100%;
+				text-align:center;
+			}
+			.search-box{
+				width: 100%;
+				margin-bottom: 10px;
+			}
+			thead{
+				display: none;
+			}
+			tbody,tr,td{
+				display: block;
+				width: 100%;
+			}
+			tr{
+				margin-bottom: 2rem;
+			}
+			td{
+				text-align:right;
+				position: relative;
+			}
+			td:before{
+				content: attr(data-label);
+				position: absolute;
+				left: 5px;
+				font-weight: bold;
+				color: #000;
+				font-size: 15px;
+
+			}
+		}
+  </style>
 
 </head>
 <body class="bg-gray-200">
@@ -56,48 +189,8 @@
 
 
 <body class="flex items-center justify-center">
-	<div class="bg-gray-200">
 
-    <!-- component -->
-<div class="w-2/3 mx-auto">
-  <div class="bg-white shadow-md rounded my-6">
-        <%for(i of arr){%> 
-        <!-- component -->
-        <div id="rolereq-<%=i.userid._id%>">
-    <a href="/profilepage/<%=i.userid.username%>" >
-      <div class="flex flex-col p-8 bg-white shadow-md hover:shodow-lg rounded-2xl">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            
-            <img src="<%=i.userid.dp%>" alt="avatar"
-              class="w-16 h-16 rounded-2xl p-3 border border-blue-100 text-blue-400 bg-blue-50">
-            <div class="flex flex-col ml-3">
-              <div class="font-medium leading-none"><%=i.userid.username%></div>
-              <p class="text-sm text-gray-600 leading-none mt-1"><%=i.appliedRole%>
-              </p>
-            </div>
-          </div>
-          <div>
-    
-          <%if((locals.user) && locals.user.UserType=='Admin'){%>
-            <a href="<%=i.link1%>"><button  class="flex-no-shrink text-blue-400 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider  text-white rounded-full">Link</button></a>
 
-        
-        <a class="accept-user" href="/accept/<%=i.appliedRole%>/<%=i.userid.id%>" > <button  class="flex-no-shrink bg-green-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-500 text-white rounded-full">Accept</button></a> 
-            
-        <a class="delete-user" href="/reject/<%=i.appliedRole%>/<%=i.userid.id%>" ><button  class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Delete</button></a>
-        
-
-        <%}%>
-        </div>
-        </div>
-      </div>
-    </a>
-</div>
-      <br> 
-        <%}%>        
-	</div>
-</body>
 
   
   <!-- Priviledge Conditions
@@ -110,7 +203,45 @@
 -->
 
 
+
+
+<div class="container">
+  <div class="table">
+    <div class="heading">
+      <h1>Applications</h1>
+    </div>
+   
+  </div>
+  <table>
+    <thead>
+      <th>username</th>
+      <th>role</th>
+      <th>link</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <%for(i of arr){%> 
+       
+      <tr  id="rolereq-<%=i.userid._id%>">
+        <td data-label="username"><%=i.userid.username%></td>
+        <td data-label="role"><%=i.appliedRole%></td>
+        <td data-label="link"><a href="<%=i.link1%>" class="text-blue-500">Go</a></td>
+        <td data-label="Action">
+          <%if((locals.user) && locals.user.UserType=='Admin'){%>
+
+          <a class="accept-user" href="/accept/<%=i.appliedRole%>/<%=i.userid.id%>" > <button  class="flex-no-shrink bg-green-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-500 text-white rounded-full">Accept</button></a> 
+            
+          <a class="delete-user" href="/reject/<%=i.appliedRole%>/<%=i.userid.id%>" ><button  class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Delete</button></a>
+          <%}%>  
+        </td>
+      </tr>
+    </div>
+      <%}%>      
+    </tbody>
+  </table>
 </div>
+
+
 <script src='/js/viewapplication.js' ></script>
 <script src='/js/Noty.js' ></script>
 </body>

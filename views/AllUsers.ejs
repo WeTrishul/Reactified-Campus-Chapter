@@ -13,7 +13,7 @@
 
 
     <!-- <link rel="stylesheet" href="index.css"> -->
-    <style>
+    <!-- <style>
         html,
         body {
           height: 100%;
@@ -36,7 +36,167 @@
         th:not(:last-child) {
           border-bottom: 2px solid rgba(0, 0, 0, .1);
         }
-      </style>
+      </style> -->
+
+
+       
+  <style>
+    *{
+			margin:0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body{
+			background-color: #e4ecf0;
+		}
+		.container{
+			width: 70%;
+			margin:2rem auto;
+		}
+		.table{
+			width: 100%;
+			padding:1rem 20px;
+			display: flex;
+			justify-content: space-between; 
+		}
+		.heading{
+			flex-basis: 50%;
+			text-align: left;
+
+		}
+		h1{
+			font-size: 2.5rem;
+			font-weight: 900;
+			color: forestgreen;
+			text-shadow: 1px 2px 1px #fff;
+			font-family: sans-serif;
+
+		}
+		.search-box{
+			flex-basis: 20%;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			position: relative;
+			padding-right: 3px;
+		}
+		input{
+			width: 0;
+			height: 50px;
+			border:none;
+			outline: none;
+			background-color: #fff;
+			color: green;
+			font-size: 20px;
+			padding:0px 20px;
+			box-shadow: 0 0 15px 1px #b6bbc0;
+			transition: 1s linear;
+			border-radius: 50px;
+
+		}
+
+		.search-btn{
+			position: absolute;
+			top:50%;
+			transform: translateY(-50%);
+			right: 0;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background-color: forestgreen;
+
+		}
+
+		.fas{
+			position: absolute;
+			top:50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			color: #fff;
+			font-size: 20px; 
+		}
+
+		.active{
+			width: 100%;
+		}
+
+		table{
+			width: 100%;
+			border-collapse: collapse;
+			text-align: center;
+		}
+
+		th,td{
+			padding: 1rem 20px;
+			border:1px solid #bbb;
+		}
+
+		th{
+			font-size: 15px;
+			font-weight: bold;
+			color: #fff;
+			background-color: forestgreen;
+			font-family: sans-serif;
+
+		}
+		td{
+			font-size: 18px;
+			font-family: sans-serif;
+			font-weight: lighter;
+
+		}
+
+		thead th:nth-child(1){
+			padding:1rem 5px;
+		}
+
+		tbody tr:nth-child(even){
+			background-color: #f5f5f5;
+		}
+		tbody tr:nth-child(odd){
+			background-color: #fff;
+		}
+
+		@media(max-width: 500px){
+			.container{
+				width: 90%
+			}
+			.table{
+				flex-direction: column-reverse;
+			}
+			.heading{
+				width: 100%;
+				text-align:center;
+			}
+			.search-box{
+				width: 100%;
+				margin-bottom: 10px;
+			}
+			thead{
+				display: none;
+			}
+			tbody,tr,td{
+				display: block;
+				width: 100%;
+			}
+			tr{
+				margin-bottom: 2rem;
+			}
+			td{
+				text-align:right;
+				position: relative;
+			}
+			td:before{
+				content: attr(data-label);
+				position: absolute;
+				left: 5px;
+				font-weight: bold;
+				color: #000;
+				font-size: 15px;
+
+			}
+		}
+  </style>
   
 
 </head>
@@ -98,15 +258,51 @@
 
 
 
+<div class="container">
+  <div class="table">
+    <div class="heading">
+      <h1>All Users</h1>
+    </div>
+   
+  </div>
+  <table>
+    <thead>
+      <th>username</th>
+      <th>role</th>
+      
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <%for(u of users){%> 
+       
+      <tr  id="rolereq-<%=u._id%>">
+        <td data-label="username"><a href="/profilepage/<%=u.username%>"><%=u.name%></a></td>
+        <td data-label="role"><%=u.UserType%></td>
+       
+        <td data-label="Action">
+          <%if((locals.user) && locals.user.UserType=='Admin'){%>
+
+            
+          <a  href="/delete/<%= u.username %>" ><button  class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Delete</button></a>
+          <%}%>  
+        </td>
+      </tr>
+    </div>
+      <%}%>      
+    </tbody>
+  </table>
+</div>
 
 
 
 
-    <!-- component -->
+
+<!-- 
+  
 <div class="w-2/3 mx-auto">
   <div class="bg-white shadow-md rounded my-6">
         <%for(var u of users){%> 
-        <!-- component -->
+       
     <a href="/profilepage/<%=u.username%>">
       <div class="flex flex-col p-8 bg-white shadow-md hover:shodow-lg rounded-2xl">
         <div class="flex items-center justify-between">
@@ -135,7 +331,7 @@
       <br> 
         <%}%>        
 	</div>
-</body>
+</body> -->
 
   
   <!-- Priviledge Conditions

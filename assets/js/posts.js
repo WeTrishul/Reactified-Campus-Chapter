@@ -8,6 +8,9 @@
         newPostForm.submit(function(e){
             e.preventDefault();
 
+            document.getElementById('new-post-form').reset()
+            
+
             $.ajax({
                 type: 'post',
                 url: '/postit',

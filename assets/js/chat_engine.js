@@ -40,6 +40,9 @@ class ChatEngine{
             
             let msg = $('#chat-message-input').val();
             console.log(msg)
+             $('#chat-message-input').val('');
+             $('#chat-message-input').focus();
+
             if (msg != ''){
                 self.socket.emit('send_message', {
                     message: msg,
@@ -64,7 +67,7 @@ class ChatEngine{
                 'html': data.username
             }));
             newMessage.append($('<sub>', {
-                'html': data.createdAt
+                'html': moment(data.createdAt).format('h:mm a')
             }));
             newMessage.append($('<br>'));
             
@@ -94,7 +97,7 @@ class ChatEngine{
                     'html': element.username
                 }));
                 newMessage.append($('<sub>', {
-                    'html': element.createdAt
+                    'html': moment(element.createdAt).format('h:mm a')
                 }));
                 newMessage.append($('<br>'));
                 
