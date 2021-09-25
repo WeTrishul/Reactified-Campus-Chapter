@@ -199,7 +199,6 @@ else
 module.exports.updatecoderhandles = async (req,res)=>{
     const user =  await User.findOne({email:req.params.email})
     console.log(user)
-
     try {
         const updates = Object.keys(req.body)
         updates.forEach((update) => user[update] = req.body[update])
@@ -211,7 +210,7 @@ module.exports.updatecoderhandles = async (req,res)=>{
       
         console.log(req.user.username)
 
-       res.redirect('/UpcomingEvents')
+       res.redirect('/profilepage')
         
     } catch (err) {
        console.log(err) 

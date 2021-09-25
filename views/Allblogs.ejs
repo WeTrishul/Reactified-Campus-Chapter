@@ -107,7 +107,8 @@
 
       <%if((locals.user) && locals.user.UserType=='Admin' || blog.userid.id==locals.user.id){%>
     <a href="/editblog/?id=<%= blog._id %>"> <button  class="flex-no-shrink bg-green-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-500 text-white rounded-full">Edit</button></a> 
-      <a href="/deleteblog/<%= blog.id %>"><button  class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Delete</button></a>
+   
+      <a href="/deleteblog/<%= blog.id %>"><button  class="mt-2 flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Delete</button></a>
 
       <%}%>
     </div>
@@ -126,7 +127,7 @@
 <!-------------------------------------------------------------###################------------------------------------------->
   
 
-<div class="fixed mr-6 mb-8 bottom-0 right-0   ... ">
+<div class="absolute mr-6 mb-20 bottom-0 right-0   ... ">
   <a href="/writeblog">
   <button
           class="text-white px-4 w-auto h-12 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none cursor-pointer transition duration-500 ease-in-out hover:shadow hover:bg-indigo-600 transition duration-500 ease-in-out  hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 ...">
@@ -140,8 +141,10 @@
   </button>
 </a>
 </div>
-
+<div class="mt-80"></div>
+<%- include('_footer') -%>
 </body>
+
 </html>
 
 
