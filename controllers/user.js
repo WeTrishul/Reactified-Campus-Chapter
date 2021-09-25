@@ -219,16 +219,22 @@ module.exports.updatecoderhandles = async (req,res)=>{
 }
 
 module.exports.othersProfile = async(req,res)=>{
-    const user = await User.findOne({username:req.params.username})
+   
 
     try {
+
+        if(req.isAuthenticated())
+            {
+                const user = await User.findOne({username:req.params.username})
         res.render('othersProfile',{
             title:'Profile',
             searchuser:user
         })
+    }
+    res.redirect('/login')
     } catch (err) {
     console.log(err)
-    res.render('error_page') 
+    res.redirect('/error_page')
     }
 }
 
@@ -319,12 +325,19 @@ module.exports.changePassword = async (req,res)=>{
 module.exports.listUsers = async (req,res)=>{
 
     try {
-        const user = await User.find({})
-       // console.log(user)
-       return res.render('AllUsers',{
-            title:'All Users',
-            users:user
-        })
+
+        if(req.isAuthenticated())
+        {
+            const user = await User.find({})
+            // console.log(user)
+            return res.render('AllUsers',{
+                 title:'All Users',
+                 users:user
+             })
+        }
+        else
+         res.redirect('/login')
+       
         
     } catch (error) {
         console.log('Error from listUsers',error)
