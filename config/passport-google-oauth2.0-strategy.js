@@ -1,4 +1,5 @@
 const passport =require('passport')
+const Env = require('./environment')
 const googleStrategy = require('passport-google-oauth').OAuth2Strategy
 const crypto = require('crypto')
 const User = require('../models/user')
@@ -8,9 +9,9 @@ const queue = require('./kue')
 const loginEmailsWorker = require('../workers/login_emails_workers')
 
 passport.use(new googleStrategy({
-    clientID:'724954914773-8tgpsd25gtsegic3g6g1jom7sslie8e9.apps.googleusercontent.com',
-    clientSecret:'TNMJyQfBVgQAQOglMyxIWLce',
-    callbackURL:'http://localhost:3000/users/auth/google/callback'
+    clientID:Env.google_client_ID, //'724954914773-8tgpsd25gtsegic3g6g1jom7sslie8e9.apps.googleusercontent.com'
+    clientSecret:Env.google_client_secret,//'TNMJyQfBVgQAQOglMyxIWLce'
+    callbackURL:Env.google_callback_URL//'http://localhost:3000/users/auth/google/callback'
 },
     function(accessToken,refreshToken,profile,done){
         User.findOne({email:profile.emails[0].value}).exec((err,user)=>{

@@ -1,4 +1,5 @@
 const express = require('express')
+const Env = require('./config/environment')
 const session = require('express-session')
 const ejs = require('ejs')
 const bodyParser = require("body-parser")
@@ -47,7 +48,7 @@ app.set('views','./views')
 
 app.use(session({
     name: 'CodechefCampusChapter',
-    secret: 'blahblahblah..',
+    secret: Env.session_cookie_key,
     saveUninitialized:false,
     resave:false,
     cookie:{
@@ -71,7 +72,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(passport.setAuthenticatedUser)
 
-app.use(express.static('./assets'))
+app.use(express.static(Env.asset_path))
 app.use(EventRouter)
 
 app.use(UserRouter)

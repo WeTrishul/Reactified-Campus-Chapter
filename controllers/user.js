@@ -1,5 +1,6 @@
 const cookieParser = require('cookie-parser');
 const express = require('express')
+const Env = require('../config/environment')
 const db = require('../config/db')
 const mongoose = require('mongoose')
 const User = require('../models/user')
@@ -261,7 +262,7 @@ module.exports.forgotPassword = async(req,res)=>{
         try {
             const user = await User.findOne({email})
             console.log(user + ' from forgot password')
-            const token =  await jwt.sign({_id:user._id},'CampusChapter',{expiresIn:'20m'})
+            const token =  await jwt.sign({_id:user._id},Env.jwt_secret,{expiresIn:'10000m'})
             console.log(token)
             //forgot.forgot(user.email,token)
             const obj = {
