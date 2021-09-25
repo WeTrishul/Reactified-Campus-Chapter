@@ -1,6 +1,7 @@
 const express = require('express')
 const Env = require('./config/environment')
 const session = require('express-session')
+const logger = require('morgan')
 const ejs = require('ejs')
 const bodyParser = require("body-parser")
 const cookieParser = require('cookie-parser')
@@ -26,6 +27,7 @@ const globalEventMethods = require('./config/GlobaleventMethods')
 const applyrouter = require('./routes/applyRouter')
 
 
+
 const app=express()
 app.use(cors({
     origin:'*'
@@ -47,7 +49,7 @@ app.set('views','./views')
 
 
 app.use(session({
-    name: 'CodechefCampusChapter',
+    name: 'CodeChefCampusChapter',
     secret: Env.session_cookie_key,
     saveUninitialized:false,
     resave:false,
@@ -55,7 +57,7 @@ app.use(session({
         maxAge: (1000*60*100)
     },
     store: MongoStore.create({
-        mongoUrl: 'mongodb://127.0.0.1:27017/CodeChefCampusChapter',
+        mongoUrl: `mongodb://127.0.0.1:27017/${Env.db}`,
         autoRemove:'disabled',
     },
     function(err)
@@ -85,6 +87,8 @@ app.use(resourceRouter)
 app.use(applyrouter)
 
 app.use('/uploads',express.static(__dirname + '/uploads'))
+
+app.use(logger(Env.morgan.mode,Env.morgan.options))
 
 
 const ChatServer = require('http').Server(app)
@@ -121,7 +125,7 @@ app.listen(port,()=>{
 
         setTimeout(() => RatingsHandler.updateLeaderboards(), t) 
         
-    },604800000); //
+    },604800000);
     
 
     console.log('Server is up on port '+ port)

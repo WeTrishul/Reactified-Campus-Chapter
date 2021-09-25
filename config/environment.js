@@ -1,8 +1,18 @@
+const fs = require('fs')
+const rfs = require('rotating-file-stream')
 const dotenv = require('dotenv')
+
+const path = require('path')
 
 dotenv.config()
 
-console.log(process.env.CAMPUS_CHAPTER_ADMIN_EMAIL)
+const logDirectory = path.join(__dirname,'../production_logs')
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
+
+const accessLogStream = rfs.createStream('access.log',{
+  interval:'1d',
+  path:logDirectory
+}) 
 
 const development = {
     name:'development',
@@ -22,7 +32,11 @@ const development = {
     google_client_ID:'724954914773-8tgpsd25gtsegic3g6g1jom7sslie8e9.apps.googleusercontent.com',
     google_client_secret:'TNMJyQfBVgQAQOglMyxIWLce',
     google_callback_URL:'http://localhost:3000/users/auth/google/callback',
-    jwt_secret:'CampusChapter'
+    jwt_secret:'CampusChapter',
+    morgan:{
+      mode:'dev',
+      options:{stream:accessLogStream}
+    }
 }
 
 
@@ -45,9 +59,13 @@ const production = {
     google_client_ID:process.env.CAMPUS_CHAPTER_GOOGLE_CLIENT_ID,//CAMPUS_CHAPTER_GOOGLE
     google_client_secret:process.env.CAMPUS_CHAPTER_GOOGLE_CLIENT_SECRET,
     google_callback_URL:process.env.CAMPUS_CHAPTER_GOOGLE_CALLBACK_URL,//yaha pr localhost:3000 k jagah apna domain ayega
-    jwt_secret:process.env.CAMPUS_CHAPTER_JWT_SECRET//WMtu8WvikkMxmmnkrNKNF2kDzpboe2q6
+    jwt_secret:process.env.CAMPUS_CHAPTER_JWT_SECRET,//WMtu8WvikkMxmmnkrNKNF2kDzpboe2q6
+    morgan:{
+      mode:'combined',
+      options:{stream:accessLogStream}
+    }
 }
 
-console.log(eval(process.env.CAMPUS_CHAPTER_ENVIRONMENT))
+console.log(eval(process.env.NODE_ENV))
 
-module.exports = eval(process.env.CAMPUS_CHAPTER_ENVIRONMENT) == undefined ? development : eval(process.env.CAMPUS_CHAPTER_ENVIRONMENT)
+module.exports = eval(process.env.CAMPUS_CHAPTER_ENVIRONMENT) === undefined ? development : eval(process.env.CAMPUS_CHAPTER_ENVIRONMENT)
