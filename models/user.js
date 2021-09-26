@@ -86,6 +86,14 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:'yes'
     },
+    seenAllCoreChats : {
+        type:String,
+        default:'yes'
+    },
+    seenAllExecChats : {
+        type:String,
+        default:'yes'
+    },
     resetLink:{
         data:String,
         default:''

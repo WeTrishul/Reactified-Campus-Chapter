@@ -26,7 +26,8 @@ class ChatEngine{
 
                 self.socket.emit('join_room',{
                     username:self.username,
-                    chatroom:self.chattype
+                    chatroom:self.chattype,
+                    chatbox : self.chatBox
                 })
     
                 self.socket.on('user_joined',(data)=>{
@@ -75,10 +76,10 @@ class ChatEngine{
                 'html': data.message
             }));
 
-            notifier.notify(undefined,'texted in ' + data.chatroom,'/corechat')
-
 
             $('#chat-messages-list').append(newMessage);
+
+            self.socket.emit('caninotifyothers',{data:data,room : self.chattype})
         })
 
         self.socket.on('old_messages',(data)=>{
@@ -110,6 +111,35 @@ class ChatEngine{
                 $('#chat-messages-list').append(newMessage);
             });
           
+        })
+
+        self.socket.on('yesyoumaynotify',(data)=>{
+
+
+            console.log('yes you may')
+
+            $("#bll").css("fill", '#FF0000');
+
+            let currcoti = $('#notis')
+
+            $('#nothing').remove()
+
+            currcoti.prepend('<a href="'+data.placetogo +'" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2"><img class="h-8 w-8 rounded-full object-cover mx-1" src="https://cdn.staticcrate.com/stock-hd/effects/footagecrate-4k-bell-icon-prev-full.png" alt="avatar"><p class="text-gray-600 text-sm mx-2"><span class="font-bold" href="#">'+data.msg +'</span></p></a>')
+            
+
+            new Noty({
+                theme: 'relax',
+                text: data.msg,
+                type: 'success',
+                layout: 'centerRight',
+                timeout: 1500
+                
+            }).show();
+
+            
+
+
+
         })
 
     }
