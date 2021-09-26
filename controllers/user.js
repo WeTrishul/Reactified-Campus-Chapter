@@ -358,7 +358,8 @@ module.exports.delete = async(req,res)=>{
         if(user.dp!=='Nhi hai') 
         {
             if(user.dp[0]!='h')
-                 fs.unlinkSync(path.join(__dirname,'..',user.dp))             
+                 fs.unlinkSync(path.join(__dirname,'..',user.dp))
+                 console.log('Path '  +path.join(__dirname,'..',user.dp))
         }
         await User.deleteOne({username:username})
         

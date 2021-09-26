@@ -21,8 +21,8 @@ module.exports.chat = (socketserver) =>{
         socket.on('join_room',async(data)=>{
           console.log('joining request by ' , data)
           let chats = []
-          chats = await Chat.find({chatroom:data.chatroom})
-          // console.log(chats)
+          chats = await Chat.find({chatroom:data.chatroom}).populate('userid')
+          console.log(chats)
           socket.join(data.chatroom)
 
           socket.emit('old_messages',chats)
@@ -30,11 +30,21 @@ module.exports.chat = (socketserver) =>{
           io.in(data.chatroom).emit('user_joined',data)
         })
 
-        socket.on('send_message', (data)=>{
-          Chat.create(data,(error,chat)=>{
-            io.in(data.chatroom).emit('receive_message', chat);
-          })
+        socket.on('send_message', async(data)=>{
+          // Chat.create(data,(error,chat)=>{
+          //   io.in(data.chatroom).emit('receive_message', chat);
+          // })
           console.log(data)
+          const c = {
+            userid : data.username,
+            chatroom : data.chatroom,
+            message : data.message
+          }
+          var chat = await Chat.create(c)
+          chat = await chat.populate('userid').execPopulate()
+          // console.log(chat)
+          io.in(data.chatroom).emit('receive_message', chat);
+          
           
       })
 

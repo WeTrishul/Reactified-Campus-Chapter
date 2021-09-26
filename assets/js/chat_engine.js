@@ -55,7 +55,7 @@ class ChatEngine{
         self.socket.on('receive_message',(data)=>{
             console.log('message recieved',data.message)
             let newMessage
-            if(self.username==data.username)
+            if(self.username==data.userid._id)
             {
                 newMessage = $('<li class="float-right table clear-both bg-yellow-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 mr-4 mt-3">');
             }
@@ -64,7 +64,7 @@ class ChatEngine{
 
             }
             newMessage.append($('<strong>', {
-                'html': data.username
+                'html': data.userid.username
             }));
             newMessage.append($('<sub>', {
                 'html': moment(data.createdAt).format('h:mm a')
@@ -75,16 +75,18 @@ class ChatEngine{
                 'html': data.message
             }));
 
+            notifier.notify(undefined,'texted in ' + data.chatroom,'/corechat')
+
 
             $('#chat-messages-list').append(newMessage);
         })
 
         self.socket.on('old_messages',(data)=>{
-           
+            // console.log(data)
             console.log(self.username)
             data.forEach((element) => {
                 let newMessage
-                if(self.username==element.username)
+                if(self.username==element.userid._id)
                 {
                     newMessage = $('<li class="float-right table clear-both justify-end bg-yellow-200 rounded-bl-2xl rounded-br-2xl rounded-tr-2xl p-2 mr-4 mt-3">');
                     
@@ -94,7 +96,7 @@ class ChatEngine{
 
                 }
                 newMessage.append($('<strong>', {
-                    'html': element.username
+                    'html': element.userid.username
                 }));
                 newMessage.append($('<sub>', {
                     'html': moment(element.createdAt).format('h:mm a')

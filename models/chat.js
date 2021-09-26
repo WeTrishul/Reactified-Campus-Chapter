@@ -4,9 +4,9 @@ const db = require('../config/db')
 
 const chatSchema = new mongoose.Schema({
 
-    username:{
-        type:String,
-        required:true
+    userid:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
     }
     ,
     chatroom : {

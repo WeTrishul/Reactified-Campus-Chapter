@@ -235,7 +235,7 @@ width: 100%;" >
 <script src='/js/chat_engine.js' ></script>
 
 <script>
-    new ChatEngine('user-chat-box','<%=user.username%>','core')
+    new ChatEngine('user-chat-box','<%=locals.user._id%>','core')
 </script>
 
 </body>
