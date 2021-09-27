@@ -25,6 +25,9 @@ router.post('/login/createsession',passport.authenticate(
     {failureRedirect:'/login'}
     ),UserController.postlogin)
 
+
+    router.get('/verify/user/:token',UserController.verifySignup)
+
 router.get('/users/auth/google',passport.authenticate('google',{scope:['profile','email']}))
 router.get('/users/auth/google/callback',passport.authenticate('google',{failureRedirect:'/signup'}),UploadController.profile)
 

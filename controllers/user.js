@@ -19,19 +19,16 @@ const path=require('path')
 const fs =require('fs')
 const queue = require('../config/kue')
 const otpWorkers = require('../workers/otp_workers')
+const signupotpWorkers = require('../workers/verifyUser_workers')
 const globaleventsmethods = require('../config/GlobaleventMethods')
 const Hackerrank = require('../config/Hackerank')
 const resourses = require('../models/resourses')
 const upcomingEvents = require('../models/UpcomingEvents')
+const signup_mailer = require('../mailers/signup_mailer')
 
 
 const jwt  = require('jsonwebtoken');
 const { findOneAndDelete } = require('../models/user');
-
-
-
-
-
 
 module.exports.getlogin=(req,res)=>{
 
@@ -70,15 +67,71 @@ module.exports.postsignup = async (req,res)=>{
 
     console.log(req.body)
     
-        const user = await new User(req.body)
+        const newObjUser = req.body
 
         try {
-            await user.save()
-            console.log('User created successfully')
-            res.redirect('/login')
+                const token =  jwt.sign(newObjUser,Env.jwt_secret,{expiresIn:60*60*24})
+                console.log(token)
+    
+    
+                const obj = {
+                    token:token,
+                    email:req.body.email
+                }
+    
+                let job = queue.create('signupVerify',obj).priority('high').save(function(err){
+                    if(err)
+                    {
+                        console.log('Error in sending Otp from signup',err)
+                        return
+                    }
+                    console.log('Signup OTP enqueued successfully',job.id)
+                })
+    
+                res.render('signup',{
+                    title:'signup',
+                    msg:'Go verify Your Email Dude!'
+                })
+           
         } catch (error) {
             console.log(error)
             res.redirect('back')
+        }
+    }
+
+
+    module.exports.verifySignup= async (req,res)=>{
+        const token = req.params.token
+        try {
+
+            jwt.verify(token,'CampusChapter', async (error,decodedData)=>{
+                if(error)
+                {
+                    console.log('Incorrect token or it is expired')
+                    return
+                }
+                const email = decodedData.email
+
+                const user =await User.findOne({email})
+
+                if(user)
+                {
+                    res.redirect('/login')  
+                }
+                else
+                {
+                    const Newuser = await new User(decodedData)
+                    await Newuser.save()
+                }
+                console.log(decodedData)
+                res.redirect('/login')
+            })
+            
+        } catch (error) {  
+            res.render('signup',{
+                title:'signup',
+                msg:'User couldnot be verifed.Go change your password!'
+            }) 
         }
     }
     
@@ -152,14 +205,6 @@ module.exports.globaleventpage = async (req,res) =>{
 
    else if(req.params.platform=='CodeChef')
      {
-         /*eventsArray = await globaleventsmethods.codeChefEvents ()
-
-         eventsData[0].codechef=eventsArray
-
-         await eventsData[0].save()
-
-         eventsArray = eventsData[0].codeforces*/
-
          eventsArray= events[0].codechef
      }
      else if(req.params.platform=='hackerrank')
@@ -255,21 +300,21 @@ module.exports.forgotPasswordView = (req,res)=>{
 
 
 module.exports.forgotPassword = async(req,res)=>{
-    const forgotSecret = 'CampusChapter'
+
     const email = req.body.email
     console.log (email+'from forgot password post')
              
         try {
             const user = await User.findOne({email})
             console.log(user + ' from forgot password')
-            const token =  await jwt.sign({_id:user._id},Env.jwt_secret,{expiresIn:'10000m'})
+            const token =  await jwt.sign({_id:user._id},Env.jwt_secret,{expiresIn:60})
             console.log(token)
-            //forgot.forgot(user.email,token)
+
             const obj = {
                 token:token,
                 email:user.email
             }
-            let job = queue.create('otp',obj).priority('high').save(function(err){
+            let job = queue.create('otp',obj).priority('high').save(function(err){//
                 if(err)
                 {
                     console.log('Error in sending Otp ',err)
@@ -380,9 +425,7 @@ module.exports.delete = async(req,res)=>{
 }
 
 module.exports.changeRole = async(req,res)=>{
-
-
-    
+ 
     try {
 
         if(!req.isAuthenticated())
