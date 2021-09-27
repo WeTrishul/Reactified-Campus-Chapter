@@ -5,6 +5,7 @@ const User = require('../models/user')
 const Post = require('../models/post')
 const Like=require('../models/like')
 const Comment = require('../models/comments')
+const Report = require('../models/report')
 const passport =require('passport')
 const passport_local = require('../config/passport-local-auth')
 const fetch = require('node-fetch')
@@ -218,4 +219,85 @@ module.exports.likehandler= async (req,res)=>{
         return console.log(error)
     }
     
+}
+
+
+
+
+
+
+module.exports.reporthandler= async (req,res)=>{
+    try{
+       
+        var reportable
+        let deleted = false;
+
+    if(req.query.type=='post')
+    {
+        reportable=await Post.findById(req.query.id).populate('report');
+    }else
+    {
+        reportable=await Comment.findById(req.query.id).populate('report');
+    }
+
+
+    var ispresent=await Report.findOne({
+        userid:req.user._id,
+        reportable:req.query.id,
+        onModel:req.query.type
+
+    })
+
+    if(ispresent)
+    {
+        
+        reportable.report.pull(ispresent._id)
+        reportable.save()
+       ispresent.remove()
+       deleted = true;
+    }
+    else{
+        
+        var currreport = await Report.create({
+            userid:req.user._id,
+            reportable:req.query.id,
+            onModel:req.query.type
+        })
+        reportable.report.push(currreport._id)
+        console.log(currreport._id)
+        reportable.save()
+    }
+    const reportablepop = await  reportable.populate('userid').execPopulate()
+   console.log(reportable._id)
+    return res.json(200, {
+        message: "Request successful!",
+        data: {
+            deleted: deleted,
+            reportableowner:reportablepop.userid.username,
+            reportabletype:req.query.type,
+            reportable:reportable._id
+        }
+    })
+
+
+    // return res.redirect('back')
+
+    }catch(error){
+        return console.log(error)
+    }
+    
+}
+
+module.exports.reportedthings = async (req,res) => {
+
+  const reportedposts = await Post.find({ "report.0": { "$exists": true }}) 
+  console.log(reportedposts) 
+  const reportedcomments = await Comment.find({ "report.0": { "$exists": true }}) 
+  
+  return res.render('reportedthings',{
+      posts :reportedposts ,
+      comments : reportedcomments
+  })
+
+
 }

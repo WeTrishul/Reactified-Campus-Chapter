@@ -34,6 +34,7 @@ class PostComments{
                     $(`#post-comments-${postId}`).append(newComment);
                     pSelf.deleteComment($('.delete-comment-button', newComment));
                     new ToggleLike($(' .toggle-like-button', newComment));
+                    new ToggleReport($(' .report-button', newComment));
 
                     new Noty({
                       theme: 'relax',
@@ -110,7 +111,8 @@ class PostComments{
                      <a  href="/destroycomment/${ comment._id }" class="delete-comment-button" >
                        <small>Delete</small>
                      </a>
-                     
+                     <small class="self-center">.</small>
+                        <a class="report-button" data-reports="${ comment.report.length }" href="/Reporthandler/?id=${ comment._id }&type=comment"><small class="text-red-700">${ comment.report.length } Report</small></a>
                   
                     
                    </div>

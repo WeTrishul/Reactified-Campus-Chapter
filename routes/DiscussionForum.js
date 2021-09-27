@@ -16,4 +16,10 @@ router.get('/destroycomment/:id',passport.checkAuthentication,DiscussController.
 
 router.post('/Likehandler',DiscussController.likehandler)
 
+router.post('/Reporthandler',DiscussController.reporthandler)
+
+router.get('/ReportedThings',DiscussController.reportedthings)
+
+
+
 module.exports = router
