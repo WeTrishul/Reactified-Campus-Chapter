@@ -153,7 +153,7 @@ module.exports.deleteResource = async (req,res)=>{
 
             arr.forEach((obj)=>{
                
-                if((obj.ele!==rid1) && obj.user===req.user.username)
+                if(obj.ele!==rid1)
                 {
                     Newarr.push(obj)
                 }
@@ -165,7 +165,7 @@ module.exports.deleteResource = async (req,res)=>{
             await cat_data.save()
 
             fs.unlinkSync(path.join(__dirname,'..',rid1))
-             res.redirect('/dashboard')
+             res.redirect('back')
     }        
         catch (error) {
            console.log('delete resources ka error',error.message)
