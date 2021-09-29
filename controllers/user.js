@@ -245,7 +245,6 @@ else
 module.exports.updatecoderhandles = async (req,res)=>{
     const user =  await User.findOne({email:req.params.email})
     console.log(user)
-
     try {
         const updates = Object.keys(req.body)
         updates.forEach((update) => user[update] = req.body[update])
@@ -257,7 +256,7 @@ module.exports.updatecoderhandles = async (req,res)=>{
       
         console.log(req.user.username)
 
-       res.redirect('/UpcomingEvents')
+       res.redirect('/profilepage')
         
     } catch (err) {
        console.log(err) 
@@ -408,7 +407,8 @@ module.exports.delete = async(req,res)=>{
         if(user.dp!=='Nhi hai') 
         {
             if(user.dp[0]!='h')
-                 fs.unlinkSync(path.join(__dirname,'..',user.dp))             
+                 fs.unlinkSync(path.join(__dirname,'..',user.dp))
+                 console.log('Path '  +path.join(__dirname,'..',user.dp))
         }
         await User.deleteOne({username:username})
         
@@ -437,16 +437,16 @@ module.exports.changeRole = async(req,res)=>{
         console.log('User from changeRole',user)
         if(req.query.role==='events')
             {
-                user.UserType='Events Lead'
+                user.UserType='EventsLead'
                 await user.save();
          }
          else if(req.query.role==='questionsetter')
          {
-            user.UserType='Question Setter'
+            user.UserType='QuestionSetter'
             await user.save();
          }
          else{
-            user.UserType='Media Lead'
+            user.UserType='MediaLead'
             await user.save();
          }
          return res.redirect('/listUsers')

@@ -166,7 +166,8 @@ module.exports.accept = async(req,res)=>{
             res.redirect('back')
         }
         else{
-
+    
+            const selectedUser = await apply.deleteOne({userid:id})
 
             if (req.xhr){
                 console.log('aagya')

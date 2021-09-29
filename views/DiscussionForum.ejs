@@ -75,7 +75,7 @@
                <div class="">
                   <div class="flex items-center justify-between">
                      <h2 class="text-lg font-semibold text-gray-900 -mt-1"><%=post.userid.username%> </h2>
-                     <!-- <small class="text-sm text-gray-700">22h ago</small> -->
+                    <a class="report-button" data-reports="<%= post.report.length %>" href="/Reporthandler/?id=<%= post.id %>&type=post"> <small class="text-sm text-red-600"><%= post.report.length %> Report</small></a>
                   </div>
                   <p class="mt-3 text-gray-700 text-sm">
                     <%=post.postBody%>
@@ -99,7 +99,7 @@
                         </svg>
                         <span><%=post.comments.length%></span>
                      </div>
-                     <%if((locals.user) && locals.user.UserType=='Admin' || post.userid.id==locals.user.id){%>
+                     <%if((locals.user) && locals.user.UserType=='Admin' || post.userid.id==locals.user.id || (post.report.length>=5 && locals.user.UserType=='EventsLead')   ){%>
                      <a class="delete-post-button" href="/destroypost/<%= post._id %>">
                      <div class="flex mr-2 text-gray-700 text-sm mr-4">
                       
@@ -150,14 +150,14 @@
                       </a>
                       <%}%>  
                                            
-                      <%if((locals.user) && locals.user.UserType=='Admin' || comment.userid.id==locals.user.id){%>
+                      <%if((locals.user) && locals.user.UserType=='Admin' || comment.userid.id==locals.user.id || (comment.report.length>=5 && locals.user.UserType=='EventsLead')){%>
                     <small class="self-center">.</small>
                       <a href="/destroycomment/<%= comment.id %>" class="delete-comment-button">
                         <small>Delete</small>
                       </a>
                       <%}%>
-                    <!-- <small class="self-center">.</small>
-                        <small><%= comment.likes.length %> Likes</small> -->
+                    <small class="self-center">.</small>
+                        <a class="report-button" data-reports="<%= comment.report.length %>" href="/Reporthandler/?id=<%= comment.id %>&type=comment"><small class="text-red-700"><%= comment.report.length %> Report</small></a>
                      
                     </div>
                   </div>
@@ -289,6 +289,81 @@ class ToggleLike{
         let toggleLike = new ToggleLike(self);
     });
 </script>
+
+
+
+
+
+
+
+
+<script>
+
+
+  class ToggleReport{
+      constructor(toggleElement){
+          this.toggler = toggleElement;
+          this.toggleReport();
+      }
+  
+  
+      toggleReport(){
+          $(this.toggler).click(function(e){
+              e.preventDefault();
+              let self = this;
+              
+              $.ajax({
+                  type: 'POST',
+                  url: $(self).attr('href'),
+              })
+              .done(function(data) {
+                  let reportCount = parseInt($(self).attr('data-reports'));
+                  console.log(reportCount);
+                  if (data.data.deleted == true){
+                      reportCount -= 1;
+                      
+                  }else{
+                      reportCount += 1;
+                  }
+  
+                  // console.log('mai hun'+data.data.reportCount)
+  
+                  $(self).attr('data-reports', reportCount);
+                  
+                  $(self).html(`${reportCount} reports`);
+
+                  if(reportCount==5)
+                  {
+                    console.log('yo man')
+                    let reporttonoti = '/Discuss/#'+data.data.reportabletype+'-'+data.data.reportable
+
+                    notifier.notify('reportnoti','One ' + data.data.reportabletype +' has 5 reports',reporttonoti)
+                  }
+  
+                  if(data.data.deleted==false && notifier.notifieruser!=data.data.reportableowner)
+                  {
+                  let reporttonoti = '/Discuss/#'+data.data.reportabletype+'-'+data.data.reportable
+                  notifier.notify(data.data.reportableowner,'reported your ' + data.data.reportabletype,reporttonoti)
+                  }
+  
+              })
+              .fail(function(errData) {
+                  console.log('Error aaya');
+              });
+              
+  
+          });
+      }
+  }
+  
+  </script>
+  <script>
+      $('.report-button').each(function(){
+          let self = this;
+          let toggleReport = new ToggleReport(self);
+      });
+  </script>
+  
 
 
 <!-- </div> -->

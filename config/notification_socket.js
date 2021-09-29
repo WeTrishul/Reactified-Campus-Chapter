@@ -20,7 +20,30 @@ module.exports.notification = (socketserver) =>{
         
       socket.on('notify',async(data)=>{
         try {
-          if(!data.to)
+
+          if(data.to=='reportnoti')
+          {
+            console.log('huuu')
+            const user = await User.find({$or:[ {UserType:'Admin'}, {UserType:'EventsLead'}]})
+            const notific = {
+              msg : data.msg,
+              placetogo:data.placetogo
+            }
+
+            user.forEach((user)=>{
+              user.Notifications.push(notific)
+             user.seenAllNotifications='no'
+              user.save()
+              io.in(user.username).emit('notification',notific)
+           })
+
+           
+
+           
+
+          }
+
+          else if(!data.to)
           {
             // notifying all users
 
@@ -46,6 +69,15 @@ module.exports.notification = (socketserver) =>{
           console.log('hello ')
           const user = await User.find({username:data.to})
           console.log(user[0].name)
+          const str = data.msg
+          if(str[2]=='n')
+          {
+              data.from = ''
+          }
+          if(str[0]=='r')
+          {
+            data.from='Someone '
+          }
           const notific = {
             msg : data.from+' ' + data.msg,
             placetogo:data.placetogo
