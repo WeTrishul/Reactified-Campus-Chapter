@@ -131,7 +131,8 @@ module.exports.deleteResource = async (req,res)=>{
           return   res.redirect('/login')
        }
 
-       let rid1 = '\\uploads\\resources/'
+    //    let rid1 = '\\uploads\\resources/'
+    let rid1 = '/uploads/resources/'
        let fileName = req.params.rid
       console.log('cuta hua string',fileName)
        rid1+=fileName
@@ -149,12 +150,13 @@ module.exports.deleteResource = async (req,res)=>{
 
            console.log('array before deletion',arr)
 
-           console.log(typeof(rid1))
+           console.log(rid1)
 
             arr.forEach((obj)=>{
                
                 if((obj.ele!==rid1) && obj.user===req.user.username)
                 {
+                    console.log(obj.ele)
                     Newarr.push(obj)
                 }
                    
@@ -165,7 +167,7 @@ module.exports.deleteResource = async (req,res)=>{
             await cat_data.save()
 
             fs.unlinkSync(path.join(__dirname,'..',rid1))
-             res.redirect('/dashboard')
+             res.redirect('back')
     }        
         catch (error) {
            console.log('delete resources ka error',error.message)

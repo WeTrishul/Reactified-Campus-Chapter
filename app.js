@@ -113,7 +113,7 @@ app.listen(port,()=>{
 
     setInterval( async ()=>{
         
-        await Noticleaner.cleanit()
+        // await Noticleaner.cleanit()
         await globalEventMethods.codeforcesevents()
         await globalEventMethods.codeChefEvents()
 
@@ -129,7 +129,7 @@ app.listen(port,()=>{
 
         setTimeout(() => RatingsHandler.updateLeaderboards(), t) 
         
-    },604800000);
+    },604800000);//604800000
     
 
     console.log('Server is up on port '+ port)
