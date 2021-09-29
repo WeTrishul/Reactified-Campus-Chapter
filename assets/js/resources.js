@@ -20,7 +20,7 @@
                 form_data.append('resources',f)
             }
 
-            var option = $(".javascript:checked").val();
+            var option = $("#category").val();
             var name = $("#name").val()
 
             form_data.append('patanhi',option)
@@ -54,8 +54,8 @@
                         timeout: 1500
                         
                     }).show();
-                    document.getElementById("file-form").reset();
-
+                    
+                   location.reload(true);
                 }
                 else {
                     new Noty({
@@ -86,3 +86,4 @@
 
     createPost()
 }
+

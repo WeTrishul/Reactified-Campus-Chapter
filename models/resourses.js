@@ -7,13 +7,13 @@ const Resources_PATH = path.join('/uploads/resources')
 
 
 const resoursesSchema = new mongoose.Schema({
-   dsa:[],
-   cp:[],
-   dev:[],
-  apti:[],
-  gate:[],
-  coresub:[],
-  placements:[] 
+    dsa:[],
+    cp:[],
+    dev:[],
+    apti:[],
+    gate:[],
+    coresub:[],
+    placements:[] 
   })
 
 

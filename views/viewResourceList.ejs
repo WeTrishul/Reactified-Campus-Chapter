@@ -61,15 +61,16 @@
         <!-- component -->
 <div class="my-16 py-16 h-screen">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine-ie11.min.js" defer></script>
+
       <div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-1 gap-4 mx-auto  w-full  px-3 pb-3" x-data="{ open: false, color: false }" @keydown.escape="open = false" @click.away="open = false">
         <%for(var i=l-1;i>=0;i--){%>
                     
                       <div class="flex items-center bg-indigo-500 rounded-md p-3 text-white ">
                           <div>
                              
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>   
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                              </svg>  
                       
                         </div>
                           <div class="px-3 mr-auto">
@@ -77,10 +78,17 @@
                               <small class="text-xs"><%=arr[i].user%></small>
                           </div>
                           <div class="relative">
-                              <a href="<%=arr[i].ele%>" @click="open = !open">
+                              <a href="/fileresources/<%=arr[i].name%>" @click="open = !open">
+                                <p class=" cursor-pointer transition duration-500 ease-in-out hover:shadow hover:bg-indigo-600 transition duration-500 ease-in-out  hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 ...">Open</p>
                                    <!-- <svg fill="currentColor" class="w-5 h-5"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg> -->
-                                    <p class=" cursor-pointer transition duration-500 ease-in-out hover:shadow hover:bg-indigo-600 transition duration-500 ease-in-out  hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 ...">Open</p>
+                                    
                                 </a>
+                                    <%if(locals.user.username===arr[i].user){%>
+                                <a href="/deleteres<%=arr[i].ele%>/<%=category%>/<%=arr[i].user%>" @click="open = !open">
+                                    <p class=" cursor-pointer transition duration-500 ease-in-out hover:shadow hover:bg-indigo-600 transition duration-500 ease-in-out  hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 ...">Del</p>
+                                       <!-- <svg fill="currentColor" class="w-5 h-5"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg> -->
+                                    </a>
+                                    <%}%>
                           </div>
                       </div>
                       

@@ -1,5 +1,6 @@
 const resourses = require('../models/resourses')
 const User = require('../models/user')
+const Folder = require('../models/resourceFolder')
 
 const cookieParser = require('cookie-parser')
 const express = require('express')
@@ -20,50 +21,14 @@ module.exports.getresoursePage = async(req,res)=>{
     }
 
     const category = req.params.category
-    let cat_data = await resourses.find({})
+    let cat_data = await Folder.find({categoryName:category})
 
-                 if(!cat_data.length)
-                    {
-                        const temp = await resourses.create({})
-                        cat_data.push(temp)
-                    }
     try {
-
-        let categoryArray=[]
-        if(category==='DSA')
-        {
-            categoryArray = cat_data[0].dsa
-        }
-       else if(category==='CP')
-        {
-            categoryArray = cat_data[0].cp
-        }
-        else if(category==='APTI')
-        {
-            categoryArray = cat_data[0].apti
-        }
-        else if(category==='PLACEMENTS')
-        {
-            categoryArray = cat_data[0].placements
-        }
-        else if(category==='GATE')
-        {
-            categoryArray = cat_data[0].gate
-        }
-        else if(category==='CORE')
-        {
-            categoryArray = cat_data[0].coresub
-        }
-        else
-        {
-            categoryArray = cat_data[0].dev
-        }
-
-        console.log(categoryArray)
         res.render('viewResourceList',{
             title:'hello',
-            arr:categoryArray,
-            l:categoryArray.length
+            arr:cat_data,
+            l:cat_data.length,
+            category
         })
     } catch (error) {
         console.log('resources nhi dikha pa rha hai',error)
@@ -72,7 +37,144 @@ module.exports.getresoursePage = async(req,res)=>{
 }
 
 
-module.exports.getuploadPage =  (req,res)=>{
+module.exports.showFilesFromResources = async(req,res)=>{
+
+    if(!req.isAuthenticated())
+        {
+      return   res.redirect('/login')
+    }
+
+    const foldername = req.params.foldername
+    console.log(foldername)
+    let cat_data = await Folder.findOne({name:foldername})
+    console.log(cat_data)
+
+    try {
+        res.render('viewFilesFromResourceList',{
+            title:'hello',
+            arr:cat_data,
+            l:cat_data.files.length
+        })
+    } catch (error) {
+        console.log('resources nhi dikha pa rha hai',error)
+        res.render('error_page')
+    }
+}
+
+
+/*module.exports.create = async(req,res)=>{
+    const category = req.params.category
+    const allFolders = await Folder.find({category}).populate('userid')
+    const user = await Folder.findOne({userid:req.user._id}) 
+
+    try {
+
+        if(user.length==0)
+        {
+            res.render('create_folder',{
+                allFolders,
+                isPresent:false
+            })
+        }
+        else{
+            res.render('create_folder',{
+                allFolders,
+                isPresent:true
+            }) 
+        }
+       
+    } catch (error) {
+        console.log(error.message)
+        res.render('error_page')
+        
+    }
+}*/
+
+module.exports.createFolder = async (req,res)=>{
+    const category = req.params.category
+    const str = req.user.username+'_'+category
+    console.log(str)
+    const user = await Folder.findOne({name:str})
+    let allFiles
+
+   try {
+    if(!user)
+    {
+        const folder = await new Folder({
+            name:req.user.username+'_'+category,
+            userid: req.user._id,
+            categoryName:category
+        })
+
+        await folder.save()
+    }
+    else
+    {
+        allFiles = await Folder.findOne({name:str}).populate('userid')
+    }
+
+    console.log(allFiles)
+    res.render('viewUploadPage',{
+        title:'Hello',
+        category,
+       allFiles
+    })
+   } catch (error) {
+       console.log(error.message)
+       res.render('error_page')
+   }
+}
+
+module.exports.deleteResource = async (req,res)=>{
+    if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+       }
+
+       let rid1 = '\\uploads\\resources/'
+       let fileName = req.params.rid
+      console.log('cuta hua string',fileName)
+       rid1+=fileName
+       console.log(rid1)
+
+       let foldername = req.params.foldername
+       console.log(foldername)
+
+       try {
+
+        let cat_data = await Folder.findOne({name:foldername})
+        var Newarr = [] 
+
+           let arr = cat_data.files
+
+           console.log('array before deletion',arr)
+
+           console.log(typeof(rid1))
+
+            arr.forEach((obj)=>{
+               
+                if((obj.ele!==rid1) && obj.user===req.user.username)
+                {
+                    Newarr.push(obj)
+                }
+                   
+            })
+
+           console.log('array after deletion',Newarr)
+           cat_data.files=Newarr
+            await cat_data.save()
+
+            fs.unlinkSync(path.join(__dirname,'..',rid1))
+             res.redirect('/dashboard')
+    }        
+        catch (error) {
+           console.log('delete resources ka error',error.message)
+           res.render('error_page')
+       }
+}
+
+
+module.exports.getuploadPage =  (req,res)=>{//tmko hata denge hm beta!
 
     if(!req.isAuthenticated())
         {
@@ -99,20 +201,14 @@ module.exports.postresourses = async(req,res)=>{
             try {
 
                 const _id = req.params.id
-                const category = req.body.patanhi
+                const category = req.body.patanhi//yeh beta hatega
                 console.log('category',category)
                 console.log(req.body.flag)
                 const name = req.body.name
-                let catData = await resourses.find({})
+                const str = req.user.username+'_'+category
+                let catData = await Folder.findOne({name:str})
 
-                 if(!catData.length)
-                    {
-                        const temp = await resourses.create({})
-                        catData.push(temp)
-                    }
-                console.log(catData)
-                let user = await User.findOne({_id})
-                
+                console.log(catData)                
                 if(error)
             {
                 console.log('******Multer Error*****'+error.message)  
@@ -141,11 +237,17 @@ module.exports.postresourses = async(req,res)=>{
 
                 console.log(arr)
 
-                switch (category) {
+                arr.forEach((ele,i=1) =>{
+                    var fileName= name+' '+i;
+                    catData.files.push({ele,user:req.user.username,name:fileName})
+                    i++;
+                })
+
+                /*switch (category) {
                         case 'DSA':
                         arr.forEach((ele,i=1) =>{
                             var fileName= name+' '+i;
-                            catData[0].dsa.push({ele,user:user.username,name:fileName})
+                            catData.files.push({ele,user:user.username,name:fileName})
                             i++;
                         })
                         break;
@@ -198,21 +300,23 @@ module.exports.postresourses = async(req,res)=>{
                     default:
                         console.log(category)
                         break;
-                }
+                }*/
 
-                console.log(catData[0])
-                await catData[0].save()
+                console.log(catData)
+                await catData.save()
 
                 if (req.body.flag){
                 
                     console.log('yahan aagya 1')
-                    return res.status(200).json({
+                   return res.status(200).json({
                         data: {
                             done: 'yes'
                         },
                         message: "uploaded!"
                     });
-                }   
+                }
+                
+                
            }
             } catch (error) {
                 console.log('ajax ka natak',error)
@@ -222,5 +326,32 @@ module.exports.postresourses = async(req,res)=>{
     }catch (error) {
         console.log('Error'+error)
         res.redirect('back')
+    }
+}
+
+
+
+
+
+module.exports.create = async(req,res)=>{
+    const username = req.params.username
+
+    try {
+        const user = User.findOne({username})
+        console.log(user)
+        const folder = await Folder.find({username:user.username})
+
+        console.log(folder)
+        
+        if(folder.length==0)
+        {
+            const newfolder = new Folder({})           
+        }
+        else
+        {
+           console.log('Madarchod!!') 
+        }
+    } catch (error) {
+        console.log('lawda Madarchod!!')
     }
 }

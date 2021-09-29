@@ -44,31 +44,11 @@
                     <input id="fm" type="submit" value="Submit">              
                 </form>                  
             </div>          
-        </div> -->
+        </div> -->      
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-        <form id="file-form" class="mt-40 " action="/resourses/<%=locals.user.id%>" method="post" enctype="multipart/form-data">
+        <form id="file-form" class="mt-40 " action="/resourses/<%=locals.user.id%>" method="post" enctype="multipart/form-data" > 
     <div class="bg-white p7 rounded w-9/12 mx-auto shadow-xl">
         <div x-data="dataFileDnD()" class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
             <div x-ref="dnd"
@@ -135,52 +115,13 @@
 <!-- <div id="and" class="flex justify-center  items-center">
 <input class="shadow-xl shadow appearance-none border p-6 rounded text-grey-darker" id="name" name="name" placeholder="name">
 </div> -->
-
-
-
-
-
-
-
-
-        
+  
         <input type="hidden" value="<%=locals.user._id%>" id="userid">
+        <input type="hidden" value="<%=category%>" id="category">
         
         <div class="main flex border border-gray-300 rounded-full overflow-hidden m-4 select-none">
-          <div class="title  py-3 my-auto px-5 bg-blue-500 text-white text-sm font-semibold mr-3">Select Category</div>
-          <label class="flex radio p-2 cursor-pointer">
-            <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="DSA" />
-            <div class=" title px-2" >Dsa</div>
-          </label>
-        
-          <label class="flex radio p-2 cursor-pointer">
-            <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="CP" />
-            <div class="title px-2" >Cp</div>
-          </label>
-        
-          <label class="flex radio p-2 cursor-pointer">
-            <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="DEV" />
-            <div class=" title px-2" >Dev </div>
-          </label>
-        
-          <label class="flex radio p-2 cursor-pointer">
-            <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="APTI" />
-            <div class="title px-2">Apti</div>
-          </label>
-        
-          <label class="flex radio p-2 cursor-pointer">
-            <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="GATE" />
-            <div class="title px-2" >Gate</div>
-          </label>
-        
-          <label class="flex radio p-2 cursor-pointer">
-            <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="CORE" />
-            <div class="title px-2">Core</div>
-          </label>
-          <label class="flex radio p-2 cursor-pointer">
-            <input class="javascript my-auto transform scale-125" type="radio" name="Option" value="PLACEMENTS" />
-            <div class="title px-2">Placements</div>
-          </label>
+          <div class="title  py-3 my-auto px-5 bg-blue-500 text-white text-sm font-semibold mr-3"><%=category%></div>
+          
 
           <input class="shadow appearance-none border p-2 rounded text-grey-darker" id="name" name="name" placeholder="File Title">
 
@@ -267,6 +208,41 @@
             };
         }
         </script>
+
+            <%if(allFiles){%>
+<div class="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-1 gap-4 mx-auto  w-full  px-3 pb-3" x-data="{ open: false, color: false }" @keydown.escape="open = false" @click.away="open = false">
+                 <%for(var i=allFiles.files.length-1;i>=0;i--){%>
+                
+                  <div class="flex items-center bg-indigo-500 rounded-md p-3 text-white ">
+                      <div>
+                         
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>   
+                  
+                    </div>
+                      <div class="px-3 mr-auto">
+                          <h4 class="font-bold"><%=allFiles.files[i].name%></h4>
+                          <small class="text-xs"><%=allFiles.files[i].user%></small>
+                      </div>
+                      <div class="relative">
+                          <a href="<%=allFiles.files[i].ele%>" @click="open = !open">
+                            <p class=" cursor-pointer transition duration-500 ease-in-out hover:shadow hover:bg-indigo-600 transition duration-500 ease-in-out  hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 ...">Open</p>
+                               <!-- <svg fill="currentColor" class="w-5 h-5"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg> -->
+                                
+                            </a>
+                                <%if(locals.user.username===allFiles.files[i].user){%>
+                            <a href="/deleteres<%=allFiles.files[i].ele%>/<%=category%>/<%=allFiles.name%>" @click="open = !open">
+                                <p class=" cursor-pointer transition duration-500 ease-in-out hover:shadow hover:bg-indigo-600 transition duration-500 ease-in-out  hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 ...">Del</p>
+                                   <!-- <svg fill="currentColor" class="w-5 h-5"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg> -->
+                                </a>
+                                <%}%>
+                      </div>
+                  </div>
+                  
+                  <%}%>
+              </div>
+              <%}%>
 
 
 

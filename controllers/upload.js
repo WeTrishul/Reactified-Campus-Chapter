@@ -93,8 +93,6 @@ module.exports.upload = async(req,res)=>{
                
                 
             } 
-            
-
            catch (error) {
                 console.log(error)
                 res.render('error_page')
