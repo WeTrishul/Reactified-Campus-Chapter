@@ -93,9 +93,7 @@
                     </div>
                         
                     <h3 class="text-gray-600 font-lg text-semibold leading-6">....</h3>
-                    <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit.
-                        Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
+                    <p class="text-sm text-gray-500 hover:text-gray-600 leading-6"><%=searchuser.bio%></p>
                     
                 </div>
                 <!-- End of profile card -->
@@ -112,7 +110,7 @@
 
                   <div class="container row">
                     <div class="jumbotron col-sm-4 pull-center">
-                                <%if((locals.user)){%>
+                                <%if((locals.user) && locals.searchuser._id==locals.user.id ){%>
                             <form action="/profilepage/setdp/<%=locals.searchuser._id%>" method="post" enctype="multipart/form-data">
                             <input type="file" name="dp" >
                             <div class="form-group">
@@ -177,7 +175,7 @@
                   Contributions
                 </p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                  376
+                    <%=searchuser.resourcesuploaded + searchuser.arr.length%>
                 </p>
               </div>
             </div>

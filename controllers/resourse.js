@@ -165,6 +165,12 @@ module.exports.deleteResource = async (req,res)=>{
            console.log('array after deletion',Newarr)
            cat_data.files=Newarr
             await cat_data.save()
+            
+
+            const user = await User.findById(req.user._id)
+                user.resourcesuploaded -= 1
+                await user.save()
+
 
             fs.unlinkSync(path.join(__dirname,'..',rid1))
              res.redirect('back')
@@ -238,12 +244,16 @@ module.exports.postresourses = async(req,res)=>{
                 arr =  paths.split(',')
 
                 console.log(arr)
-
+                const user = await User.findById(req.user._id)
+                user.resourcesuploaded += arr.length
+                await user.save()
                 arr.forEach((ele,i=1) =>{
                     var fileName= name+' '+i;
                     catData.files.push({ele,user:req.user.username,name:fileName})
                     i++;
                 })
+
+
 
                 /*switch (category) {
                         case 'DSA':

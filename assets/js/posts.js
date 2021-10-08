@@ -55,8 +55,8 @@
                <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src="${ post.userid.dp }" alt="avatar">
                <div class="">
                   <div class="flex items-center justify-between">
-                     <h2 class="text-lg font-semibold text-gray-900 -mt-1">${ post.userid.username } </h2>
-                     <a class="report-button" data-reports="${ post.report.length }" href="/Reporthandler/?id=${ post._id }&type=comment"><small class="text-red-700">${ post.report.length } Report</small></a>
+                  <a href="/profilepage/${ post.userid.username }">  <h2 class="text-lg font-semibold text-gray-900 -mt-1">${ post.userid.username } </h2></a>
+                     <a class="report-button" data-reports="${ post.report.length }" href="/Reporthandler/?id=${ post._id }&type=post"><small class="text-red-700">${ post.report.length } Report</small></a>
 
                   </div>
                   <p class="mt-3 text-gray-700 text-sm">

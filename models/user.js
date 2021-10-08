@@ -100,6 +100,15 @@ const userSchema = new mongoose.Schema({
     },
     arr:{
         type:Array
+    }, 
+    resourcesuploaded : {
+        type:Number,
+        default:0
+    }, 
+    bio:{
+        type:String,
+        default:'No bio'
+
     }
 }, 
 {
