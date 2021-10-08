@@ -154,7 +154,7 @@ module.exports.deleteResource = async (req,res)=>{
 
             arr.forEach((obj)=>{
                
-                if((obj.ele!==rid1) && obj.user===req.user.username)
+                if(obj.ele!==rid1)
                 {
                     console.log(obj.ele)
                     Newarr.push(obj)
