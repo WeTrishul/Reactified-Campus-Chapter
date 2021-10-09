@@ -89,6 +89,8 @@
 </head>
 <body class="bg-gray-900">
     
+  
+
 <!-- component -->
 <div class="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 shadow-md">
     <div class="py-6 px-8 rounded-xl">
@@ -120,7 +122,7 @@
             </div>
             <div class="my-5 text-sm">
                 <label for="password" class="block text-black">Password</label>
-                <input type="password" name="password" id="password" class="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Password" />
+                <input type="password" name="password" id="password" class="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full" placeholder="Password (minimum 8 characters)" />
                 <div class="flex justify-end mt-2 text-xs text-gray-600">
                 </div>
             </div>
@@ -147,5 +149,13 @@
 </div>
     
 
+<% if(msg){ %>
+    <script>
+        function myFunction() {
+alert('Go and verify your email');
+}
+myFunction()
+    </script>
+    <%}%> 
 </body>
 </html>

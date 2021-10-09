@@ -39,7 +39,9 @@ module.exports.getlogin=(req,res)=>{
 else
 {
     res.render('login',{
-        title:'login'
+        title:'login',
+        msg:undefined,
+        flag:undefined
     })
 }
 }
@@ -57,7 +59,8 @@ if(req.isAuthenticated())
 else
 {
     res.render('signup',{
-        title:'signup'
+        title:'signup',
+        msg:undefined
     })
 }
 
@@ -116,7 +119,12 @@ module.exports.postsignup = async (req,res)=>{
 
                 if(user)
                 {
-                    res.redirect('/login')  
+                    // res.redirect('/login')  
+                   return res.render('login',{
+                        title:'login',
+                        msg:'Signup failed : User already exists',
+                        flag:'error'
+                    })
                 }
                 else
                 {
@@ -124,7 +132,12 @@ module.exports.postsignup = async (req,res)=>{
                     await Newuser.save()
                 }
                 console.log(decodedData)
-                res.redirect('/login')
+                // res.redirect('/login')
+                res.render('login',{
+                    title:'login',
+                    msg:'Verified successfully !!',
+                    flag:'success'
+                })
             })
             
         } catch (error) {  

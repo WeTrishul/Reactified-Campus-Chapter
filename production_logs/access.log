@@ -410,3 +410,6 @@
 [0mGET /users/auth/google/js/notification_engine.js [33m404[0m 7.389 ms - 182[0m
 [0mGET /users/auth/google/js/notification_engine.js [33m404[0m 0.490 ms - 182[0m
 [0mGET /index.css [33m404[0m 1.006 ms - 148[0m
+[0mGET /favicon.ico [33m404[0m 4.080 ms - 150[0m
+[0mGET /index.css [33m404[0m 3.929 ms - 148[0m
+[0mGET /index.css [33m404[0m 4.117 ms - 148[0m
