@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.fab-container {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 990;
+  cursor: pointer;
+}
+
+.fab-holder {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: #016fb9;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.fab-holder:hover {
+  opacity: 0.8;
+}
+
+.add-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-style: 25px;
+  color: #ffffff;
+}
+
+.fab {
+  width: 60px;
+  height: 60px;
+  background: #d23f31;
+}
+
+.icon-option {
+  list-style: none;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  opacity: 0;
+  transition: all 0.4s ease;
+  transform: scale(0);
+  transform-origin: 85% bottom;
+}
+
+.fab:hover + .icon-option,
+.icon-option:hover {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.icon-option li {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+}
+
+.myname {
+  padding: 2px 5px;
+  align-self: center;
+  user-select: none;
+  white-space: nowrap;
+  border-radius: 3px;
+  font-size: 16px;
+  background: #666666;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  margin-right: 10px;
+}

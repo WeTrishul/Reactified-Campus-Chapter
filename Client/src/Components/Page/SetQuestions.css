@@ -1,0 +1,16 @@
+.setq-box {
+  width: 30%;
+  height: 40vh;
+  position: relative;
+  margin: 2% auto;
+  border-radius: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 5px 5px 2px black;
+  text-align: center;
+  justify-content: center;
+}
+
+.question-form {
+  margin: 6rem;
+}
