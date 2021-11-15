@@ -1,6 +1,44 @@
 import React from 'react';
 import './AllUsers.css';
+import {useEffect,useState} from 'react'
+import axios from 'axios'
 function AllUsers() {
+
+
+    const [allusers,setAllUsers] = useState([]);
+
+
+
+    useEffect(() =>{
+
+        axios.get('http://localhost:3000/listUsers')
+        .then(response => {
+            return response.data
+        }).then(data =>{
+            console.log(data)
+            setAllUsers(data.data.users)
+        });
+
+    },[])
+
+
+    const deleteHandler = (name) =>{
+        name.preventDefault();
+        console.log(name.target.id)
+
+        axios.get('http://localhost:3000/delete/?username='+name.target.id)
+        .then(response => {
+            return response.data
+        }).then(data =>{
+            console.log(data)
+            document.getElementById('tr-'+ name.target.id).remove()
+        });
+
+    }
+
+
+
+
     return (
         <div>
             <table className='user-table'>
@@ -12,30 +50,22 @@ function AllUsers() {
                         
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Anand kumar Choudhary</td>
+                {allusers.map((data) =>{
+                       return(
+                        <tbody key={data._id}>
+                    <tr id={'tr-'+data.username}>
+                        <td>{data.name}</td>
                         
-                        <td><button className='table-btn'>Delete</button></td>
-                        
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr>
-                        <td>Shivam Sharma</td>
-                        
-                        <td><button className='table-btn'>Delete</button></td>
+                        <td><button onClick={deleteHandler} id ={data.username} className='table-btn'>Delete</button></td>
                         
                     </tr>
                 </tbody>
-                <tbody>
-                    <tr>
-                        <td>Harikesh Rai</td>
-                        
-                        <td><button className='table-btn'>Delete</button></td>
-                        
-                    </tr>
-                </tbody>
+
+                       )
+                   })}
+
+                
+                
             </table>
         </div>
     )

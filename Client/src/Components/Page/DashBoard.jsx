@@ -14,6 +14,7 @@ function DashBoard(props) {
 
     const authCtx=useContext(AuthContext)
     let userId=authCtx.id;
+    let userName = authCtx.username;
 
     const [blogs,setBlogs] = useState([]);
     const [events,setEvents] = useState([]);
@@ -61,6 +62,7 @@ function DashBoard(props) {
                 <div className="announce">
                     <h3>Announcement</h3>
                     {userId}
+                    {userName}
                     
                    
                 </div>

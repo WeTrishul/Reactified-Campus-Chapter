@@ -54,7 +54,7 @@ router.post('/reset/password/:token',UserController.changePassword)
 
 
 router.get('/listUsers',UserController.listUsers)
-router.get('/delete/:username',UserController.delete)
+router.get('/delete',UserController.delete)
 router.get('/userrole',UserController.changeRole)
 
 

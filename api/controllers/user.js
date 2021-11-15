@@ -437,17 +437,26 @@ module.exports.listUsers = async (req,res)=>{
 
     try {
 
-        if(req.isAuthenticated())
-        {
+        // if(req.isAuthenticated())
+        // {
             const user = await User.find({})
             // console.log(user)
-            return res.render('AllUsers',{
-                 title:'All Users',
-                 users:user
-             })
-        }
-        else
-         res.redirect('/login')
+            // return res.render('AllUsers',{
+            //      title:'All Users',
+            //      users:user
+            //  })
+            
+             return res.status(200).json({
+                data: {
+                    title:'All Users',
+                users : user
+                    
+                },
+                message: "Applied Successfully!"
+            });
+        // }
+        // else
+        //  res.redirect('/login')
        
         
     } catch (error) {
@@ -458,16 +467,16 @@ module.exports.listUsers = async (req,res)=>{
 }
 
 module.exports.delete = async(req,res)=>{
-    const username = req.params.username
+    const username = req.query.username
     try {
 
-        if(req.isAuthenticated())
-        {
+        // if(req.isAuthenticated())
+        // {
             const user = await User.findOne({username:username})
-        if(user.UserType==='Admin')
-        {
-            return res.redirect('/listUsers')
-        }
+        // if(user.UserType==='Admin')
+        // {
+        //     return res.redirect('/listUsers')
+        // }
 
         if(user.dp!=='Nhi hai') 
         {
@@ -478,10 +487,16 @@ module.exports.delete = async(req,res)=>{
         await User.deleteOne({username:username})
         
         console.log(user)
-        return res.redirect('/listUsers')
-        }
-        else
-        res.redirect('/login')
+        return res.status(200).json({
+            data: {
+                message: "Deleted Successfully"
+            },
+            message: "Applied Successfully!"
+        });
+        // return res.redirect('/listUsers')
+        // }
+        // else
+        // res.redirect('/login')
         
     } catch (error) {
          console.log('Error from delete',error)
@@ -523,7 +538,7 @@ module.exports.changeRole = async(req,res)=>{
 }
 
 module.exports.listUserQuestions = async (req,res)=>{
-   
+
 
     try {
         if(!req.isAuthenticated())

@@ -59,8 +59,7 @@ function UpcomingEvent()
                         <div className="event-box">
                         <div className="event-banner" key={data._id}>
                             
-                            <img className='image-img' src='https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg'/>
-                            {data.eventbanner}
+                            <img className='image-img' src={'http://localhost:3000/'+data.eventbanner}/>
                             <h2>{data.eventname}</h2>
                             <p>{data.eventDate}
                             {data.eventStartTime}
