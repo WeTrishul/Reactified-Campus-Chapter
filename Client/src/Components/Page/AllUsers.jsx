@@ -1,5 +1,6 @@
 import React from 'react';
 import './AllUsers.css';
+
 import {useEffect,useState} from 'react'
 import axios from 'axios'
 function AllUsers() {
@@ -36,9 +37,6 @@ function AllUsers() {
 
     }
 
-
-
-
     return (
         <div>
             <table className='user-table'>
@@ -64,6 +62,7 @@ function AllUsers() {
                        )
                    })}
 
+                
                 
                 
             </table>
