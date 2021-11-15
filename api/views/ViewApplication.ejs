@@ -1,0 +1,285 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+
+    <!-- <link rel="stylesheet" href="index.css"> -->
+  
+  <style>
+    *{
+			margin:0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body{
+			background-color: #e4ecf0;
+		}
+		.container{
+			width: 70%;
+			margin:2rem auto;
+		}
+		.table{
+			width: 100%;
+			padding:1rem 20px;
+			display: flex;
+			justify-content: space-between; 
+		}
+		.heading{
+			flex-basis: 50%;
+			text-align: left;
+
+		}
+		h1{
+			font-size: 2.5rem;
+			font-weight: 900;
+			color: forestgreen;
+			text-shadow: 1px 2px 1px #fff;
+			font-family: sans-serif;
+
+		}
+		.search-box{
+			flex-basis: 20%;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			position: relative;
+			padding-right: 3px;
+		}
+		input{
+			width: 0;
+			height: 50px;
+			border:none;
+			outline: none;
+			background-color: #fff;
+			color: green;
+			font-size: 20px;
+			padding:0px 20px;
+			box-shadow: 0 0 15px 1px #b6bbc0;
+			transition: 1s linear;
+			border-radius: 50px;
+
+		}
+
+		.search-btn{
+			position: absolute;
+			top:50%;
+			transform: translateY(-50%);
+			right: 0;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background-color: forestgreen;
+
+		}
+
+		.fas{
+			position: absolute;
+			top:50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			color: #fff;
+			font-size: 20px; 
+		}
+
+		.active{
+			width: 100%;
+		}
+
+		table{
+			width: 100%;
+			border-collapse: collapse;
+			text-align: center;
+		}
+
+		th,td{
+			padding: 1rem 20px;
+			border:1px solid #bbb;
+		}
+
+		th{
+			font-size: 15px;
+			font-weight: bold;
+			color: #fff;
+			background-color: forestgreen;
+			font-family: sans-serif;
+
+		}
+		td{
+			font-size: 18px;
+			font-family: sans-serif;
+			font-weight: lighter;
+
+		}
+
+		thead th:nth-child(1){
+			padding:1rem 5px;
+		}
+
+		tbody tr:nth-child(even){
+			background-color: #f5f5f5;
+		}
+		tbody tr:nth-child(odd){
+			background-color: #fff;
+		}
+
+		@media(max-width: 500px){
+			.container{
+				width: 90%
+			}
+			.table{
+				flex-direction: column-reverse;
+			}
+			.heading{
+				width: 100%;
+				text-align:center;
+			}
+			.search-box{
+				width: 100%;
+				margin-bottom: 10px;
+			}
+			thead{
+				display: none;
+			}
+			tbody,tr,td{
+				display: block;
+				width: 100%;
+			}
+			tr{
+				margin-bottom: 2rem;
+			}
+			td{
+				text-align:right;
+				position: relative;
+			}
+			td:before{
+				content: attr(data-label);
+				position: absolute;
+				left: 5px;
+				font-weight: bold;
+				color: #000;
+				font-size: 15px;
+
+			}
+		}
+  </style>
+
+</head>
+<body class="bg-gray-200">
+    
+<!-- component -->
+<%- include('_navbar') -%>
+
+
+
+
+<!----------------------------###################  Navbar ends  ###############------------------------------------------------>
+
+<!----------------------------###################  ------------  ###############------------------------------------------------>
+
+<!----------------------------###################  Table starts  ###############------------------------------------------------>
+
+
+<body class="flex items-center justify-center">
+
+
+
+  
+  <!-- Priviledge Conditions
+  Resource Upload Page 
+  Change roles
+  user update page 
+  others profile 
+  Add proper view to question list
+
+-->
+
+
+<% if(!arr || arr.length==0){ %>
+
+	<div class="flex flex-col mt-4  bg-center bg-cover bg-no-repeat bg-gray-200">
+		<div class="grid place-items-center w-4/5 mx-auto p-10 my-20 sm:my-auto bg-white-600 border-4 border-indigo-600 bg-opacity-70 rounded-xl shadow-2xl space-y-5 text-center cursor-pointer">
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="h-24 w-24 text-indigo-600" viewBox="0 0 16 16">
+	<path d="M4.968 9.75a.5.5 0 1 0-.866.5A4.498 4.498 0 0 0 8 12.5a4.5 4.5 0 0 0 3.898-2.25.5.5 0 1 0-.866-.5A3.498 3.498 0 0 1 8 11.5a3.498 3.498 0 0 1-3.032-1.75zM7 5.116V5a1 1 0 0 0-1-1H3.28a1 1 0 0 0-.97 1.243l.311 1.242A2 2 0 0 0 4.561 8H5a2 2 0 0 0 1.994-1.839A2.99 2.99 0 0 1 8 6c.393 0 .74.064 1.006.161A2 2 0 0 0 11 8h.438a2 2 0 0 0 1.94-1.515l.311-1.242A1 1 0 0 0 12.72 4H10a1 1 0 0 0-1 1v.116A4.22 4.22 0 0 0 8 5c-.35 0-.69.04-1 .116z"/>
+	<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-1 0A7 7 0 1 0 1 8a7 7 0 0 0 14 0z"/>
+	</svg>
+	
+			<h1 class="text-4xl font-bold uppercase text-indigo-600 transition duration-500">No applications to show</h1>
+	<!-- <h2 class="text-xl text-gray-700 transition duration-500">We are almost there to introduce our new event.</h2> -->
+	<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+	  
+		<!-- <a href="https://www.facebook.com/QuickToolz" title="Quicktoolz On Facebook"
+		  class="md:w-32 tracking-wide font-bold rounded border-2 border-indigo-500 hover:text-white hover:border-blue-600 hover:bg-blue-600 shadow-md py-2 px-6 inline-flex items-center transition duration-500">
+		  <span class="mx-auto">Facebook</span>
+		</a>
+	  
+	  
+		<a href="https://twitter.com/quicktoolz" title="Quicktoolz On Twitter"
+		  class="md:w-32 tracking-wide font-bold rounded border-2 border-indigo-500 hover:text-white hover:border-blue-500 hover:bg-blue-500 shadow-md py-2 px-6 inline-flex items-center transition duration-500">
+		  <span class="mx-auto">Twitter</span>
+		</a>
+	  
+	  
+		<a href="https://pinterest.com/quicktoolz/" title="Quicktoolz On Pinterest"
+		  class="md:w-32 tracking-wide font-bold rounded border-2 border-indigo-500 hover:text-white hover:border-red-600 hover:bg-red-600 shadow-md py-2 px-6 inline-flex items-center transition duration-500">
+		  <span class="mx-auto">Pintrest</span>
+		</a>
+	  
+	  
+		<a href="https://www.reddit.com/user/quicktoolz/" title="Quicktoolz On Facebook"
+		  class="md:w-32 tracking-wide font-bold rounded border-2 border-indigo-500 hover:text-white hover:border-yellow-600 hover:bg-yellow-600 shadow-md py-2 px-6 inline-flex items-center transition duration-500">
+		  <span class="mx-auto">Reddit</span>
+		</a> -->
+	  
+	</div>
+		</div>
+	</div>
+
+	<%}else{%>
+
+<div class="container">
+  <div class="table">
+   
+  </div>
+  <table>
+    <thead>
+      <th class="bg-indigo-500">username</th>
+      <th class="bg-indigo-500">role</th>
+      <th class="bg-indigo-500">link</th>
+      <th class="bg-indigo-500">Action</th>
+    </thead>
+    <tbody>
+      <%for(i of arr){%> 
+       
+      <tr  id="rolereq-<%=i.userid._id%>">
+        <td data-label="username"><%=i.userid.username%></td>
+        <td data-label="role"><%=i.appliedRole%></td>
+        <td data-label="link"><a href="<%=i.link1%>" class="text-blue-500">Go</a></td>
+        <td data-label="Action">
+          <%if((locals.user) && locals.user.UserType=='Admin'){%>
+
+          <a class="accept-user" href="/accept/<%=i.appliedRole%>/<%=i.userid.id%>" > <button  class="flex-no-shrink bg-green-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-green-500 text-white rounded-full">Accept</button></a> 
+            
+          <a class="delete-user" href="/reject/<%=i.appliedRole%>/<%=i.userid.id%>" ><button  class="flex-no-shrink bg-red-500 px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Delete</button></a>
+          <%}%>  
+        </td>
+      </tr>
+    </div>
+      <%}%>      
+    </tbody>
+  </table>
+</div>
+<script src="<%=assetPath('/js/viewapplication.js')%>" ></script>
+<script src="<%=assetPath('/js/Noty.js')%>"></script>
+<%}%>     
+<%- include('_footer') -%>
+</body>
+</html>

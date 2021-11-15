@@ -1,0 +1,415 @@
+<!-- <html>
+    <head>
+        <title>Upcoming Events</title>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    </head>
+    <body class="container">
+        <div class="page-header">
+            <h1>Login System</h1>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/UpcomingEvents">Upcoming Events</a></li>
+                        <li><a href="/profilepage">Profile</a></li>
+
+                        <%if((locals.user) && (user.UserType=="Admin")){%>
+                            <li><a href="/listUsers">All Users</a></li>
+                            
+                            <%}%>
+                              
+
+                        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+                        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+                        <li><a href="/teamchat">Team Chat</a></li>
+                        <%}%>
+
+                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
+                            <li><a href="/fileupload">Set Questions</a></li>
+                            <%}%>
+
+                        <li><a href="/Discuss">Discussion</a></li>
+                        <li><a href="/Leaderboards">Leaderboards</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">Log In</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+       
+        
+        <div id="user-chat-box">
+            <ul id="chat-messages-list" style="list-style-type:none;">
+                <li>
+                    <strong></strong>
+                    <sub></sub><br>
+                    <small></small>
+                </li>
+    
+            </ul>
+            <div id="chat-message-input-container">
+              <input id="chat-message-input" placeholder="Type message here">
+              <button id="send-message">Send</button>
+            </div>
+          
+          </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script src="https://cdn.socket.io/4.1.2/socket.io.min.js" integrity="sha384-toS6mmwu70G0fw54EGlWWeA4z3dyJ+dlXBtSURSKN4vyRFOcxd3Bzjj/AoOwY+Rg" crossorigin="anonymous"></script>
+        <script src='/js/chat_engine.js' ></script>
+
+        <script>
+            new ChatEngine('user-chat-box','<%=user.username%>','core')
+        </script>
+       
+    </body>
+</html> -->
+
+
+<!-- <html>
+    <head>
+        <title>Upcoming Events</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body class="container">
+        <div class="page-header">
+            <h1>Login System</h1>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/UpcomingEvents">Upcoming Events</a></li>
+                        <li><a href="/profilepage">Profile</a></li>
+
+                        <%if((locals.user) && (user.UserType=="Admin")){%>
+                            <li><a href="/listUsers">All Users</a></li>
+                            
+                            <%}%>
+
+                        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+                        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+                        <li><a href="/teamchat">Team Chat</a></li>
+                        <%}%>
+
+                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
+                            <li><a href="/fileupload">Set Questions</a></li>
+                            <%}%>
+
+                        <li><a href="/Discuss">Discussion</a></li>
+                        <li><a href="/Leaderboards">Leaderboards</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">Log In</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+       
+        
+        <div id="user-chat-box">
+            <ul id="chat-messages-list" style="list-style-type:none;">
+                <li>
+                    <strong></strong>
+                    <sub></sub><br>
+                    <small></small>
+                </li>
+    
+            </ul>
+            <div id="chat-message-input-container">
+              <input id="chat-message-input" placeholder="Type message here">
+              <button id="send-message">Send</button>
+            </div>
+          
+          </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script src="https://cdn.socket.io/4.1.2/socket.io.min.js" integrity="sha384-toS6mmwu70G0fw54EGlWWeA4z3dyJ+dlXBtSURSKN4vyRFOcxd3Bzjj/AoOwY+Rg" crossorigin="anonymous"></script>
+        <script src='/js/chat_engine.js' ></script>
+
+        <script>
+            new ChatEngine('user-chat-box','<%=user.username%>','executive')
+        </script>
+       
+    </body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+
+
+
+
+  <style>
+  li{
+        width: fit-content;
+  }
+      
+      </style>
+
+</head>
+<body class="bg-gray-200">
+    
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<div class="min-h-screen">
+  <div class="antialiased bg-gray-100 dark-mode:bg-gray-900">
+  <div class="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 ">
+    <div id="andy" x-data="{ open: true }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+      <div class="flex flex-row items-center justify-between p-4">
+        <a href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Campus Chapter</a>
+        <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
+          <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+            <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+            <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+      <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-end md:flex-row" style="z-index: 30;">
+        <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/dashboard">Dashboard</a>
+        <!-- <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/UpcomingEvents">Upcoming Events</a> -->
+        <%- include('_dropdown_events') -%>
+
+
+        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+        <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/teamchat">Chat</a>
+        <%}%>
+
+        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
+            <!-- <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/fileupload">Set Questions</a> -->
+
+            <%- include('_dropdown_setquestion') -%>
+           
+
+
+            <%}%>
+
+        <% if((locals.user) && (user.UserType=="Admin")){ %>
+        <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/listUsers">Users</a>
+        <%}%>
+        
+        <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/Discuss">Discuss</a>
+        <%- include('_resources') -%>
+        <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/Leaderboards">Leaderboard</a>
+
+        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+
+          <%- include('_polling') -%>
+
+          <%}%>
+
+
+
+        <a class="px-2 py-1 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/allblogs">Blogs</a>
+          
+        <%- include('_bell') -%>
+
+        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+          <button @click="open = !open" class="flex flex-row text-gray-900 bg-gray-200 items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <span>Myself</span>
+            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+          <div  x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full md:max-w-screen-sm md:w-screen mt-2 origin-top-right">
+            <div class="px-2 pt-2 pb-4 bg-gray-100 rounded-md shadow-lg dark-mode:bg-gray-700  text-black">
+              <div class=" gap-4">
+                <a class="flex flex row items-start rounded-lg bg-transparent p-2  dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/profilepage">
+                  <div class="bg-teal-500 text-black rounded-lg p-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
+                    </svg>                  </div>
+                  <div class="ml-3">
+                    <p class="font-semibold"> Profile</p>
+                    
+                  </div>
+                </a>
+
+                <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/update">
+                  <div class="bg-teal-500 text-black rounded-lg p-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                      <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+                    </svg>                  </div>
+                  <div class="ml-3">
+                    <p class="font-semibold">Edit Profile</p>
+                    <!-- <p class="text-sm">Check your latest comments</p> -->
+                  </div>
+                </a>
+
+               
+
+                <%if((locals.user) && (locals.user.UserType=="Admin")){%>
+                  
+                <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/applications">
+                  <div class="bg-teal-500 text-black rounded-lg p-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                      <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                    </svg>                  </div>
+                  <div class="ml-3">
+                    <p class="font-semibold">Applications</p>
+                    <!-- <p class="text-sm">Check your latest comments</p> -->
+                  </div>
+                </a>
+
+                  <%}else{%>
+
+                    <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/applyform">
+                      <div class="bg-teal-500 text-black rounded-lg p-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
+                          <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                        </svg>                  </div>
+                      <div class="ml-3">
+                        <p class="font-semibold">Apply</p>
+                        <!-- <p class="text-sm">Check your latest comments</p> -->
+                      </div>
+                    </a>
+
+                    <%}%>
+        
+
+                <a class="flex flex row items-start rounded-lg bg-transparent p-2 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="/logout">
+                  <div class="bg-teal-500 text-black rounded-lg p-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>                  </div>
+                  <div class="ml-3">
+                    <p class="font-semibold">Logout</p>
+                    
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>    
+      </nav>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdn.socket.io/4.1.2/socket.io.min.js" integrity="sha384-toS6mmwu70G0fw54EGlWWeA4z3dyJ+dlXBtSURSKN4vyRFOcxd3Bzjj/AoOwY+Rg" crossorigin="anonymous"></script>
+<script src='/js/notification_engine.js' ></script>
+<script src='/js/chat_engine.js' ></script>
+
+
+          <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin") || (user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+  
+              <script>
+                  new ChatEngine(undefined,'<%=locals.user._id%>','executivenotification')
+              </script>
+  
+            <%}%>
+
+<script>
+    new NotiEngine('user-chat-box','<%=user.username%>','executive')
+    const notifier = new Notihandler('<%=user.username%>')
+
+    $('#bll').click(()=>{
+    
+      $("#bll").css("fill", '#000000')
+      if('<%=locals.user.seenAllNotifications%>'!='yes')
+      {
+        console.log('hi')
+        notifier.changebell()
+      }
+      
+    })
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<div style=" overflow-y: auto; height: 75vh;">
+<div id="user-chat-box">
+  <ul id="chat-messages-list" style="list-style-type:none;">
+      <li>
+          <strong></strong>
+          <sub></sub><br>
+          <small></small>
+      </li>
+
+  </ul>
+
+</div>
+<div style="  position: fixed;
+bottom: 0;
+width: 100%;" >
+  <!-- <div id="chat-message-input-container" class="m-4 flex">
+    <input id="chat-message-input" class="w-full rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="message"/>
+  <button id="send-message" class="px-8 rounded-r-lg bg-yellow-400  text-gray-800 font-bold p-4 uppercase border-yellow-500 border-t border-b border-r">Send</button>
+  </div> -->
+
+
+  <div id="chat-message-input-container" class="m-4 flex">
+    <input id="chat-message-input" class="w-full rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="Type message here">
+    <button id="send-message" class="px-8 rounded-r-lg bg-yellow-400  text-gray-800 font-bold p-4 uppercase border-yellow-500 border-t border-b border-r" >Send</button>
+  </div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdn.socket.io/4.1.2/socket.io.min.js" integrity="sha384-toS6mmwu70G0fw54EGlWWeA4z3dyJ+dlXBtSURSKN4vyRFOcxd3Bzjj/AoOwY+Rg" crossorigin="anonymous"></script>
+<script src= "<%=assetPath('js/chat_engine.js')%>"></script>
+
+<script>
+    new ChatEngine('user-chat-box','<%=locals.user._id%>','core')
+</script>
+
+</body>
+</html>

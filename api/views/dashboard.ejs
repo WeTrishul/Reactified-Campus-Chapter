@@ -1,0 +1,598 @@
+<!-- <html>
+    <head>
+        <title><%=title%></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body class="container">
+        <div class="page-header">
+            <h1>Login System</h1>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/poll">Home</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/UpcomingEvents">Upcoming Events</a></li>
+                        <li><a href="/profilepage">Profile</a></li>
+                        <%if((locals.user) && (user.UserType=="Admin")){%>
+                        <li><a href="/listUsers">All Users</a></li>
+                        
+                        <%}%>
+                          
+                        
+
+                        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+                        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+                        <li><a href="/teamchat">Team Chat</a></li>
+                        <%}%>
+
+
+                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
+                            <li><a href="/fileupload">Set Questions</a></li>
+                            <%}%>
+                        <li><a href="/Discuss">Discussion</a></li>
+                        <li><a href="/Leaderboards">Leaderboards</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">Log In</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container row">
+            
+        </div>
+        <%if(!locals.user){%>
+        <form action="\dashboard" >
+            <input class="btn btn-primary" type="submit" value="Update Handle"/>
+        </form>
+        <%}%>
+
+        <h1>Hii, Welcome to your Dashboard</h1>
+
+        <div class="container row">
+            <div class="jumbotron col-sm-4 pull-center">
+                <%if(locals.user){%>
+                <form action="/update/coderhandles/<%=locals.user.email%>" method="POST">
+                    <div class="form-group">
+                        <label>Username:</label>
+                        <input class="form-control" required type="text" name="username"/>
+                    </div>  
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input class="form-control" required type="password" name="password"/>
+                    </div>
+                    <div class="form-group">
+                        <label>CodeForces:</label>
+                        <input class="form-control" required type="text" name="codeforces"/>
+                    </div>
+                    <div class="form-group">
+                        <label>CodeChef:</label>
+                        <input class="form-control" required type="text" name="codechef"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Hackerrank:</label>
+                        <input class="form-control" required type="text" name="hackerrank"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Spoj:</label>
+                        <input class="form-control" required type="text" name="spoj"/>
+                    </div>
+                    <div class="form-group">
+                        <label>UserType:</label>
+                        <input class="form-control" required type="text" name="UserType"/>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="Update User"/>
+                    </div>
+                </form>                  
+            </div>          
+        </div>
+        <%}%>
+
+
+        
+
+    </body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <!-- <style>
+      .carousel-open:checked+.carousel-item {
+        position: relative;
+        opacity: 100;
+      }
+    
+      .carousel-item {
+        -webkit-transition: opacity 0.6s ease-out;
+        transition: opacity 0.6s ease-out;
+        z-index: -1;
+      }
+    
+      #carousel-1:checked~.control-1,
+      #carousel-2:checked~.control-2,
+      #carousel-3:checked~.control-3 {
+        display: block;
+      }
+    
+      .carousel-indicators {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        bottom: 2%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 10;
+      }
+    
+      #carousel-1:checked~.control-1~.carousel-indicators li:nth-child(1) .carousel-bullet,
+      #carousel-2:checked~.control-2~.carousel-indicators li:nth-child(2) .carousel-bullet,
+      #carousel-3:checked~.control-3~.carousel-indicators li:nth-child(3) .carousel-bullet {
+        color: #2b6cb0;
+        /*Set to match the Tailwind colour you want the active one to be */
+      }
+    </style> -->
+</head>
+<body class="bg-gray-200">
+    
+<!-- component -->
+<%- include('_navbar') -%>
+
+
+<!-------------------------------------------------------------###################------------------------------------------->
+<!------------------------------------------------------------- navbar ends------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+  
+<!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------Carousel start------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+
+
+<!DOCTYPE html>
+<html>
+   
+    
+
+		<style>
+			.carousel-open:checked + .carousel-item {
+				position: static;
+				opacity: 100;
+			}
+			.carousel-item {
+				-webkit-transition: opacity 0.6s ease-out;
+				transition: opacity 0.6s ease-out;
+        
+			}
+			#carousel-1:checked ~ .control-1,
+			#carousel-2:checked ~ .control-2,
+			#carousel-3:checked ~ .control-3 {
+				display: block;
+			}
+			.carousel-indicators {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				position: absolute;
+				bottom: 2%;
+				left: 0;
+				right: 0;
+				text-align: center;
+        z-index: 10;
+			
+			}
+
+      @media  (max-width:968px) {
+
+    
+  .anand {
+    
+    height: 30vh;
+   width: 100%;
+  }
+
+  .alund{
+    height: 30vh;
+   width: 100%;
+  }
+}
+@media  (min-width: 968px) and (max-width: 1440px) {
+  .anand {
+
+
+    height: 60vh;
+   width: 100%;
+  }
+
+  .alund{
+    height: 60vh;
+   width: 100%;
+  }
+}
+
+			#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+			#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
+			#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+				color: #2b6cb0;  /*Set to match the Tailwind colour you want the active one to be */
+			}
+		</style>
+        
+
+</head>
+
+<body class="bg-white font-sans leading-normal tracking-normal"  >
+
+<div class="carousel relative shadow-2xl bg-white" >
+	<div class="carousel-inner relative overflow-hidden w-full" >
+	  <!--Slide 1-->
+		<input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
+		<div class=" alund carousel-item absolute opacity-0 h-auto overflow-hidden  object-cover"  >
+            <% if(!events[0]) { %>
+                      <img src="https://cdn.codechef.com/download/banner/1627746015.png" class="lg: w-full h-full " alt="">
+
+                <%} else {%>
+      <img src="<%=events[0].eventbanner%>"  class=" anand w-full h-full object-fit"  alt="">
+      <%}%>
+
+      <div class="block h-full w-full bg-indigo-500 text-white text-5xl text-center">Slide 1</div>
+		</div>
+		<label for="carousel-3" class="prev control-1 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center  inset-y-0 left-0 my-auto" >‹</label>
+		<label for="carousel-2" class="next control-1 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center  inset-y-0 right-0 my-auto">›</label>
+		
+		<!--Slide 2-->
+		<input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
+		<div class=" alund carousel-item absolute opacity-0" >
+            <% if(!events[1]) { %>
+                <img src="https://cdn.codechef.com/download/banner/1627746015.png" class="lg: w-full h-full" alt="">
+
+          <%} else {%>
+<img src="<%=events[1].eventbanner%>"  class=" anand w-full h-full"  alt="">
+<%}%>
+			<div class="block h-full w-full bg-orange-500 text-white text-5xl text-center">Slide 2</div>
+		</div>
+		<label for="carousel-1" class="prev control-2 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+		<label for="carousel-3" class="next control-2 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label> 
+		
+		<!--Slide 3-->
+		<input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
+		<div class=" alund carousel-item absolute opacity-0" >
+            <% if(!events[2]) { %>
+                <img src="https://cdn.codechef.com/download/banner/1628600419.png" class=" anand w-full h-full" alt="">
+
+          <%} else {%>
+<img src="<%=events[2].eventbanner%>"  class=" anand w-full h-full"  alt="">
+<%}%>
+			<div class="block h-full w-full bg-green-500 text-white text-5xl text-center">Slide 3</div>
+		</div>
+		<label for="carousel-2" class="prev control-3 w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+		<label for="carousel-1" class="next control-3 w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+
+		<!-- Add additional indicators for each slide-->
+		<ol class="carousel-indicators">
+			<li class="inline-block mr-3">
+				<label for="carousel-1" class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
+			</li>
+			<li class="inline-block mr-3">
+				<label for="carousel-2" class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
+			</li>
+			<li class="inline-block mr-3">
+				<label for="carousel-3" class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
+			</li>
+		</ol>
+		
+	</div>
+</div>
+</body>
+</html>
+
+<!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------carousel ends------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+
+<!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------main body starts------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+<br>
+<br>
+
+<!-- component -->
+<!-- component -->
+
+ 
+    <div class="w-full h-screen" id="main-body">
+      <div class="flex flex-col lg:grid lg:gap-4 2xl:gap-6 lg:grid-cols-4 2xl:row-span-2 2xl:pb-8 ml-2 pt-4 px-6">
+        <!-- Beginning of the component about Daniel Clifford -->
+        <div class="bg-indigo-600 lg:order-1 lg:row-span-1 2xl:row-span-1 lg:col-span-2 rounded-lg shadow-xl mb-5 lg:mb-0">
+          <div class="mx-6 my-8 2xl:mx-10">
+            <div class="w-8 md:w-9 lg:w-10 2xl:w-20 h-8 md:h-9 lg:h-10 2xl:h-20 r  ml-1 lg:ml-3 2xl:ml-0 md:-mt-1 2xl:-mt-4" src="#"></div>
+            <h1 class="text-white text-xs md:text-base 2xl:text-2xl pl-12 lg:pl-16 2xl:pl-20 -mt-8 md:-mt-10 lg:-mt-11 2xl:-mt-20 2xl:mx-8">Recent Events</h1>
+ 
+          </div>
+          <div class="-mt-6 relative">
+            <br />
+            <% for(event of events) {%>
+           <a href="/UpcomingEvents/#event-<%=event._id%>"> <p class="hover:text-red-400 text-white text-xl 2xl:text-4xl font-bold px-7 lg:px-9 2xl:pt-6 2xl:mx-2"> <%=event.eventname%></p></a>
+            <%}%>
+          </div>
+        </div>
+        <!-- Ending of the component about Daniel Clifford -->
+
+        <!-- Announcements -->
+        <div class="bg-gray-900 lg:order-2 lg:row-span-1 2xl:row-span-1 lg:col-span-1 rounded-lg shadow-xl pb-4 mb-5 lg:mb-0">
+          <div class="mx-8 2xl:mx-10 my-10 ">
+           
+            <h1 class="text-white text-xs md:text-base 2xl:text-2xl pl-11 md:pl-12 2xl:pl-24 -mt-8 md:-mt-10 2xl:-mt-13">Announcements</h1>
+            <div class="text-white text-xs md:text-base 2xl:text-2xl text-opacity-50 pl-11 md:pl-12 2xl:pl-24"></div>
+          </div>
+          <div class="-mt-8 mx-1 lg:mx-2">
+            <p class="text-white text-lg lg:text-xl 2xl:text-4xl font-semibold pt-1 px-6 2xl:px-8 lg:pl-5 lg:pr-8">None </p>
+            <br />
+            <p class="text-white text-opacity-50 font-medium md:text-sm 2xl:text-3xl pl-6 lg:pl-5 pr-4 -mt-1 lg:mt-6 2xl:mt-2 2xl:px-8"></p>
+          </div>
+        </div>
+        <!-- Ending of the component about Jonathan Walters -->
+
+        <!-- Beginning of the component about Jeanette Harmon -->
+        <div class="bg-primary-color-white lg:order-3 lg:row-span-2 2xl:row-span-1  rounded-lg shadow-xl mb-5 lg:mb-0 2xl:mb-8">
+          <div class="mx-8 my-10 lg:my-8">
+            <div class="w-8 md:w-9 lg:w-11 2xl:w-20 h-8 md:h-9 lg:h-11 2xl:h-20  -mt-3 -ml-1 lg:-ml-0" src=""></div>
+            <h1 class="primary-color-blackish-blue text-xs md:text-base 2xl:text-2xl pl-11 md:pl-12 lg:pl-14 2xl:pl-24 -mt-8 md:-mt-10 lg:-mt-11 2xl:-mt-16">Pinned Resources</h1>
+            <h2 class="primary-color-blackish-blue-opacity text-xs md:text-base 2xl:text-2xl pl-11 md:pl-12 lg:pl-14 2xl:pl-24"></h2>
+          </div>
+          <div class="-mt-4 ml-5 mr-11">
+            <p class="primary-color-blackish-blue text-xl 2xl:text-4xl font-bold px-2 lg:px-3 -mt-6 lg:-mt-5 2xl:mt-12 2xl:pb-6">Will be updated soon</p>
+            <br />
+            
+            <!-- <p class="primary-color-blackish-blue-opacity font-medium md:text-sm 2xl:text-3xl pl-2 lg:pl-3 lg:pr-4 mb-6 2xl:pt-2 -mt-3">“ Thank you for the wonderful experience! I now have a job I 
+              really enjoy, and make a good living while doing something I love. 
+             
+              really enjoy, and make a good living while doing something I love. ”</p> -->
+          </div>
+        </div>
+        <!-- Ending of the component about Jeanette Harmon -->
+
+        <!-- Beginning of the component about Patrick Abrams -->
+        <div class="bg-purple-800 lg:order-3 lg:row-span-2 2xl:row-span-1 col-span-2  rounded-lg shadow-xl mb-5 lg:mb-0 2xl:mb-8 lg:pb-14 2xl:pb-20">
+          <div class="mx-8 my-8 ">
+            <div class="w-8 md:w-9 lg:w-10 2xl:w-20 h-8 md:h-9 lg:h-10 2xl:h-20  lg:-mt-3"></div>
+            <h1 class="text-white text-xs md:text-base 2xl:text-2xl pl-12 md:pl-14 2xl:pl-24 -mt-8 md:-mt-10 lg:-mt-11 2xl:-mt-16">Recent Discussion</h1>
+            <div class="text-white text-xs md:text-base 2xl:text-xs text-opacity-50 pl-12 md:pl-14 2xl:pl-24"></div>
+          </div>
+          <div class="px-3 -mt-3 mb-5 lg:mb-0">
+            <!-- <p class="text-white text-lg 2xl:text-4xl font-semibold px-4 -mt-3 lg:-mt-6 2xl:mt-8">Which is the best IDE ?</p>
+            <br /> -->
+            <!-- <p class="text-white text-opacity-50 font-medium md:text-sm 2xl:text-3xl px-4 mt-1 lg:-mt-3 2xl:mt-6">Universe</p> -->
+
+            <% for(post of posts) {
+                
+                %>
+                
+
+          <a href="/Discuss/#post-<%= post._id %>"><p class="text-white hover:text-red-400 text-lg 2xl:text-2xl font-semibold px-4 -mt-3 lg:-mt-0 2xl:mt-10"><%=post.postBody%></p></a>
+            <!-- <p class="text-white text-lg 2xl:text-4xl font-semibold px-4 -mt-3 lg:-mt-6 2xl:mt-8">Hackerank vs codeforces Hackerank vs codeforces Hackerank vs codeforces Hackerank vs codeforces</p> -->
+            <%}%>
+
+          </div>
+        </div>
+        <!-- Ending of the component about Patrick Abrams -->
+
+        <!-- Beginning of the component about Kira Whittle -->
+        <div class="bg-primary-color-white lg:order-2 lg:row-span-4 lg:col-span-1 rounded-lg shadow-xl mb-5 lg:pb-4 2xl:h-screen">
+          <div class="mx-8 my-8 lg:pl-1">
+            <div class="w-8 md:w-9 lg:w-12 2xl:w-20 h-8 md:h-9 lg:h-12 2xl:h-20  lg:-mt-4 -ml-1 lg:-ml-4" ></div>
+            <h1 class="primary-color-blackish-blue text-xs md:text-base 2xl:text-2xl pl-10 md:pl-12 2xl:pl-24 -mt-8 md:-mt-10 lg:-mt-12 2xl:-mt-16">Recent Blogs</h1>
+            <h2 class="primary-color-blackish-blue-opacity text-xs md:text-base 2xl:text-2xl pl-10 md:pl-12 2xl:pl-24">--------</h2>
+          </div>
+          <div class="px-3 lg:px-5 lg:-mt-4 mb-5 lg:mb-0">
+            <% for(blog of blogs) {%>
+            
+           <a href="/showblog/<%=blog._id%>"> <p class="hover:text-white primary-color-blackish-blue text-xl 2xl:text-4xl font-semibold px-4 lg:px-0 -mt-2 lg:-mt-0"><%=blog.title%></p></a><br>
+            <%}%>
+            <!-- <p class="primary-color-blackish-blue-opacity font-medium md:text-sm 2xl:text-3xl px-4 lg:px-0 2xl:px-4 lg:pr-3 mt-2 lg:-mt-1 2xl:mt-2 2xl:pb-64">“ Before joining the bootcamp, I’ve never written a line of code. I needed some structure from professionals who can help me learn programming step by step. I was encouraged to enroll by a former student of theirs who can only say wonderful things about the program. The entire curriculum and staff did not disappoint. They were very hands-on and I never had to wait long for assistance. The agile team project, in particular, was outstanding. It took my learning to the next level in a way that no tutorial could ever have. In fact, I’ve often referred to it during interviews as an example of my developent experience. It certainly helped me land a job as a full-stack developer after receiving multiple offers. 100% recommend! ”</p> -->
+          </div>
+        </div>
+        <!-- Ending of the component about Kira Whittle -->
+      </div>
+   
+
+
+
+
+  
+
+
+  
+  <!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------main body Ends------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+ 
+  <!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------Footer starts------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+
+<!-- component -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@iconscout/unicons@3.0.6/css/line.css">
+
+
+
+<footer class="bg-gray-800 pt-10 sm:mt-10 pt-10">
+    <div class="max-w-6xl m-auto text-gray-800 flex flex-wrap justify-left">
+        <!-- Col-1 -->
+        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+            <!-- Col Title -->
+            <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                Getting Started
+            </div>
+
+            <!-- Links -->
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Installation
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Release Notes
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Upgrade Guide
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Using with Preprocessors
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Optimizing for Production
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Browser Support
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                IntelliSense
+            </a>
+        </div>
+
+        <!-- Col-2 -->
+        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+            <!-- Col Title -->
+            <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                Core Concepts
+            </div>
+
+            <!-- Links -->
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Utility-First
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Responsive Design
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Hover, Focus, & Other States
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Dark Mode
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Adding Base Styles
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Extracting Components
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Adding New Utilities
+            </a>
+        </div>
+
+        <!-- Col-3 -->
+        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+            <!-- Col Title -->
+            <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                Customization
+            </div>
+
+            <!-- Links -->
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Configuration
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Theme Configuration
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Breakpoints
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Customizing Colors
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Customizing Spacing
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Configuring Variants
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Plugins
+            </a>
+        </div>
+
+        <!-- Col-3 -->
+        <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
+            <!-- Col Title -->
+            <div class="text-xs uppercase text-gray-400 font-medium mb-6">
+                Community
+            </div>
+
+            <!-- Links -->
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                GitHub
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Discord
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                Twitter
+            </a>
+            <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
+                YouTube
+            </a>
+        </div>
+    </div>
+
+    <!-- Copyright Bar -->
+    <div class="pt-2">
+        <div class="flex pb-5 px-3 m-auto pt-5 
+            border-t border-gray-500 text-gray-400 text-sm 
+            flex-col md:flex-row max-w-6xl">
+            <div class="mt-2">
+                © Copyright 2021-year. All Rights Reserved.
+            </div>
+
+            <!-- Required Unicons (if you want) -->
+            <div class="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-facebook-f"></i>
+                </a>
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-twitter-alt"></i>
+                </a>
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-youtube"></i>
+                </a>
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-linkedin"></i>
+                </a>
+                <a href="#" class="w-6 mx-1">
+                    <i class="uil uil-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</div>
+</div>
+
+</div>
+
+
+
+</body>
+</html>
+
+
+
+
+

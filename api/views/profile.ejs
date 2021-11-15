@@ -1,0 +1,475 @@
+<!-- <html>
+    <head>
+        <title><%=title%></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+    <body class="container">
+        <div class="page-header">
+            <h1>Login System</h1>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+               
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/UpcomingEvents">Upcoming Events</a></li>
+                        <li><a href="/profilepage">Profile</a></li>
+                        <%if((locals.user) && (user.UserType=="Admin")){%>
+                            <li><a href="/listUsers">All Users</a></li>
+                            
+                            <%}%>
+
+                        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+                        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+                        <li><a href="/teamchat">Team Chat</a></li>
+                        <%}%>
+                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
+                            <li><a href="/fileupload">Set Questions</a></li>
+                            <%}%>
+
+                            <li><a href="/Discuss">Discussion</a></li>
+                            <li><a href="/Leaderboards">Leaderboards</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">Log In</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div>
+            <img src="<%=user.dp%>" alt="<%=user.name%>" width="100">
+        </div>
+
+        <div class="container row">
+            <div class="jumbotron col-sm-4 pull-center">
+                        <%if((locals.user)){%>
+                    <form action="/profilepage/setdp/<%=locals.user._id%>" method="post" enctype="multipart/form-data">
+                    <input type="file" name="dp" >
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="UploadPic"/>
+                    </div>
+                </form>  
+                <%}%>                
+            </div>          
+        </div>
+        <p>Performance graph this month</p>
+        <canvas id="myChart" width="25" height="10"></canvas>
+
+        <script>
+
+
+             a = '<%=locals.user.OverallRatings%>'
+             var res = a.split(",");
+             console.log(res)
+
+            var ctx = document.getElementById('myChart');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['week 1', 'week 2', 'weet 3', 'week 4'],
+                    datasets: [{
+                        label: '# of rating',
+                        data: res,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            
+
+            </script>
+
+
+    </body>
+</html> -->
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- component -->
+<style>
+
+
+    :root {
+        --main-color: #4a76a8;
+    }
+
+    .bg-main-color {
+        background-color: var(--main-color);
+    }
+
+    .text-main-color {
+        color: var(--main-color);
+    }
+
+    .border-main-color {
+        border-color: var(--main-color);
+    }
+
+    @media screen and (max-width: 968px) {
+        #chart-rkhnewala{
+            position: relative;
+        height: 40vh;
+        width: 80vw;
+        }
+        
+    }
+
+</style>
+</head>
+<body class="bg-gray-200">
+    
+<!-- component -->
+<%- include('_navbar') -%>
+
+
+
+
+<!-------------------------------------------------------------###################------------------------------------------->
+<!------------------------------------------------------------- navbar ends------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+  
+<!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------Profile Body start------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+
+
+
+
+
+
+
+
+<div class="bg-gray-100 -mt-6">
+
+    <!-- End of Navbar -->
+
+    <div class="container mx-auto my-5 p-5">
+        <div class="md:flex no-wrap md:-mx-2 ">
+            <!-- Left Side -->
+            <div class="w-full md:w-3/12 md:mx-2">
+                <!-- Profile Card -->
+                <div class="bg-white p-3 border-t-4 border-green-400">
+                    <div class="image overflow-hidden">
+                        <img class="h-auto w-full mx-auto"
+                            src="<%=user.dp%>"
+                            alt="">
+                            
+                    </div>
+                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1"><%=user.username%></h1> <span class="ml-auto"><span
+                        class="bg-blue-500 py-1 px-2 rounded text-white text-sm"><%=user.UserType%></span></span><br>
+                        
+                    <h3 class="text-gray-600 font-lg text-semibold leading-6">....</h3>
+                    <p class="text-sm text-gray-500 hover:text-gray-600 leading-6"> <%=user.bio%></p>
+                    
+                </div>
+                <!-- End of profile card -->
+                <div class="my-4"></div>
+                <!-- Friends card -->
+           
+                <!-- End of friends card -->
+            </div>
+            <!-- Right Side -->
+            <div class="w-full md:w-9/12 mx-2 h-64">
+                <!-- Profile tab -->
+                <!-- About Section -->
+                <div class="bg-white p-3 shadow-sm rounded-sm">
+
+                  <div class="container row">
+                    <div class="jumbotron col-sm-4 pull-center">
+                                <%if((locals.user)){%>
+                            <form action="/profilepage/setdp/<%=locals.user._id%>" method="post" enctype="multipart/form-data">
+                            <input type="file" name="dp" >
+                            <div class="form-group">
+                                <input class="btn btn-primary" type="submit" value="UploadPic"/>
+                            </div>
+                        </form>  
+                        <%}%>                
+                    </div>          
+                </div>
+                   
+                
+                    
+<!-- This is an example component -->
+<div class="py-5">
+    <main class="h-full overflow-y-auto">
+        <div class="container  mx-auto grid">
+       
+        
+          <!-- ABout -->
+          <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+            <!-- Card -->
+            <!-- <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+              <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                  My Blog Posts
+                </p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                  10
+                </p>
+              </div>
+            </div> -->
+            <!-- Card -->
+            <div class="flex items-center p-4 bg-green-100 rounded-lg shadow-xs dark:bg-gray-800">
+              <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                   Ratings
+                </p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                    <%=user.CurrentRating%>
+                </p>
+              </div>
+            </div>
+            <!-- Card -->
+            <div class="flex items-center p-4 bg-blue-100 rounded-lg shadow-xs dark:bg-gray-800">
+                <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+              <div>
+                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                  Contributions
+                </p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                    <%=locals.user.resourcesuploaded + locals.user.arr.length%>
+                </p>
+              </div>
+            </div>
+            <!-- Card -->
+            <!-- <div class="flex items-center p-4 bg-indigo-100 rounded-lg shadow-xs dark:bg-gray-800">
+             
+              <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                </svg>
+              </div>
+              <div>
+                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+                 Questions Solved
+                </p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                  35
+                </p>
+              </div>
+            </div> -->
+          </div>
+
+        </div>
+    </main>
+</div>
+
+
+
+                
+                </div>
+                <!-- End of about section -->
+
+                <div class="my-4"></div>
+
+                <!-- Experience and education -->
+                <div class="bg-white p-3 shadow-sm rounded-sm">
+
+                    <div class="grid grid-cols-2">
+                        <div>
+                            <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
+                                <span clas="text-green-500">
+                                    <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                </span>
+                                <span class="tracking-wide">Personal</span>
+                            </div>
+                            <ul class="list-inside space-y-2">
+                                <li>
+                                    <div class="text-teal-600"><%=user.name%></div>
+                                   
+                                </li>
+                                <li>
+                                    <div class="text-teal-600">3rd Year</div>
+                                   
+                                </li>
+                                <!-- <li>
+                                    <div class="text-teal-600">Owner at Her Company Inc.</div>
+                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                                </li>
+                                <li>
+                                    <div class="text-teal-600">Owner at Her Company Inc.</div>
+                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                                </li> -->
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
+                                <span clas="text-green-500">
+                                    <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
+                                        <path fill="#fff"
+                                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                                    </svg>
+                                </span>
+                                <span class="tracking-wide">College</span>
+                            </div>
+                            <ul class="list-inside space-y-2">
+                                <li>
+                                    <div class="text-teal-600">University of Engineering and Management</div>
+                                    <!-- <div class="text-gray-500 text-xs">March 2020 - Now</div> -->
+                                </li>
+                                <!-- <li>
+                                    <div class="text-teal-600">Bachelors Degreen in LPU</div>
+                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                                </li> -->
+                            </ul>
+                        </div>
+                        <div id="chart-rkhnewala" class=" bg-white p-1 shadow-sm rounded-sm">
+
+                            <p>Performance graph this month</p>
+                           
+                            <canvas id="myChart" width="25" height="10"></canvas>
+                           
+                            <script>
+                    
+                    
+                                 a = '<%=locals.user.OverallRatings%>'
+                                 var res = a.split(",");
+                                 console.log(res)
+                    
+                                var ctx = document.getElementById('myChart');
+                                var myChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: ['week 1', 'week 2', 'weet 3', 'week 4'],
+                                        datasets: [{
+                                            label: '# of rating',
+                                            data: res,
+                                            // data: [800,1200,0,400],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(153, 102, 255, 1)',
+                                                'rgba(255, 159, 64, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    }
+                                });
+                    
+                                
+                    
+                                </script>
+                    
+
+                        </div>
+                    </div>
+                    
+                    <!-- End of Experience and education grid -->
+
+                   
+                </div>
+                
+                <!-- End of profile tab -->
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+
+<!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------Profile body End------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+
+<!-------------------------------------------------------------###################------------------------------------------->
+<!-------------------------------------------------------------Graph start------------------------------------------->
+<!-------------------------------------------------------------###################------------------------------------------->
+
+
+
+</div>
+
+<%- include('_footer') -%>
+</body>
+</html>
+
+
+

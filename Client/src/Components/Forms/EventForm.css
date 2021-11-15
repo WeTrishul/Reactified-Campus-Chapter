@@ -1,0 +1,41 @@
+.form-box {
+  top: 50px;
+  width: 380px;
+  height: 400px;
+  position: relative;
+  margin: 2% auto;
+  background: rgb(199, 191, 191);
+  border-radius: 7px;
+  padding: 5px;
+}
+.heading {
+  text-align: center;
+}
+
+.input {
+  left: 30px;
+  text-align: center;
+  top: 50px;
+  position: absolute;
+  width: 280px;
+  transition: 0.5s;
+}
+
+.field {
+  width: 100%;
+  padding: 10px 0px;
+  margin: 5px 0;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
+}
+
+.submit-btn {
+  margin-top: 20px;
+  height: 30px;
+  width: 100px;
+  background-color: rgb(128, 90, 128);
+}

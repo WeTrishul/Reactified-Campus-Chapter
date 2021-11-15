@@ -1,0 +1,156 @@
+<!-- <html>
+    <head>
+        <title>Leaderboards</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body class="container">
+        <div class="page-header">
+            <h1>Login System</h1>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+           
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/UpcomingEvents">Upcoming Events</a></li>
+                        <li><a href="/profilepage">Profile</a></li>
+
+                        <%if((locals.user) && (user.UserType=="Admin")){%>
+                            <li><a href="/listUsers">All Users</a></li>
+                            
+                            <%}%>
+
+                        <%if((locals.user) && (user.UserType=="Executive")||(user.UserType=="Admin")
+                        ||(user.UserType=="EventsLead")||(user.UserType=="MediaLead")){%>
+                        <li><a href="/teamchat">Team Chat</a></li>
+                        <%}%>
+                        <%if((locals.user) && (user.UserType=="QuestionSetter")||(user.UserType=="Admin")){%>
+                            <li><a href="/fileupload">Set Questions</a></li>
+                            <%}%>
+                        <li><a href="/Leaderboards">Leaderboards</a></li>
+                        <li><a href="/Discuss">Discussion</a></li>
+                      
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">Log In</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div id="leaderboards">
+            <ol><% for(item of leaderboard){ %>
+                
+                    <p><%= item.userid.name%></p>
+
+                <%}%> 
+            </ol>
+
+        </div>
+            
+
+    </body>
+</html>
+
+
+ -->
+
+
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <style>
+        html,
+        body {
+          height: 100%;
+        }
+      
+        @media (min-width: 640px) {
+          table {
+            display: inline-table !important;
+          }
+      
+          thead tr:not(:first-child) {
+            display: none;
+          }
+        }
+      
+        td:not(:last-child) {
+          border-bottom: 0;
+        }
+      
+        th:not(:last-child) {
+          border-bottom: 2px solid rgba(0, 0, 0, .1);
+        }
+      </style>
+  
+
+</head>
+<body class="bg-gray-200">
+    
+
+<%- include('_navbar') -%>
+
+
+
+<!----------------------------###################  Navbar ends  ###############------------------------------------------------>
+
+<!----------------------------###################  ------------  ###############------------------------------------------------>
+
+<!----------------------------###################  Table starts  ###############------------------------------------------------>
+
+
+
+<div class="container">
+<br>
+
+	<table class="text-left w-full">
+		<thead class="bg-black flex text-white w-full">
+
+			<tr class="flex w-full mb-4">
+				<th class="p-4 w-1/4">User</th>
+				<th class="p-4 w-1/4">Ratings</th>
+				<th class="p-4 w-1/4">Role</th>
+				<th class="p-4 w-1/4">College</th>
+			</tr>
+		</thead>
+    <!-- Remove the nasty inline CSS fixed height on production and replace it with a CSS class — this is just for demonstration purposes! -->
+		<tbody class="bg-green-200 flex flex-col items-center justify-between overflow-y-scroll w-full" style="height: 20vh;">
+            <% for(item of leaderboard){ %>
+            <tr class="flex w-full mb-4">
+                
+
+				<td class="p-2 w-1/2"><%= item.userid.name%></td>
+				<td class="p-2 w-1/2"><%= item.userid.CurrentRating%></td>
+                
+
+				<td class="p-2 w-1/2"><%= item.userid.UserType%></td>
+				<td class="p-2 w-1/2">UEMK</td>
+			</tr>
+            
+			<%}%> 
+            
+		</tbody>
+	</table>
+</div>
+
+
+</div>
+
+<%- include('_footer') -%>
+</body>
+</html>
+

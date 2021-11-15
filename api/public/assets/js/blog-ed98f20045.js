@@ -1,0 +1,1 @@
+var stringToHTML=function(r){return(new DOMParser).parseFromString(r,"text/html").body};

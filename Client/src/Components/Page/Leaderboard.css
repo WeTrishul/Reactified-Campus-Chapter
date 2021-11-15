@@ -1,0 +1,37 @@
+h1 {
+  text-align: center;
+}
+
+.toplist {
+  margin-top: 1rem;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  background: white;
+}
+.listbox {
+  height: 8vh;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 10px;
+  border-bottom: 1.5px solid #dddddd;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.name-list {
+  width: 50%;
+}
+
+.rating-list {
+  width: 25%;
+}
+.rank-list {
+  width: 25%;
+}

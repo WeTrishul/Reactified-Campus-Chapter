@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- <style>
+        html,
+        body {
+          height: 100%;
+          
+        }
+      </style> -->
+
+</head>
+<body class="bg-gray-200 ">
+    
+
+<%- include('_navbar') -%>
+
+
+
+<!-- component -->
+
+
+<!-- component -->
+<!-- comment form -->
+<div class="flex mx-auto items-center justify-center shadow-lg mt-20 mx-8 mb-4 max-w-lg">
+    <form id="file-form" class="w-full max-w-xl bg-white rounded-lg px-4 pt-2" action="/applied/<%=locals.user._id%>">
+        <div class="relative inline-flex">
+            <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232"><path d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z" fill="#648299" fill-rule="nonzero"/></svg>
+            <select id="roleoption" name="appliedRole" class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+              <option>Choose a Role</option>
+              <option value="QuestionSetter">Question Setter</option>
+              <option value="EventsLead">Event's Lead</option>
+              <option value="MediaLead">Media Lead</option>
+              <option value="Executive">Executive</option>
+
+            
+            </select>
+          </div>
+          <input type="hidden" value="<%=locals.user.id%>" name="userid">
+
+       <div class="flex flex-wrap -mx-3 mb-6">
+          <h2 class="px-4 pt-3 pb-2 text-gray-800 text-lg">Why you think you are eligible ?</h2>
+          <div class="w-full md:w-full px-3 mb-2 mt-2">
+             <textarea name="reason" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="reason" placeholder='Type here' required></textarea>
+          </div>
+          <input name="link1" id="link" class="ml-3 shadow appearance-none bg-gray-100 border border-gray-400 rounded py-2 px-3 text-grey-darker" placeholder="Link" >
+       
+          <div class="w-full mt-4 md:w-full flex items-start md:w-full px-3">
+             <div class="flex items-start w-1/2 text-gray-700 px-2 mr-auto">
+                <svg fill="none" class="w-5 h-5 text-gray-600 mr-1" viewBox="0 0 24 24" stroke="currentColor">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-xs md:text-sm pt-px">add link of your best coding profile</p>
+             </div>
+             <div class="-mr-1">
+                <input id="fm" type='submit' class="cursor-pointer bg-green-200 text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100" value='Apply'>
+             </div>
+          </div>
+          <!-- component -->
+       </form>
+    </div>
+ </div>
+
+
+
+ <script src="<%=assetPath('js/apply.js')%>"></script>
+ <%- include('_footer') -%>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
