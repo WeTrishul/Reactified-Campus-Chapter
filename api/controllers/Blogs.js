@@ -19,18 +19,25 @@ module.exports.allblogs = async (req,res) =>{
 
     try {
 
-        if(!req.isAuthenticated())
-        {
-          return   res.redirect('/login')
-        }
+        // if(!req.isAuthenticated())
+        // {
+        //   return   res.redirect('/login')
+        // }
 
         const allblogs = await Blog.find({}).populate('userid')
        
        
-        res.render('Allblogs',{
+        // res.render('Allblogs',{
             
-            allblogs
-        })
+        //     allblogs
+        // })
+        return res.status(200).json({
+            data: {
+                done:"yes",
+                blogs:allblogs
+            },
+            message: "Applied Successfully!"
+        });
 
 
     } catch (error) {
@@ -42,14 +49,22 @@ module.exports.allblogs = async (req,res) =>{
 
 module.exports.blogform = async (req,res) =>{
 
-    if(!req.isAuthenticated())
-    {
-      return   res.redirect('/login')
-    }
+    // if(!req.isAuthenticated())
+    // {
+    //   return   res.redirect('/login')
+    // }
 
-    res.render('blogform',{
-        blog:undefined
-    })
+    // res.render('blogform',{
+    //     blog:undefined
+    // })
+    return res.status(200).json({
+        blogs:undefined
+        // data: {
+        //     done:"yes",
+        //     blogs:undefined
+        // },
+        // message: "Applied Successfully!"
+    });
 }
 
 module.exports.editblogform = async (req,res) =>{
@@ -77,13 +92,17 @@ module.exports.saveblog = async (req,res) =>{
 
     try {
 
-        if(!req.isAuthenticated())
-        {
-          return   res.redirect('/login')
-        }
+        // if(!req.isAuthenticated())
+        // {
+        //   return   res.redirect('/login')
+        // }
 
         await Blog.create(req.body)
-        res.redirect('/Allblogs')
+        return res.status(200).json({
+            
+            message: "Applied Successfully!"
+        });
+        // res.redirect('/Allblogs')
     } catch (error) {
         res.render('back')
     }
@@ -93,15 +112,20 @@ module.exports.saveblog = async (req,res) =>{
 module.exports.showblog = async (req,res) =>{
     try {
 
-        if(!req.isAuthenticated())
-        {
-          return   res.redirect('/login')
-        }
+        // if(!req.isAuthenticated())
+        // {
+        //   return   res.redirect('/login')
+        // }
 
         const blog = await Blog.findById(req.params.id).populate('userid')
         
         console.log(blog)
-       res.render('BlogPage',{blog})
+    //    res.render('BlogPage',{blog})
+
+    return res.status(200).json({
+        blogs:blog
+        
+    });
 
     // res.send(blog.content)
     } catch (error) {

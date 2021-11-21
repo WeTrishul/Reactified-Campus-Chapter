@@ -5,9 +5,9 @@ const BlogController = require('../controllers/Blogs')
 
 router.get('/allblogs',BlogController.allblogs)
 
-router.get('/writeblog',passport.checkAuthentication,BlogController.blogform)
+router.get('/writeblog',BlogController.blogform)
 
-router.post('/saveblog',passport.checkAuthentication,BlogController.saveblog)
+router.post('/saveblog',BlogController.saveblog)
 
 router.get('/showblog/:id',BlogController.showblog)
 

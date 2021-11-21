@@ -1,12 +1,7 @@
-
-
-
-
-
 import React, { useEffect, useRef, useState } from "react"
 import io from "socket.io-client"
 import AuthContext from '../../Service/auth-context';
- 
+import SendIcon from '@mui/icons-material/Send';
 import { useContext } from 'react';
  
 import './CoreChat.css';
@@ -109,22 +104,34 @@ function CoreChat() {
         if(data.userid._id==userId)
         {
             return(
-                <div className="selfmsg">
-                                {data.message}  
-                            </div>)
+                // <div className="selfmsg">
+                //     {data.message}  
+                // </div>
+
+<span className="user-text">
+                 {data.message}
+             </span>
+            )
+
+                
         }
         else{
             return(
-            <div className="friendmsg">
-            {data.message} 
-        </div>)
+        //     <div className="friendmsg">
+        //     {data.message} 
+        // </div>
+
+<span className="friend-text">
+                {data.message}
+            </span>
+        )
             
         }
     }
 
     return (
         <div>
-            <div className="border-box">
+            {/* <div className="border-box">
                 <div className="chat-box">
                     <div className="chat-heading">
                         <h2>Core Team</h2>
@@ -140,9 +147,6 @@ function CoreChat() {
                             })
                       
                         }
-                       
-                        
-                        
                     </div>
                     <div className="text-area">
                         <div className="textdiv">
@@ -151,7 +155,81 @@ function CoreChat() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
+
+
+
+
+
+
+
+
+
+            <div className ="chat-outerbox">
+         <div className ="messageTyping-Container">
+         <div className ="innermessagebox">
+             {
+                            chat.map((data)=>{
+                               return( <div className="msg">
+                                    
+                                    {rendermessage(data)}
+                           
+                                </div>)
+                            })
+                      
+                        }
+            </div>            
+
+            <div className ="chat-typebox">
+                <div className="typemessage">
+                <input type="text" id="message-input" className="inputTextBox" placeholder="Write your message"/>
+                </div>
+                <div onClick={sendmsg} className="chatSpan">
+                    <SendIcon/>
+                </div>
+             </div>
+         </div> 
+        </div>
+
+
+
+
+
+
+
+
+
+
+            {/* <div className ="chat-outerbox">
+//         <div className ="messageTyping-Container">
+//         <div className ="innermessagebox">
+//             {
+                            chat.map((data)=>{
+                               return( <div className="msg">
+                                    
+                                    {rendermessage(data)}
+                           
+                                </div>)
+                            })
+                      
+                        }
+//             {/* <div className="user-text">
+//                 hyy
+//             </div>
+//             <div className="friend-text">
+//                 hello
+//             </div> */}
+{/* //         </div> */}
+                
+{/* //             <div className ="chat-typebox">
+//                 <div className="typemessage">
+//                 <input type="text"  className="inputBox" placeholder="Write your message"/>
+//                 </div>
+//                 <div onClick={sendmsg}  className="chatSpan"><SendIcon/></div>
+//             </div>
+//         </div> */}
+{/* //     </div> */}
+
         </div>
     )
 }

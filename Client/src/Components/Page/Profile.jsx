@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Chart from './Chart';
 import './Profile.css';
 
 
@@ -38,8 +38,20 @@ function Profile() {
                </div>
                
                <div className="personal-details">
-                   personal data
-                   
+                   <div className="personalDetails">
+                       <div>
+                       Name: Anand kumar Choudhary
+                       </div>
+                       <div>
+                       College: University of Engineering and Management, kolkata
+                       </div>
+                       <div>
+                       Year: 3rd
+                       </div>
+                   </div>
+                   <div className="graphProfile">
+                       <Chart/>
+                   </div>
                </div>
 
                <div className="only-space">

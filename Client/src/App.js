@@ -17,6 +17,13 @@ import FloatingBtn from './Components/Layout/FloatingBtn';
 import SignupData from './Components/MainPage/SignupData';
 import AuthContext from './Service/auth-context';
 import {useContext} from 'react'
+import AddEvent from './Components/Page/AddEvent';
+import Polling from './Components/Page/Polling';
+import PollCreate from './Components/Page/PollCreate';
+import Blogs from './Components/Page/Blogs';
+import WriteBlogs from './Components/Page/WriteBlogs';
+import DisplayBlogs from './Components/Page/DisplayBlogs';
+
 
 function App() {
 
@@ -36,8 +43,26 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/Profile'>
           <Profile/>
         </Route>}
-        {<Route exact path='/AllUsers'>
+        {authCtx.isLoggedIn &&<Route exact path='/AddEvent'>
+          <AddEvent/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/WriteBlogs'>
+          <WriteBlogs/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/Polling'>
+          <Polling/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/PollCreate'>
+          <PollCreate/>
+        </Route>}
+        {authCtx.isLoggedIn && <Route exact path='/AllUsers'>
           <AllUsers/>
+        </Route>}
+        {authCtx.isLoggedIn && <Route exact path='/Blogs'>
+          <Blogs/>
+        </Route>}
+        {authCtx.isLoggedIn && <Route exact path='/DisplayBlogs'>
+          <DisplayBlogs/>
         </Route>}
         {!authCtx.isLoggedIn &&<Route exact path='/TeamChat'>
           <TeamChat/>
