@@ -23,6 +23,7 @@ import PollCreate from './Components/Page/PollCreate';
 import Blogs from './Components/Page/Blogs';
 import WriteBlogs from './Components/Page/WriteBlogs';
 import DisplayBlogs from './Components/Page/DisplayBlogs';
+import EditBlog from './Components/Page/EditBlog';
 
 
 function App() {
@@ -63,6 +64,9 @@ function App() {
         </Route>}
         {authCtx.isLoggedIn && <Route exact path='/DisplayBlogs'>
           <DisplayBlogs/>
+        </Route>}
+        {authCtx.isLoggedIn && <Route exact path='/EditBlog'>
+          <EditBlog/>
         </Route>}
         {!authCtx.isLoggedIn &&<Route exact path='/TeamChat'>
           <TeamChat/>

@@ -11,6 +11,8 @@ function DisplayBlogs() {
 
     useEffect(() =>{
 
+        console.log("main id ",location.state)
+
         axios.get('http://localhost:3000/showblog/'+location.state)
         .then(response => {
             return response.data

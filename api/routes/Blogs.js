@@ -11,11 +11,11 @@ router.post('/saveblog',BlogController.saveblog)
 
 router.get('/showblog/:id',BlogController.showblog)
 
-router.get('/deleteblog/:id',passport.checkAuthentication,BlogController.deleteblog)
+router.post('/deleteblog',BlogController.deleteblog)
 
-router.get('/editblog',passport.checkAuthentication,BlogController.editblogform)
+router.get('/editblog',BlogController.editblogform)
 
-router.post('/updateblog/:id',passport.checkAuthentication,BlogController.editblog)
+router.post('/updateblog',BlogController.editblog)
 
 
 

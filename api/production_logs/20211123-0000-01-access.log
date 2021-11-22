@@ -1,0 +1,7 @@
+[0mPOST /writeblog [33m404[0m 4.714 ms - 149[0m
+[0mGET /index.css [33m404[0m 10.449 ms - 148[0m
+[0mGET /index.css [33m404[0m 4.570 ms - 148[0m
+[0mGET /index.css [33m404[0m 8.739 ms - 148[0m
+[0mGET /index.css [33m404[0m 0.800 ms - 148[0m
+[0mGET /deleteblog/?id=619a36bdad09b659b8338ccf [33m404[0m 3.846 ms - 150[0m
+[0mGET /index.css [33m404[0m 8.615 ms - 148[0m

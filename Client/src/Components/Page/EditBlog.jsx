@@ -3,13 +3,19 @@ import {useRef} from 'react'
 import {useContext} from "react"
 import AuthContext from '../../Service/auth-context';
 import { CKEditor } from 'ckeditor4-react';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom"
+import {useLocation} from 'react-router-dom';
 
 
+function EditBlog() {
 
-function WriteBlogs() {
+
+    const location = useLocation();
+    const [displayBlogs, setDisplayBlogs] = useState({});
+
+
 
     const [editor,setEditor]= useState({})
     let history = useHistory();
@@ -33,7 +39,7 @@ function WriteBlogs() {
             userid:userId
         }
 
-        axios.post('http://localhost:3000/saveblog',blogDetails,{
+        axios.post('http://localhost:3000/updateblog',blogDetails,{
             headers: {
                 "Access-Control-Allow-Origin": "*",
             }
@@ -48,20 +54,48 @@ function WriteBlogs() {
         });
     }
 
-    
-    
+
+
+    useEffect(() =>{
+        console.log("main id", location.state)
+
+        axios.get('http://localhost:3000/showblog/'+location.state)
+        .then(response => {
+            return response.data
+        }).then(data =>{
+            console.log(data)
+            setDisplayBlogs(data.blogs)
+            console.log("yahan")
+            console.log(displayBlogs)
+            // let main = document.querySelector("main")
+            // let str = data.blogs.content
+            // let strhtml = str;
+            // main.innerHTML=strhtml;
+        });
+
+    },[])
+
+
+
+
 
 
     return (
         <div>
-           <div className="App">
+            <div className="App">
                 {/* <h2>Using CKEditor 5 build in React</h2> */}
-                <input type="text" placeholder="Title" ref={titleInputRef} />
-                <input type="text" placeholder="Description" ref={descriptionInputRef}/>
+                <input type="text" value={displayBlogs.title}  ref={titleInputRef} />
+                <input type="text" value={displayBlogs.description} placeholder="Description" ref={descriptionInputRef}/>
+                {/* <input type="hidden" id="cont" value={displayBlogs.content}/> */}
                 <CKEditor
                     editor="null"
-                    initData="<p>Write a blog!!</p>"
+                    
+                    initData={<p>hello there</p>}
+                // data="{<p>{displayBlogs.title}</p>}"
                     onReady={ editor => {
+                        console.log(document.getElementById("cont").value)
+                        // editor.editor.setData("hello")
+                        
                         // You can store the "editor" and use when it is needed.
                         console.log( 'Editor is ready to use!', editor );
                     } }
@@ -71,7 +105,9 @@ function WriteBlogs() {
                     // } }
                     // onChange ={(e) => {setEditor(e.target.value)}}
 
-                    onChange={evt => { 
+                    onChange={evt => {
+                        
+                        console.log("chal nh be",document.getElementById("cont").value)
                     
                     const editorValue = evt.editor.getData() 
                 setEditor(editorValue)}}
@@ -89,70 +125,8 @@ function WriteBlogs() {
                     <button onClick={blogSubmitHandler}>Submit</button>
                 </div>
             </div>
-        
         </div>
     )
 }
 
-export default WriteBlogs
-
-
-
-
-// // class App extends Component {
-// //     render() {
-// //         return (
-// //             <div className="App">
-// //                 <h2>Using CKEditor 5 build in React</h2>
-// //                 <CKEditor
-// //                     editor={ ClassicEditor }
-// //                     data="<p>Hello from CKEditor 5!</p>"
-// //                     onReady={ editor => {
-// //                         // You can store the "editor" and use when it is needed.
-// //                         console.log( 'Editor is ready to use!', editor );
-// //                     } }
-// //                     onChange={ ( event, editor ) => {
-// //                         const data = editor.getData();
-// //                         console.log( { event, editor, data } );
-// //                     } }
-// //                     onBlur={ ( event, editor ) => {
-// //                         console.log( 'Blur.', editor );
-// //                     } }
-// //                     onFocus={ ( event, editor ) => {
-// //                         console.log( 'Focus.', editor );
-// //                     } }
-// //                 />
-// //             </div>
-// //         );
-// //     }
-// // }
-
-// // export default App;
-
-
-// import React, {Component} from "react";
-// import CKEDITOR from "@ckeditor/ckeditor5-build-classic"
-
-// export default class CKEditor extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.componentDidMount = this.componentDidMount.bind(this);
-//   }
-
-//   render() {
-//     return (
-//       <textarea name="editor" cols="100" rows="6" defaultValue={this.props.value}></textarea>
-//     )
-//   }
-
-//   componentDidMount() {
-//     let configuration = {
-//       toolbar: "Basic"
-//     };
-//     CKEDITOR.replace("editor", configuration);
-//     CKEDITOR.instances.editor.on('change', function () {
-//       let data = CKEDITOR.instances.editor.getData();
-//       this.props.onChange(data);
-//     }.bind(this));
-//   }
-// }
+export default EditBlog

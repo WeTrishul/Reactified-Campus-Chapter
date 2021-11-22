@@ -5,18 +5,21 @@ const db = require('../config/db')
 BlogSchema = mongoose.Schema({
     userid:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        ref:'User',
+        required:true
     },
     title:{
         type:String,
         required:true
     },
     description:{
-        type:String
+        type:String,
+        required:true
     },
 
     content:{
-        type:String
+        type:String,
+        required:true
     }
 
 }, {

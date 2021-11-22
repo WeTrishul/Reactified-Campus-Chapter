@@ -137,22 +137,31 @@ module.exports.showblog = async (req,res) =>{
 module.exports.deleteblog =  async (req,res) =>{
     try {
 
+        console.log(req.body)
 
-        if(!req.isAuthenticated())
-        {
-          return   res.redirect('/login')
-        }
+        // if(!req.isAuthenticated())
+        // {
+        //   return   res.redirect('/login')
+        // }
        
-        const blog = await Blog.findById(req.params.id)
-        if(req.user.id==blog.userid)
+        const blog = await Blog.findById(req.body.blogid)
+
+        console.log(blog)
+        if(req.body.userid==blog.userid)
         {
             await blog.remove()
            
         }
-        res.redirect('/Allblogs')
+        // res.redirect('/Allblogs')
+        console.log("delete ho gya")
+        return res.status(200).json({
+            
+            message: "Deleted Successfully!"
+        });
 
     // res.send(blog.content)
     } catch (error) {
+        console.log("error aaya")
         res.render('error_page')
     }
 }
@@ -162,14 +171,20 @@ module.exports.deleteblog =  async (req,res) =>{
 module.exports.editblog =  async (req,res) =>{
     try {
 
-        if(!req.isAuthenticated())
-        {
-          return   res.redirect('/login')
-        }
+        // if(!req.isAuthenticated())
+        // {
+        //   return   res.redirect('/login')
+        // }
        
         const blog = await Blog.findByIdAndUpdate(req.params.id,req.body)
         blog.save()
-        res.redirect('/Allblogs')
+
+        return res.status(200).json({
+            
+            message: "Edited Successfully!"
+        });
+
+        // res.redirect('/Allblogs')
 
     // res.send(blog.content)
     } catch (error) {

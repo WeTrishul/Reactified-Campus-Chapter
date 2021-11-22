@@ -1,1 +1,4 @@
-[0mPOST /writeblog [33m404[0m 4.714 ms - 149[0m
+[0mGET /index.css [33m404[0m 4.587 ms - 148[0m
+[0mGET /index.css [33m404[0m 0.812 ms - 148[0m
+[0mPOST /editblog [33m404[0m 4.659 ms - 148[0m
+[0mPOST /editblog/619bca36d0fd8f2e748d7144 [33m404[0m 6.260 ms - 173[0m
