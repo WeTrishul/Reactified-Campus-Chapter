@@ -17,10 +17,10 @@ module.exports.getPoll = (req,res)=>{
 module.exports.savePoll = async (req,res)=>{
     try {
 
-        if(!req.isAuthenticated())
-        {
-          return  res.redirect('/login')
-        }
+        // if(!req.isAuthenticated())
+        // {
+        //   return  res.redirect('/login')
+        // }
 
         const newPoll = new poll(req.body)
         console.log('poll saved successfully')
@@ -30,7 +30,15 @@ module.exports.savePoll = async (req,res)=>{
 
        // alert('https://localhost:3000/viewPagePoll/'+savedPoll.id)
 
-        res.redirect('/viewPagePoll/'+savedPoll.id)
+       return res.status(200).json({
+        data: {
+            done:"yes",
+            
+        },
+        message: "Applied Successfully!"
+    });
+
+        // res.redirect('/viewPagePoll/'+savedPoll.id)
 
     } catch (error) {
         console.log('had hai ',error)
@@ -142,19 +150,25 @@ module.exports.showAllPolls = async (req,res)=>{
     
     try {
 
-        if(!req.isAuthenticated())
-        {
-          return   res.redirect('/login')
-        }
+        // if(!req.isAuthenticated())
+        // {
+        //   return   res.redirect('/login')
+        // }
 
         const allPolls = await poll.find({})
         console.log(allPolls)
 
-        res.render('viewAllPolls',{
-            title:'View All Polls',
-            allPolls
-        })
-        
+        // res.render('viewAllPolls',{
+        //     title:'View All Polls',
+        //     allPolls
+        // })
+        return res.status(200).json({
+            data: {
+                done:"yes",
+                allPolls
+            },
+            message: "Applied Successfully!"
+        });
         
     } catch (error) {
         res.render('error_page')

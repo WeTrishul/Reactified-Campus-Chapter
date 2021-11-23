@@ -24,6 +24,7 @@ import Blogs from './Components/Page/Blogs';
 import WriteBlogs from './Components/Page/WriteBlogs';
 import DisplayBlogs from './Components/Page/DisplayBlogs';
 import EditBlog from './Components/Page/EditBlog';
+import ViewAllPoll from './Components/Page/ViewAllPoll';
 
 
 function App() {
@@ -52,6 +53,9 @@ function App() {
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/Polling'>
           <Polling/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/ViewAllPoll'>
+          <ViewAllPoll/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/PollCreate'>
           <PollCreate/>

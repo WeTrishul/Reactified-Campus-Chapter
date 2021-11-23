@@ -41,13 +41,13 @@ function MainNavigation() {
                     <Link to='/UpcomingEvent' className='nav-links' onClick={closeSideBar} >Upcoming Event</Link>
                 </li>
                 <li className= 'navbar-items'>
-                    <Link to='/SignupData' className='nav-links' onClick={closeSideBar} >Discussion</Link>
+                    <Link to='/Discussion' className='nav-links' onClick={closeSideBar} >Discussion</Link>
                 </li>
                 <li className= 'navbar-items'>
                     <Link to='/Leaderboard' className='nav-links' onClick={closeSideBar} >Leaderboard</Link>
                 </li>
                 <li className= 'navbar-items'>
-                    <Link to='/Polling' className='nav-links' onClick={closeSideBar} >Polling</Link>
+                    <Link to='/ViewAllPoll' className='nav-links' onClick={closeSideBar} >Polling</Link>
                 </li>
                 <li className= 'navbar-items'>
                     <Link to='/Blogs' className='nav-links' onClick={closeSideBar}>Blogs</Link>
