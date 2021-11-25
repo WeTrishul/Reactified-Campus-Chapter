@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Discussion.css"
+import {useRef} from 'react';
 import ThumbUpTwoToneIcon from '@mui/icons-material/ThumbUpTwoTone';
 import AddCommentTwoToneIcon from '@mui/icons-material/AddCommentTwoTone';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,6 +13,9 @@ import Axios from "axios"
 
 function Discussion() {
 
+    const postBody = useRef();
+    const commentBody = useRef();
+
     const [Discuss,setDiscuss] = useState([])
     let count=0;
     const [likePost,setLikePost]= useState(count)
@@ -20,6 +24,80 @@ function Discussion() {
 
     const authCtx = useContext(AuthContext);
     let userid = authCtx.id;
+
+
+
+    const PostsubmitHandler = (event) => {
+        event.preventDefault();
+        console.log(postBody.current.value)
+        Axios({
+            method: "POST",
+           data:{ postBody:postBody.current.value },
+           
+            withCredentials: true,
+            url: "http://localhost:3000/postit",
+          }).then((response) =>{
+            
+            console.log(response)
+
+            return response.data
+            
+        })
+        .then(data =>{
+            
+           console.log('Post hogya')
+            // console.log(data)
+           setDiscuss([ ...Discuss, data.data.post ])
+            
+        })
+        .catch(err =>{
+            console.log(err)
+        
+        })
+
+
+        };
+
+
+        const CommentsubmitHandler = (event) => {
+            event.preventDefault();
+
+           var s = event.target.id.split("-")[2]
+
+
+           var v = document.getElementById("post-commentinput-"+s).value
+
+            console.log(v)
+            Axios({
+                method: "POST",
+               data:{ commentBody:v , postid :s},
+               
+                withCredentials: true,
+                url: "http://localhost:3000/commentit",
+              }).then((response) =>{
+                
+                console.log(response)
+    
+                return response.data
+                
+            })
+            .then(data =>{
+                
+               console.log('comment hogya')
+                console.log(data)
+                var x = event.target.getAttribute("post-index")
+                let copy = [...Discuss]
+                copy[x].comments.push(data.data.comment)
+                setDiscuss(copy)
+                
+            })
+            .catch(err =>{
+                console.log(err)
+            
+            })
+    
+    
+            };
 
 
     useEffect(() =>{
@@ -85,31 +163,7 @@ function Discussion() {
             id:userid
         }
 
-        // const config = {
-        //     withCredentials: true,
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     //   "Access-Control-Allow-Origin": "http://localhost:3000",
-        //       "Access-Control-Allow-Credentials": true
-              
-        //     },
-        //   };
-
-        //   axios.post('http://localhost:8000/routes/register', user, config);
-
-        // axios.get('http://localhost:3000/destroypost/'+del.target.id,
-        //     // headers:{
-        //     //     "Access-Control-Allow-Origin": "http://localhost:3000",
-                
-        //     // }
-        // )
-        //     .then(response => {
-        //         return response.data
-        //     }).then(data =>{
-        //         console.log(data)
-        //         document.getElementById('post-'+ del.target.id).remove()
-        // });
-
+     
 
 
         Axios({
@@ -129,18 +183,36 @@ function Discussion() {
     }
 
 
-    const likePostHandler = () =>{
+    const likePostHandler = (e) =>{
 
-        var str =e.target.id.slice("-")
+        // /Likehandler/?id=<%= post.id %>&type=post
+        var str =e.target.id.split("-")[1]
         Axios({
             method: "POST",
             
             
             withCredentials: true,
-            url: "http://localhost:3000/Likehandler",
+            url: "http://localhost:3000/Likehandler?id="+str+"&type=post",
           }).then(res => {
-            console.log(res);
-            document.getElementById('blog-'+ blog.target.id).remove()
+           
+
+            var likesCount = parseInt(e.target.getAttribute("data-likes"))
+
+
+            if (res.data.data.deleted == true){
+                likesCount -= 1;
+                
+            }else{
+                likesCount += 1;
+            }
+
+            // console.log(likesCount)
+            e.target.setAttribute('data-likes', likesCount);
+
+            console.log(parseInt(e.target.getAttribute("data-likes")))
+                
+            // e.target.innerHTML(`${likesCount} likes`);
+            document.getElementById("span-like-"+str).innerHTML = likesCount;
             
         }).catch(err => {
             console.log(err);
@@ -150,7 +222,60 @@ function Discussion() {
     }
 
 
-    const deleteCommentHandler = () =>{
+    const ReportPostHandler = (e) =>{
+
+        // /Likehandler/?id=<%= post.id %>&type=post
+        var str =e.target.id.split("-")[1]
+        Axios({
+            method: "POST",
+            
+            
+            withCredentials: true,
+            url: "http://localhost:3000/Reporthandler?id="+str+"&type=post",
+          }).then(res => {
+           
+
+            var reportCount = parseInt(e.target.getAttribute("data-reports"))
+
+
+            if (res.data.data.deleted == true){
+                reportCount -= 1;
+                
+            }else{
+                reportCount += 1;
+            }
+
+            // console.log(likesCount)
+            e.target.setAttribute('data-reports', reportCount);
+
+   
+                
+            // e.target.innerHTML(`${likesCount} likes`);
+            document.getElementById("span-report-"+str).innerHTML = reportCount;
+            
+        }).catch(err => {
+            console.log(err);
+            console.log("main nhi chal rha hoon bhai")
+        });
+
+    }
+
+    const deleteCommentHandler = (del) =>{
+        console.log("main id hoon", del.target.id)
+
+        Axios({
+            method: "GET",
+            
+            withCredentials: true,
+            url: 'http://localhost:3000/destroycomment/'+del.target.id,
+          }).then(response => {
+            return response.data
+        }).then(data =>{
+            console.log(data)
+            // setDiscuss(...Discuss,data)
+            document.getElementById('comment-'+ del.target.id).remove()
+    });
+
 
     }
 
@@ -158,12 +283,87 @@ function Discussion() {
 
 
 
+    const likeCommentHandler = (e) =>{
+
+        // /Likehandler/?id=<%= post.id %>&type=post
+        var str =e.target.id.split("-")[1]
+        Axios({
+            method: "POST",
+            
+            
+            withCredentials: true,
+            url: "http://localhost:3000/Likehandler?id="+str+"&type=comment",
+          }).then(res => {
+           
+
+            var likesCount = parseInt(e.target.getAttribute("data-likes"))
+
+
+            if (res.data.data.deleted == true){
+                likesCount -= 1;
+                
+            }else{
+                likesCount += 1;
+            }
+
+            // console.log(likesCount)
+            e.target.setAttribute('data-likes', likesCount);
+
+            console.log(parseInt(e.target.getAttribute("data-likes")))
+                
+            // e.target.innerHTML(`${likesCount} likes`);
+            document.getElementById("span-like-"+str).innerHTML = likesCount;
+            
+        }).catch(err => {
+            console.log(err);
+            console.log("main nhi chal rha hoon bhai")
+        });
+
+    }
+    const ReportCommentHandler = (e) =>{
+
+        // /Likehandler/?id=<%= post.id %>&type=post
+        var str =e.target.id.split("-")[1]
+        Axios({
+            method: "POST",
+            
+            
+            withCredentials: true,
+            url: "http://localhost:3000/Reporthandler?id="+str+"&type=comment",
+          }).then(res => {
+           
+
+            var reportCount = parseInt(e.target.getAttribute("data-reports"))
+
+
+            if (res.data.data.deleted == true){
+                reportCount -= 1;
+                
+            }else{
+                reportCount += 1;
+            }
+
+            // console.log(likesCount)
+            e.target.setAttribute('data-reports', reportCount);
+
+   
+                
+            // e.target.innerHTML(`${likesCount} likes`);
+            document.getElementById("span-report-"+str).innerHTML = reportCount;
+            
+        }).catch(err => {
+            console.log(err);
+            console.log("main nhi chal rha hoon bhai")
+        });
+
+    }
+
 
     return (
         <div>
             <div className="discussionOuterBox">
                 <div className="discussionInnerBox">
-                {Discuss.map((data) =>{
+                {Discuss.map((data, index) =>{
                        return(
                         <div id={'post-'+ data._id} className="discussionMessageBox">
                         <div  className="PostBox" key={data._id}>
@@ -173,7 +373,8 @@ function Discussion() {
                                     <span className="discussionUsername"><h2>{data.userid.username}</h2></span>
                                     <div className="discussionReport">
                                     
-                                    <span>{data.report.length} report</span>
+                                    {/* <span>{data.report.length} report</span> */}
+                                    <button onClick={ReportPostHandler} id={"report-"+data._id} data-reports={data.report.length}> <span id={"span-report-"+data._id}>{data.report.length}</span> Report </button>
                                     </div>
                                 </div>
                             </div>
@@ -182,16 +383,19 @@ function Discussion() {
                             </div>
                             <div className="discussionLikeandComment">
                                 <div>
-                                <button onClick={likePostHandler} id={"like-"+data._id}> {data.likes.length} <ThumbUpTwoToneIcon/> </button>
+                                {/* <button onClick={likePostHandler} id={"like-"+data._id} data-likes={data.likes.length}> <span id={"span-like-"+data._id}>{data.likes.length}</span> <ThumbUpTwoToneIcon/> </button> */}
+
+                                 <button onClick={likePostHandler} id={"like-"+data._id} data-likes={data.likes.length}> <span id={"span-like-"+data._id}>{data.likes.length}</span> Like </button>
                                 <span><AddCommentTwoToneIcon/> {data.comments.length}</span>
                                 <span><button onClick={deletePostHandler} id={data._id}>Delete</button></span>
                                 {/* <span onClick={deletePostHandler} id={data._id} className="discussionDeletePost">< DeleteIcon/>Delete Post</span> */}
                                 </div>
                             </div>
                         </div>
+                        <div id={"commentsof-"+data._id}>
                         {data.comments.map((value) =>{
                        return(
-                        <div className="discussionCommentSection">
+                        <div id={'comment-'+ value._id} className="discussionCommentSection">
                         <div key={value._id} className="discussionScrollField">
                         <div className="discussionUserComment">
                             <div><PersonIcon/></div>
@@ -201,13 +405,21 @@ function Discussion() {
                                 {value.commentBody}
                             </div>
                             </div>
-                            <div onClick={deleteCommentHandler} style={{color:"red"}}><ClearIcon/></div>
-                            
+                            {/* <div onClick={deleteCommentHandler} style={{color:"red"}}><ClearIcon/></div> */}
+                            <span><button onClick={deleteCommentHandler} id={value._id}>Delete</button></span>
                         </div>
                         <div className="CommentLikesandReport">
-                                <span>{value.likes.length} <ThumbUpTwoToneIcon/></span>
+                                {/* <span>{value.likes.length} <ThumbUpTwoToneIcon/></span> */}
+                                <button onClick={likeCommentHandler} id={"like-"+value._id} data-likes={value.likes.length}> <span id={"span-like-"+value._id}>{value.likes.length}</span> like </button>
+                                {/* <button onClick={likeCommentHandler} id={"like-"+value._id} data-likes={value.likes.length}> <span id={"span-like-"+value._id}>{value.likes.length}</span> <ThumbUpTwoToneIcon/> </button> */}
+
+
                                 
-                                <span style={{color:"red"}}> {value.report.length} report</span>
+                                {/* <span style={{color:"red"}}> {value.report.length} report</span> */}
+                                <button onClick={ReportCommentHandler} id={"report-"+value._id} data-reports={value.report.length}> <span id={"span-report-"+value._id}>{value.report.length}</span> Report </button>
+                                {/* <button onClick={ReportCommentHandler} id={"report-"+value._id} data-reports={value.report.length}> <span id={"span-report-"+value._id}>{value.report.length}</span> <ThumbUpTwoToneIcon/> </button> */}
+
+
                         </div>
 
                         
@@ -215,13 +427,15 @@ function Discussion() {
                         
                     </div>
                        )
-                   })}
+                       
+                   })}</div>
+                   
 
 <div className="discussionPostComment">
                             <div className="WriteComment">
-                                <textarea className="discussionCommentBox" type="text" placeholder="Comment here..!" />
+                                <textarea name="commentBody" id={"post-commentinput-"+data._id} className="discussionCommentBox" type="text" placeholder="Comment here..!"  />
                             </div>
-                            <div className="CommentButton">Send</div>
+                            <div onClick={CommentsubmitHandler} id={"post-submit-"+data._id} post-index={index} className="CommentButton">Send</div>
                         </div>
                         
                     </div>
@@ -231,9 +445,9 @@ function Discussion() {
                 </div>
                 <div className="discussionPostBox">
                 <div className="WritePost">
-                    <textarea className="discussionWritePostBox" type="text" placeholder="Write your Post here..!" />
+                    <textarea name="postBody" className="discussionWritePostBox" type="text" placeholder="Write your Post here..!" ref={postBody} />
                 </div>
-                <div className="discussionPostButton">Send</div>
+                <div onClick={PostsubmitHandler} className="discussionPostButton">Send</div>
                 </div>
             </div>
         </div>
