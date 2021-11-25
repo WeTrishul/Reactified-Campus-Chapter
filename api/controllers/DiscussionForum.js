@@ -22,16 +22,20 @@ module.exports.discuss = (req,res)=>{
         }
         else
         {
+        console.log("Discussion se aaya hoon bro",req.user)
             Post.find({}).populate('userid').populate({
                 path:'comments',
                 populate:{
                     path:'userid'
                 }
             }).exec((error,posts)=>{
-                // console.log(posts)
-                return res.render('DiscussionForum',{
+                console.log(posts)
+                // return res.render('DiscussionForum',{
+                //     posts:posts
+                // })
+                return res.status(200).json({
                     posts:posts
-                })
+                });
             })
         }
 
@@ -117,32 +121,44 @@ module.exports.deletepost = (req,res)=>{
         {
           return   res.redirect('/login')
         }
+        else{
 
+        
+    console.log("main params hoon",req.params.id)
+    console.log("main harikesh hoon",req.user._id)
 
     Post.findById(req.params.id,async (error,post)=>{
-        if(req.user.id==post.userid || req.user.UserType=='Admin')
+        if(req.user._id==post.userid || req.user.UserType=='Admin')
         {
             await Like.deleteMany({likeable:post._id,onModel:'post'})
             await Like.deleteMany({likeable:{$in:post.comments}})
             post.remove()
             await Comment.deleteMany({postid:req.params.id})
 
-            if (req.xhr){
-                console.log('hi')
-                return res.status(200).json({
-                    data: {
-                        post_id: req.params.id
-                    },
-                    message: "Post deleted"
-                });
-            }
+            // if (req.xhr){
+            //     console.log('hi')
+            //     return res.status(200).json({
+            //         data: {
+            //             post_id: req.params.id
+            //         },
+            //         message: "Post deleted"
+            //     });
+            // }
 
-            res.redirect('back')
+            // res.redirect('back')
+
+            return res.status(200).json({
+                data: {
+                    post_id: req.params.id
+                },
+                message: "Post deleted"
+            });
         }
         else{
             res.redirect('back')
         }
     })
+}
 }
 
 module.exports.deletecomment = (req,res)=>{
@@ -176,6 +192,7 @@ module.exports.deletecomment = (req,res)=>{
                     });
                 }
                 return res.redirect('/Discuss')
+
     
             }
             else{

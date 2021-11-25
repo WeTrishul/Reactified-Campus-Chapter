@@ -4,7 +4,7 @@ import {useContext} from "react"
 import AuthContext from '../../Service/auth-context';
 import { CKEditor } from 'ckeditor4-react';
 import {useState, useEffect} from "react";
-import axios from "axios";
+import Axios from "axios";
 import {useHistory} from "react-router-dom"
 import {useLocation} from 'react-router-dom';
 
@@ -39,12 +39,33 @@ function EditBlog() {
             userid:userId
         }
 
-        axios.post('http://localhost:3000/updateblog',blogDetails,{
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-            }
-        })
-        .then(res => {
+        // axios.post('http://localhost:3000/updateblog',blogDetails,{
+        //     headers: {
+        //         "Access-Control-Allow-Origin": "*",
+        //     }
+        // })
+        // .then(res => {
+        //     console.log(res);
+        //     history.push("/Blogs")
+            
+        // }).catch(err => {
+        //     console.log(err);
+        //     console.log("main nhi chal rha hoon bhai")
+        // });
+
+
+        Axios({
+            method: "POST",
+            data: {
+                title:enteredTitle,
+            description:enteredDescription,
+            content:editor,
+            userid:userId
+              },
+            
+            withCredentials: true,
+            url: "http://localhost:3000/updateblog",
+          }).then(res => {
             console.log(res);
             history.push("/Blogs")
             
@@ -52,6 +73,12 @@ function EditBlog() {
             console.log(err);
             console.log("main nhi chal rha hoon bhai")
         });
+
+
+
+
+
+
     }
 
 
@@ -59,19 +86,43 @@ function EditBlog() {
     useEffect(() =>{
         console.log("main id", location.state)
 
-        axios.get('http://localhost:3000/showblog/'+location.state)
-        .then(response => {
-            return response.data
-        }).then(data =>{
+        // axios.get('http://localhost:3000/showblog/'+location.state)
+        // .then(response => {
+        //     return response.data
+        // }).then(data =>{
+        //     console.log(data)
+        //     setDisplayBlogs(data.blogs)
+        //     console.log("yahan")
+        //     console.log(displayBlogs)
+        //     // let main = document.querySelector("main")
+        //     // let str = data.blogs.content
+        //     // let strhtml = str;
+        //     // main.innerHTML=strhtml;
+        // });
+
+
+        Axios({
+            method: "GET",
+            
+            withCredentials: true,
+            url: "http://localhost:3000/showblog/"+location.state,
+          }).then((response) =>{
+          
+                  return response.data
+                  
+              })
+          .then(data =>{
             console.log(data)
             setDisplayBlogs(data.blogs)
             console.log("yahan")
-            console.log(displayBlogs)
-            // let main = document.querySelector("main")
-            // let str = data.blogs.content
-            // let strhtml = str;
-            // main.innerHTML=strhtml;
-        });
+            // console.log(displayBlogs)
+              //     // console.log(data)
+              });
+
+
+
+
+
 
     },[])
 

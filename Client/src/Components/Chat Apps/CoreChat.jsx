@@ -79,9 +79,7 @@ function CoreChat() {
 
         socketRef.current.on('receive_message',(data)=>{
             // setChat(data.message)
-            var anand = chat;
-            anand.push(data.message)
-            setChat(anand)
+            setChat([ ...chat, data ])
             // console.log(chat)
             // if(userId==data.userid._id)
             // {

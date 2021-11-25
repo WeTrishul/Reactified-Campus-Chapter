@@ -1,6 +1,6 @@
 import './UpcomingEvent.css';
 import FormTable from '../Images/FormTable.svg'
-import axios from 'axios'
+import Axios from 'axios'
 import {useContext, useEffect} from 'react'
 import {useState} from 'react'
 import {Link} from "react-router-dom"
@@ -16,14 +16,34 @@ function UpcomingEvent()
 
     useEffect(() =>{
 
-        axios.get('http://localhost:3000/UpcomingEvents')
-        .then(response => {
-            return response.data
-        }).then(data =>{
+        // axios.get('http://localhost:3000/UpcomingEvents')
+        // .then(response => {
+        //     return response.data
+        // }).then(data =>{
+        //     console.log(data)
+        //     setEve(data.data.events)
+            
+        // });
+
+
+
+        Axios({
+            method: "GET",
+            
+            withCredentials: true,
+            url: "http://localhost:3000/UpcomingEvents",
+          }).then((response) =>{
+          
+                  return response.data
+                  
+              })
+          .then(data =>{
             console.log(data)
             setEve(data.data.events)
-            
-        });
+              //     // console.log(data)
+              });
+
+
 
     },[])
 
@@ -32,13 +52,34 @@ function UpcomingEvent()
         apiId.preventDefault();
         
 
-        axios.get('http://localhost:3000/RegisterForEvent/?id='+apiId.target.id+'&userid='+userId)
-        .then(response =>{
+        // axios.get('http://localhost:3000/RegisterForEvent/?id='+apiId.target.id+'&userid='+userId)
+        // .then(response =>{
+        //     return response.data
+        // }).then(data =>{
+        //     console.log(data)
+        //     alert('Registration Successfull')
+        // })
+
+
+        Axios({
+            method: "GET",
+            
+            withCredentials: true,
+            url: 'http://localhost:3000/RegisterForEvent/?id='+apiId.target.id+'&userid='+userId,
+          }).then(response =>{
             return response.data
         }).then(data =>{
             console.log(data)
             alert('Registration Successfull')
         })
+
+
+
+
+
+
+
+
     }
 
     const renderButton = (data) =>{

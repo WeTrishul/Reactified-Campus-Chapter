@@ -4,7 +4,7 @@ import Carousel from '../Slider/Carousel';
 import './DashBoard.css';
 import { CarouselData } from '../Slider/CarouselData';
 import {useState, useEffect} from 'react';
-import axios from 'axios';
+import Axios from 'axios';
 import AuthContext from '../../Service/auth-context';
 import { useContext } from 'react';
 
@@ -22,15 +22,40 @@ function DashBoard(props) {
 
     useEffect(() =>{
 
-        axios.get('http://localhost:3000/dashboard')
-        .then(response => {
-            return response.data
-        }).then(data =>{
+        // axios.get('http://localhost:3000/dashboard')
+        // .then(response => {
+        //     return response.data
+        // }).then(data =>{
+        //     console.log(data)
+        //     setBlogs(data.data.blogs)
+        //     setEvents(data.data.events)
+        //     setPosts(data.data.posts)
+        // });
+
+
+        Axios({
+            method: "GET",
+            
+            withCredentials: true,
+            url: "http://localhost:3000/dashboard",
+          }).then((response) =>{
+          
+                  return response.data
+                  
+              })
+          .then(data =>{
             console.log(data)
-            setBlogs(data.data.blogs)
-            setEvents(data.data.events)
-            setPosts(data.data.posts)
-        });
+                setBlogs(data.data.blogs)
+                setEvents(data.data.events)
+                setPosts(data.data.posts)
+              //     // console.log(data)
+              });
+
+
+
+
+
+
 
     },[])
 
@@ -94,6 +119,7 @@ function DashBoard(props) {
                 
                 
             </div>
+            
         </div>
 
     )

@@ -1,11 +1,17 @@
 .discussionOuterBox {
-  background: chocolate;
+  /* background: chocolate; */
   width: 100%;
   height: 90vh;
 }
 
+.discussionInnerBox {
+  /* background: turquoise; */
+  height: 80vh;
+  overflow-y: auto;
+}
+
 .discussionMessageBox {
-  background: coral;
+  /* background: coral; */
   width: 100%;
   padding-top: 1rem;
   padding-left: 4rem;
@@ -13,8 +19,122 @@
 }
 
 .PostBox {
-  width: 50%;
+  width: 60%;
   padding-top: 1rem;
+  border-radius: 10px;
   height: 30vh;
-  background: yellowgreen;
+  background: rgb(207, 209, 203);
+  box-shadow: 10px 9px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 9px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 9px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.discussionUserDetails {
+  text-align: left;
+  padding-left: 1rem;
+}
+.discussionUserDetails {
+  display: flex;
+}
+
+.discussionUserImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+  border-image: none;
+  /* background: rgb(82, 236, 95); */
+}
+.discussionUsername {
+  padding-left: 20px;
+}
+.discussionReport {
+  padding-left: 400px;
+  padding-top: 10px;
+  color: red;
+}
+.discussionUserPost {
+  height: 10vh;
+  padding-left: 6.3rem;
+
+  /* text-align: center; */
+}
+
+.discussionLikeandComment {
+  padding-left: 6.3rem;
+}
+
+.discussionDeletePost {
+  padding-left: 20px;
+  color: red;
+}
+
+.discussionCommentSection {
+  margin-top: 1rem;
+  padding-left: 5rem;
+
+  /* background: cornflowerblue; */
+}
+
+.discussionScrollField {
+  overflow-y: auto;
+}
+
+.discussionUserComment {
+  display: flex;
+}
+.CommentUserDetails {
+  padding: 5px;
+  background: rgb(199, 195, 195);
+  border-radius: 7px;
+}
+
+.CommentLikesandReport {
+  padding-left: 2rem;
+}
+
+.discussionPostComment {
+  margin-top: 10px;
+  display: flex;
+}
+
+.discussionCommentBox {
+  border-style: none;
+  border-radius: 5px 0 0 5px;
+  padding: 5px;
+  height: 30px;
+}
+
+.CommentButton {
+  padding: 3px;
+  background: #5595fd;
+  border-radius: 0 5px 5px 0;
+}
+
+.discussionPostBox {
+  display: flex;
+  margin-top: 1vh;
+}
+
+.WritePost {
+  width: 90%;
+  height: 8vh;
+}
+
+.discussionWritePostBox {
+  border-style: none;
+  padding: 5px;
+  border-radius: 5px 0 0 5px;
+  font-size: 25px;
+  font-weight: 500;
+  width: 100%;
+  height: 8vh;
+}
+
+.discussionPostButton {
+  width: 10%;
+  height: 8vh;
+  background: #5595fd;
+  border-radius: 0 5px 5px 0;
+  text-align: center;
+  padding-top: 10px;
 }

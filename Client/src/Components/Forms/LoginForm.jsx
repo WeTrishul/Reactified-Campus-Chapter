@@ -3,7 +3,7 @@ import './LoginForm.css';
 import LoginPage from '../Images/LoginPage.svg';
 import {Link} from 'react-router-dom';
 import {useRef, useContext} from 'react';
-import axios from 'axios';
+import Axios from 'axios';
 import AuthContext from '../../Service/auth-context';
 import GoogleLogin from 'react-google-login'
 import {useHistory} from 'react-router-dom'
@@ -32,32 +32,60 @@ function LoginForm() {
 
         // console.log(loginDetails);
 
-        axios.post('http://localhost:3000/login/createsession/',loginDetails
-            // headers: {
-            //     "Access-Control-Allow-Origin": "*",
-            //     'Content-Type' : 'application/json'
-            // }
-        ).then((response) =>{
+        // axios.post('http://localhost:3000/login/createsession/',loginDetails
+        //     // headers: {
+        //     //     "Access-Control-Allow-Origin": "*",
+        //     //     'Content-Type' : 'application/json'
+        //     // }
+        // ).then((response) =>{
             
-            return response.data
+        //     return response.data
             
-        })
-        .then(data =>{
-            // console.log(data)
-            // console.log(data.data.applyreq.token)
-            // console.log(data.data.applyreq._id)
+        // })
+        // .then(data =>{
+        //     // console.log(data)
+        //     // console.log(data.data.applyreq.token)
+        //     // console.log(data.data.applyreq._id)
             
-            authCtx.userId(data.data.applyreq._id)
-            authCtx.userName(data.data.applyreq.username)
+        //     authCtx.userId(data.data.applyreq._id)
+        //     authCtx.userName(data.data.applyreq.username)
             
-            authCtx.login(data.data.applyreq.token)
-            history.push("/Dashboard")
-            // console.log(data)
-        })
-        .catch(err =>{
-            console.log("error")
-            alert("Authentication Failed!!");
-        })
+        //     authCtx.login(data.data.applyreq.token)
+        //     history.push("/Dashboard")
+        //     // console.log(data)
+        // })
+        // .catch(err =>{
+        //     console.log("error")
+        //     alert("Authentication Failed!!");
+        // })
+
+        // const login = () => {
+            Axios({
+              method: "POST",
+              data: {
+                username:enteredUsername,
+                password:enteredPassword
+              },
+              withCredentials: true,
+              url: "http://localhost:3000/login/createsession",
+            }).then((response) =>{
+            
+                    return response.data
+                    
+                })
+            .then(data =>{
+                //     // console.log(data)
+                //     // console.log(data.data.applyreq.token)
+                //     // console.log(data.data.applyreq._id)
+                    
+                    authCtx.userId(data.data.applyreq._id)
+                    authCtx.userName(data.data.applyreq.username)
+                    
+                    authCtx.login(data.data.applyreq.token)
+                    history.push("/Dashboard")
+                //     // console.log(data)
+                });
+        //   };
 
 
 

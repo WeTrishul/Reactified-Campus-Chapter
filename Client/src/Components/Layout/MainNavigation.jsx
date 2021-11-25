@@ -52,19 +52,19 @@ function MainNavigation() {
                 <li className= 'navbar-items'>
                     <Link to='/Blogs' className='nav-links' onClick={closeSideBar}>Blogs</Link>
                 </li>
-                {/* <li className= 'navbar-items'>
+                <li className= 'navbar-items'>
                     <Link className='nav-links' onClick={closeSideBar} ><NotificationsActiveIcon/> </Link>
+                </li>
+                {/* <li className= 'navbar-items'>
+                    <Link to='/Profile' className='nav-links' onClick={closeSideBar} >Profile</Link>
                 </li> */}
                 <li className= 'navbar-items'>
-                    <Link to='/Profile' className='nav-links' onClick={closeSideBar} >Profile</Link>
-                </li>
-                {/* <li className= 'navbar-items'>
                     <Link  className='nav-links' onClick={closeSideBar} onClick={DropActive}><AccountCircleRoundedIcon/></Link>
                     {dropdown && <Dropdown/>}
-                </li> */}
-                 <li className= 'navbar-items'>
-                    <Link  className='nav-links' onClick={logoutHandler} >Logout</Link>
                 </li>
+                 {/* <li className= 'navbar-items'>
+                    <Link  className='nav-links' onClick={logoutHandler} >Logout</Link>
+                </li> */}
                 {/* <li className= 'navbar-items'>
                     <Dropdown/>
                 </li> */}

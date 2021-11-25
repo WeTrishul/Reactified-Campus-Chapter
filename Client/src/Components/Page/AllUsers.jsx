@@ -2,7 +2,7 @@ import React from 'react';
 import './AllUsers.css';
 
 import {useEffect,useState} from 'react'
-import axios from 'axios'
+import Axios from 'axios'
 function AllUsers() {
 
 
@@ -12,13 +12,36 @@ function AllUsers() {
 
     useEffect(() =>{
 
-        axios.get('http://localhost:3000/listUsers')
-        .then(response => {
-            return response.data
-        }).then(data =>{
+        // axios.get('http://localhost:3000/listUsers')
+        // .then(response => {
+        //     return response.data
+        // }).then(data =>{
+        //     console.log(data)
+        //     setAllUsers(data.data.users)
+        // });
+
+
+
+        Axios({
+            method: "GET",
+            
+            withCredentials: true,
+            url: "http://localhost:3000/listUsers",
+          }).then((response) =>{
+          
+                  return response.data
+                  
+              })
+          .then(data =>{
             console.log(data)
             setAllUsers(data.data.users)
-        });
+              //     // console.log(data)
+              });
+
+
+
+
+
 
     },[])
 
@@ -27,13 +50,43 @@ function AllUsers() {
         name.preventDefault();
         console.log(name.target.id)
 
-        axios.get('http://localhost:3000/delete/?username='+name.target.id)
-        .then(response => {
-            return response.data
-        }).then(data =>{
+        // axios.get('http://localhost:3000/delete/?username='+name.target.id)
+        // .then(response => {
+        //     return response.data
+        // }).then(data =>{
+        //     console.log(data)
+        //     document.getElementById('tr-'+ name.target.id).remove()
+        // });
+
+
+
+        Axios({
+            method: "GET",
+            
+            withCredentials: true,
+            url: "http://localhost:3000/delete/?username="+name.target.id,
+          }).then((response) =>{
+          
+                  return response.data
+                  
+              })
+          .then(data =>{
             console.log(data)
             document.getElementById('tr-'+ name.target.id).remove()
-        });
+              //     // console.log(data)
+              });
+
+
+
+        
+
+
+
+
+
+
+
+
 
     }
 

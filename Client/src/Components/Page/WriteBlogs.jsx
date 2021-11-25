@@ -86,7 +86,15 @@ function WriteBlogs() {
                     } } */}
                 {/* /> */}
                 <div className="submitBlog">
-                    <button onClick={blogSubmitHandler}>Submit</button>
+                    <button style={{width:"100px", 
+                    background:'#5595fd', 
+                    borderStyle:"none",
+                    height:"5vh",
+                    borderRadius:"20px",
+                    marginTop:"1rem", 
+                    marginLeft:"1rem", 
+                    cursor:"pointer", 
+                    color:"white"}} onClick={blogSubmitHandler}>Submit</button>
                 </div>
             </div>
         

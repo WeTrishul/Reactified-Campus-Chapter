@@ -1,24 +1,39 @@
 import React from 'react';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import './Dropdown.css';
+import { useContext } from 'react';
+import AuthContext from '../../Service/auth-context';
+import { useHistory } from 'react-router';
+import {Link} from 'react-router-dom'
 
 function Dropdown() {
+
+
+    const authCtx = useContext(AuthContext)
+
+
+    let history = useHistory();
+
+    const logoutHandler = () =>{
+        authCtx.logout();
+        history.push('/');
+    }
 
     
     return (
         <div className='dropdown' style={{float:"right"}}>
-            <div className="dropdown-btn"><AccountCircleRoundedIcon/></div>
+            {/* <div className="dropdown-btn"><AccountCircleRoundedIcon/></div> */}
             <div className="dropdown-content">
                 <div className="dropdown-item">
-                    Profile
+                    <Link to="Profile">Profile</Link>
                 </div>
                 <div className="dropdown-item">
-                    Edit Profile
+                    <Link to="EditProfile">Edit Profile</Link>
                 </div>
                 <div className="dropdown-item">
-                    Apply
+                    <Link to="Apply">Apply</Link>
                 </div>
-                <div className="dropdown-item">
+                <div onClick={logoutHandler} className="dropdown-item"> 
                     Logout
                 </div>
             </div>

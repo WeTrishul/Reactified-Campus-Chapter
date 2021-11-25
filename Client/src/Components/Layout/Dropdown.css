@@ -60,6 +60,7 @@
 .dropdown .dropdown-content {
   margin-top: 10px;
   right: 40px;
+  top: 50px;
   padding-right: 50px;
   position: absolute;
   z-index: 998;

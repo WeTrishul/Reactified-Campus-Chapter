@@ -172,6 +172,7 @@ module.exports.postsignup = async (req,res)=>{
 
 module.exports.dashboard = async (req,res)=>{
     console.log("inside dashboard")
+    console.log(req.user)
     try { 
         
         const posts = await Post.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(8)

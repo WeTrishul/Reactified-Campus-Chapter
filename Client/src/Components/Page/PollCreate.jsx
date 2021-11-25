@@ -2,7 +2,7 @@ import React from 'react'
 import "./PollCreate.css"
 import {useHistory} from 'react-router-dom'
 import {useRef, useContext} from 'react';
-import axios from 'axios';
+import Axios from 'axios';
 import AuthContext from '../../Service/auth-context';
 
 function PollCreate() {
@@ -25,26 +25,63 @@ function PollCreate() {
     const submitHandler = (event) => {
         event.preventDefault();
 
+
+
+            const enteredpollName=pollnameInputRef.current.value;
+            const enteredQuestion=questionInputRef.current.value;
+            const enteredOptionA=optionAInputRef.current.value;
+            const enteredOptionB=optionBInputRef.current.value;
+            const enteredOptionC=optionCInputRef.current.value;
+            const enteredOptionD=optionDInputRef.current.value;
+
         // const pollName = pollnameInputRef.current.value;
         
 
         const pollData = {
-            pollName:pollnameInputRef.current.value,
-            question:questionInputRef.current.value,
-            optionA:optionAInputRef.current.value,
-            optionB:optionBInputRef.current.value,
-            optionC:optionCInputRef.current.value,
-            optionD:optionDInputRef.current.value
+            pollName:enteredpollName,
+            Question:enteredQuestion,
+            optionA:enteredOptionA,
+            optionB:enteredOptionB,
+            optionC:enteredOptionC,
+            optionD:enteredOptionD
 
         };
        
 
-        axios.post('http://localhost:3000/poll/createpoll',pollData,
-            // headers: {
-            //     "Access-Control-Allow-Origin": "*",
-            //     'Content-Type' : 'application/json'
-            // }
-        ).then((response) =>{
+        // axios.post('http://localhost:3000/poll/createpoll',pollData,
+            
+        // ).then((response) =>{
+            
+        //     console.log(response)
+
+        //     return response.data
+            
+        // })
+        // .then(data =>{
+            
+        //     history.push("/Polling")
+            
+        // })
+        // .catch(err =>{
+        //     console.log("error")
+        //     alert("Poll Failed!!");
+        // })
+
+
+        Axios({
+            method: "POST",
+            data: {
+                pollName:enteredpollName,
+            Question:enteredQuestion,
+            optionA:enteredOptionA,
+            optionB:enteredOptionB,
+            optionC:enteredOptionC,
+            optionD:enteredOptionD
+              },
+            
+            withCredentials: true,
+            url: "http://localhost:3000/poll/createpoll",
+          }).then((response) =>{
             
             console.log(response)
 
@@ -52,23 +89,14 @@ function PollCreate() {
             
         })
         .then(data =>{
-            // console.log(data)
-            // console.log(data.data.applyreq.token)
-            // console.log(data.data.applyreq._id)
             
-            // authCtx.userId(data.data.applyreq._id)
-            // authCtx.userName(data.data.applyreq.username)
-            
-            // authCtx.login(data.data.applyreq.token)
             history.push("/Polling")
-            // console.log(data)
+            
         })
         .catch(err =>{
             console.log("error")
             alert("Poll Failed!!");
         })
-
-
 
 
 

@@ -4,7 +4,7 @@ const router = new express.Router()
 const DiscussController = require('../controllers/DiscussionForum')
 
 
-router.get('/Discuss',DiscussController.discuss)
+router.get('/Discuss',passport.checkAuthentication,DiscussController.discuss)
 
 router.post('/postit',passport.checkAuthentication,DiscussController.postit)
 

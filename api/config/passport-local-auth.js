@@ -56,8 +56,11 @@ passport.deserializeUser(function(username,done){
 passport.checkAuthentication = (req,res,next)=>{
     if(req.isAuthenticated())
     {
+        console.log(req.user,"check auth ke andar")
         return next()
     }
+
+    console.log("check auth outside")
 
     return res.redirect('/login')
 }
@@ -65,9 +68,10 @@ passport.checkAuthentication = (req,res,next)=>{
 passport.setAuthenticatedUser = (req,res,done)=>{
     if(req.isAuthenticated())
     {
+        console.log(req.user,"set auth ke andar")
         res.locals.user = req.user
     }
-    
+    console.log("set auth outside")
     done()
 }
 

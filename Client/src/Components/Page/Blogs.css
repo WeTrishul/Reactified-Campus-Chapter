@@ -1,9 +1,173 @@
-.blogsOuter {
+.blogsOuterBox {
   width: 100%;
   height: auto;
+  /* background: rgb(102, 168, 47); */
 }
 
-.blogsList {
+.blogsInnerBox {
   width: 100%;
-  height: 20vh;
+  height: 90vh;
+  /* background: #bdbd1e; */
+  overflow-y: auto;
+}
+
+.blogsListBox {
+  background: #fff;
+  height: 10vh;
+  margin: 1rem 5rem 1rem 5rem;
+  border-radius: 7px;
+  display: flex;
+  box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+
+  justify-content: center;
+}
+
+.blogsTitleBox {
+  width: 50%;
+  text-align: center;
+  /* background: chartreuse; */
+  padding-top: 20px;
+  transition: 0.5s ease-in-out;
+}
+/* .blogsTitleBox:hover {
+  transform: scale(1.2, 1.2);
+
+  /* transition: 0.5s ease-out;
+  transition: 0.5s ease-in; }*/
+
+.blogsTitleLink {
+  text-decoration: none;
+  cursor: pointer;
+  color: blue;
+  font-size: 20px;
+  font-weight: 600;
+  /* transform: scale(1.2, 1.2);
+  transition: 0.5s ease-out; */
+  transition: 0.5s ease-in-out;
+}
+
+.blogsTitleLink:hover {
+  transform: scale(1.2, 1.2);
+}
+
+.blogsDeleteBox {
+  width: 25%;
+  text-align: center;
+  /* background: coral; */
+  padding-top: 20px;
+}
+
+.blogsDeleteButton {
+  width: 100px;
+  height: 4vh;
+  border-style: none;
+  background: rgb(233, 70, 70);
+  border-radius: 20px;
+  color: white;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.blogsDeleteButton:hover {
+  transform: scale(1.2, 1.2);
+  box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+}
+
+.blogsEditBox {
+  width: 25%;
+  text-align: center;
+  /* background: crimson; */
+  padding-top: 20px;
+}
+
+.blogsEditButton {
+  width: 100px;
+  height: 4vh;
+  border-style: none;
+  text-decoration: none;
+  background: #5595fd;
+  border-radius: 20px;
+  color: white;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.blogsEditButton:hover {
+  transform: scale(1.2, 1.2);
+  box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+}
+
+.writeBlogsButton {
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  z-index: 990;
+  cursor: pointer;
+
+  width: 105px;
+  height: 7vh;
+  border-style: none;
+  background: rgb(233, 70, 70);
+  color: white;
+  border-radius: 10px;
+  transition: 0.5s ease-in-out;
+}
+
+.writeBlogsButton:hover {
+  transform: scale(1.3, 1.2);
+  background: rgb(201, 41, 41);
+}
+
+/* ViewAll Blogs */
+
+.viewBlogsHeading {
+  text-align: center;
+}
+
+.ViewblogsOuterBox {
+  width: 100%;
+  height: auto;
+  /* background: rgb(102, 168, 47); */
+}
+
+.ViewblogsInnerBox {
+  width: 100%;
+  height: 80vh;
+  /* background: #bdbd1e; */
+  overflow-y: auto;
+}
+
+.ViewblogsListBox {
+  background: rgb(102, 168, 47);
+  /* background: rgb(116, 9, 9); */
+  height: 10vh;
+  margin: 1rem 5rem 1rem 5rem;
+  border-radius: 7px;
+  display: flex;
+  box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 11px 11px 14px -6px rgba(0, 0, 0, 0.75);
+
+  justify-content: center;
+  transition: 0.5s ease-in-out;
+}
+
+.ViewblogsListBox:hover {
+  transition: 0.5s ease-in-out;
+  transform: scale(1.1, 1.1);
+}
+
+.ViewallBlogsLink {
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
 }
