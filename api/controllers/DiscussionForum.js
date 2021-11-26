@@ -22,14 +22,14 @@ module.exports.discuss = (req,res)=>{
         }
         else
         {
-        console.log("Discussion se aaya hoon bro",req.user)
+      
             Post.find({}).populate('userid').populate({
                 path:'comments',
                 populate:{
                     path:'userid'
                 }
             }).exec((error,posts)=>{
-                console.log(posts)
+               
                 // return res.render('DiscussionForum',{
                 //     posts:posts
                 // })

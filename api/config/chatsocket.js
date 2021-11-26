@@ -27,6 +27,7 @@ module.exports.chat = (socketserver) =>{
               user.seenAllCoreChats='no'
               user.save()
               socket.join('corenotification')
+              console.log("yyyyyyyyyyyy")
           }
           else if(data.chatroom=='executivenotification')
           {
@@ -81,7 +82,7 @@ module.exports.chat = (socketserver) =>{
 
         console.log('aagya idhar')
 
-
+        console.log('Mai hoon chat ', data)
 // io.emit('notifyroom',notific)
 
         if(data.room=='core')
