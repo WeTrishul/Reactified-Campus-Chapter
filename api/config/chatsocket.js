@@ -23,6 +23,7 @@ module.exports.chat = (socketserver) =>{
           console.log('joining request by ' , data)
           if(data.chatroom=='corenotification')
           {
+            console.log(data.username)
               var user = await User.findById(data.username)
               user.seenAllCoreChats='no'
               user.save()

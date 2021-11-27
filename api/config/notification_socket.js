@@ -115,7 +115,7 @@ module.exports.notification = (socketserver) =>{
          
           socket.join(data.chatroom)
           console.log(data)
-          io.in('realshivam').emit('user_joined')
+          io.in(data.chatroom).emit('user_joined')
     
         })
 
