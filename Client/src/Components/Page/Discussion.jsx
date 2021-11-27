@@ -1,6 +1,8 @@
 import React from 'react'
 import "./Discussion.css"
+import * as noti from "../../Service/socket";
 import {useRef} from 'react';
+
 import ThumbUpTwoToneIcon from '@mui/icons-material/ThumbUpTwoTone';
 import AddCommentTwoToneIcon from '@mui/icons-material/AddCommentTwoTone';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -11,7 +13,14 @@ import AuthContext from '../../Service/auth-context';
 import{useContext} from 'react'
 import Axios from "axios"
 
-function Discussion() {
+function Discussion({socket}) {
+
+    const authCtx = useContext(AuthContext);
+    let userid = authCtx.id;
+    let username = authCtx.username
+    console.log(username)
+
+
 
     const postBody = useRef();
     const commentBody = useRef();
@@ -20,11 +29,10 @@ function Discussion() {
     let count=0;
     const [likePost,setLikePost]= useState(count)
 
+    const [notifications,setnotifications] = useState([])
 
 
-    const authCtx = useContext(AuthContext);
-    let userid = authCtx.id;
-
+  
 
 
     const PostsubmitHandler = (event) => {
@@ -84,11 +92,19 @@ function Discussion() {
             .then(data =>{
                 
                console.log('comment hogya')
-                console.log(data)
                 var x = event.target.getAttribute("post-index")
                 let copy = [...Discuss]
                 copy[x].comments.push(data.data.comment)
                 setDiscuss(copy)
+                console.log(data.data.comment.userid.username)
+                console.log(data.data.postuser)
+                // if(data.data.comment.userid.username!=data.data.postuser)
+                // {
+
+               
+                // noti.notify(data.data.postuser,'commented on your post')
+
+                // }
                 
             })
             .catch(err =>{
@@ -102,14 +118,19 @@ function Discussion() {
 
     useEffect(() =>{
 
-        // axios.get('http://localhost:3000/Discuss')
-        // .then(response => {
-        //     return response.data
-        // }).then(data =>{
-        //     console.log(data)
-        //     setDiscuss(data.posts)
-            
-        // });
+        // const socket = noti.socket
+
+        // // noti.joinNotiRoom(username)
+
+        
+        // socket.on('user_joined',()=>{
+        //     console.log("Bolbum")
+        // })
+
+        // socket.on('notification',(data)=>{
+        //     console.log('notification aya')
+        //     console.log(data) 
+        // })
 
 
         Axios({
@@ -213,6 +234,20 @@ function Discussion() {
                 
             // e.target.innerHTML(`${likesCount} likes`);
             document.getElementById("span-like-"+str).innerHTML = likesCount;
+
+            // if(res.data.data.deleted==false && noti.usernaam!=res.data.data.likeableowner)
+            // {
+            //     noti.notify(res.data.data.likeableowner,'liked your ' + res.data.data.likeabletype,res.data.data.likeabletype)
+
+            // }
+            if(res.data.data.deleted==false && authCtx.username!=res.data.data.likeableowner){
+            socket.emit('notify',{
+                            to : res.data.data.likeableowner,
+                            from:authCtx.username,
+                            msg : 'liked your ' + res.data.data.likeabletype,
+                            placetogo:''
+                        })
+                    }
             
         }).catch(err => {
             console.log(err);
@@ -248,10 +283,32 @@ function Discussion() {
             // console.log(likesCount)
             e.target.setAttribute('data-reports', reportCount);
 
+            // if(reportCount==5)
+            // {
+            //   console.log('yo man')
+            //   let reporttonoti = '/Discuss/#'+res.data.data.reportabletype+'-'+res.data.data.reportable
+
+            //   noti.notify('reportnoti','One ' + res.data.data.reportabletype +' has 5 reports',reporttonoti)
+            // }
+
    
                 
             // e.target.innerHTML(`${likesCount} likes`);
             document.getElementById("span-report-"+str).innerHTML = reportCount;
+
+            // if(res.data.data.deleted==false && noti.usernaam!=res.data.data.reportableowner)
+            // {
+            // let reporttonoti = '/Discuss/#'+res.data.data.reportabletype+'-'+res.data.data.reportable
+            // noti.notify(res.data.data.reportableowner,'reported your ' + res.data.data.reportabletype,reporttonoti)
+            // }
+            if(res.data.data.deleted==false && authCtx.username!=res.data.data.reportableowner){
+                socket.emit('notify',{
+                                to : res.data.data.reportableowner,
+                                from:authCtx.username,
+                                msg : 'reported your ' + res.data.data.reportabletype,
+                                placetogo:'/Discuss/#'+res.data.data.reportabletype+'-'+res.data.data.reportable
+                            })
+                        }
             
         }).catch(err => {
             console.log(err);
@@ -313,6 +370,19 @@ function Discussion() {
                 
             // e.target.innerHTML(`${likesCount} likes`);
             document.getElementById("span-like-"+str).innerHTML = likesCount;
+            // if(res.data.data.deleted==false && noti.usernaam!=res.data.data.likeableowner)
+            // {
+            //     noti.notify(res.data.data.likeableowner,'liked your ' + res.data.data.likeabletype,res.data.data.likeabletype)
+
+            // }
+            if(res.data.data.deleted==false && authCtx.username!=res.data.data.likeableowner){
+                socket.emit('notify',{
+                                to : res.data.data.likeableowner,
+                                from:authCtx.username,
+                                msg : 'liked your ' + res.data.data.likeabletype,
+                                placetogo:''
+                            })
+                        }
             
         }).catch(err => {
             console.log(err);
@@ -343,6 +413,14 @@ function Discussion() {
                 reportCount += 1;
             }
 
+            // if(reportCount==5)
+            //       {
+            //         console.log('yo man')
+            //         let reporttonoti = '/Discuss/#'+res.data.data.reportabletype+'-'+res.data.data.reportable
+
+            //         noti.notify('reportnoti','One ' + res.data.data.reportabletype +' has 5 reports',reporttonoti)
+            //       }
+  
             // console.log(likesCount)
             e.target.setAttribute('data-reports', reportCount);
 
@@ -350,6 +428,20 @@ function Discussion() {
                 
             // e.target.innerHTML(`${likesCount} likes`);
             document.getElementById("span-report-"+str).innerHTML = reportCount;
+
+            // if(res.data.data.deleted==false && noti.usernaam!=res.data.data.reportableowner)
+            // {
+            // let reporttonoti = '/Discuss/#'+res.data.data.reportabletype+'-'+res.data.data.reportable
+            // noti.notify(res.data.data.reportableowner,'reported your ' + res.data.data.reportabletype,reporttonoti)
+            // }
+            if(res.data.data.deleted==false && authCtx.username!=res.data.data.reportableowner){
+                socket.emit('notify',{
+                                to : res.data.data.reportableowner,
+                                from:authCtx.username,
+                                msg : 'reported your ' + res.data.data.reportabletype,
+                                placetogo:'/Discuss/#'+res.data.data.reportabletype+'-'+res.data.data.reportable
+                            })
+                        }
             
         }).catch(err => {
             console.log(err);

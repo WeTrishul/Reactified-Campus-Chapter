@@ -7,7 +7,7 @@ import {useState, useEffect} from 'react';
 import Axios from 'axios';
 import AuthContext from '../../Service/auth-context';
 import { useContext } from 'react';
-
+import * as noti from "../../Service/socket";
 
 function DashBoard(props) {
 
@@ -21,6 +21,9 @@ function DashBoard(props) {
     const[posts,setPosts] = useState([]);
 
     useEffect(() =>{
+
+       
+
 
         // axios.get('http://localhost:3000/dashboard')
         // .then(response => {

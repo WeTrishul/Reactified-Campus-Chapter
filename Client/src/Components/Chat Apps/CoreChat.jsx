@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import io from "socket.io-client"
+import * as  noti from "../../Service/notification_engine"
 import AuthContext from '../../Service/auth-context';
 import SendIcon from '@mui/icons-material/Send';
 import { useContext } from 'react';
@@ -10,19 +11,25 @@ function CoreChat() {
     // const [ state, setState ] = useState({ message: "", name: "" })
     const [ chat, setChat ] = useState([])
  
-    
+   
  
     const socketRef = useRef()
     const authCtx=useContext(AuthContext)
     let userId=authCtx.id;
+
+    let username=authCtx.username
+    console.log(authCtx.id)
  
     useEffect(
         () => {
+
+            // socket2.emit('leaveroom','corenotification')
+           
             socketRef.current = io.connect("http://localhost:5000")
  
             socketRef.current.on('connect', function(){
                 console.log('connection established using sockets...!');
-    
+             
                 socketRef.current.emit('join_room',{
                         username:userId,
                         chatroom:'core',
@@ -46,9 +53,26 @@ function CoreChat() {
                
  
             })
+
+
+
+            // socketRef.current.on('yesyoumaynotify',(data)=>{
+
+            //     console.log('yes you may')
+                    
+            // })
+    
  
            
-            return () => socketRef.current.disconnect()
+            return () => {
+                
+                // socket2.emit("join_room",{
+                //     username:authCtx.id,
+                //     chatroom:'corenotification',
+                //     chatbox : ''
+                //     });
+                
+                socketRef.current.disconnect()}
         },
         []
     )
@@ -88,16 +112,16 @@ function CoreChat() {
             // else{
             //     document.getElementById('chatbody').append(data.message);
             // }
-           
-    
+          
+            socketRef.current.emit('caninotifyothers',{data:data,room : 'core'})
+
         })
 
     },[chat])
  
     const rendermessage = (data) =>{
         
-        console.log("data check")
-        console.log(data)
+     
         // console.log(data.userid._id)
         if(data.userid._id==userId)
         {

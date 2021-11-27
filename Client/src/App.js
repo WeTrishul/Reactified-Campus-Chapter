@@ -25,19 +25,51 @@ import WriteBlogs from './Components/Page/WriteBlogs';
 import DisplayBlogs from './Components/Page/DisplayBlogs';
 import EditBlog from './Components/Page/EditBlog';
 import ViewAllPoll from './Components/Page/ViewAllPoll';
-
+import SocketContext, { socket } from "../src/Service/socket";
+import { io } from "socket.io-client";
+import { useEffect, useState } from "react";
 
 function App() {
 
   const authCtx = useContext(AuthContext)
+  const username = authCtx.username
+  const [socket, setSocket] = useState(null);
+  // const [socket2, setSocket2] = useState(null);
+
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    setSocket(io("http://localhost:7000"));
+
+    // setSocket2(io("http://localhost:5000"))
+
+  }, []);
+
+  useEffect(() => {
+    socket?.emit("join_room",{
+            chatroom:username
+            });
+
+    // socket2?.emit("join_room",{
+    //   username:authCtx.id,
+    //   chatroom:'corenotification',
+    //   chatbox : ''
+    //   });
+      
+  }, [socket, user]);
 
   return (
     <div>
-      {authCtx.isLoggedIn && <MainNavigation/>}
+
+{/* <SocketContext.Provider value={socket}>
+<Blogs/> 
+   </SocketContext.Provider> */}
+
+      {authCtx.isLoggedIn && socket && <MainNavigation socket={socket} />}
       {authCtx.isLoggedIn && <FloatingBtn/>}
       <Switch>
         {authCtx.isLoggedIn && <Route exact path='/Dashboard'>
-          <DashBoard/>
+          <DashBoard />
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/UpcomingEvent'>
           <UpcomingEvent/>
@@ -78,8 +110,8 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/SetQuestions'>
           <SetQuestions/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/Discussion'>
-          <Discussion/>
+        {authCtx.isLoggedIn && socket &&<Route exact path='/Discussion'>
+          <Discussion socket={socket}/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/Leaderboard'>
           <Leaderboard/>
@@ -97,7 +129,7 @@ function App() {
           <ExecutiveChat/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/CoreChat'>
-          <CoreChat/>
+          <CoreChat />
         </Route>}
         <Route exact path='*'>
         <LoginForm/>
