@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link, useHistory} from 'react-router-dom';
-import {useState, useContext} from 'react';
+import {useState,useEffect ,useContext} from 'react';
+
 import './MainNavigation.css'
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
@@ -11,7 +12,25 @@ import DialogSelect from './Dropdata';
 
 
 
-function MainNavigation() {
+function MainNavigation({ socket}) {
+    const [notifications, setNotifications] = useState([]);
+    const [open, setOpen] = useState(false);
+  
+    useEffect(() => {
+       
+      socket.on('notification', (data) => {
+          console.log(data)
+        setNotifications((prev) => [...prev, data]);
+      });
+
+    //   socket2.on('yesyoumaynotify',(data)=>{
+
+    //     console.log(data)
+    //     setNotifications((prev) => [...prev, data]);
+
+    //   })
+
+    }, [socket]);
 
     const authCtx = useContext(AuthContext)
     let history = useHistory();

@@ -8,7 +8,7 @@ module.exports.notification = (socketserver) =>{
 
     let io = require('socket.io')(socketserver, {
         cors: {
-          origin: "http://localhost:3000",
+          origin: "http://localhost:3001",
           methods: ["GET", "POST"]
         }
       })
@@ -16,11 +16,13 @@ module.exports.notification = (socketserver) =>{
 
     io.sockets.on('connection',(socket)=>{
         // console.log('notification engine running')
+
+
         
         
       socket.on('notify',async(data)=>{
         try {
-
+          
           if(data.to=='reportnoti')
           {
             console.log('huuu')
@@ -66,9 +68,11 @@ module.exports.notification = (socketserver) =>{
           else{
 
              // notifying specific users
+             console.log('yhin par aya ')
           console.log('hello ')
           const user = await User.find({username:data.to})
           console.log(user[0].name)
+         
           const str = data.msg
           if(str[2]=='n')
           {
@@ -110,8 +114,8 @@ module.exports.notification = (socketserver) =>{
         socket.on('join_room',async(data)=>{
          
           socket.join(data.chatroom)
-
-          io.in('realshivam').emit('user_joined')
+          console.log(data)
+          io.in(data.chatroom).emit('user_joined')
     
         })
 

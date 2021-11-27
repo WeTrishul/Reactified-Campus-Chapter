@@ -22,14 +22,14 @@ module.exports.discuss = (req,res)=>{
         }
         else
         {
-        console.log("Discussion se aaya hoon bro",req.user)
+      
             Post.find({}).populate('userid').populate({
                 path:'comments',
                 populate:{
                     path:'userid'
                 }
             }).exec((error,posts)=>{
-                console.log(posts)
+               
                 // return res.render('DiscussionForum',{
                 //     posts:posts
                 // })
@@ -55,18 +55,20 @@ module.exports.postit =  (req,res)=>{
     },async (error,post)=>{
         if(error){return res.redirect('back')}
         
-        if (req.xhr){
+        // if (req.xhr){
             
             post = await post.populate('userid').execPopulate();
+            console.log(post)
             return res.status(200).json({
                 data: {
                     post: post
                 },
                 message: "Post created!"
             });
-        }
-        req.flash('success', 'Post published!');
-        return res.redirect('back');
+            
+        // }
+        // req.flash('success', 'Post published!');
+        // return res.redirect('back');
 
         // return res.redirect('/Discuss')
         
@@ -97,7 +99,7 @@ module.exports.commentit = (req,res)=>{
                     
                     post_user = await post.populate('userid').execPopulate()
                     // console.log(post_user.userid.username)
-                    if (req.xhr){
+                    // if (req.xhr){
                 
                         console.log('yahan pohoch gya')
                         return res.status(200).json({
@@ -107,8 +109,8 @@ module.exports.commentit = (req,res)=>{
                             },
                             message: "Post created!"
                         });
-                    }
-                    return res.redirect('/Discuss')
+                    // }
+                    // return res.redirect('/Discuss')
                 })
             }
         })

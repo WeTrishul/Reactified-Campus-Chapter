@@ -23,10 +23,12 @@ module.exports.chat = (socketserver) =>{
           console.log('joining request by ' , data)
           if(data.chatroom=='corenotification')
           {
+            console.log(data.username)
               var user = await User.findById(data.username)
               user.seenAllCoreChats='no'
               user.save()
               socket.join('corenotification')
+              console.log("yyyyyyyyyyyy")
           }
           else if(data.chatroom=='executivenotification')
           {
@@ -81,7 +83,7 @@ module.exports.chat = (socketserver) =>{
 
         console.log('aagya idhar')
 
-
+        console.log('Mai hoon chat ', data)
 // io.emit('notifyroom',notific)
 
         if(data.room=='core')

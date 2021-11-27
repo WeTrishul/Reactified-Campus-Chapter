@@ -6,26 +6,33 @@ import { Link } from 'react-router-dom';
 import AuthContext from '../../Service/auth-context';
 import {useContext} from "react"
 import CreateIcon from '@mui/icons-material/Create';
+import * as noti from "../../Service/socket";
 
 function Blogs() {
 
 
+
     const authCtx = useContext(AuthContext)
     let userId = authCtx.id;
+    let username=authCtx.username
+
+   
+    // const socket = React.useContext(SocketContext)
 
     const [blogs,setBlogs] = useState([]);
 
+        // noti.Notiengineconnect(username)
+
+
+        // noti.ChatNoticonnect()
+        // noti.JoinCore(userId)
+
+    
+     
 
     useEffect(() =>{
 
-        // axios.get('http://localhost:3000/allblogs')
-        // .then(response => {
-        //     return response.data
-        // }).then(data =>{
-        //     console.log(data)
-        //     setBlogs(data.data.blogs)
-        // });
-
+        
 
 
         Axios({
@@ -46,7 +53,9 @@ function Blogs() {
 
 
 
-
+            // return () =>{
+            //     console.log('Hi buddy')
+            // }
 
 
     },[])
