@@ -5,6 +5,10 @@ import { useContext } from 'react';
 import AuthContext from '../../Service/auth-context';
 import { useHistory } from 'react-router';
 import {Link} from 'react-router-dom'
+import PersonIcon from '@mui/icons-material/Person';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import WorkIcon from '@mui/icons-material/Work';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function Dropdown() {
 
@@ -25,17 +29,22 @@ function Dropdown() {
             {/* <div className="dropdown-btn"><AccountCircleRoundedIcon/></div> */}
             <div className="dropdown-content">
                 <div className="dropdown-item">
-                    <Link to="Profile">Profile</Link>
+                    
+                <span><PersonIcon/></span>
+                    <Link className="DropProfile" to="Profile">Profile</Link>
                 </div>
                 <div className="dropdown-item">
-                    <Link to="EditProfile">Edit Profile</Link>
+                <span><AppRegistrationIcon/></span>
+                    <Link className="DropEditProfile" to="EditProfile">Edit Profile</Link>
                 </div>
-                <div className="dropdown-item">
-                    <Link to="Apply">Apply</Link>
+                <div  className="dropdown-item">
+                <span><WorkIcon/></span>
+                    <Link className="DropApply" to="Apply">Apply</Link>
                 </div>
-                <div onClick={logoutHandler} className="dropdown-item"> 
-                    Logout
+                <div onClick={logoutHandler} style={{paddingLeft:"10px"}} className="dropdown-item"> 
+                     <span style={{paddingLeft:"10px"}} ><LogoutIcon/>  </span>Logout
                 </div>
+                <span></span>
             </div>
         </div>
     )

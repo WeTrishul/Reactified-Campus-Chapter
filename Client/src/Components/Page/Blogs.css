@@ -171,3 +171,21 @@
   text-decoration: none;
   color: #fff;
 }
+
+@media (max-width: 968px) {
+  .blogsListBox {
+    margin: 1rem 10px 1rem 10px;
+  }
+  .blogsEditButton {
+    width: 75px;
+  }
+  .blogsDeleteButton {
+    width: 75px;
+  }
+}
+
+@media (max-width: 968px) {
+  .ViewblogsListBox {
+    margin: 1rem 10px 1rem 10px;
+  }
+}

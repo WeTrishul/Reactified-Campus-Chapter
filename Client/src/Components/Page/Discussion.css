@@ -138,3 +138,19 @@
   text-align: center;
   padding-top: 10px;
 }
+
+@media (max-width: 968px) {
+  .discussionMessageBox {
+    width: 90%;
+    padding-top: 1rem;
+    padding-left: 0;
+    height: auto;
+  }
+  .PostBox {
+    width: 100%;
+  }
+
+  .discussionReport {
+    padding-left: 120px;
+  }
+}

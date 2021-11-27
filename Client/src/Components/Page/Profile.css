@@ -86,7 +86,7 @@
   grid-area: only-space;
 }
 
-@media screen and (max-width: 960px) {
+@media (max-width: 968px) {
   .profile-page {
     height: 150vh;
     grid-template-columns: 1fr;

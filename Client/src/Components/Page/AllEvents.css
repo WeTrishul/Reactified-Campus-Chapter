@@ -1,0 +1,25 @@
+.outerCard {
+  width: '100%';
+  height: 'auto';
+}
+
+.innerCard {
+  width: '100%';
+  height: '70vh';
+  padding: '1rem';
+}
+
+.cardComponent {
+  display: 'flex';
+}
+
+.EventsCard {
+  margin: '10px';
+}
+
+@media (max-width: 968px) {
+  .cardComponent {
+    display: flex;
+    flex-direction: column;
+  }
+}

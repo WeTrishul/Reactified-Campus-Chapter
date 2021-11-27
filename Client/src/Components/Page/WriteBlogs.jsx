@@ -56,8 +56,10 @@ function WriteBlogs() {
         <div>
            <div className="App">
                 {/* <h2>Using CKEditor 5 build in React</h2> */}
-                <input type="text" placeholder="Title" ref={titleInputRef} />
-                <input type="text" placeholder="Description" ref={descriptionInputRef}/>
+                <div style={{textAlign:"centre"}} className="titleAndDescription">
+                <input style={{textAlign:"centre"}} type="text" placeholder="Title" ref={titleInputRef} />
+                <input style={{textAlign:"centre"}} type="text" placeholder="Description" ref={descriptionInputRef}/>
+                </div>
                 <CKEditor
                     editor="null"
                     initData="<p>Write a blog!!</p>"

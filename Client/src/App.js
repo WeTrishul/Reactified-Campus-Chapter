@@ -25,6 +25,7 @@ import WriteBlogs from './Components/Page/WriteBlogs';
 import DisplayBlogs from './Components/Page/DisplayBlogs';
 import EditBlog from './Components/Page/EditBlog';
 import ViewAllPoll from './Components/Page/ViewAllPoll';
+import AllEvents from "./Components/Page/AllEvents";
 
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/UpcomingEvent'>
           <UpcomingEvent/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/AllEvents'>
+          <AllEvents/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/Profile'>
           <Profile/>

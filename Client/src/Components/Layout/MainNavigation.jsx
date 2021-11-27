@@ -7,6 +7,9 @@ import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import Dropdown from './Dropdown';
 import AuthContext from '../../Service/auth-context';
+import DialogSelect from './Dropdata';
+
+
 
 function MainNavigation() {
 
@@ -20,17 +23,20 @@ function MainNavigation() {
 
     const [click,setClick] = useState(false);
     const[dropdown,setDropdown] = useState(false);
+    const [modal,setModal] = useState(false)
 
     const handleNavbar = () => setClick(!click);
     const closeSideBar = () => setClick(false);
 
     const DropActive = () => setDropdown(!dropdown)
 
+    const modalActive = () => setModal(!modal)
+
 
     return (
         <div>
             <nav className='navbar'>
-            <div className="logo">Campus-Chapter</div>
+            <div className="logo">CAMPUS-CHAPTER</div>
             <i className='icon' onClick={handleNavbar}><MenuIcon/></i>
             <ul className= {click ? 'nav-bar active' : 'nav-bar'}>
                 
@@ -38,7 +44,7 @@ function MainNavigation() {
                     <Link to='/Dashboard' className='nav-links' onClick={closeSideBar}>DashBoard</Link>
                 </li>
                 <li className= 'navbar-items'>
-                    <Link to='/UpcomingEvent' className='nav-links' onClick={closeSideBar} >Upcoming Event</Link>
+                    <Link to='/AllEvents' className='nav-links' onClick={closeSideBar} >All Events</Link>
                 </li>
                 <li className= 'navbar-items'>
                     <Link to='/Discussion' className='nav-links' onClick={closeSideBar} >Discussion</Link>
@@ -52,6 +58,12 @@ function MainNavigation() {
                 <li className= 'navbar-items'>
                     <Link to='/Blogs' className='nav-links' onClick={closeSideBar}>Blogs</Link>
                 </li>
+                <li className= 'navbar-items'>
+                    <Link className='nav-links' onClick={modalActive} onClick={closeSideBar}>Resources</Link>
+                    {/* {modal && <DropActive/>} */}
+                </li>
+
+
                 <li className= 'navbar-items'>
                     <Link className='nav-links' onClick={closeSideBar} ><NotificationsActiveIcon/> </Link>
                 </li>

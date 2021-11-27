@@ -130,24 +130,25 @@ function Discussion() {
 
 
     const likePostHandler = () =>{
-
-        var str =e.target.id.slice("-")
-        Axios({
-            method: "POST",
-            
-            
-            withCredentials: true,
-            url: "http://localhost:3000/Likehandler",
-          }).then(res => {
-            console.log(res);
-            document.getElementById('blog-'+ blog.target.id).remove()
-            
-        }).catch(err => {
-            console.log(err);
-            console.log("main nhi chal rha hoon bhai")
-        });
-
     }
+
+    //     var str =e.target.id.slice("-")
+    //     Axios({
+    //         method: "POST",
+            
+            
+    //         withCredentials: true,
+    //         url: "http://localhost:3000/Likehandler",
+    //       }).then(res => {
+    //         console.log(res);
+    //         document.getElementById('blog-'+ blog.target.id).remove()
+            
+    //     }).catch(err => {
+    //         console.log(err);
+    //         console.log("main nhi chal rha hoon bhai")
+    //     });
+
+    // }
 
 
     const deleteCommentHandler = () =>{
