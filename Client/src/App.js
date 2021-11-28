@@ -33,30 +33,27 @@ function App() {
 
   const authCtx = useContext(AuthContext)
   const username = authCtx.username
-  const [socket, setSocket] = useState(null);
+  const [socket,setSocket] = useState(null);
   // const [socket2, setSocket2] = useState(null);
 
   const [user, setUser] = useState("");
 
   useEffect(() => {
+    
     setSocket(io("http://localhost:7000"));
-
+  
+   
     // setSocket2(io("http://localhost:5000"))
 
-  }, []);
+  }, [authCtx.username]);
 
   useEffect(() => {
-    socket?.emit("join_room",{
-            chatroom:username
-            });
-
-    // socket2?.emit("join_room",{
-    //   username:authCtx.id,
-    //   chatroom:'corenotification',
-    //   chatbox : ''
-    //   });
-      
-  }, [socket, user]);
+    if(authCtx.username && socket){
+        socket?.emit("join_room", {
+          chatroom: authCtx.username
+        });
+    }
+  }, [socket, authCtx.username]);
 
   return (
     <div>
@@ -68,13 +65,13 @@ function App() {
       {authCtx.isLoggedIn && socket && <MainNavigation socket={socket} />}
       {authCtx.isLoggedIn && <FloatingBtn/>}
       <Switch>
-        {authCtx.isLoggedIn && <Route exact path='/Dashboard'>
-          <DashBoard />
+        {authCtx.isLoggedIn && socket && <Route exact path='/Dashboard'>
+          <DashBoard socket={socket}/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/UpcomingEvent'>
+        {authCtx.isLoggedIn && <Route exact path='/UpcomingEvent'>
           <UpcomingEvent/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/Profile'>
+        {authCtx.isLoggedIn  && <Route exact path='/Profile'>
           <Profile/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/AddEvent'>

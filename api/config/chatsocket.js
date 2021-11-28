@@ -60,6 +60,11 @@ module.exports.chat = (socketserver) =>{
           }
         })
 
+        socket.on('leaveroom',async(roomname)=>{
+          console.log("nikal diya")
+          socket.leave(roomname)
+        })
+
         socket.on('send_message', async(data)=>{
           // Chat.create(data,(error,chat)=>{
           //   io.in(data.chatroom).emit('receive_message', chat);

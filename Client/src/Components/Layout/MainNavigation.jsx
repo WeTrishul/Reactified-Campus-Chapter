@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link, useHistory} from 'react-router-dom';
-import {useState,useEffect ,useContext} from 'react';
+import {useState,setState,useEffect ,useContext} from 'react';
 
 import './MainNavigation.css'
 import MenuIcon from '@material-ui/icons/Menu';
@@ -26,6 +26,8 @@ function MainNavigation({ socket}) {
     //     setNotifications((prev) => [...prev, data]);
 
     //   })
+
+  
 
     }, [socket]);
 
