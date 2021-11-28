@@ -108,3 +108,25 @@
   color: black;
   padding-left: 10px;
 }
+
+.Eventsdropdown-content {
+  margin-top: 10px;
+  right: 600px;
+  top: 50px;
+  padding-right: 50px;
+  position: fixed;
+  z-index: 998;
+  width: 155px;
+  justify-content: left;
+  background: rgb(224, 217, 217);
+  border-radius: 7px;
+}
+
+.Eventsdropdown-item {
+  border-radius: 7px;
+  width: 153px;
+  padding: 20px 0px 0px 20px;
+  cursor: pointer;
+  height: 4rem;
+  margin: 1px;
+}

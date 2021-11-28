@@ -1,19 +1,23 @@
 import React from 'react'
 import './AddEvent.css'
 import {useRef} from "react"
-import Axios from "axios"
 import {useState} from "react";
+import Axios from "axios"
+import { useEffect } from 'react';
+import {useLocation} from 'react-router-dom';
+
 import {useHistory} from "react-router-dom"
 
-function AddEvent() {
 
-    
+function EditEventPage() {
 
-    // const [eventData,setEventData] = useState({})
 
-    
-        
-        const AboutEventRef = useRef();
+    const location = useLocation();
+
+    const [event,setEvent] = useState({});
+
+
+    const AboutEventRef = useRef();
         const EventNameRef = useRef();
         const EventDateRef = useRef();
         const EventStartTimeRef = useRef();
@@ -21,7 +25,29 @@ function AddEvent() {
 
         let history = useHistory();
 
-        
+
+        useEffect(() =>{
+
+            Axios({
+                method: "GET",
+                
+                withCredentials: true,
+                url: "http://localhost:3000/EditForm/?id="+location.state,
+              }).then((response) =>{
+              
+                      return response.data
+                      
+                  })
+              .then(data =>{
+                console.log(data)
+                console.log(data.event)
+                setEvent(data.event)
+                console.log("yahan")
+                // console.log(displayBlogs)
+                  //     // console.log(data)
+                  });
+        },[])
+
 
 
 
@@ -67,7 +93,7 @@ function AddEvent() {
             headers: { "Content-Type": "multipart/form-data" },
             
             withCredentials: true,
-            url: "http://localhost:3000/CreateEvent",
+            url: "http://localhost:3000/UpdateEvent",
           }).then(res => {
             console.log(res);
             history.push("/UpcomingEvent")
@@ -87,6 +113,7 @@ function AddEvent() {
 
 
 
+
     return (
         <div>
             <div className="main-wrap">
@@ -97,22 +124,22 @@ function AddEvent() {
                     <form onSubmit={submitHandler} className="register-form" enctype="multipart/form-data">
                         
                         <label htmlFor="Banner">Banner</label><br />
-                        <input type="file" name='eventbanner' className='user' style={{borderStyle:"none"}} id="multiFiles" /><br />
+                        <input type="file"  className='user' style={{borderStyle:"none"}} id="multiFiles" /><br />
 
                         <label htmlFor="About Event">About Event</label><br />
-                        <input type="text" ref={AboutEventRef}   className='email' placeholder='About Event'/><br />
+                        <input type="text" ref={AboutEventRef} value={event.aboutevent}  className='email' /><br />
 
                         <label htmlFor="Event Name" >Event Name</label><br />
-                        <input type="text" ref={EventNameRef}  name='pass'  className='pass' placeholder='Event Name' /><br />
+                        <input type="text" ref={EventNameRef}   value={event.eventname}  className='pass' /><br />
 
                         <label htmlFor="Event Date" >Event Date</label><br />
-                        <input type="text" ref={EventDateRef} name='cdfrce'  className='Codeforces' placeholder='Event Date' /><br />
+                        <input type="text" ref={EventDateRef}  value={event.eventDate}  className='Codeforces'  /><br />
 
                         <label htmlFor="Start Time">Start Time</label><br />
-                        <input type="text" ref={EventStartTimeRef} name='cdchef'  className='Cdchef' placeholder='Start Time'/><br />
+                        <input type="text" ref={EventStartTimeRef}  value={event.eventStartTime}  className='Cdchef' /><br />
 
                         <label htmlFor="End Time" name=''>End Time</label><br />
-                        <input type="text" ref={EventEndTimeRef} name='hckrnk'  className='hckrnk' placeholder='End Time' /><br />
+                        <input type="text" ref={EventEndTimeRef}  value={event.eventEndTime}  className='hckrnk'  /><br />
 
                         <button type='submit' className="register-btn">Add Event</button>
 
@@ -123,4 +150,4 @@ function AddEvent() {
     )
 }
 
-export default AddEvent
+export default EditEventPage

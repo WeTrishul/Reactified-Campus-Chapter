@@ -6,10 +6,12 @@ const AuthContext = React.createContext({
     id:'',
     username:'',
     isLoggedIn:'false',
+    flag:'',
     login: (token) => {},
     userId:(id) => {},
     userName:(username) => {},
-    logout: () => {}
+    logout: () => {},
+    render: (flag) => {}
 
 });
 
@@ -18,12 +20,20 @@ export const AuthContextProvider =(props) =>{
     const initialToken = localStorage.getItem('token');
     const initialId = localStorage.getItem('id');
     const initialUsername = localStorage.getItem('username');
+    const flagValue = localStorage.getItem('flag');
     const [token,setToken] = useState(initialToken);
+    const [flag,setFlag] = useState('');
     const [id,setUserId] = useState(initialId);
     const [username, setUserName] = useState(initialUsername);
 
 
     const userIsLoggedIn = !!token;
+
+    const renderHandle =(flag) =>{
+        var flag = '1';
+        setFlag(flag);
+        localStorage.setItem('flag',flag)
+    }
 
     const loginHandler = (token) =>{
         setToken(token);
@@ -57,10 +67,12 @@ export const AuthContextProvider =(props) =>{
         id:id,
         username:username,
         isLoggedIn: userIsLoggedIn,
+        flag:flag,
         login: loginHandler,
         userId:useridHandler,
         userName:usernameHandler,
-        logout: logoutHandler
+        logout: logoutHandler,
+        render:renderHandle,
     }
 
     return <AuthContext.Provider value={contextValue}>

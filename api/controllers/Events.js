@@ -65,7 +65,7 @@ module.exports.createevent = async (req,res)=>{
             eventbanner: dest  
         })
 
-        if (req.body.flag){
+        // if (req.body.flag){
                 
             console.log('yahan aagya')
             return res.status(200).json({
@@ -77,7 +77,7 @@ module.exports.createevent = async (req,res)=>{
                 },
                 message: "uploaded!"
             });
-        }
+        // }
             
         } catch (error) {
 
@@ -151,8 +151,12 @@ module.exports.editeventform = async (req,res) =>{
     
     var event = await Event.findById(req.query.id)
 
-    res.render('EventForm',{
-        event : event
+    // res.render('EventForm',{
+    //     event : event
+    // });
+    return res.status(200).json({
+        event:event,
+        message: "uploaded!"
     });
    
 }
@@ -192,7 +196,10 @@ module.exports.updateevent = async(req,res)=>{
             }
                    
            
-        return res.redirect('/UpcomingEvents')
+        // return res.redirect('/UpcomingEvents')
+        return res.status(200).json({
+            message: " Event Uploaded!"
+        });
         })     
     }catch(error){
         console.log(error)
@@ -213,7 +220,10 @@ module.exports.deleteevent = async (req,res)=>{
         console.log(eve.eventname)
         fs.unlinkSync(path.join(__dirname,'..',eve.eventbanner))
         eve.remove()
-        return res.redirect('/UpcomingEvents')
+        // return res.redirect('/UpcomingEvents')
+        return res.status(200).json({
+            message: " Event Deleted!"
+        });
     })  
 
     }catch(error){

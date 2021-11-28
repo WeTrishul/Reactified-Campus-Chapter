@@ -1,14 +1,13 @@
 import React from 'react'
 import {Link, useHistory} from 'react-router-dom';
 import {useState,useEffect ,useContext} from 'react';
-
 import './MainNavigation.css'
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import Dropdown from './Dropdown';
 import AuthContext from '../../Service/auth-context';
-import DialogSelect from './Dropdata';
+import EventsDropdown from './EventsDropdown';
 
 
 
@@ -43,11 +42,14 @@ function MainNavigation({ socket}) {
     const [click,setClick] = useState(false);
     const[dropdown,setDropdown] = useState(false);
     const [modal,setModal] = useState(false)
+    const [EventsDrop,setEventsDrop] = useState(false)
 
     const handleNavbar = () => setClick(!click);
     const closeSideBar = () => setClick(false);
 
     const DropActive = () => setDropdown(!dropdown)
+
+    const EventsActive = () => setEventsDrop(!EventsDrop)
 
     const modalActive = () => setModal(!modal)
 
@@ -60,10 +62,11 @@ function MainNavigation({ socket}) {
             <ul className= {click ? 'nav-bar active' : 'nav-bar'}>
                 
                 <li className= 'navbar-items'>
-                    <Link to='/Dashboard' className='nav-links' onClick={closeSideBar}>DashBoard</Link>
+                    <Link to='/Dashboard'  className='nav-links' onClick={closeSideBar}>DashBoard</Link>
                 </li>
                 <li className= 'navbar-items'>
-                    <Link to='/AllEvents' className='nav-links' onClick={closeSideBar} >All Events</Link>
+                    <Link to='/AllEvents' className='nav-links' onClick={closeSideBar} onClick={EventsActive} >All Events</Link>
+                    {EventsDrop && <EventsDropdown/>}
                 </li>
                 <li className= 'navbar-items'>
                     <Link to='/Discussion' className='nav-links' onClick={closeSideBar} >Discussion</Link>

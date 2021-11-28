@@ -52,7 +52,7 @@ function Discussion({socket}) {
             
         })
         .then(data =>{
-            
+            postBody.current.value="";
            console.log('Post hogya')
             // console.log(data)
            setDiscuss([ ...Discuss, data.data.post ])
@@ -90,7 +90,7 @@ function Discussion({socket}) {
                 
             })
             .then(data =>{
-                
+                document.getElementById("post-commentinput-"+s).value=" ";
                console.log('comment hogya')
                 var x = event.target.getAttribute("post-index")
                 let copy = [...Discuss]
@@ -204,19 +204,6 @@ function Discussion({socket}) {
     }
 
 
-    const likePostHandler = () =>{
-    }
-
-    //     var str =e.target.id.slice("-")
-    //     Axios({
-    //         method: "POST",
-            
-            
-    //         withCredentials: true,
-    //         url: "http://localhost:3000/Likehandler",
-    //       }).then(res => {
-    //         console.log(res);
-    //         document.getElementById('blog-'+ blog.target.id).remove()
     const likePostHandler = (e) =>{
 
         // /Likehandler/?id=<%= post.id %>&type=post
@@ -323,12 +310,12 @@ function Discussion({socket}) {
                             })
                         }
             
-    //     }).catch(err => {
-    //         console.log(err);
-    //         console.log("main nhi chal rha hoon bhai")
-    //     });
+        }).catch(err => {
+            console.log(err);
+            console.log("main nhi chal rha hoon bhai")
+        });
 
-    // }
+    }
 
     const deleteCommentHandler = (del) =>{
         console.log("main id hoon", del.target.id)
@@ -558,7 +545,5 @@ function Discussion({socket}) {
         </div>
     )
 }
-           ) }
-        }
 
 export default Discussion

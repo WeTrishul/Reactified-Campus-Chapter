@@ -26,6 +26,7 @@ import DisplayBlogs from './Components/Page/DisplayBlogs';
 import EditBlog from './Components/Page/EditBlog';
 import ViewAllPoll from './Components/Page/ViewAllPoll';
 import AllEvents from "./Components/Page/AllEvents";
+import EditEventPage from './Components/Page/EditEventPage';
 
 import SocketContext, { socket } from "../src/Service/socket";
 import { io } from "socket.io-client";
@@ -40,17 +41,28 @@ function App() {
 
   const [user, setUser] = useState("");
 
+  
+
   useEffect(() => {
     setSocket(io("http://localhost:7000"));
+    // const socket = io("http://localhost:7000")
+    // console.log(socket)
+
 
     // setSocket2(io("http://localhost:5000"))
 
   }, []);
 
+  // socket?.emit("join_room",{
+  //   chatroom:username
+  //   });
+ 
   useEffect(() => {
-    socket?.emit("join_room",{
-            chatroom:username
-            });
+
+  socket?.emit("join_room",{
+    chatroom:username
+    });
+    
 
     // socket2?.emit("join_room",{
     //   username:authCtx.id,
@@ -85,6 +97,9 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/AddEvent'>
           <AddEvent/>
         </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/EditEventPage'>
+          <EditEventPage/>
+        </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/WriteBlogs'>
           <WriteBlogs/>
         </Route>}
@@ -115,8 +130,8 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/SetQuestions'>
           <SetQuestions/>
         </Route>}
-        {authCtx.isLoggedIn && socket &&<Route exact path='/Discussion'>
-          <Discussion socket={socket}/>
+        {authCtx.isLoggedIn &&<Route exact path='/Discussion'>
+          <Discussion />
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/Leaderboard'>
           <Leaderboard/>

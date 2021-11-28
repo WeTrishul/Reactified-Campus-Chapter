@@ -44,7 +44,7 @@ function Dropdown() {
                 <div onClick={logoutHandler} style={{paddingLeft:"10px"}} className="dropdown-item"> 
                      <span style={{paddingLeft:"10px"}} ><LogoutIcon/>  </span>Logout
                 </div>
-                <span></span>
+                
             </div>
         </div>
     )

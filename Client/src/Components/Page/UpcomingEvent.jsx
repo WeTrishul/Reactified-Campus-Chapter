@@ -52,13 +52,7 @@ function UpcomingEvent()
         apiId.preventDefault();
         
 
-        // axios.get('http://localhost:3000/RegisterForEvent/?id='+apiId.target.id+'&userid='+userId)
-        // .then(response =>{
-        //     return response.data
-        // }).then(data =>{
-        //     console.log(data)
-        //     alert('Registration Successfull')
-        // })
+        
 
 
         Axios({
@@ -77,6 +71,27 @@ function UpcomingEvent()
 
 
 
+
+
+    }
+
+
+
+
+    const deleteEventHandler = (del) =>{
+
+        Axios({
+            method: "GET",
+            
+            withCredentials: true,
+            url: 'http://localhost:3000/DeleteEvent/?id='+del.target.id,
+          }).then(response => {
+            return response.data
+        }).then(data =>{
+            console.log(data)
+            // setDiscuss(...Discuss,data)
+            document.getElementById('event-'+ del.target.id).remove()
+    });
 
 
 
@@ -101,7 +116,7 @@ function UpcomingEvent()
             {eve.map((data) =>{
                 
                        return(
-                        <div className="event-box">
+                        <div id ={"event-"+data._id} className="event-box">
                         <div className="event-banner" key={data._id}>
                             
                             <div className="events-imagebox">
@@ -118,7 +133,10 @@ function UpcomingEvent()
                             </p>
                             {
                                 renderButton(data)
+
                             }
+                            <button onClick={deleteEventHandler} id={data._id}>Delete</button>
+                            <Link to={{pathname: "/EditEventPage",state:data._id}}><button >Edit</button></Link>
                             </div>
                         
                         </div>

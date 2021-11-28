@@ -8,6 +8,8 @@ import Axios from 'axios';
 import AuthContext from '../../Service/auth-context';
 import { useContext } from 'react';
 import * as noti from "../../Service/socket";
+import {useHistory} from "react-router-dom"
+import {useLocation} from 'react-router-dom';
 
 function DashBoard(props) {
 
@@ -15,14 +17,29 @@ function DashBoard(props) {
     const authCtx=useContext(AuthContext)
     let userId=authCtx.id;
     let userName = authCtx.username;
+    let history =useHistory();
+    let location = useLocation();
+    let Flag = '1'
 
     const [blogs,setBlogs] = useState([]);
     const [events,setEvents] = useState([]);
     const[posts,setPosts] = useState([]);
 
+    // useEffect(() =>{
+    //     console.log(Flag)
+
+    //     if(Flag=='1')
+    //     {
+    //         Flag='0';
+    //         window.location.reload();
+    //     }
+
+    // },[])
+
     useEffect(() =>{
 
-       
+    //    window.location.reload();
+        history.push("/Dashboard")
 
 
         // axios.get('http://localhost:3000/dashboard')

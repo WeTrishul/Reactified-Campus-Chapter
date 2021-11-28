@@ -9,6 +9,7 @@ function SetQuestions(props) {
   const [file,setFile] = useState([])
     const hiddenFileInput = React.useRef(null);
     
+    
 
     const handleClick = () =>{
 
@@ -31,15 +32,15 @@ function SetQuestions(props) {
           <p>Loading.....</p>
         )
       }
-      else{
-        {file.map((data,index) =>{
-          return(
-              <div key={index}>
-                  {data.name}
-              </div>
-          )
-      })}
-      }
+      // else{
+      //   {file.map((data,index) =>{
+      //     return(
+      //         <div key={index}>
+      //             {data.name}
+      //         </div>
+      //     )
+      // })}
+      // }
     }
 
 
