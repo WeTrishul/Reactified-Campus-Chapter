@@ -36,7 +36,7 @@ function App() {
 
   const authCtx = useContext(AuthContext)
   const username = authCtx.username
-  const [socket, setSocket] = useState(null);
+  const [socket,setSocket] = useState(null);
   // const [socket2, setSocket2] = useState(null);
 
   const [user, setUser] = useState("");
@@ -44,14 +44,17 @@ function App() {
   
 
   useEffect(() => {
+    
     setSocket(io("http://localhost:7000"));
     // const socket = io("http://localhost:7000")
     // console.log(socket)
 
 
+  
+   
     // setSocket2(io("http://localhost:5000"))
 
-  }, []);
+  }, [authCtx.username]);
 
   // socket?.emit("join_room",{
   //   chatroom:username
@@ -59,18 +62,24 @@ function App() {
  
   useEffect(() => {
 
-  socket?.emit("join_room",{
-    chatroom:username
-    });
+  // socket?.emit("join_room",{
+  //   chatroom:username
+  //   });
     
 
-    // socket2?.emit("join_room",{
-    //   username:authCtx.id,
-    //   chatroom:'corenotification',
-    //   chatbox : ''
-    //   });
+  //   // socket2?.emit("join_room",{
+  //   //   username:authCtx.id,
+  //   //   chatroom:'corenotification',
+  //   //   chatbox : ''
+  //   //   });
       
-  }, [socket, user]);
+  // }, [socket, user]);
+    if(authCtx.username && socket){
+        socket?.emit("join_room", {
+          chatroom: authCtx.username
+        });
+    }
+  }, [socket, authCtx.username]);
 
   return (
     <div>
@@ -82,10 +91,10 @@ function App() {
       {authCtx.isLoggedIn && socket && <MainNavigation socket={socket} />}
       {authCtx.isLoggedIn && <FloatingBtn/>}
       <Switch>
-        {authCtx.isLoggedIn && <Route exact path='/Dashboard'>
-          <DashBoard />
+        {authCtx.isLoggedIn && socket && <Route exact path='/Dashboard'>
+          <DashBoard socket={socket}/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/UpcomingEvent'>
+        {authCtx.isLoggedIn && <Route exact path='/UpcomingEvent'>
           <UpcomingEvent/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/AllEvents'>
