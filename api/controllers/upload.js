@@ -77,7 +77,7 @@ module.exports.upload = async(req,res)=>{
     
                     console.log('Idhar aagya')
     
-                    if (req.body.flag){
+                    // if (req.body.flag){
                 
                         console.log('yahan aagya')
                         return res.status(200).json({
@@ -86,7 +86,7 @@ module.exports.upload = async(req,res)=>{
                             },
                             message: "uploaded!"
                         });
-                    }
+                    // }
                     
                }  
 

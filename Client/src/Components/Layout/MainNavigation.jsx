@@ -8,6 +8,7 @@ import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import Dropdown from './Dropdown';
 import AuthContext from '../../Service/auth-context';
 import EventsDropdown from './EventsDropdown';
+import QuestionsDropdown from './QuestionsDropdown';
 
 
 
@@ -45,6 +46,7 @@ function MainNavigation({ socket}) {
     const[dropdown,setDropdown] = useState(false);
     const [modal,setModal] = useState(false)
     const [EventsDrop,setEventsDrop] = useState(false)
+    const [questiondrop,setQuestionDrop] = useState(false)
 
     const handleNavbar = () => setClick(!click);
     const closeSideBar = () => setClick(false);
@@ -52,6 +54,8 @@ function MainNavigation({ socket}) {
     const DropActive = () => setDropdown(!dropdown)
 
     const EventsActive = () => setEventsDrop(!EventsDrop)
+
+    const QuestionActive = () => setQuestionDrop(!questiondrop)
 
     const modalActive = () => setModal(!modal)
 
@@ -77,7 +81,8 @@ function MainNavigation({ socket}) {
                     <Link to='/Leaderboard' className='nav-links' onClick={closeSideBar} >Leaderboard</Link>
                 </li>
                 <li className= 'navbar-items'>
-                    <Link to='/ViewAllPoll' className='nav-links' onClick={closeSideBar} >Polling</Link>
+                    <Link  className='nav-links' onClick={closeSideBar} onClick={QuestionActive} >Set Question</Link>
+                    {questiondrop && <QuestionsDropdown/>}
                 </li>
                 <li className= 'navbar-items'>
                     <Link to='/Blogs' className='nav-links' onClick={closeSideBar}>Blogs</Link>
@@ -86,6 +91,8 @@ function MainNavigation({ socket}) {
                     <Link className='nav-links' onClick={modalActive} onClick={closeSideBar}>Resources</Link>
                     {/* {modal && <DropActive/>} */}
                 </li>
+
+                
 
 
                 <li className= 'navbar-items'>

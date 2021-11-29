@@ -551,11 +551,18 @@ module.exports.listUserQuestions = async (req,res)=>{
         const user = await User.findById(_id)
 
         const arr = user.arr;
-        res.render('questionlist',{
+        // res.render('questionlist',{
+        //     title:'question list',
+        //     l: user.arr.length,
+        //     arr: arr
+        // })
+        return res.status(200).json({
+            
             title:'question list',
             l: user.arr.length,
-            arr: arr
-        })
+            arr: arr,
+            message: "aagya!"
+        });
     } catch (error) {
         res.render('error_page')
     }

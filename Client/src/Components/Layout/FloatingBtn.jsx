@@ -37,9 +37,15 @@ function FloatingBtn() {
                         </div>
                     </li>
                     <li>
-                    <span className='myname'>Set Question</span>
+                    <span className='myname'>Polling</span>
                         <div className="fab-holder">
-                            <Link to='/SetQuestions'><i className="add-icon"><HelpIcon/></i></Link>
+                            <Link to='/Polling'><i className="add-icon"><HelpIcon/></i></Link>
+                        </div>
+                    </li>
+                    <li>
+                    <span className='myname'>Reports</span>
+                        <div className="fab-holder">
+                            <Link to='/'><i className="add-icon"><HelpIcon/></i></Link>
                         </div>
                     </li>
                 </ul>

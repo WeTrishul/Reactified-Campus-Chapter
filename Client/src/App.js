@@ -27,6 +27,7 @@ import EditBlog from './Components/Page/EditBlog';
 import ViewAllPoll from './Components/Page/ViewAllPoll';
 import AllEvents from "./Components/Page/AllEvents";
 import EditEventPage from './Components/Page/EditEventPage';
+import ViewQuestions from './Components/Page/ViewQuestions';
 
 import SocketContext, { socket } from "../src/Service/socket";
 import { io } from "socket.io-client";
@@ -139,8 +140,11 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/SetQuestions'>
           <SetQuestions/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/Discussion'>
-          <Discussion />
+        {authCtx.isLoggedIn &&<Route exact path='/ViewQuestions'>
+          <ViewQuestions/>
+        </Route>}
+        {authCtx.isLoggedIn && socket &&<Route exact path='/Discussion'>
+          <Discussion socket={socket}/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/Leaderboard'>
           <Leaderboard/>
