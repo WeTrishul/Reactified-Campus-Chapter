@@ -17,6 +17,7 @@ function DashBoard(props) {
     const authCtx=useContext(AuthContext)
     let userId=authCtx.id;
     let userName = authCtx.username;
+    let usertype = authCtx.usertype;
     let history =useHistory();
     let location = useLocation();
     let Flag = '1'
@@ -108,6 +109,7 @@ function DashBoard(props) {
                     <h3>Announcement</h3>
                     {userId}
                     {userName}
+                    {usertype}
                     
                    
                 </div>

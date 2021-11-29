@@ -77,11 +77,10 @@ function LoginForm() {
                 //     // console.log(data)
                 //     // console.log(data.data.applyreq.token)
                 //     // console.log(data.data.applyreq._id)
-                   
                     authCtx.userId(data.data.applyreq._id)
                     authCtx.userName(data.data.applyreq.username)
-          
                     authCtx.login(data.data.applyreq.token)
+                    authCtx.userrole(data.data.applyreq.UserType);
                     history.push("/Dashboard")
                 //     // console.log(data)
                 });

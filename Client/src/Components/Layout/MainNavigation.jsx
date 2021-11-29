@@ -9,18 +9,25 @@ import Dropdown from './Dropdown';
 import AuthContext from '../../Service/auth-context';
 import EventsDropdown from './EventsDropdown';
 import QuestionsDropdown from './QuestionsDropdown';
-
+import NotifyDropdown from './NotifyDropdown';
+import Axios from "axios";
 
 
 function MainNavigation({ socket}) {
     const [notifications, setNotifications] = useState([]);
     const [open, setOpen] = useState(false);
+    const [notifycheck,setNotifyCheck] = useState('');
+    const authCtx = useContext(AuthContext)
+    let username = authCtx.username;
+    let userid = authCtx.id;
+    let history = useHistory();
   
     useEffect(() => {
        
       socket.on('notification', (data) => {
           console.log(data)
         setNotifications((prev) => [...prev, data]);
+        setNotifyCheck("no")
       });
 
 
@@ -33,6 +40,12 @@ function MainNavigation({ socket}) {
 
         console.log(data)
         setNotifications((prev) => [...prev, data]);
+        setNotifyCheck("no")
+    })
+
+    socket.on("changedbell",()=>{
+        console.log("PERMISSION GRANTED")
+        setNotifyCheck("yes")
     })
 
   
@@ -43,8 +56,32 @@ function MainNavigation({ socket}) {
 
     }, [socket]);
 
-    const authCtx = useContext(AuthContext)
-    let history = useHistory();
+
+
+    useEffect(()=>{
+        Axios({
+            method: "GET",
+            withCredentials: true,
+            url: "http://localhost:3000/profilepage/"+username,
+          }).then((response) =>{
+            return response.data
+            })
+          .then(data =>{
+            console.log("Notification wala hoon main")
+            console.log(data)
+            // if(data.searchuser.Notifications.length>0)
+            // {
+            //     setNotifications((prev) => [...prev, data.searchuser.Notifications])
+            // }
+            
+            setNotifyCheck(data.searchuser.seenAllNotifications)
+            console.log(notifycheck)
+        });
+    },[])
+
+    
+
+    
 
     const logoutHandler = () =>{
         authCtx.logout();
@@ -56,6 +93,7 @@ function MainNavigation({ socket}) {
     const [modal,setModal] = useState(false)
     const [EventsDrop,setEventsDrop] = useState(false)
     const [questiondrop,setQuestionDrop] = useState(false)
+    const [notify,setNotify] = useState(false)
 
     const handleNavbar = () => setClick(!click);
     const closeSideBar = () => setClick(false);
@@ -64,10 +102,45 @@ function MainNavigation({ socket}) {
 
     const EventsActive = () => setEventsDrop(!EventsDrop)
 
+    const NotifyDrop = () => {
+        console.log("main click ho gya shivu")
+        socket.emit('changebell',{
+            userid:username
+        })
+        setNotify(!notify)
+    }
+
     const QuestionActive = () => setQuestionDrop(!questiondrop)
 
     const modalActive = () => setModal(!modal)
 
+    const notificationChecked = () =>{
+        console.log("main click ho gya shivu")
+        // socket.emit('changebell',{
+        //     userid:userid
+        // })
+    }
+
+    const notifyrendering = () =>{
+        console.log("hyy",notifycheck)
+        if(notifycheck == "no")
+        {
+            return(
+                <li className= 'navbar-items'>
+                <Link className='nav-links' style={{color:"red"}} onClick={closeSideBar}  onClick={notificationChecked} onClick={NotifyDrop}><NotificationsActiveIcon/> </Link>
+                {notify && <NotifyDropdown notifications={notifications}/>}
+            </li>
+            )
+        }
+        else{
+            return(
+                <li className= 'navbar-items'>
+                <Link className='nav-links' onClick={closeSideBar} onClick={NotifyDrop} ><NotificationsActiveIcon/> </Link>
+                {notify && <NotifyDropdown/>}
+            </li>
+            )
+        }
+    }
 
     return (
         <div>
@@ -101,12 +174,11 @@ function MainNavigation({ socket}) {
                     {/* {modal && <DropActive/>} */}
                 </li>
 
-                
-
-
-                <li className= 'navbar-items'>
-                    <Link className='nav-links' onClick={closeSideBar} ><NotificationsActiveIcon/> </Link>
-                </li>
+                {notifyrendering()}
+                {/* <li className= 'navbar-items'>
+                    <Link className='nav-links' onClick={closeSideBar} onClick={NotifyDrop} ><NotificationsActiveIcon/> </Link>
+                    {notify && <NotifyDropdown/>}
+                </li> */}
                 {/* <li className= 'navbar-items'>
                     <Link to='/Profile' className='nav-links' onClick={closeSideBar} >Profile</Link>
                 </li> */}

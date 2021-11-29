@@ -112,6 +112,7 @@ module.exports.notification = (socketserver) =>{
 
       socket.on('changebell',async(data)=>{
 
+        console.log("################")
         const user = await User.find({username:data.userid})
         user[0].seenAllNotifications='yes'
         user[0].save()

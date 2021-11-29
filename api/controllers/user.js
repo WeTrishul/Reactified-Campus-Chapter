@@ -338,12 +338,18 @@ module.exports.othersProfile = async(req,res)=>{
         if(req.isAuthenticated())
             {
                 const user = await User.findOne({username:req.params.username})
-        res.render('othersProfile',{
-            title:'Profile',
-            searchuser:user
-        })
+        // res.render('othersProfile',{
+        //     title:'Profile',
+        //     searchuser:user
+        // })
+        return res.status(200).json({
+            
+            searchuser:user,
+            message: "Notification aagya!"
+        });
     }
-    res.redirect('/login')
+    // res.redirect('/login')
+    
     } catch (err) {
     console.log(err)
     res.redirect('/error_page')
