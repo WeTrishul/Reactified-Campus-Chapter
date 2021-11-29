@@ -28,7 +28,7 @@ function(username,password,done){
             console.log('Error in sending to the queue',err)
             return
         }  
-        console.log('job enqueued',job.id)
+        console.log('job enqueued')
 
       })
         
@@ -56,7 +56,7 @@ passport.deserializeUser(function(username,done){
 passport.checkAuthentication = (req,res,next)=>{
     if(req.isAuthenticated())
     {
-        console.log(req.user,"check auth ke andar")
+        // console.log(req.user,"check auth ke andar")
         return next()
     }
 
@@ -68,7 +68,7 @@ passport.checkAuthentication = (req,res,next)=>{
 passport.setAuthenticatedUser = (req,res,done)=>{
     if(req.isAuthenticated())
     {
-        console.log(req.user,"set auth ke andar")
+        // console.log(req.user,"set auth ke andar")
         res.locals.user = req.user
     }
     console.log("set auth outside")

@@ -6,11 +6,13 @@ import SendIcon from '@mui/icons-material/Send';
 import { useContext } from 'react';
  
 import './CoreChat.css';
-function CoreChat() {
+function CoreChat({socket}) {
  
+    socket.emit('leaveroom','corenotification')
+
     // const [ state, setState ] = useState({ message: "", name: "" })
     const [ chat, setChat ] = useState([])
- 
+    const [noti,setNoti] = useState([])
    
  
     const socketRef = useRef()
@@ -23,7 +25,7 @@ function CoreChat() {
     useEffect(
         () => {
 
-            // socket2.emit('leaveroom','corenotification')
+            socket.emit('leaveroom','corenotification')
            
             socketRef.current = io.connect("http://localhost:5000")
  
@@ -71,6 +73,11 @@ function CoreChat() {
                 //     chatroom:'corenotification',
                 //     chatbox : ''
                 //     });
+                socket.emit('join_room',{
+                    username:authCtx.id,
+                    chatroom:'corenotification',
+                    chatbox : ''
+                })
                 
                 socketRef.current.disconnect()}
         },
@@ -96,6 +103,7 @@ function CoreChat() {
             chatroom: 'core'
         });
         document.getElementById('message-input').value = "";
+      
     }
    
     }
@@ -103,7 +111,10 @@ function CoreChat() {
 
         socketRef.current.on('receive_message',(data)=>{
             // setChat(data.message)
-            setChat([ ...chat, data ])
+         
+            // setChat([ ...chat, data ])
+            setChat(chat => [ ...chat, data ]);
+            console.log('Bol kya dikkat h')
             // console.log(chat)
             // if(userId==data.userid._id)
             // {
@@ -113,11 +124,11 @@ function CoreChat() {
             //     document.getElementById('chatbody').append(data.message);
             // }
           
-            socketRef.current.emit('caninotifyothers',{data:data,room : 'core'})
+            socket.emit('caninotifyothers',{data:data,room : 'core'})
 
         })
 
-    },[chat])
+    },[])
  
     const rendermessage = (data) =>{
         

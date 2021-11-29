@@ -33,6 +33,7 @@ function App() {
 
   const authCtx = useContext(AuthContext)
   const username = authCtx.username
+  const userid = authCtx.id
   const [socket,setSocket] = useState(null);
   // const [socket2, setSocket2] = useState(null);
 
@@ -47,13 +48,39 @@ function App() {
 
   }, [authCtx.username]);
 
+ 
+
   useEffect(() => {
     if(authCtx.username && socket){
         socket?.emit("join_room", {
           chatroom: authCtx.username
         });
+
+
+        socket?.emit('join_room',{
+          username:authCtx.id,
+          chatroom:'corenotification',
+          chatbox : ''
+      })
+      socket?.emit('join_room',{
+        username:authCtx.id,
+        chatroom:'executivenotification',
+        chatbox : ''
+    })
+        
     }
-  }, [socket, authCtx.username]);
+  }, [socket,authCtx.username]);
+
+  // useEffect(() => {
+  //   if(authCtx.id && socket2){
+  //       socket2?.emit('join_room',{
+  //         username:authCtx.id,
+  //         chatroom:'corenotification',
+  //         chatbox : ''
+  //     })
+  //   }
+  // }, [socket2, authCtx.id]);
+
 
   return (
     <div>
@@ -122,11 +149,11 @@ function App() {
         <Route exact path='/SignupData'>
           <SignupData/>
         </Route>
-        {authCtx.isLoggedIn &&<Route exact path='/ExecutiveChat'>
-          <ExecutiveChat/>
+        {authCtx.isLoggedIn && socket &&<Route exact path='/ExecutiveChat'>
+          <ExecutiveChat socket={socket}/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/CoreChat'>
-          <CoreChat />
+        {authCtx.isLoggedIn && socket &&<Route exact path='/CoreChat'>
+          <CoreChat socket={socket} />
         </Route>}
         <Route exact path='*'>
         <LoginForm/>
