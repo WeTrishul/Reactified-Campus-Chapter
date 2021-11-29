@@ -101,6 +101,15 @@ module.exports.notification = (socketserver) =>{
             
       })
 
+      // socket.on("sunrheho",()=>{
+      //   socket.emit("bolna",'heya')
+      // })
+
+      socket.on('leaveroom',async(roomname)=>{
+        console.log("nikal diya")
+        socket.leave(roomname)
+      })
+
       socket.on('changebell',async(data)=>{
 
         const user = await User.find({username:data.userid})
@@ -112,12 +121,98 @@ module.exports.notification = (socketserver) =>{
       })
 
         socket.on('join_room',async(data)=>{
-         
+
+
+          if(data.chatroom=='corenotification')
+          {
+            console.log(data.username)
+              var user = await User.findById(data.username)
+              user.seenAllCoreChats='no'
+              user.save()
+              socket.join('corenotification')
+              console.log("core vala join hogya h")
+          }
+          else if(data.chatroom=='executivenotification')
+          {
+            var user = await User.findById(data.username)
+              user.seenAllExecChats='no'
+              user.save()
+            socket.join('executivenotification')
+            console.log("executive vala join hogya h")
+          }
+          else{
           socket.join(data.chatroom)
           console.log(data)
           io.in(data.chatroom).emit('user_joined')
+
+
+          }
     
         })
+
+
+
+      socket.on('caninotifyothers',async(data)=>{
+
+        console.log('aagya idhar')
+
+        console.log('Mai hoon chat ', data)
+// io.emit('notifyroom',notific)
+
+        if(data.room=='core')
+        {
+
+
+
+
+          const user = await User.find({ $or:[ {UserType:'Admin'}, {UserType:'EventsLead'},{UserType:'MediaLead'}],seenAllCoreChats:'no'})
+          console.log(user)
+          const notific = {
+            msg : data.data.userid.username + ' texted in core chat',
+            placetogo:'/coreteam'
+          }
+      
+        user.forEach((user)=>{
+          if(user._id!=data.data.userid._id)
+          {
+            user.Notifications.push(notific)
+            user.seenAllCoreChats='no'
+             user.save()
+          }
+      
+       })
+
+
+
+       io.in('corenotification').emit('yesyoumaynotify',notific)
+
+
+        }
+        else{
+
+          const user = await User.find({ $or:[ {UserType:'Admin'}, {UserType:'Executive'}, {UserType:'EventsLead'},{UserType:'MediaLead'}],seenAllExecChats:'no'})
+          // console.log(user)
+          const notific = {
+            msg : data.data.userid.username + ' texted in executive chat',
+            placetogo:'/executivechat'
+          }
+      
+        user.forEach((user)=>{
+          if(user._id!=data.data.userid._id)
+          {
+            user.Notifications.push(notific)
+            user.seenAllExecChats='no'
+             user.save()
+          }
+       })
+
+
+       io.in('executivenotification').emit('yesyoumaynotify',notific)
+
+
+        }
+
+      })
 
     })
 

@@ -23,14 +23,23 @@ function MainNavigation({ socket}) {
         setNotifications((prev) => [...prev, data]);
       });
 
-    //   socket2.on('yesyoumaynotify',(data)=>{
 
-    //     console.log(data)
-    //     setNotifications((prev) => [...prev, data]);
-
+    //   socket.on('bolna',(data)=>{
+    //       console.log('Ha bhai bolna')
+    //       setNotifications((prev) => [...prev, data]);
     //   })
 
+    socket.on('yesyoumaynotify',(data)=>{
+
+        console.log(data)
+        setNotifications((prev) => [...prev, data]);
+    })
+
   
+      return () => {
+                
+        
+        socket.disconnect()}
 
     }, [socket]);
 
