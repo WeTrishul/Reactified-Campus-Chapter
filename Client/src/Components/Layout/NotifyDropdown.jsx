@@ -9,10 +9,10 @@ function NotifyDropdown({notifications}) {
             {/* <div className="dropdown-btn"><AccountCircleRoundedIcon/></div> */}
             <div className="notifydropdown-content">
                 <div className="notifydropdown-item">
-                {notifications.map((data,index) =>{
+                {notifications.map((value,index) =>{
                        return(
                         <div className="notify-content" key={index}>
-                        {data.msg}
+                        {value.msg}
                         <hr className="notify-border" />
                         
                     </div>

@@ -32,6 +32,11 @@ import ViewQuestions from './Components/Page/ViewQuestions';
 import SocketContext, { socket } from "../src/Service/socket";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
+import ViewResources from './Components/Page/ViewResources';
+import Resources from './Components/Page/Resources';
+import UploadResources from './Components/Page/UploadResources';
+import ViewCategory from './Components/Page/ViewCategory';
+import ViewFiles from './Components/Page/ViewFiles';
 
 function App() {
 
@@ -169,6 +174,21 @@ function App() {
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/ViewQuestions'>
           <ViewQuestions/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/ViewResources'>
+          <ViewResources/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/ViewFiles/:foldername'>
+          <ViewFiles/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/Resources'>
+          <Resources/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
+          <UploadResources/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/ViewCategory/:categoryname'>
+          <ViewCategory/>
         </Route>}
         {authCtx.isLoggedIn && socket &&<Route exact path='/Discussion'>
           <Discussion socket={socket}/>

@@ -81,7 +81,14 @@ const userSchema = new mongoose.Schema({
     OverallRatings:[{
         type:String
     }],
-    Notifications :[],
+    Notifications :{
+        type:Array,
+        default: {
+            msg:"Welcome to campus-chapter",
+            placetogo : ""
+        }
+
+    },
     seenAllNotifications : {
         type:String,
         default:'yes'

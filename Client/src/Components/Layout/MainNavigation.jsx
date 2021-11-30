@@ -11,6 +11,7 @@ import EventsDropdown from './EventsDropdown';
 import QuestionsDropdown from './QuestionsDropdown';
 import NotifyDropdown from './NotifyDropdown';
 import Axios from "axios";
+import Dropdata from './Dropdata';
 
 
 function MainNavigation({ socket}) {
@@ -59,6 +60,18 @@ function MainNavigation({ socket}) {
 
 
     useEffect(()=>{
+
+        // const welcome = {
+        //     msg:"Welcome to campus-chapter",
+        //     placetogo : ""
+        // }
+
+        // setNotifications({
+        //     msg:"Welcome to campus-chapter",
+        //     placetogo : ""
+        // })
+        // setNotifications(oldArray => [...notifications, welcome]);
+
         Axios({
             method: "GET",
             withCredentials: true,
@@ -69,10 +82,10 @@ function MainNavigation({ socket}) {
           .then(data =>{
             console.log("Notification wala hoon main")
             console.log(data)
-            // if(data.searchuser.Notifications.length>0)
-            // {
-            //     setNotifications((prev) => [...prev, data.searchuser.Notifications])
-            // }
+            if(data.searchuser.Notifications.length>0)
+            {
+                setNotifications((prev) => [...prev, data.searchuser.Notifications])
+            }
             
             setNotifyCheck(data.searchuser.seenAllNotifications)
             console.log(notifycheck)
@@ -94,11 +107,14 @@ function MainNavigation({ socket}) {
     const [EventsDrop,setEventsDrop] = useState(false)
     const [questiondrop,setQuestionDrop] = useState(false)
     const [notify,setNotify] = useState(false)
+    const [resourcesdrop,setResourcesDrop]= useState(false);
 
     const handleNavbar = () => setClick(!click);
     const closeSideBar = () => setClick(false);
 
     const DropActive = () => setDropdown(!dropdown)
+
+    const resourcesActive=() =>setResourcesDrop(!resourcesdrop)
 
     const EventsActive = () => setEventsDrop(!EventsDrop)
 
@@ -112,7 +128,7 @@ function MainNavigation({ socket}) {
 
     const QuestionActive = () => setQuestionDrop(!questiondrop)
 
-    const modalActive = () => setModal(!modal)
+    
 
     const notificationChecked = () =>{
         console.log("main click ho gya shivu")
@@ -128,7 +144,8 @@ function MainNavigation({ socket}) {
             return(
                 <li className= 'navbar-items'>
                 <Link className='nav-links' style={{color:"red"}} onClick={closeSideBar}  onClick={notificationChecked} onClick={NotifyDrop}><NotificationsActiveIcon/> </Link>
-                {notify && <NotifyDropdown notifications={notifications}/>}
+                {/* {notify && <NotifyDropdown notifications={notifications}/>} */}
+                {notify && notifications && <NotifyDropdown notifications={notifications} />}
             </li>
             )
         }
@@ -153,7 +170,7 @@ function MainNavigation({ socket}) {
                     <Link to='/Dashboard'  className='nav-links' onClick={closeSideBar}>DashBoard</Link>
                 </li>
                 <li className= 'navbar-items'>
-                    <Link to='/AllEvents' className='nav-links' onClick={closeSideBar} onClick={EventsActive} >All Events</Link>
+                    <Link  className='nav-links' onClick={closeSideBar} onClick={EventsActive} >All Events</Link>
                     {EventsDrop && <EventsDropdown/>}
                 </li>
                 <li className= 'navbar-items'>
@@ -170,7 +187,8 @@ function MainNavigation({ socket}) {
                     <Link to='/Blogs' className='nav-links' onClick={closeSideBar}>Blogs</Link>
                 </li>
                 <li className= 'navbar-items'>
-                    <Link className='nav-links' onClick={modalActive} onClick={closeSideBar}>Resources</Link>
+                    <Link className='nav-links'  onClick={closeSideBar} onClick={resourcesActive}>Resources</Link>
+                    {resourcesdrop && <Dropdata/>}
                     {/* {modal && <DropActive/>} */}
                 </li>
 

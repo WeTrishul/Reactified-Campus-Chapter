@@ -1,1 +1,5 @@
-[0mGET /favicon.ico [33m404[0m 8.519 ms - 150[0m
+[0mGET /resources/upload/js/notification_engine.js [33m404[0m 17.303 ms - 181[0m
+[0mGET /resources/upload/js/notification_engine.js [33m404[0m 0.796 ms - 181[0m
+[0mGET /resourses/ [33m404[0m 5.360 ms - 149[0m
+[0mGET /resourses/ [33m404[0m 0.763 ms - 149[0m
+[0mGET /resourses/ [33m404[0m 0.612 ms - 149[0m

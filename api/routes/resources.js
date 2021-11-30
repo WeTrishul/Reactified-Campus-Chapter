@@ -11,7 +11,7 @@ router.post('/resourses/:id',passport.checkAuthentication,resourseController.pos
 router.get('/deleteres/uploads/resources/:rid/:category/:foldername',passport.checkAuthentication,resourseController.deleteResource)
 
 
-router.get('/resources/upload/:category',resourseController.createFolder)
+router.get('/resources/upload/:category',passport.checkAuthentication,resourseController.createFolder)
 
 router.get('/fileresources/:foldername',resourseController.showFilesFromResources)
 

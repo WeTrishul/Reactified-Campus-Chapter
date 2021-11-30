@@ -136,7 +136,7 @@
   right: 300px;
   top: 50px;
   padding-right: 50px;
-  position: fixed;
+  position: absolute;
   z-index: 998;
   width: 155px;
   justify-content: left;
@@ -181,4 +181,30 @@
   height: 0.1rem;
   color: black;
   background: black;
+}
+
+.Resourcesdropdown-content {
+  margin-top: 10px;
+  right: 140px;
+  top: 50px;
+  padding-right: 50px;
+  position: absolute;
+  z-index: 998;
+  width: 155px;
+  justify-content: left;
+  background: rgb(224, 217, 217);
+  border-radius: 7px;
+}
+.Resourcesdropdown-item {
+  border-radius: 7px;
+  width: 153px;
+  padding: 20px 0px 0px 5px;
+  cursor: pointer;
+  height: 4rem;
+  margin: 1px;
+}
+
+.Resourcesdropdown-item:hover {
+  background-color: rgb(185, 183, 183);
+  border-radius: 7px;
 }

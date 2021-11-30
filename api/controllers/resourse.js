@@ -20,16 +20,25 @@ module.exports.getresoursePage = async(req,res)=>{
       return   res.redirect('/login')
     }
 
+    
     const category = req.params.category
+
+    console.log("category se hoon bc",category)
     let cat_data = await Folder.find({categoryName:category})
 
+    console.log("cat data hoon be",cat_data)
     try {
-        res.render('viewResourceList',{
-            title:'hello',
+        // res.render('viewResourceList',{
+        //     title:'hello',
+        //     arr:cat_data,
+        //     l:cat_data.length,
+        //     category
+        // })
+        return res.status(200).json({
             arr:cat_data,
-            l:cat_data.length,
-            category
-        })
+            category:category,
+            message: "nhi hua!"
+        });
     } catch (error) {
         console.log('resources nhi dikha pa rha hai',error)
         res.render('error_page')
@@ -50,11 +59,15 @@ module.exports.showFilesFromResources = async(req,res)=>{
     console.log(cat_data)
 
     try {
-        res.render('viewFilesFromResourceList',{
-            title:'hello',
+        // res.render('viewFilesFromResourceList',{
+        //     title:'hello',
+        //     arr:cat_data,
+        //     l:cat_data.files.length
+        // })
+        return res.status(200).json({
             arr:cat_data,
-            l:cat_data.files.length
-        })
+            message: "nhi hua!"
+        });
     } catch (error) {
         console.log('resources nhi dikha pa rha hai',error)
         res.render('error_page')
@@ -114,11 +127,16 @@ module.exports.createFolder = async (req,res)=>{
     }
 
     console.log(allFiles)
-    res.render('viewUploadPage',{
-        title:'Hello',
-        category,
-       allFiles
-    })
+    // res.render('viewUploadPage',{
+    //     title:'Hello',
+    //     category,
+    //    allFiles
+    // })
+    return res.status(200).json({
+        category:category,
+        allfiles:allFiles,
+        message: "nhi hua!"
+    });
    } catch (error) {
        console.log(error.message)
        res.render('error_page')
@@ -211,16 +229,17 @@ module.exports.postresourses = async(req,res)=>{
                 const _id = req.params.id
                 const category = req.body.patanhi//yeh beta hatega
                 console.log('category',category)
-                console.log(req.body.flag)
+                // console.log(req.body.flag)
                 const name = req.body.name
                 const str = req.user.username+'_'+category
+                console.log('Upload Controller se hoon bhenchod',str);
                 let catData = await Folder.findOne({name:str})
 
                 console.log(catData)                
                 if(error)
             {
                 console.log('******Multer Error*****'+error.message)  
-                if (req.body){
+                // if (req.body){
                 
                     console.log('yahan aagya')
                     return res.status(200).json({
@@ -229,7 +248,7 @@ module.exports.postresourses = async(req,res)=>{
                         },
                         message: "nhi hua!"
                     });
-                }
+                // }
             }
            if(req.files[0])
            { 
@@ -317,7 +336,7 @@ module.exports.postresourses = async(req,res)=>{
                 console.log(catData)
                 await catData.save()
 
-                if (req.body.flag){
+                // if (req.body.flag){
                 
                     console.log('yahan aagya 1')
                    return res.status(200).json({
@@ -326,7 +345,7 @@ module.exports.postresourses = async(req,res)=>{
                         },
                         message: "uploaded!"
                     });
-                }
+                // }
                 
                 
            }

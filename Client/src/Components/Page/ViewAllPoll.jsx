@@ -30,6 +30,8 @@ function ViewAllPoll() {
                        <h2>Polling Lists</h2>
                    </div>
                <div>
+               <div className="ViewblogsOuterBox">
+    <div className="ViewblogsInnerBox">
                 
                {allpolls.map((data) =>{
                        return(
@@ -38,19 +40,20 @@ function ViewAllPoll() {
                        
                        
 
-                        <div className="ViewblogsOuterBox">
-    <div className="ViewblogsInnerBox">
+                        
         <div className="ViewblogsListBox" key={data._id}>
         <Link className="ViewallBlogsLink" to={{pathname: `/viewPagePoll/${data._id}`}}>{data.pollName}</Link>
         </div>
-    </div>
-</div>
+    
 
 
                        )
                    })}
+                   
+</div>
 
             </div>
+        </div>
         </div>
     )
 }
