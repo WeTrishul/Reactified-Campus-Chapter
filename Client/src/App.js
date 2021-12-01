@@ -124,7 +124,7 @@ function App() {
       {authCtx.isLoggedIn && socket && <MainNavigation socket={socket} />}
       {authCtx.isLoggedIn && <FloatingBtn/>}
       <Switch>
-        {authCtx.isLoggedIn && socket && <Route exact path='/Dashboard'>
+        {authCtx.isLoggedIn && socket && <Route exact path='/DashBoard'>
           <DashBoard socket={socket}/>
         </Route>}
         {authCtx.isLoggedIn && <Route exact path='/UpcomingEvent'>
@@ -181,7 +181,7 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/ViewFiles/:foldername'>
           <ViewFiles/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/Resources'>
+        {authCtx.isLoggedIn &&<Route exact path='/Resources/:categoryname'>
           <Resources/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>

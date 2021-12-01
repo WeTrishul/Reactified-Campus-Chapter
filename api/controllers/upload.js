@@ -114,10 +114,15 @@ module.exports.profile = async(req,res)=>{
             return res.redirect('/login')
             }
 
-            res.render('profile',{
-                title:'Profile Page',
-                user:req.user
-            })
+            // res.render('profile',{
+            //     title:'Profile Page',
+            //     user:req.user
+            // })
+            return res.status(200).json({
+            
+                user:req.user,
+                message: "Profile page delivered!"
+            });
     }
 
 module.exports.uploadDp = async(req,res)=>{
@@ -157,7 +162,11 @@ module.exports.uploadDp = async(req,res)=>{
             }            
            }
         })     
-        return res.redirect('back')
+        // return res.redirect('back')
+        return res.status(200).json({
+            photu:user.dp,
+            message: "DP aa gya!"
+        });
                     
     }catch (error) {
         console.log('Error'+error)
