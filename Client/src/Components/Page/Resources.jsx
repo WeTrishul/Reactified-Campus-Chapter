@@ -1,6 +1,5 @@
 import React from 'react';
 import './Resources.css';
-import { useLocation } from 'react-router-dom';
 import AuthContext from '../../Service/auth-context';
 import { useContext, useState } from 'react';
 import Axios from 'axios';
