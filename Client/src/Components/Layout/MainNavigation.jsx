@@ -15,17 +15,13 @@ import Dropdata from './Dropdata';
 
 function MainNavigation({ socket }) {
   const [notifications, setNotifications] = useState([]);
-  const [letsfire, setLetsFire] = useState();
+
   const [open, setOpen] = useState(false);
   const [notifycheck, setNotifyCheck] = useState('');
   const authCtx = useContext(AuthContext);
   let username = authCtx.username;
   let userid = authCtx.id;
   let history = useHistory();
-
-  useEffect(() => {
-    setLetsFire('Anand');
-  }, []);
 
   useEffect(() => {
     socket.on('notification', (data) => {
@@ -78,14 +74,15 @@ function MainNavigation({ socket }) {
       .then((data) => {
         console.log('Notification wala hoon main');
         console.log(data);
-        if (data.searchuser.Notifications.length > 0) {
-          setNotifications((prev) => [...prev, data.searchuser.Notifications]);
-        }
+        // if (data.searchuser.Notifications.length > 0) {
+        //   setNotifications((prev) => [...prev, data.searchuser.Notifications]);
+        // }
 
+        setNotifications(data.searchuser.Notifications);
         setNotifyCheck(data.searchuser.seenAllNotifications);
         console.log(notifycheck);
       });
-  }, [letsfire]);
+  }, []);
 
   const logoutHandler = () => {
     authCtx.logout();

@@ -39,6 +39,7 @@ import ViewCategory from './Components/Page/ViewCategory';
 import ViewFiles from './Components/Page/ViewFiles';
 import DisplayPoll from './Components/Page/DisplayPoll'
 import GlobalEvents from './Components/Page/GlobalEvents'
+import Reports from './Components/Page/Reports';
 
 function App() {
 
@@ -137,6 +138,9 @@ function App() {
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/AllEvents'>
           <AllEvents/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/Reports'>
+          <Reports/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/Profile'>
           <Profile/>

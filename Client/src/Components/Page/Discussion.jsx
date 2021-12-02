@@ -87,12 +87,14 @@ function Discussion({ socket }) {
         // {
 
         console.log('main submit', data);
-        socket.emit('notify', {
-          to: data.data.postuser,
-          from: authCtx.username,
-          msg: 'commented on your post',
-          placetogo: '/Discussion/#post-' + data.data.comment.postid,
-        });
+        if (data.data.postuser != authCtx.username) {
+          socket.emit('notify', {
+            to: data.data.postuser,
+            from: authCtx.username,
+            msg: 'commented on your post',
+            placetogo: '/Discussion/#post-' + data.data.comment.postid,
+          });
+        }
 
         // noti.notify(data.data.postuser,'commented on your post')
 

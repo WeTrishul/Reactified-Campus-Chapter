@@ -349,10 +349,15 @@ module.exports.reportedthings = async (req,res) => {
   console.log(reportedposts) 
   const reportedcomments = await Comment.find({ "report.0": { "$exists": true }}) 
   
-  return res.render('reportedthings',{
-      posts :reportedposts ,
-      comments : reportedcomments
-  })
+//   return res.render('reportedthings',{
+//       posts :reportedposts ,
+//       comments : reportedcomments
+//   })
+return res.json(200, {
+    message: "Request successful!",
+    posts:reportedposts,
+    comments:reportedcomments
+})
 
 
 }
