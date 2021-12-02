@@ -78,7 +78,11 @@ module.exports.editblogform = async (req,res) =>{
 
         const blog = await Blog.findById(req.query.id,req.body)
         
-        res.render('blogform',{blog})
+        // res.render('blogform',{blog})
+        return res.status(200).json({
+            blog
+            
+        });
 
     } catch (error) {
 

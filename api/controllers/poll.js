@@ -56,11 +56,19 @@ module.exports.showPollPage =async (req,res)=>{
         }
 
         const findPoll = await poll.findById(req.params.id)
-        res.render('pollPageView',{
+        
+        // res.render('pollPageView',{
+        //     myPoll:findPoll,
+        //     title:"Ha bol bhai",
+        //     backid:undefined
+        // })
+
+
+        return res.status(200).json({
             myPoll:findPoll,
             title:"Ha bol bhai",
             backid:undefined
-        })
+        });
         
     } catch (error) {
         console.log(error)
@@ -81,7 +89,7 @@ module.exports.storeUserResponse = async (req,res)=>{
 
         const _id = req.params.id
         console.log(_id)
-
+        console.log(req.body)
         const PollName = await poll.findById(req.body.pollID)
         const option = req.body.Option
         console.log(option)
@@ -94,11 +102,16 @@ module.exports.storeUserResponse = async (req,res)=>{
 
           const arr = [PollName.A,PollName.B,PollName.C,PollName.D]
         console.log(arr)
-          return res.render('pollPageView',{
-              title:"Ha bol bhai",
-              backid:_id,
-              arr:arr
-          })
+        //   return res.render('pollPageView',{
+        //       title:"Ha bol bhai",
+        //       backid:_id,
+        //       arr:arr
+        //   })
+        return res.status(200).json({
+            title:"again",
+            backid:_id,
+            arr: [PollName.A,PollName.B,PollName.C,PollName.D]
+        });
        }
         const pair = {
             UserID:_id ,
@@ -131,11 +144,18 @@ module.exports.storeUserResponse = async (req,res)=>{
         await PollName.save()
              
 
-        return res.render('pollPageView',{
+        // return res.render('pollPageView',{
+        //     title:"Ha bol bhai",
+        //     backid:_id,
+        //     arr: [PollName.A,PollName.B,PollName.C,PollName.D]
+        // })
+        
+
+        return res.status(200).json({
             title:"Ha bol bhai",
             backid:_id,
             arr: [PollName.A,PollName.B,PollName.C,PollName.D]
-        })
+        });
         
             
     } catch(e){

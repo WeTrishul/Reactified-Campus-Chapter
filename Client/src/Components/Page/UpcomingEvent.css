@@ -54,6 +54,7 @@
 .events-contentBox {
   width: 100%;
   text-align: center;
+  height: 35vh;
   justify-content: center;
 }
 
@@ -88,5 +89,10 @@
     margin-bottom: 1px;
     background: lightskyblue;
     border-radius: 10px;
+  }
+
+  .events-contentBox {
+    height: 35vh;
+    background: red;
   }
 }

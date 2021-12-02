@@ -13,6 +13,9 @@ function Resources() {
   const { categoryname } = useParams();
   // const category = location.state;
 
+  var cat = { categoryname };
+  var category = cat.categoryname;
+
   const [userfiles, setUserFiles] = useState([]);
 
   // setCategory(location.state.message)
@@ -25,8 +28,8 @@ function Resources() {
   // },[])
 
   useEffect(() => {
-    var cat = { categoryname };
-    var category = cat.categoryname;
+    // var cat = { categoryname };
+    // var category = cat.categoryname;
 
     // setCategory(location.state.message)
 
@@ -66,32 +69,32 @@ function Resources() {
     // var option = location.state;
     var name = document.getElementById('name').value;
 
+    form_data.append('patanhi', category);
     // form_data.append('patanhi', option);
     // form_data.append('flag',true)
     form_data.append('name', name);
 
     // console.log('location wala hoon', category);
-    for (var pair of form_data.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
-    }
+    // for (var pair of form_data.entries()) {
+    //   console.log(pair[0] + ', ' + pair[1]);
+    // }
 
-    // Axios({
-    //     method: "POST",
-    //     data: form_data,
-    //     withCredentials: true,
-    //     url: "http://localhost:3000/resourses/"+userid,
-    //   }).then((response) =>{
+    Axios({
+      method: 'POST',
+      data: form_data,
+      withCredentials: true,
+      url: 'http://localhost:3000/resourses/' + userid,
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+        //     // console.log(data.data.applyreq.token)
+        //     // console.log(data.data.applyreq._id)
 
-    //           return response.data
-
-    //       })
-    //   .then(data =>{
-    //         console.log(data)
-    //       //     // console.log(data.data.applyreq.token)
-    //       //     // console.log(data.data.applyreq._id)
-
-    //       //     // console.log(data)
-    //       });
+        //     // console.log(data)
+      });
   };
 
   return (

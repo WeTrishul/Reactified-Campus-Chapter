@@ -57,6 +57,7 @@ function Profile() {
 
   return (
     <div>
+      { profile && profiledp && 
       <div className='profile-page'>
         <div className='side-img-display'>
           <div className='profile-img'>
@@ -103,6 +104,7 @@ function Profile() {
 
         <div className='only-space'></div>
       </div>
+}
     </div>
   );
 }

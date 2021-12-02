@@ -282,11 +282,20 @@ module.exports.globaleventpage = async (req,res) =>{
      }
      console.log(eventsArray)
 
-     res.render('globalevents',{
-         result : eventsArray,
+    //  res.render('globalevents',{
+    //      result : eventsArray,
+    //      query: req.params.platform,
+    //      resultTiming:eventsTiming
+    //  })
+
+    return res.status(200).json({
+      
+        result : eventsArray,
          query: req.params.platform,
          resultTiming:eventsTiming
-     })
+    });
+
+
         
     } catch (error) {
         console.log(error)

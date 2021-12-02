@@ -102,6 +102,14 @@ function Discussion({socket}) {
                 // {
 
                
+
+                    socket.emit('notify',{
+                        to : data.data.postuser,
+                        from:authCtx.username,
+                        msg :'commented on your post',
+                        placetogo:'/Discussion/#post-'+data.data.postid
+                    })
+
                 // noti.notify(data.data.postuser,'commented on your post')
 
                 // }

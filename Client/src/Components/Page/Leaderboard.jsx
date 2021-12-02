@@ -26,6 +26,7 @@ function Leaderboard() {
       })
       .then((data) => {
         console.log(data);
+        setBoard(data.data.LeaderBoards);
         // setBlogs(data.data.blogs)
         // setEvents(data.data.events)
         // setPosts(data.data.posts)
@@ -37,18 +38,18 @@ function Leaderboard() {
     <div>
       <h1>Leaderboard</h1>
       <div className='toplist'>
-        {board.map((data) => {
+        {board.map((data, index) => {
           return (
-            <div className='listbox'>
+            <div className='listbox' key={data.userid._id}>
               <div className='list'>
                 <div className='name-list'>
-                  <h3>Shivam Sharma</h3>
+                  <h3>{data.userid.name}</h3>
                 </div>
                 <div className='rating-list'>
-                  <h3>Rating: 1200</h3>
+                  <h3>Rating: {data.userid.CurrentRating}</h3>
                 </div>
                 <div className='rank-list'>
-                  <h3>Rank : 1</h3>
+                  <h3>Rank : {index}</h3>
                 </div>
               </div>
             </div>
