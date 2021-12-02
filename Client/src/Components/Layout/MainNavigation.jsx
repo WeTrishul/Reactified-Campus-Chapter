@@ -153,7 +153,7 @@ function MainNavigation({ socket}) {
             return(
                 <li className= 'navbar-items'>
                 <Link className='nav-links' onClick={closeSideBar} onClick={NotifyDrop} ><NotificationsActiveIcon/> </Link>
-                {notify && <NotifyDropdown/>}
+                {notify && notifications && <NotifyDropdown notifications={notifications} />}
             </li>
             )
         }

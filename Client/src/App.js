@@ -37,6 +37,8 @@ import Resources from './Components/Page/Resources';
 import UploadResources from './Components/Page/UploadResources';
 import ViewCategory from './Components/Page/ViewCategory';
 import ViewFiles from './Components/Page/ViewFiles';
+import DisplayPoll from './Components/Page/DisplayPoll'
+import GlobalEvents from './Components/Page/GlobalEvents'
 
 function App() {
 
@@ -130,6 +132,9 @@ function App() {
         {authCtx.isLoggedIn && <Route exact path='/UpcomingEvent'>
           <UpcomingEvent/>
         </Route>}
+        {authCtx.isLoggedIn && <Route exact path='/GlobalEvents/:platform'>
+          <GlobalEvents/>
+        </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/AllEvents'>
           <AllEvents/>
         </Route>}
@@ -150,6 +155,9 @@ function App() {
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/ViewAllPoll'>
           <ViewAllPoll/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/DisplayPoll/:pollID'>
+          <DisplayPoll/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/PollCreate'>
           <PollCreate/>

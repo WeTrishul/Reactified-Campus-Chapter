@@ -114,7 +114,7 @@ NotificationServer.listen(process.env.port||7000)
 
 
 
-app.listen(port,()=>{
+app.listen(port,async()=>{
 
     setInterval( async ()=>{
         

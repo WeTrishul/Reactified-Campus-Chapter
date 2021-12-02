@@ -76,23 +76,23 @@ function Resources() {
       console.log(pair[0] + ', ' + pair[1]);
     }
 
-    // Axios({
-    //     method: "POST",
-    //     data: form_data,
-    //     withCredentials: true,
-    //     url: "http://localhost:3000/resourses/"+userid,
-    //   }).then((response) =>{
+    Axios({
+        method: "POST",
+        data: form_data,
+        withCredentials: true,
+        url: "http://localhost:3000/resourses/"+userid,
+      }).then((response) =>{
 
-    //           return response.data
+              return response.data
 
-    //       })
-    //   .then(data =>{
-    //         console.log(data)
-    //       //     // console.log(data.data.applyreq.token)
-    //       //     // console.log(data.data.applyreq._id)
+          })
+      .then(data =>{
+            console.log(data)
+          //     // console.log(data.data.applyreq.token)
+          //     // console.log(data.data.applyreq._id)
 
-    //       //     // console.log(data)
-    //       });
+          //     // console.log(data)
+          });
   };
 
   return (

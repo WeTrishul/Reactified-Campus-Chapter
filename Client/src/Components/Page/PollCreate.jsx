@@ -72,7 +72,7 @@ function PollCreate() {
             method: "POST",
             data: {
                 pollName:enteredpollName,
-            Question:enteredQuestion,
+            question:enteredQuestion,
             optionA:enteredOptionA,
             optionB:enteredOptionB,
             optionC:enteredOptionC,
