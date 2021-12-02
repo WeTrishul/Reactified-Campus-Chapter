@@ -55,7 +55,7 @@ function AddEvent({ socket }) {
       url: 'http://localhost:3000/CreateEvent',
     })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         socket.emit('notify', {
           to: undefined,
           from: userName,
@@ -64,7 +64,7 @@ function AddEvent({ socket }) {
             res.data.data.eventname +
             ' on ' +
             res.data.data.eventdate,
-          placetogo: '/U',
+          placetogo: '/UpcomingEvent/' + '#event-' + res.data.data.eventid,
         });
         history.push('/UpcomingEvent');
       })

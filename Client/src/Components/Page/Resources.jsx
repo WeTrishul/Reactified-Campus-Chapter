@@ -22,6 +22,7 @@ function Resources() {
 
   const authCtx = useContext(AuthContext);
   let userid = authCtx.id;
+  let username = authCtx.username;
 
   // useEffect(()=>{
   //     setCategory(location.state.message)
@@ -47,12 +48,37 @@ function Resources() {
 
         // setUserFiles([...userfiles, { value: data.allfiles.files }]);
         // setUserFiles(data.allfiles.files);
-        setUserFiles((files) => [...userfiles, data.allfiles.files]);
-        // setEvents(data.data.events)
-        // setPosts(data.data.posts)
-        //     // console.log(data)
+        setUserFiles(data.allfiles.files);
+        // setUserFiles((files) => [...userfiles, data.allfiles.files]);
       });
   }, []);
+
+  const DeleteFilesHandler = (e) => {
+    var rid = e.target.id;
+    var foldername = username + '_' + category;
+
+    Axios({
+      method: 'GET',
+
+      withCredentials: true,
+      url:
+        'http://localhost:3000/deleteres' +
+        rid +
+        '/' +
+        category +
+        '/' +
+        foldername,
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+        document.getElementById('file-' + e.target.id).remove();
+
+        //     // console.log(data)
+      });
+  };
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -90,6 +116,7 @@ function Resources() {
       })
       .then((data) => {
         console.log(data);
+
         //     // console.log(data.data.applyreq.token)
         //     // console.log(data.data.applyreq._id)
 
@@ -99,11 +126,6 @@ function Resources() {
 
   return (
     <div>
-      <ul>
-        {userfiles.map((data, index) => {
-          <li key={index}>{data.name}</li>;
-        })}
-      </ul>
       <div className='main-wrap'>
         <div className='outer-wrap'>
           <h1>Add Event</h1>
@@ -142,6 +164,40 @@ function Resources() {
               Add Event
             </button>
           </form>
+        </div>
+      </div>
+      <div className='view-question'>
+        <div className='viewBlogsHeading'>
+          <h2>View Files</h2>
+        </div>
+        <div>
+          <div className='ViewblogsOuterBox'>
+            <div className='ViewblogsInnerBox'>
+              {userfiles &&
+                userfiles.map((data, index) => {
+                  return (
+                    <div
+                      id={'file-' + data.ele}
+                      style={{ background: 'blue' }}
+                      className='ViewblogsListBox'
+                      key={index}
+                    >
+                      <a
+                        href={'http://localhost:3000' + data.ele}
+                        target='_blank'
+                        style={{ color: 'white' }}
+                        className='ViewallBlogsLink'
+                      >
+                        {data.name}
+                      </a>
+                      <button id={data.ele} onClick={DeleteFilesHandler}>
+                        Delete
+                      </button>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
         </div>
       </div>
     </div>

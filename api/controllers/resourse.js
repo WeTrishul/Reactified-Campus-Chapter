@@ -191,7 +191,11 @@ module.exports.deleteResource = async (req,res)=>{
 
 
             fs.unlinkSync(path.join(__dirname,'..',rid1))
-             res.redirect('back')
+            //  res.redirect('back')
+            return res.status(200).json({
+                
+                message: "Delete ho gya !!"
+            });
     }        
         catch (error) {
            console.log('delete resources ka error',error.message)

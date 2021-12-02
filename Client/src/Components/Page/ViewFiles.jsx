@@ -41,24 +41,25 @@ function ViewFiles() {
       <div>
         <div className='ViewblogsOuterBox'>
           <div className='ViewblogsInnerBox'>
-            {files.map((data, index) => {
-              return (
-                <div
-                  style={{ background: 'blue' }}
-                  className='ViewblogsListBox'
-                  key={index}
-                >
-                  <a
-                    href={'http://localhost:3000' + data.ele}
-                    target='_blank'
-                    style={{ color: 'white' }}
-                    className='ViewallBlogsLink'
+            {files &&
+              files.map((data, index) => {
+                return (
+                  <div
+                    style={{ background: 'blue' }}
+                    className='ViewblogsListBox'
+                    key={index}
                   >
-                    {data.name}
-                  </a>
-                </div>
-              );
-            })}
+                    <a
+                      href={'http://localhost:3000' + data.ele}
+                      target='_blank'
+                      style={{ color: 'white' }}
+                      className='ViewallBlogsLink'
+                    >
+                      {data.name}
+                    </a>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>

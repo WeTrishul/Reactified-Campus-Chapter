@@ -56,23 +56,24 @@ function ViewCategory() {
       <div>
         <div className='ViewblogsOuterBox'>
           <div className='ViewblogsInnerBox'>
-            {files.map((data, index) => {
-              return (
-                <div
-                  style={{ background: 'yellow' }}
-                  className='ViewblogsListBox'
-                  key={index}
-                >
-                  <Link
-                    to={'/ViewFiles/' + data[index].name}
-                    style={{ color: 'red' }}
-                    className='ViewallBlogsLink'
+            {files &&
+              files.map((data, index) => {
+                return (
+                  <div
+                    style={{ background: 'yellow' }}
+                    className='ViewblogsListBox'
+                    key={index}
                   >
-                    {data[index].name}
-                  </Link>
-                </div>
-              );
-            })}
+                    <Link
+                      to={'/ViewFiles/' + data[index].name}
+                      style={{ color: 'red' }}
+                      className='ViewallBlogsLink'
+                    >
+                      {data[index].name}
+                    </Link>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
