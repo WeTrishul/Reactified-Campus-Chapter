@@ -111,7 +111,7 @@
 
 .Eventsdropdown-content {
   margin-top: 10px;
-  right: 600px;
+  right: 650px;
   top: 50px;
   padding-right: 50px;
   position: fixed;
@@ -122,18 +122,18 @@
   border-radius: 7px;
 }
 
-.Eventsdropdown-item {
+/* .Eventsdropdown-item {
   border-radius: 7px;
   width: 153px;
   padding: 20px 0px 0px 20px;
   cursor: pointer;
   height: 4rem;
   margin: 1px;
-}
+} */
 
 .Questiondropdown-content {
   margin-top: 10px;
-  right: 300px;
+  right: 320px;
   top: 50px;
   padding-right: 50px;
   position: absolute;
@@ -147,10 +147,15 @@
 .Questiondropdown-item {
   border-radius: 7px;
   width: 153px;
-  padding: 20px 0px 0px 20px;
+  padding: 20px 0px 0px 10px;
   cursor: pointer;
   height: 4rem;
   margin: 1px;
+}
+
+.Questiondropdown-item:hover {
+  background-color: rgb(185, 183, 183);
+  border-radius: 7px;
 }
 
 .notifydropdown-content {

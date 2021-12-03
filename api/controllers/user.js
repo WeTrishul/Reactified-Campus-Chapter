@@ -62,6 +62,7 @@ module.exports.postlogin = async(req,res)=>{
             message: "Applied Successfully!"
         });
     } catch (error) {
+        
         console.log("post login ka naya natak wala error");
     }
 }

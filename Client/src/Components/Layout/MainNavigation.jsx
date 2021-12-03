@@ -52,17 +52,6 @@ function MainNavigation({ socket }) {
   }, [socket]);
 
   useEffect(() => {
-    // const welcome = {
-    //     msg:"Welcome to campus-chapter",
-    //     placetogo : ""
-    // }
-
-    // setNotifications({
-    //     msg:"Welcome to campus-chapter",
-    //     placetogo : ""
-    // })
-    // setNotifications(oldArray => [...notifications, welcome]);
-
     Axios({
       method: 'GET',
       withCredentials: true,
@@ -161,6 +150,272 @@ function MainNavigation({ socket }) {
     }
   };
 
+  const windowSizeRendering = () => {
+    if (window.innerWidth <= 968) {
+      return (
+        <>
+          <ul className={click ? 'nav-bar active' : 'nav-bar'}>
+            <li className='navbar-items'>
+              <Link
+                to='/Dashboard'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                DashBoard
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/UpcomingEvent'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                CollegeEvents
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/GlobalEvents/CodeForces'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                Codeforces
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/GlobalEvents/CodeChef'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                Codechef
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/GlobalEvents/HackerRank'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                HackerRank
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/GlobalEvents/GeeksForGeeks'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                GeeksforGeeks
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/Discussion'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                Discussion
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/Leaderboard'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                Leaderboard
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/SetQuestions'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                Upload Question
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/ViewQuestions'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                View Question
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link to='/Blogs' className='nav-links' onClick={closeSideBar}>
+                Blogs
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/UploadResources'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                Upload Resources
+              </Link>
+
+              {/* {modal && <DropActive/>} */}
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/ViewResources'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                Resources
+              </Link>
+
+              {/* {modal && <DropActive/>} */}
+            </li>
+
+            {notifyrendering()}
+            {/* <li className= 'navbar-items'>
+                      <Link className='nav-links' onClick={closeSideBar} onClick={NotifyDrop} ><NotificationsActiveIcon/> </Link>
+                      {notify && <NotifyDropdown/>}
+                  </li> */}
+            {/* <li className= 'navbar-items'>
+                      <Link to='/Profile' className='nav-links' onClick={closeSideBar} >Profile</Link>
+                  </li> */}
+            <li className='navbar-items'>
+              <Link to='/Profile' className='nav-links' onClick={closeSideBar}>
+                Profile
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/EditProfile'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                Edit Profile
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link to='/Apply' className='nav-links' onClick={closeSideBar}>
+                Apply
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                className='nav-links'
+                onClick={closeSideBar}
+                onClick={logoutHandler}
+              >
+                Logout
+              </Link>
+            </li>
+            {/* <li className= 'navbar-items'>
+                      <Link  className='nav-links' onClick={logoutHandler} >Logout</Link>
+                  </li> */}
+            {/* <li className= 'navbar-items'>
+                      <Dropdown/>
+                  </li> */}
+          </ul>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <ul className={click ? 'nav-bar active' : 'nav-bar'}>
+            <li className='navbar-items'>
+              <Link
+                to='/Dashboard'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                DashBoard
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                className='nav-links'
+                onClick={closeSideBar}
+                onClick={EventsActive}
+              >
+                All Events
+              </Link>
+              {EventsDrop && <EventsDropdown data={EventsActive} />}
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/Discussion'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                Discussion
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                to='/Leaderboard'
+                className='nav-links'
+                onClick={closeSideBar}
+              >
+                Leaderboard
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                className='nav-links'
+                onClick={closeSideBar}
+                onClick={QuestionActive}
+              >
+                Set Question
+              </Link>
+              {questiondrop && <QuestionsDropdown data={QuestionActive} />}
+            </li>
+            <li className='navbar-items'>
+              <Link to='/Blogs' className='nav-links' onClick={closeSideBar}>
+                Blogs
+              </Link>
+            </li>
+            <li className='navbar-items'>
+              <Link
+                className='nav-links'
+                onClick={closeSideBar}
+                onClick={resourcesActive}
+              >
+                Resources
+              </Link>
+              {resourcesdrop && <Dropdata data={resourcesActive} />}
+              {/* {modal && <DropActive/>} */}
+            </li>
+
+            {notifyrendering()}
+            {/* <li className= 'navbar-items'>
+                      <Link className='nav-links' onClick={closeSideBar} onClick={NotifyDrop} ><NotificationsActiveIcon/> </Link>
+                      {notify && <NotifyDropdown/>}
+                  </li> */}
+            {/* <li className= 'navbar-items'>
+                      <Link to='/Profile' className='nav-links' onClick={closeSideBar} >Profile</Link>
+                  </li> */}
+            <li className='navbar-items'>
+              <Link
+                className='nav-links'
+                onClick={closeSideBar}
+                onClick={DropActive}
+              >
+                <AccountCircleRoundedIcon />
+              </Link>
+              {dropdown && <Dropdown data={DropActive} />}
+            </li>
+            {/* <li className= 'navbar-items'>
+                      <Link  className='nav-links' onClick={logoutHandler} >Logout</Link>
+                  </li> */}
+            {/* <li className= 'navbar-items'>
+                      <Dropdown/>
+                  </li> */}
+          </ul>
+        </>
+      );
+    }
+  };
+
   return (
     <div>
       <nav className='navbar'>
@@ -168,88 +423,7 @@ function MainNavigation({ socket }) {
         <i className='icon' onClick={handleNavbar}>
           <MenuIcon />
         </i>
-        <ul className={click ? 'nav-bar active' : 'nav-bar'}>
-          <li className='navbar-items'>
-            <Link to='/Dashboard' className='nav-links' onClick={closeSideBar}>
-              DashBoard
-            </Link>
-          </li>
-          <li className='navbar-items'>
-            <Link
-              className='nav-links'
-              onClick={closeSideBar}
-              onClick={EventsActive}
-            >
-              All Events
-            </Link>
-            {EventsDrop && <EventsDropdown />}
-          </li>
-          <li className='navbar-items'>
-            <Link to='/Discussion' className='nav-links' onClick={closeSideBar}>
-              Discussion
-            </Link>
-          </li>
-          <li className='navbar-items'>
-            <Link
-              to='/Leaderboard'
-              className='nav-links'
-              onClick={closeSideBar}
-            >
-              Leaderboard
-            </Link>
-          </li>
-          <li className='navbar-items'>
-            <Link
-              className='nav-links'
-              onClick={closeSideBar}
-              onClick={QuestionActive}
-            >
-              Set Question
-            </Link>
-            {questiondrop && <QuestionsDropdown />}
-          </li>
-          <li className='navbar-items'>
-            <Link to='/Blogs' className='nav-links' onClick={closeSideBar}>
-              Blogs
-            </Link>
-          </li>
-          <li className='navbar-items'>
-            <Link
-              className='nav-links'
-              onClick={closeSideBar}
-              onClick={resourcesActive}
-            >
-              Resources
-            </Link>
-            {resourcesdrop && <Dropdata />}
-            {/* {modal && <DropActive/>} */}
-          </li>
-
-          {notifyrendering()}
-          {/* <li className= 'navbar-items'>
-                    <Link className='nav-links' onClick={closeSideBar} onClick={NotifyDrop} ><NotificationsActiveIcon/> </Link>
-                    {notify && <NotifyDropdown/>}
-                </li> */}
-          {/* <li className= 'navbar-items'>
-                    <Link to='/Profile' className='nav-links' onClick={closeSideBar} >Profile</Link>
-                </li> */}
-          <li className='navbar-items'>
-            <Link
-              className='nav-links'
-              onClick={closeSideBar}
-              onClick={DropActive}
-            >
-              <AccountCircleRoundedIcon />
-            </Link>
-            {dropdown && <Dropdown />}
-          </li>
-          {/* <li className= 'navbar-items'>
-                    <Link  className='nav-links' onClick={logoutHandler} >Logout</Link>
-                </li> */}
-          {/* <li className= 'navbar-items'>
-                    <Dropdown/>
-                </li> */}
-        </ul>
+        {windowSizeRendering()}
       </nav>
     </div>
   );

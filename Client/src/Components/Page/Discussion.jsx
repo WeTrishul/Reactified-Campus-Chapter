@@ -22,6 +22,9 @@ function Discussion({ socket }) {
   const postBody = useRef();
   const commentBody = useRef();
 
+  const [viewComment, setViewComment] = useState(false);
+
+  const commentViewHandler = () => setViewComment(!viewComment);
   const [Discuss, setDiscuss] = useState([]);
   let count = 0;
   const [likePost, setLikePost] = useState(count);
@@ -404,151 +407,160 @@ function Discussion({ socket }) {
     <div>
       <div className='discussionOuterBox'>
         <div className='discussionInnerBox'>
-          {Discuss.map((data, index) => {
-            return (
-              <div id={'post-' + data._id} className='discussionMessageBox'>
-                <div className='PostBox' key={data._id}>
-                  <div className='discussionUserDetails'>
+          {Discuss &&
+            Discuss.map((data, index) => {
+              return (
+                <div id={'post-' + data._id} className='discussionMessageBox'>
+                  <div className='PostBox' key={data._id}>
                     <div className='discussionUserDetails'>
-                      <img
-                        className='discussionUserImage'
-                        src={data.userid.dp}
-                        alt=''
-                      />
-                      <span className='discussionUsername'>
-                        <h2>{data.userid.username}</h2>
-                      </span>
-                      <div className='discussionReport'>
-                        {/* <span>{data.report.length} report</span> */}
-                        <button
-                          onClick={ReportPostHandler}
-                          id={'report-' + data._id}
-                          data-reports={data.report.length}
-                        >
-                          {' '}
-                          <span id={'span-report-' + data._id}>
-                            {data.report.length}
-                          </span>{' '}
-                          Report{' '}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='discussionUserPost'>
-                    <h4>{data.postBody}</h4>
-                  </div>
-                  <div className='discussionLikeandComment'>
-                    <div>
-                      {/* <button onClick={likePostHandler} id={"like-"+data._id} data-likes={data.likes.length}> <span id={"span-like-"+data._id}>{data.likes.length}</span> <ThumbUpTwoToneIcon/> </button> */}
-
-                      <button
-                        onClick={likePostHandler}
-                        id={'like-' + data._id}
-                        data-likes={data.likes.length}
-                      >
-                        {' '}
-                        <span id={'span-like-' + data._id}>
-                          {data.likes.length}
-                        </span>{' '}
-                        Like{' '}
-                      </button>
-                      <span>
-                        <AddCommentTwoToneIcon /> {data.comments.length}
-                      </span>
-                      <span>
-                        <button onClick={deletePostHandler} id={data._id}>
-                          Delete
-                        </button>
-                      </span>
-                      {/* <span onClick={deletePostHandler} id={data._id} className="discussionDeletePost">< DeleteIcon/>Delete Post</span> */}
-                    </div>
-                  </div>
-                </div>
-                <div id={'commentsof-' + data._id}>
-                  {data.comments.map((value) => {
-                    return (
-                      <div
-                        id={'comment-' + value._id}
-                        className='discussionCommentSection'
-                      >
-                        <div key={value._id} className='discussionScrollField'>
-                          <div className='discussionUserComment'>
-                            <div>
-                              <PersonIcon />
-                            </div>
-                            <div className='CommentUserDetails'>
-                              {value.userid.username}
-                              <div className='CommentText'>
-                                {value.commentBody}
-                              </div>
-                            </div>
-                            {/* <div onClick={deleteCommentHandler} style={{color:"red"}}><ClearIcon/></div> */}
-                            <span>
-                              <button
-                                onClick={deleteCommentHandler}
-                                id={value._id}
-                              >
-                                Delete
-                              </button>
-                            </span>
-                          </div>
-                          <div className='CommentLikesandReport'>
-                            {/* <span>{value.likes.length} <ThumbUpTwoToneIcon/></span> */}
-                            <button
-                              onClick={likeCommentHandler}
-                              id={'like-' + value._id}
-                              data-likes={value.likes.length}
-                            >
-                              {' '}
-                              <span id={'span-like-' + value._id}>
-                                {value.likes.length}
-                              </span>{' '}
-                              like{' '}
-                            </button>
-                            {/* <button onClick={likeCommentHandler} id={"like-"+value._id} data-likes={value.likes.length}> <span id={"span-like-"+value._id}>{value.likes.length}</span> <ThumbUpTwoToneIcon/> </button> */}
-
-                            {/* <span style={{color:"red"}}> {value.report.length} report</span> */}
-                            <button
-                              onClick={ReportCommentHandler}
-                              id={'report-' + value._id}
-                              data-reports={value.report.length}
-                            >
-                              {' '}
-                              <span id={'span-report-' + value._id}>
-                                {value.report.length}
-                              </span>{' '}
-                              Report{' '}
-                            </button>
-                            {/* <button onClick={ReportCommentHandler} id={"report-"+value._id} data-reports={value.report.length}> <span id={"span-report-"+value._id}>{value.report.length}</span> <ThumbUpTwoToneIcon/> </button> */}
-                          </div>
+                      <div className='discussionUserDetails'>
+                        <img
+                          className='discussionUserImage'
+                          src={'http://localhost:3000' + data.userid.dp}
+                          alt=''
+                        />
+                        <span className='discussionUsername'>
+                          <h2>{data.userid.username}</h2>
+                        </span>
+                        <div className='discussionReport'>
+                          {/* <span>{data.report.length} report</span> */}
+                          <button
+                            onClick={ReportPostHandler}
+                            id={'report-' + data._id}
+                            data-reports={data.report.length}
+                          >
+                            {' '}
+                            <span id={'span-report-' + data._id}>
+                              {data.report.length}
+                            </span>{' '}
+                            Report{' '}
+                          </button>
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                    <div className='discussionUserPost'>
+                      <h4>{data.postBody}</h4>
+                    </div>
+                    <div className='discussionLikeandComment'>
+                      <div>
+                        {/* <button onClick={likePostHandler} id={"like-"+data._id} data-likes={data.likes.length}> <span id={"span-like-"+data._id}>{data.likes.length}</span> <ThumbUpTwoToneIcon/> </button> */}
 
-                <div className='discussionPostComment'>
-                  <div className='WriteComment'>
-                    <textarea
-                      name='commentBody'
-                      id={'post-commentinput-' + data._id}
-                      className='discussionCommentBox'
-                      type='text'
-                      placeholder='Comment here..!'
-                    />
+                        <button
+                          onClick={likePostHandler}
+                          id={'like-' + data._id}
+                          data-likes={data.likes.length}
+                        >
+                          {' '}
+                          <span id={'span-like-' + data._id}>
+                            {data.likes.length}
+                          </span>{' '}
+                          Like{' '}
+                        </button>
+                        <span>
+                          <AddCommentTwoToneIcon onClick={commentViewHandler} />{' '}
+                          {data.comments.length}
+                        </span>
+                        <span>
+                          <button onClick={deletePostHandler} id={data._id}>
+                            Delete
+                          </button>
+                        </span>
+                        {/* <span onClick={deletePostHandler} id={data._id} className="discussionDeletePost">< DeleteIcon/>Delete Post</span> */}
+                      </div>
+                    </div>
                   </div>
-                  <div
-                    onClick={CommentsubmitHandler}
-                    id={'post-submit-' + data._id}
-                    post-index={index}
-                    className='CommentButton'
-                  >
-                    Send
-                  </div>
+                  {viewComment && (
+                    <div>
+                      <div id={'commentsof-' + data._id}>
+                        {data.comments.map((value) => {
+                          return (
+                            <div
+                              id={'comment-' + value._id}
+                              className='discussionCommentSection'
+                            >
+                              <div
+                                key={value._id}
+                                className='discussionScrollField'
+                              >
+                                <div className='discussionUserComment'>
+                                  <div>
+                                    <PersonIcon />
+                                  </div>
+                                  <div className='CommentUserDetails'>
+                                    {value.userid.username}
+                                    <div className='CommentText'>
+                                      {value.commentBody}
+                                    </div>
+                                  </div>
+                                  {/* <div onClick={deleteCommentHandler} style={{color:"red"}}><ClearIcon/></div> */}
+                                  <span>
+                                    <button
+                                      onClick={deleteCommentHandler}
+                                      id={value._id}
+                                    >
+                                      Delete
+                                    </button>
+                                  </span>
+                                </div>
+                                <div className='CommentLikesandReport'>
+                                  {/* <span>{value.likes.length} <ThumbUpTwoToneIcon/></span> */}
+                                  <button
+                                    onClick={likeCommentHandler}
+                                    id={'like-' + value._id}
+                                    data-likes={value.likes.length}
+                                  >
+                                    {' '}
+                                    <span id={'span-like-' + value._id}>
+                                      {value.likes.length}
+                                    </span>{' '}
+                                    like{' '}
+                                  </button>
+                                  {/* <button onClick={likeCommentHandler} id={"like-"+value._id} data-likes={value.likes.length}> <span id={"span-like-"+value._id}>{value.likes.length}</span> <ThumbUpTwoToneIcon/> </button> */}
+
+                                  {/* <span style={{color:"red"}}> {value.report.length} report</span> */}
+                                  <button
+                                    onClick={ReportCommentHandler}
+                                    id={'report-' + value._id}
+                                    data-reports={value.report.length}
+                                  >
+                                    {' '}
+                                    <span id={'span-report-' + value._id}>
+                                      {value.report.length}
+                                    </span>{' '}
+                                    Report{' '}
+                                  </button>
+                                  {/* <button onClick={ReportCommentHandler} id={"report-"+value._id} data-reports={value.report.length}> <span id={"span-report-"+value._id}>{value.report.length}</span> <ThumbUpTwoToneIcon/> </button> */}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      <div className='discussionPostComment'>
+                        <div className='WriteComment'>
+                          <textarea
+                            name='commentBody'
+                            id={'post-commentinput-' + data._id}
+                            className='discussionCommentBox'
+                            type='text'
+                            placeholder='Comment here..!'
+                          />
+                        </div>
+                        <div
+                          onClick={CommentsubmitHandler}
+                          id={'post-submit-' + data._id}
+                          post-index={index}
+                          className='CommentButton'
+                        >
+                          Send
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
         <div className='discussionPostBox'>
           <div className='WritePost'>

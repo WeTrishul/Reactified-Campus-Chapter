@@ -72,9 +72,9 @@ function EditBlog() {
     //   });
     Axios({
       method: 'POST',
-      mode: 'no-cors',
+
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'Access-Control-Allow-Origin': '*',
       },
       data: {
         title: enteredTitle,

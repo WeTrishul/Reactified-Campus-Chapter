@@ -70,7 +70,6 @@ function LoginForm() {
         return response.data;
       })
       .then((data) => {
-        //     // console.log(data)
         //     // console.log(data.data.applyreq.token)
         //     // console.log(data.data.applyreq._id)
         authCtx.userId(data.data.applyreq._id);
@@ -78,8 +77,14 @@ function LoginForm() {
         authCtx.login(data.data.applyreq.token);
         authCtx.userrole(data.data.applyreq.UserType);
         history.push('/Dashboard');
+
         //     // console.log(data)
+      })
+      .catch((err) => {
+        console.log('error', err);
+        alert('Authentication Failed!!');
       });
+
     //   };
 
     // .then(res => {

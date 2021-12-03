@@ -9,6 +9,8 @@ import { useContext } from 'react';
 import * as noti from '../../Service/socket';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 function DashBoard(props) {
   const authCtx = useContext(AuthContext);
@@ -21,7 +23,9 @@ function DashBoard(props) {
 
   const [blogs, setBlogs] = useState([]);
   const [events, setEvents] = useState([]);
+  const [current, setCurrent] = useState(0);
   const [posts, setPosts] = useState([]);
+  const [banner, setBanner] = useState([]);
 
   // useEffect(() =>{
   //     console.log(Flag)
@@ -61,17 +65,54 @@ function DashBoard(props) {
         console.log(data);
         setBlogs(data.data.blogs);
         setEvents(data.data.events);
+        setCurrent(data.data.events.length);
+        setBanner(data.data.events.eventbanner);
         setPosts(data.data.posts);
         //     // console.log(data)
       });
   }, []);
+
+  const [val, setVal] = useState(0);
+
+  const lastSlide = () => {
+    setVal(val === current - 1 ? 0 : val + 1);
+    console.log(val);
+    console.log(current);
+  };
+
+  const nextSlide = () => {
+    setVal(val === 0 ? current - 1 : val - 1);
+  };
 
   // console.log(data)
 
   return (
     <div>
       <div className='image-slider'>
-        <Carousel slides={CarouselData} />
+        <div>
+          <div className='outer-slider-box'>
+            <div className='slider'>
+              <ChevronLeftIcon className='left-arrow' onClick={lastSlide} />
+              <ChevronRightIcon className='right-arrow' onClick={nextSlide} />
+              {banner &&
+                banner.map((slide, index) => {
+                  return (
+                    <div
+                      className={index === val ? 'slide-active' : 'slide'}
+                      key={index}
+                    >
+                      {index === val && (
+                        <img
+                          src={'http://localhost:3000' + slide.image}
+                          className='img-image'
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className='main-work'>
@@ -90,6 +131,7 @@ function DashBoard(props) {
           {userId}
           {userName}
           {usertype}
+          {current}
         </div>
         <div className='blogs-section'>
           <h3>Recent Blogs</h3>
