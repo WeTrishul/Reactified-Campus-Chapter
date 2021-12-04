@@ -6,7 +6,7 @@ function UploadResources(props) {
   return (
     <div>
       <div className='viewBlogsHeading'>
-        <h2>Polling Lists</h2>
+        <h2>Lists of Resources</h2>
       </div>
       <div>
         <div className='ViewblogsOuterBox'>

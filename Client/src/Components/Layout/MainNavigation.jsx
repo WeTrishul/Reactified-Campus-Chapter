@@ -15,7 +15,6 @@ import Dropdata from './Dropdata';
 
 function MainNavigation({ socket }) {
   const [notifications, setNotifications] = useState([]);
-
   const [open, setOpen] = useState(false);
   const [notifycheck, setNotifyCheck] = useState('');
   const authCtx = useContext(AuthContext);

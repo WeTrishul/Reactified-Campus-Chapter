@@ -425,6 +425,12 @@ function Discussion({ socket }) {
                         <div className='discussionReport'>
                           {/* <span>{data.report.length} report</span> */}
                           <button
+                            style={{
+                              color: 'red',
+                              borderStyle: 'none',
+                              background: 'rgb(207, 209, 203)',
+                              cursor: 'pointer',
+                            }}
                             onClick={ReportPostHandler}
                             id={'report-' + data._id}
                             data-reports={data.report.length}
@@ -446,6 +452,11 @@ function Discussion({ socket }) {
                         {/* <button onClick={likePostHandler} id={"like-"+data._id} data-likes={data.likes.length}> <span id={"span-like-"+data._id}>{data.likes.length}</span> <ThumbUpTwoToneIcon/> </button> */}
 
                         <button
+                          style={{
+                            borderStyle: 'none',
+                            background: 'rgb(207, 209, 203)',
+                            cursor: 'pointer',
+                          }}
                           onClick={likePostHandler}
                           id={'like-' + data._id}
                           data-likes={data.likes.length}
@@ -456,12 +467,22 @@ function Discussion({ socket }) {
                           </span>{' '}
                           Like{' '}
                         </button>
-                        <span>
+                        <span style={{ cursor: 'pointer' }}>
                           <AddCommentTwoToneIcon onClick={commentViewHandler} />{' '}
                           {data.comments.length}
                         </span>
                         <span>
-                          <button onClick={deletePostHandler} id={data._id}>
+                          <button
+                            style={{
+                              paddingLeft: '100px',
+                              color: 'red',
+                              borderStyle: 'none',
+                              background: 'rgb(207, 209, 203)',
+                              cursor: 'pointer',
+                            }}
+                            onClick={deletePostHandler}
+                            id={data._id}
+                          >
                             Delete
                           </button>
                         </span>
@@ -495,6 +516,11 @@ function Discussion({ socket }) {
                                   {/* <div onClick={deleteCommentHandler} style={{color:"red"}}><ClearIcon/></div> */}
                                   <span>
                                     <button
+                                      style={{
+                                        color: 'red',
+                                        borderStyle: 'none',
+                                        cursor: 'pointer',
+                                      }}
                                       onClick={deleteCommentHandler}
                                       id={value._id}
                                     >
@@ -505,6 +531,10 @@ function Discussion({ socket }) {
                                 <div className='CommentLikesandReport'>
                                   {/* <span>{value.likes.length} <ThumbUpTwoToneIcon/></span> */}
                                   <button
+                                    style={{
+                                      borderStyle: 'none',
+                                      cursor: 'pointer',
+                                    }}
                                     onClick={likeCommentHandler}
                                     id={'like-' + value._id}
                                     data-likes={value.likes.length}
@@ -519,6 +549,11 @@ function Discussion({ socket }) {
 
                                   {/* <span style={{color:"red"}}> {value.report.length} report</span> */}
                                   <button
+                                    style={{
+                                      color: 'red',
+                                      borderStyle: 'none',
+                                      cursor: 'pointer',
+                                    }}
                                     onClick={ReportCommentHandler}
                                     id={'report-' + value._id}
                                     data-reports={value.report.length}

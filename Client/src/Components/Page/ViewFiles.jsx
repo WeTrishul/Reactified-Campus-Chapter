@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
+import CircularIndeterminate from '../Layout/CircularIndeterminate';
 
 function ViewFiles() {
   const [files, setfiles] = useState([]);
@@ -11,6 +12,7 @@ function ViewFiles() {
   // var cat = {foldername};
   // var fname = cat.foldername;
 
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     var cat = { foldername };
     var fname = cat.foldername;
@@ -27,44 +29,52 @@ function ViewFiles() {
       .then((data) => {
         console.log(data);
         // setfiles(files => [ ...files, data.arr.files])
+        setIsLoading(false);
         setfiles(data.arr.files);
         console.log(files);
         //     // console.log(data)
       });
   }, []);
 
-  return (
-    <div className='view-question'>
-      <div className='viewBlogsHeading'>
-        <h2>View Files</h2>
-      </div>
-      <div>
-        <div className='ViewblogsOuterBox'>
-          <div className='ViewblogsInnerBox'>
-            {files &&
-              files.map((data, index) => {
-                return (
-                  <div
-                    style={{ background: 'blue' }}
-                    className='ViewblogsListBox'
-                    key={index}
-                  >
-                    <a
-                      href={'http://localhost:3000' + data.ele}
-                      target='_blank'
-                      style={{ color: 'white' }}
-                      className='ViewallBlogsLink'
+  const viewFilesRendering = () => {
+    if (isLoading) {
+      return <CircularIndeterminate />;
+    } else {
+      return (
+        <div className='view-question'>
+          <div className='viewBlogsHeading'>
+            <h2>View Files</h2>
+          </div>
+          <div>
+            <div className='ViewblogsOuterBox'>
+              <div className='ViewblogsInnerBox'>
+                {files.map((data, index) => {
+                  return (
+                    <div
+                      style={{ background: 'blue' }}
+                      className='ViewblogsListBox'
+                      key={index}
                     >
-                      {data.name}
-                    </a>
-                  </div>
-                );
-              })}
+                      <a
+                        href={'http://localhost:3000' + data.ele}
+                        target='_blank'
+                        style={{ color: 'white' }}
+                        className='ViewallBlogsLink'
+                      >
+                        {data.name}
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
+      );
+    }
+  };
+
+  return <>{viewFilesRendering()}</>;
 }
 
 export default ViewFiles;

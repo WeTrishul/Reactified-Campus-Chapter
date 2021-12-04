@@ -7,6 +7,8 @@ import AuthContext from '../../Service/auth-context';
 import { useContext } from 'react';
 import CreateIcon from '@mui/icons-material/Create';
 import * as noti from '../../Service/socket';
+import Animations from '../Layout/Animation';
+import CircularIndeterminate from '../Layout/CircularIndeterminate';
 
 function Blogs() {
   const authCtx = useContext(AuthContext);
@@ -16,6 +18,7 @@ function Blogs() {
   // const socket = React.useContext(SocketContext)
 
   const [blogs, setBlogs] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   // noti.Notiengineconnect(username)
 
@@ -34,6 +37,7 @@ function Blogs() {
       })
       .then((data) => {
         console.log(data);
+        setLoading(false);
         setBlogs(data.data.blogs);
         //     // console.log(data)
       });
@@ -80,20 +84,6 @@ function Blogs() {
       blogid: blog.target.id,
     };
 
-    //     axios.post('http://localhost:3000/deleteblog/',blogData,{
-    //     headers: {
-    //         "Access-Control-Allow-Origin": "*",
-    //     }
-    // })
-    // .then(res => {
-    //     console.log(res);
-    //     document.getElementById('blog-'+ blog.target.id).remove()
-
-    // }).catch(err => {
-    //     console.log(err);
-    //     console.log("main nhi chal rha hoon bhai")
-    // });
-
     Axios({
       method: 'POST',
       data: {
@@ -114,76 +104,65 @@ function Blogs() {
       });
   };
 
-  return (
-    <div>
-      <div className='blogsOuterBox'>
-        <div className='blogsInnerBox'>
-          {blogs &&
-            blogs.map((data) => {
-              return (
-                // <div id={'blog-'+data._id} className="blogsList" key={data._id}>
-                // <Link to={{pathname: "/DisplayBlogs",state:data._id}}>{data.title}</Link>
-                // <span><button onClick={blogsDeleteHandler} id={data._id}>Delete</button></span>
-                // <span><Link to={{pathname: "/EditBlog",state:data._id}}>Edit</Link></span>
-                // </div>
-
-                <div
-                  id={'blog-' + data._id}
-                  className='blogsListBox'
-                  key={data._id}
-                >
-                  <div className='blogsTitleBox'>
-                    <Link
-                      className='blogsTitleLink'
-                      to={{ pathname: '/DisplayBlogs', state: data._id }}
-                    >
-                      {data.title}
-                    </Link>
-                  </div>
-
-                  <div className='blogsEditBox'>
-                    <Link to={{ pathname: '/EditBlog', state: data._id }}>
-                      <button className='blogsEditButton'>Edit</button>
-                    </Link>
-                  </div>
-                  <div className='blogsDeleteBox'>
-                    <button
-                      className='blogsDeleteButton'
-                      onClick={blogsDeleteHandler}
-                      id={data._id}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+  const blogsRendering = () => {
+    if (isLoading) {
+      return (
+        <div>
+          <CircularIndeterminate />
         </div>
-      </div>
+      );
+    } else {
+      return (
+        <div>
+          <div className='blogsOuterBox'>
+            <div className='blogsInnerBox'>
+              {blogs.map((data) => {
+                return (
+                  <div
+                    id={'blog-' + data._id}
+                    className='blogsListBox'
+                    key={data._id}
+                  >
+                    <div className='blogsTitleBox'>
+                      <Link
+                        className='blogsTitleLink'
+                        to={{ pathname: '/DisplayBlogs', state: data._id }}
+                      >
+                        {data.title}
+                      </Link>
+                    </div>
 
-      {/* <div className="blogsOuterBox">
-                <div className="blogsInnerBox"> */}
-      {/* <div className="blogsListBox">
-                        <div className="blogsTitleBox">
-                            Title daal bhai
-                        </div>
-                        <div className="blogsDeleteBox">
-                            Delete wala button daal bhai
-                        </div>
-                        <div className="blogsEditBox">
-                            Edit wala button daal bhai
-                        </div>
-                    </div> */}
-      {/* </div>
-            </div> */}
+                    <div className='blogsEditBox'>
+                      <Link to={{ pathname: '/EditBlog', state: data._id }}>
+                        <button className='blogsEditButton'>Edit</button>
+                      </Link>
+                    </div>
+                    <div className='blogsDeleteBox'>
+                      <button
+                        className='blogsDeleteButton'
+                        onClick={blogsDeleteHandler}
+                        id={data._id}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
-      <Link to='/WriteBlogs'>
-        <button className='writeBlogsButton'>
-          <CreateIcon /> <span>Write blogs</span>
-        </button>
-      </Link>
-    </div>
-  );
+          <Link to='/WriteBlogs'>
+            <button className='writeBlogsButton'>
+              <CreateIcon /> <span>Write blogs</span>
+            </button>
+          </Link>
+        </div>
+      );
+    }
+  };
+
+  return <>{blogsRendering()}</>;
 }
 
 export default Blogs;

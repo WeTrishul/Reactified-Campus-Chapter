@@ -5,9 +5,11 @@ import { useLocation } from 'react-router';
 import './Blogs.css';
 import Axios from 'axios';
 import { useParams } from 'react-router-dom';
+import CircularIndeterminate from '../Layout/CircularIndeterminate';
 
 function ViewCategory() {
   const [files, setFiles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { categoryname } = useParams();
 
@@ -22,7 +24,7 @@ function ViewCategory() {
     var cat = { categoryname };
     var category = cat.categoryname;
 
-    console.log('ja gaand mara', category);
+    console.log('main categoy bol rha ', category);
 
     Axios({
       method: 'GET',
@@ -36,49 +38,53 @@ function ViewCategory() {
       .then((data) => {
         console.log(data);
         // console.log(categoryname);
+        setIsLoading(false);
         console.log(data.arr);
         // setFiles(data.arr.name)
         setFiles((files) => [...files, data.arr]);
         // setFiles([...files, { data: data.arr }]);
         // setFiles(data.arr)
-        // setBlogs(data.data.blogs)
-        // setEvents(data.data.events)
-        // setPosts(data.data.posts)
-        //     // console.log(data)
       });
   }, []);
 
-  return (
-    <div className='view-question'>
-      <div className='viewBlogsHeading'>
-        <h2>View Category</h2>
-      </div>
-      <div>
-        <div className='ViewblogsOuterBox'>
-          <div className='ViewblogsInnerBox'>
-            {files &&
-              files.map((data, index) => {
-                return (
-                  <div
-                    style={{ background: 'yellow' }}
-                    className='ViewblogsListBox'
-                    key={index}
-                  >
-                    <Link
-                      to={'/ViewFiles/' + data[index].name}
-                      style={{ color: 'red' }}
-                      className='ViewallBlogsLink'
+  const categotyRendering = () => {
+    if (isLoading) {
+      return <CircularIndeterminate />;
+    } else {
+      return (
+        <div className='view-question'>
+          <div className='viewBlogsHeading'>
+            <h2>View Category</h2>
+          </div>
+          <div>
+            <div className='ViewblogsOuterBox'>
+              <div className='ViewblogsInnerBox'>
+                {files.map((data, index) => {
+                  return (
+                    <div
+                      style={{ background: 'yellow' }}
+                      className='ViewblogsListBox'
+                      key={index}
                     >
-                      {data[index].name}
-                    </Link>
-                  </div>
-                );
-              })}
+                      <Link
+                        to={'/ViewFiles/' + data[index].name}
+                        style={{ color: 'red' }}
+                        className='ViewallBlogsLink'
+                      >
+                        {data[index].name}
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
+      );
+    }
+  };
+
+  return <>{categotyRendering()}</>;
 }
 
 export default ViewCategory;

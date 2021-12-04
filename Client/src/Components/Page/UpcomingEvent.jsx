@@ -5,11 +5,13 @@ import { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../Service/auth-context';
+import CircularIndeterminate from '../Layout/CircularIndeterminate';
 
 function UpcomingEvent() {
   const authCtx = useContext(AuthContext);
   let userId = authCtx.id;
 
+  const [isLoading, setIsLoading] = useState(true);
   const [eve, setEve] = useState([]);
 
   useEffect(() => {
@@ -33,6 +35,7 @@ function UpcomingEvent() {
       })
       .then((data) => {
         console.log(data);
+        setIsLoading(false);
         setEve(data.data.events);
         //     // console.log(data)
       });
@@ -103,45 +106,55 @@ function UpcomingEvent() {
     }
   };
 
-  return (
-    <div>
-      <div className='divEventButton'>
-        <Link to='/AddEvent'>
-          <button className='eventAddButton'>Add Event</button>
-        </Link>
-      </div>
-      {eve.map((data) => {
-        return (
-          <div id={'event-' + data._id} className='event-box'>
-            <div className='event-banner' key={data._id}>
-              <div className='events-imagebox'>
-                <img
-                  className='image-img'
-                  src={'http://localhost:3000' + data.eventbanner}
-                />
-              </div>
-              <div className='events-contentBox'>
-                <h2>{data.eventname}</h2>
-                <p>
-                  {data.eventDate}
-                  {data.eventStartTime}
-                  {data.eventEndTime}
-                  <div>Registered Users : {data.Registeredusers.length}</div>
-                </p>
-                {renderButton(data)}
-                <button onClick={deleteEventHandler} id={data._id}>
-                  Delete
-                </button>
-                {/* <Link to={{ pathname: '/EditEventPage', state: data._id }}>
+  const UpcomingEventsRendering = () => {
+    if (isLoading) {
+      return <CircularIndeterminate />;
+    } else {
+      return (
+        <div>
+          <div className='divEventButton'>
+            <Link to='/AddEvent'>
+              <button className='eventAddButton'>Add Event</button>
+            </Link>
+          </div>
+          {eve.map((data) => {
+            return (
+              <div id={'event-' + data._id} className='event-box'>
+                <div className='event-banner' key={data._id}>
+                  <div className='events-imagebox'>
+                    <img
+                      className='image-img'
+                      src={'http://localhost:3000' + data.eventbanner}
+                    />
+                  </div>
+                  <div className='events-contentBox'>
+                    <h2>{data.eventname}</h2>
+                    <p>
+                      {data.eventDate}
+                      {data.eventStartTime}
+                      {data.eventEndTime}
+                      <div>
+                        Registered Users : {data.Registeredusers.length}
+                      </div>
+                    </p>
+                    {renderButton(data)}
+                    <button onClick={deleteEventHandler} id={data._id}>
+                      Delete
+                    </button>
+                    {/* <Link to={{ pathname: '/EditEventPage', state: data._id }}>
                   <button>Edit</button>
                 </Link> */}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
+            );
+          })}
+        </div>
+      );
+    }
+  };
+
+  return <>{UpcomingEventsRendering()}</>;
 }
 
 export default UpcomingEvent;

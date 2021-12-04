@@ -16,7 +16,6 @@
   grid-area: events-content;
   border-radius: 7px;
   margin-left: 1rem;
-  text-align: center;
   color: white;
   box-shadow: 0 2px 8px rgba(20, 7, 56, 0.26);
   overflow-y: auto;
@@ -29,6 +28,7 @@
   text-align: center;
   color: white;
   box-shadow: 0 2px 8px rgba(3, 0, 10, 0.26);
+  overflow-y: auto;
 }
 
 .blogs-section {
@@ -38,6 +38,7 @@
   margin-right: 1rem;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  overflow-y: auto;
 }
 
 .advertise {
@@ -56,6 +57,7 @@
   text-align: center;
   color: white;
   box-shadow: 0 2px 8px rgba(22, 1, 43, 0.26);
+  overflow-y: auto;
 }
 
 .empty-space {
@@ -78,16 +80,23 @@
     grid-gap: 0.7rem;
   }
 
+  .events-content {
+    overflow-y: auto;
+  }
+
   .announce {
     margin-left: 1rem;
+    overflow-y: auto;
   }
 
   .discussion {
     margin-left: 1rem;
+    overflow-y: auto;
   }
 
   .blogs-section {
     margin-left: 1rem;
     margin-right: 0;
+    overflow-y: auto;
   }
 }

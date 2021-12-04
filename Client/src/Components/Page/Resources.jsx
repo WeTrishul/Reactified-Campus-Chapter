@@ -5,6 +5,7 @@ import { useContext, useState } from 'react';
 import Axios from 'axios';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import CircularIndeterminate from '../Layout/CircularIndeterminate';
 
 function Resources() {
   // const [category,setCategory] = useState({})
@@ -17,6 +18,7 @@ function Resources() {
   var category = cat.categoryname;
 
   const [userfiles, setUserFiles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // setCategory(location.state.message)
 
@@ -45,11 +47,8 @@ function Resources() {
       })
       .then((data) => {
         console.log(data);
-
-        // setUserFiles([...userfiles, { value: data.allfiles.files }]);
-        // setUserFiles(data.allfiles.files);
+        setIsLoading(false);
         setUserFiles(data.allfiles.files);
-        // setUserFiles((files) => [...userfiles, data.allfiles.files]);
       });
   }, []);
 
@@ -124,6 +123,63 @@ function Resources() {
       });
   };
 
+  const viewResourcesRendering = () => {
+    if (isLoading) {
+      return <CircularIndeterminate />;
+    } else {
+      return (
+        <>
+          <div className='view-question'>
+            <div className='viewBlogsHeading'>
+              <h2>View Files</h2>
+            </div>
+            <div>
+              <div className='ViewblogsOuterBox'>
+                <div className='ViewblogsInnerBox'>
+                  {userfiles.map((data, index) => {
+                    return (
+                      <div
+                        style={{ display: 'flex' }}
+                        id={'file-' + data.ele}
+                        style={{ background: 'blue' }}
+                        className='ViewblogsListBox'
+                        key={index}
+                      >
+                        <div style={{ width: '90%', paddingLeft: '30px' }}>
+                          <a
+                            href={'http://localhost:3000' + data.ele}
+                            target='_blank'
+                            style={{ color: 'white' }}
+                            className='ViewallBlogsLink'
+                          >
+                            {data.name}
+                          </a>
+                        </div>
+                        <div style={{ width: '10%', paddingTop: '15px' }}>
+                          <button
+                            style={{
+                              background: 'blue',
+                              borderStyle: 'none',
+                              color: 'white',
+                            }}
+                            id={data.ele}
+                            onClick={DeleteFilesHandler}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    }
+  };
+
   return (
     <div>
       <div className='main-wrap'>
@@ -166,40 +222,7 @@ function Resources() {
           </form>
         </div>
       </div>
-      <div className='view-question'>
-        <div className='viewBlogsHeading'>
-          <h2>View Files</h2>
-        </div>
-        <div>
-          <div className='ViewblogsOuterBox'>
-            <div className='ViewblogsInnerBox'>
-              {userfiles &&
-                userfiles.map((data, index) => {
-                  return (
-                    <div
-                      id={'file-' + data.ele}
-                      style={{ background: 'blue' }}
-                      className='ViewblogsListBox'
-                      key={index}
-                    >
-                      <a
-                        href={'http://localhost:3000' + data.ele}
-                        target='_blank'
-                        style={{ color: 'white' }}
-                        className='ViewallBlogsLink'
-                      >
-                        {data.name}
-                      </a>
-                      <button id={data.ele} onClick={DeleteFilesHandler}>
-                        Delete
-                      </button>
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
-        </div>
-      </div>
+      {viewResourcesRendering()}
     </div>
   );
 }

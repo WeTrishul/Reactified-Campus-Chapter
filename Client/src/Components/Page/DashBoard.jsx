@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { Link } from 'react-router-dom';
 
 function DashBoard(props) {
   const authCtx = useContext(AuthContext);
@@ -82,6 +83,8 @@ function DashBoard(props) {
 
   const nextSlide = () => {
     setVal(val === 0 ? current - 1 : val - 1);
+    console.log(val);
+    console.log(current);
   };
 
   // console.log(data)
@@ -117,28 +120,56 @@ function DashBoard(props) {
 
       <div className='main-work'>
         <div className='events-content'>
-          <h3>Events</h3>
+          <h2 style={{ textAlign: 'center', paddingBottom: '20px' }}>Events</h2>
           {events.map((data) => {
             return (
-              <div className='eventsData' key={data._id}>
-                {data.eventname}
+              <div
+                style={{
+                  textAlign: 'left',
+                  paddingLeft: '80px',
+                  paddingBottom: '3px',
+                }}
+                className='eventsData'
+                key={data._id}
+              >
+                <Link
+                  to='/UpcomingEvent'
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  <h4> {data.eventname}</h4>
+                </Link>
               </div>
             );
           })}
         </div>
         <div className='announce'>
-          <h3>Announcement</h3>
+          <h2>Announcement</h2>
           {userId}
           {userName}
           {usertype}
           {current}
         </div>
         <div className='blogs-section'>
-          <h3>Recent Blogs</h3>
+          <h2 style={{ textAlign: 'center', paddingBottom: '20px' }}>
+            Recent Blogs
+          </h2>
           {blogs.map((data) => {
             return (
-              <div className='blogsData' key={data._id}>
-                {data.title}
+              <div
+                style={{
+                  textAlign: 'left',
+                  paddingLeft: '50px',
+                  paddingBottom: '3px',
+                }}
+                className='blogsData'
+                key={data._id}
+              >
+                <Link
+                  style={{ textDecoration: 'none', color: 'black' }}
+                  to='/blogs'
+                >
+                  <h4>{data.title}</h4>
+                </Link>
               </div>
             );
           })}
@@ -146,11 +177,26 @@ function DashBoard(props) {
 
         <div className='advertise'>G-Ads</div>
         <div className='discussion'>
-          <h3>Recent Discussion</h3>
+          <h2 style={{ textAlign: 'center', paddingBottom: '20px' }}>
+            Recent Discussion
+          </h2>
           {posts.map((data) => {
             return (
-              <div className='discussionData' key={data._id}>
-                {data.postBody}
+              <div
+                style={{
+                  textAlign: 'left',
+                  paddingLeft: '80px',
+                  paddingBottom: '3px',
+                }}
+                className='discussionData'
+                key={data._id}
+              >
+                <Link
+                  style={{ textDecoration: 'none', color: 'white' }}
+                  to='/Discussion'
+                >
+                  <h4>{data.postBody}</h4>
+                </Link>
               </div>
             );
           })}
