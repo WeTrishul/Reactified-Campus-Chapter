@@ -2,7 +2,8 @@ import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import ChatIcon from '@material-ui/icons/Chat';
 import GroupIcon from '@material-ui/icons/Group';
-import HelpIcon from '@material-ui/icons/Help';
+import PollIcon from '@mui/icons-material/Poll';
+import ReportIcon from '@mui/icons-material/Report';
 import { Link } from 'react-router-dom';
 import './FloatingBtn.css';
 
@@ -52,7 +53,7 @@ function FloatingBtn() {
             <div className='fab-holder'>
               <Link to='/Polling'>
                 <i className='add-icon'>
-                  <HelpIcon />
+                  <PollIcon />
                 </i>
               </Link>
             </div>
@@ -62,7 +63,7 @@ function FloatingBtn() {
             <div className='fab-holder'>
               <Link to='/Reports'>
                 <i className='add-icon'>
-                  <HelpIcon />
+                  <ReportIcon />
                 </i>
               </Link>
             </div>

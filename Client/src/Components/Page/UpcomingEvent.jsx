@@ -130,15 +130,28 @@ function UpcomingEvent() {
                   <div className='events-contentBox'>
                     <h2>{data.eventname}</h2>
                     <p>
-                      {data.eventDate}
-                      {data.eventStartTime}
-                      {data.eventEndTime}
+                      <span>Date:{data.eventDate} </span>
+                      <div>
+                        Timing: ({data.eventStartTime} - {data.eventEndTime})
+                      </div>
                       <div>
                         Registered Users : {data.Registeredusers.length}
                       </div>
                     </p>
                     {renderButton(data)}
-                    <button onClick={deleteEventHandler} id={data._id}>
+                    <button
+                      style={{
+                        marginLeft: '10px',
+                        width: '90px',
+                        height: '5.8vh',
+                        borderRadius: '7px',
+                        borderStyle: 'none',
+                        background: 'rgb(219, 49, 49)',
+                        color: 'white',
+                      }}
+                      onClick={deleteEventHandler}
+                      id={data._id}
+                    >
                       Delete
                     </button>
                     {/* <Link to={{ pathname: '/EditEventPage', state: data._id }}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Carousel.css';
+
 import { CarouselData } from './CarouselData';
 import { useState } from 'react';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';

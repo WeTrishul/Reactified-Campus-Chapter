@@ -72,6 +72,7 @@ function LoginForm() {
       .then((data) => {
         //     // console.log(data.data.applyreq.token)
         //     // console.log(data.data.applyreq._id)
+        console.log(data.data.time);
         authCtx.userId(data.data.applyreq._id);
         authCtx.userName(data.data.applyreq.username);
         authCtx.login(data.data.applyreq.token);

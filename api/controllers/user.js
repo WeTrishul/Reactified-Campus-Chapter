@@ -57,7 +57,8 @@ module.exports.postlogin = async(req,res)=>{
         return res.status(200).json({
             data: {
                 done:"yes",
-                applyreq: user
+                applyreq: user,
+                time:"1000*60*100"
             },
             message: "Applied Successfully!"
         });
