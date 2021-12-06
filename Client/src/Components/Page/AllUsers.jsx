@@ -68,7 +68,6 @@ function AllUsers() {
               );
             })}
           </table>
-          ;
         </div>
       );
     }

@@ -58,7 +58,7 @@ module.exports.postlogin = async(req,res)=>{
             data: {
                 done:"yes",
                 applyreq: user,
-                time:"1000*60*100"
+                
             },
             message: "Applied Successfully!"
         });
