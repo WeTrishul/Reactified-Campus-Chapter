@@ -113,7 +113,7 @@ function DashBoard(props) {
                   <div
                     style={{
                       textAlign: 'left',
-                      paddingLeft: '80px',
+                      paddingLeft: '280px',
                       paddingBottom: '3px',
                     }}
                     className='eventsData'

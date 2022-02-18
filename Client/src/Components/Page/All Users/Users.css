@@ -1,0 +1,30 @@
+.user-Body-outer-Box {
+  box-sizing: border-box;
+  height: auto;
+}
+.users-outer-Box {
+  box-sizing: border-box;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  height: auto;
+}
+.users-inner-Box {
+  height: auto;
+  width: 100%;
+}
+
+.users-Edit-Delete {
+  display: flex;
+}
+.user-Edit-Btn {
+  margin-left: 50px;
+}
+.user-Delete-Btn {
+  margin-left: 30px;
+}
+@media screen and (max-width: 600px) {
+  .users-outer-Box {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}

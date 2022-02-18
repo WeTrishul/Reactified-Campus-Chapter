@@ -1,0 +1,25 @@
+.resouce-Body-Box {
+  box-sizing: border-box;
+  height: auto;
+}
+.resource-Outer-Box {
+  box-sizing: border-box;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  height: auto;
+}
+.resource-Inner-Box {
+  height: auto;
+  width: 100%;
+}
+.resource-Tab {
+  width: 100%;
+  display: flex;
+  margin-top: 1rem;
+}
+@media screen and (max-width: 300px) {
+  .resource-Outer-Box {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}

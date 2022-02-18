@@ -46,7 +46,7 @@ function DisplayBlogs() {
                   className='DisplayblogsTitle'
                   style={{ textAlign: 'center' }}
                 >
-                  <h2>Title: {displayBlogs.title}</h2>
+                  <h2>Title: Anand</h2>
                 </div>
                 <div
                   className='DisplayblogsDescription'
@@ -55,7 +55,7 @@ function DisplayBlogs() {
                     paddingLeft: '6rem',
                   }}
                 >
-                  <h4>Description: {displayBlogs.description}</h4>
+                  <h4>Description: kumar</h4>
                 </div>
                 <div
                   className='DisplayblogsContent'
@@ -66,32 +66,34 @@ function DisplayBlogs() {
                     paddingBottom: '10px',
                   }}
                 >
-                  <main></main>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Fugiat, nihil molestias, quam pariatur consequatur eligendi
-                  perferendis sint eum vel provident modi quas dolores dolore
-                  sequi, eius nulla a? Rerum nemo modi enim amet, voluptate
-                  nobis. Optio unde iste, maiores iure assumenda pariatur
-                  aliquid quasi adipisci culpa, veniam veritatis labore sequi
-                  dolorem, excepturi minima ea saepe autem porro accusantium
-                  omnis rerum cumque. Omnis quaerat modi tenetur voluptates?
-                  Neque, totam voluptatem eligendi tempore nam officia, iusto
-                  maiores eaque dolorum dolore illo tempora quis, ut minima
-                  velit odio fugiat explicabo. Ad veritatis quia, totam eos
-                  porro vel minima ab non, magnam, cumque quibusdam voluptatem.
-                  Veritatis dolor eum earum id fugiat autem dolorum. Alias ipsum
-                  sed, ipsa molestias exercitationem repellendus perspiciatis
-                  nesciunt magni necessitatibus omnis rem, veniam soluta nulla
-                  itaque qui suscipit, numquam optio obcaecati? Porro, natus aut
-                  impedit accusantium tenetur magnam praesentium officia numquam
-                  atque distinctio obcaecati eos quisquam provident at, quas
-                  placeat dignissimos earum rerum quasi alias maiores. Eaque
-                  fugit suscipit aspernatur voluptates, maxime ut soluta itaque
-                  alias voluptate delectus doloremque quo commodi eligendi
-                  consequuntur. Alias, vitae nam! Magnam, aut sint fuga ex harum
-                  nam laboriosam culpa alias? Culpa cumque laboriosam in
-                  impedit, modi numquam, quis quaerat doloribus debitis
-                  voluptatum, harum fugiat!
+                  <main style={{ width: '100%', height: 'auto' }}>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Fugiat, nihil molestias, quam pariatur consequatur eligendi
+                    perferendis sint eum vel provident modi quas dolores dolore
+                    sequi, eius nulla a? Rerum nemo modi enim amet, voluptate
+                    nobis. Optio unde iste, maiores iure assumenda pariatur
+                    aliquid quasi adipisci culpa, veniam veritatis labore sequi
+                    dolorem, excepturi minima ea saepe autem porro accusantium
+                    omnis rerum cumque. Omnis quaerat modi tenetur voluptates?
+                    Neque, totam voluptatem eligendi tempore nam officia, iusto
+                    maiores eaque dolorum dolore illo tempora quis, ut minima
+                    velit odio fugiat explicabo. Ad veritatis quia, totam eos
+                    porro vel minima ab non, magnam, cumque quibusdam
+                    voluptatem. Veritatis dolor eum earum id fugiat autem
+                    dolorum. Alias ipsum sed, ipsa molestias exercitationem
+                    repellendus perspiciatis nesciunt magni necessitatibus omnis
+                    rem, veniam soluta nulla itaque qui suscipit, numquam optio
+                    obcaecati? Porro, natus aut impedit accusantium tenetur
+                    magnam praesentium officia numquam atque distinctio
+                    obcaecati eos quisquam provident at, quas placeat
+                    dignissimos earum rerum quasi alias maiores. Eaque fugit
+                    suscipit aspernatur voluptates, maxime ut soluta itaque
+                    alias voluptate delectus doloremque quo commodi eligendi
+                    consequuntur. Alias, vitae nam! Magnam, aut sint fuga ex
+                    harum nam laboriosam culpa alias? Culpa cumque laboriosam in
+                    impedit, modi numquam, quis quaerat doloribus debitis
+                    voluptatum, harum fugiat!
+                  </main>
                 </div>
               </div>
 

@@ -31,13 +31,14 @@ h1 {
   font-size: 28px;
 }
 
-hr {
+.horizontal-line {
   width: 40px;
   background-color: #5595fd;
   margin: auto;
   margin-top: 0.4rem;
   height: 0.4rem;
 }
+
 .register-form {
   text-align: left;
 }

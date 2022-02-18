@@ -3,6 +3,7 @@ import Chart from './Chart';
 import { useState, useEffect, useContext } from 'react';
 import './Profile.css';
 import Axios from 'axios';
+import Card from '@mui/material/Card';
 import AuthContext from '../../Service/auth-context';
 
 function Profile() {
@@ -57,54 +58,67 @@ function Profile() {
 
   return (
     <div>
-      { profile && profiledp && 
-      <div className='profile-page'>
-        <div className='side-img-display'>
-          <div className='profile-img'>
-            <input type='file' id='multiFiles' name='dp' />
-            <button onClick={profilePictureHandler}>Upload</button>
-            <img
-              id='maindp'
-              style={{ width: '100%', height: '45vh' }}
-              src={'http://localhost:3000' + profiledp.photu}
-              alt=''
-            />
+      {profile && profiledp && (
+        <div className='profile-page'>
+          <div className='side-img-display'>
+            <Card style={{ textAlign: 'center', justifyContent: 'center' }}>
+              <div className='profile-img'>
+                <input type='file' id='multiFiles' name='dp' />
+                <button
+                  style={{ marginBottom: '1rem' }}
+                  onClick={profilePictureHandler}
+                >
+                  Upload
+                </button>
+                <div className='profile-image-Container'>
+                  <img
+                    id='maindp'
+                    style={{ width: '200px', height: '200px' }}
+                    src={'http://localhost:3000' + profiledp.photu}
+                    alt=''
+                  />
+                </div>
+              </div>
+
+              <div className='profile-details'>{profile.user.UserType}</div>
+            </Card>
+          </div>
+          <div className='achievements'>
+            <Card style={{ height: '27.5vh' }}>
+              <div className='achievement-box'>
+                <div className='rating'>
+                  <div>Rating</div>
+                  <div>{profile.user.CurrentRating}</div>
+                </div>
+                <div className='contribution'>
+                  <div>Contribution</div>
+                  <div>376</div>
+                </div>
+              </div>
+            </Card>
           </div>
 
-          <div className='profile-details'>{profile.user.UserType}</div>
-        </div>
-        <div className='achievements'>
-          <div className='achievement-box'>
-            <div className='rating'>
-              <div>Rating</div>
-              <div>{profile.user.CurrentRating}</div>
-            </div>
-            <div className='contribution'>
-              <div>Contribution</div>
-              <div>376</div>
-            </div>
+          <div className='personal-details'>
+            <Card>
+              <div className='personalDetails'>
+                <div>Name: {profile.user.name}</div>
+                <div>
+                  College: University of Engineering and Management, kolkata
+                </div>
+                <div>Year: 3rd</div>
+              </div>
+              <div className='graphProfile'>
+                {profile.user.OverallRatings && (
+                  <Chart profile={profile.user.OverallRatings} />
+                )}
+                {/* <Chart profile={profile.user.OverallRatings} /> */}
+              </div>
+            </Card>
           </div>
-        </div>
 
-        <div className='personal-details'>
-          <div className='personalDetails'>
-            <div>Name: {profile.user.name}</div>
-            <div>
-              College: University of Engineering and Management, kolkata
-            </div>
-            <div>Year: 3rd</div>
-          </div>
-          <div className='graphProfile'>
-            {profile.user.OverallRatings && (
-              <Chart profile={profile.user.OverallRatings} />
-            )}
-            {/* <Chart profile={profile.user.OverallRatings} /> */}
-          </div>
+          <div className='only-space'></div>
         </div>
-
-        <div className='only-space'></div>
-      </div>
-}
+      )}
     </div>
   );
 }

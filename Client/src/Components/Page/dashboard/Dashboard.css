@@ -1,0 +1,333 @@
+.body-outer-Box {
+  box-sizing: border-box;
+  height: auto;
+}
+.dashBoard-outer-Box {
+  box-sizing: border-box;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  height: auto;
+}
+.dashBoard-inner-Box {
+  height: auto;
+  width: 100%;
+}
+/* .dashBoard-Events-section {
+  
+} */
+.Events-horizontal-line {
+  width: 70%;
+  height: 2px;
+  background-color: black;
+  margin-top: 0.1rem;
+  margin-left: 0;
+}
+.dashBoard-Events-Content {
+  margin-top: 2rem;
+  height: auto;
+  width: 100%;
+
+  /* overflow-y: auto; */
+  /* background: rgb(79, 22, 235); */
+  margin-bottom: 3rem;
+}
+.dashboardEventBox {
+  margin-left: 5rem;
+  padding-top: 3rem;
+}
+
+.v1 {
+  /* border-left: 5px solid black;
+  height: 2rem; */
+  border-left: 1.5px solid rgb(252, 71, 243);
+  height: 100px;
+  position: absolute;
+  margin-left: 6.5rem;
+}
+
+.dashBoardEventsHeading {
+  margin-left: 3rem;
+  font-size: large;
+  font-weight: 700;
+  color: black;
+}
+
+.dashboard-Cards {
+  width: 100%;
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 20px;
+}
+.dashBoard-cards-second {
+  width: 100%;
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.dashBoardContestTiming {
+  margin-left: 5rem;
+}
+
+.dashBoardContestDivider {
+  border-left: 1.5px solid rgb(8, 7, 8);
+  height: 35px;
+  position: absolute;
+  margin-left: 10rem;
+}
+
+.contestTimimg {
+  margin-left: 2rem;
+}
+
+.dashBoardRegisterButton {
+  float: right;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-right: 7rem;
+  font-size: large;
+  font-weight: 500;
+  background-color: #000;
+  color: white;
+}
+
+.dashboardAnnouncementCarousel {
+  margin-top: 4rem;
+}
+
+.AnnouncementCarouselDesign {
+  width: 100%;
+  height: 60vh;
+  background: #fff;
+  color: #333;
+
+  margin: 0 20px;
+  /* display: flex; */
+  /* justify-content: center;
+  align-items: center; */
+}
+
+.announcementHeading {
+  margin-top: 10px;
+}
+
+.announcementDescription {
+  margin-top: 20px;
+  width: 100%;
+
+  margin-left: 1rem;
+  height: 30vh;
+}
+
+.announcementDateandTime {
+  margin-left: 1rem;
+}
+
+.announcementLikeandShare {
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.recentBlogsHeading {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.dashBoardBlogsCarousel {
+  margin-top: 4rem;
+}
+.recentBlogsCarouselDesign {
+  width: 100%;
+  height: 60vh;
+  background: #fff;
+  color: #333;
+  margin: 0 20px;
+}
+
+.blogsDescription {
+  margin-top: 20px;
+  width: 100%;
+  font-weight: 600;
+
+  margin-left: 1rem;
+  height: 20vh;
+}
+
+.blogsLines {
+  width: 100%;
+  font-weight: 500;
+
+  margin-left: 1rem;
+  height: 15vh;
+}
+
+.blogsUserName {
+  margin-top: 1rem;
+  margin-left: 1rem;
+
+  height: 10vh;
+}
+
+.recentDiscussionHeading {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.recentDiscussionCarouselDesign {
+  width: 100%;
+  height: 60vh;
+  background: #fff;
+  color: #333;
+  margin: 0 20px;
+}
+.dashBoardDiscussionUserDetails {
+  margin-top: 1rem;
+  display: flex;
+}
+.discussionContent {
+  margin-top: 1rem;
+  font-size: 15px;
+  height: 23vh;
+
+  font-weight: 600;
+}
+.discussionCommentCount {
+  margin-top: 1.5rem;
+  margin-right: 1rem;
+}
+.outer-slider-box {
+  top: 2rem;
+  margin-left: 0;
+  width: 100%;
+  height: 70vh;
+  margin-bottom: 5rem;
+  padding: 0px 20px 0px 20px;
+}
+
+.slider {
+  position: relative;
+  top: 1rem;
+  width: 100%;
+  height: 70vh;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  background: #fff;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-image {
+  width: 100%;
+  height: 70vh;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 100%;
+  right: 32px;
+  font-size: 3rem;
+  color: #000;
+  cursor: pointer;
+  user-select: none;
+}
+
+.left-arrow {
+  position: absolute;
+  top: 100%;
+  left: 32px;
+  font-size: 3rem;
+  color: #000;
+  cursor: pointer;
+}
+@media screen and (max-width: 600px) {
+  .dashBoard-outer-Box {
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .AnnouncementCarouselDesign {
+    width: 100%;
+    height: 33vh;
+    background: #fff;
+    color: #333;
+
+    /* margin: 0 10px; */
+  }
+  .announcementHeading {
+    margin-top: 5px;
+  }
+  .announcementDescription {
+    margin-top: 15px;
+    width: 100%;
+    margin-left: 1rem;
+    height: 12vh;
+  }
+
+  .announcementLikeandShare {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+  }
+  .recentBlogsCarouselDesign {
+    width: 100%;
+    height: 35vh;
+    background: #fff;
+    color: #333;
+    /* margin: 0 20px; */
+  }
+  .blogsDescription {
+    margin-top: 10px;
+    width: 100%;
+    font-weight: 600;
+    margin-left: 1rem;
+    height: 12vh;
+  }
+  .blogsLines {
+    width: 100%;
+    font-weight: 500;
+
+    margin-left: 1rem;
+    height: 10vh;
+  }
+  .blogsUserName {
+    width: 100%;
+    margin-top: 1rem;
+    /* margin-left: 2px; */
+    height: 5vh;
+  }
+  .recentDiscussionCarouselDesign {
+    width: 100%;
+    height: 40vh;
+    background: #fff;
+    color: #333;
+    /* margin: 0 20px; */
+  }
+  .discussionContent {
+    margin-top: 1rem;
+    font-size: 15px;
+    height: 13vh;
+    font-weight: 600;
+  }
+  .discussionCommentCount {
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+  }
+}
+
+@media screen and (min-width: 600px) {
+}
+@media screen and (min-width: 768px) {
+}
+@media screen and (min-width: 992px) {
+}
+@media screen and (min-width: 1200px) {
+}
+
+@media screen and (max-width: 960px) {
+  .outer-slider-box {
+    height: 40vh;
+  }
+  .slider {
+    height: 30vh;
+  }
+  .img-image {
+    height: 30vh;
+  }
+}

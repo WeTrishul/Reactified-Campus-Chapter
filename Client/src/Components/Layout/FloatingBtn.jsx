@@ -31,7 +31,7 @@ function FloatingBtn() {
           <li>
             <span className='myname'>Core Chat</span>
             <div className='fab-holder'>
-              <Link to='/CoreChat'>
+              <Link to='/Corechat'>
                 <i className='add-icon'>
                   <ChatIcon />
                 </i>
@@ -41,7 +41,7 @@ function FloatingBtn() {
           <li>
             <span className='myname'>Executive Chat</span>
             <div className='fab-holder'>
-              <Link to='/ExecutiveChat'>
+              <Link to='/Executivechat'>
                 <i className='add-icon'>
                   <ChatIcon />
                 </i>

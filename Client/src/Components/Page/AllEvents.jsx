@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import './AllEvents.css';
 
 function AllEvents() {
-  // Main faltu hoon mera gaand maar do.
+  // Main faltu hoon no use
   return (
     <div>
       <div style={{ width: '100%', height: 'auto' }} className='outerCard'>

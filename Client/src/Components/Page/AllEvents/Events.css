@@ -1,0 +1,33 @@
+.upComingEvents-Body-Box {
+  box-sizing: border-box;
+  height: auto;
+}
+.upComingEvents-Outer-Box {
+  box-sizing: border-box;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  height: auto;
+}
+.upComingEvents-Inner-Box {
+  height: auto;
+  width: 100%;
+}
+.create-Events-Button {
+  position: fixed;
+  bottom: 50px;
+  left: 30px;
+  z-index: 990;
+  cursor: pointer;
+
+  width: 117px;
+  height: 7vh;
+  border-style: none;
+  background: rgb(233, 70, 70);
+  color: white;
+  border-radius: 10px;
+  transition: 0.5s ease-in-out;
+}
+.create-Events-Button:hover {
+  transform: scale(1.3, 1.2);
+  background: rgb(201, 41, 41);
+}

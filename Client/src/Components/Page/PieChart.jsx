@@ -14,20 +14,20 @@ function PieChart({ profile }) {
           label: '# of rating',
           // data: [0.12, 0.45, 0.12, 0.93],
           data: profile,
-         backgroundColor: [
-        '#B21F00',
-        '#C9DE00',
-        '#2FDE00',
-        '#00A6B4',
-        '#6800B4'
-      ],
-      hoverBackgroundColor: [
-      '#501800',
-      '#4B5000',
-      '#175000',
-      '#003350',
-      '#35014F'
-      ],
+          backgroundColor: [
+            '#B21F00',
+            '#C9DE00',
+            '#2FDE00',
+            '#00A6B4',
+            '#6800B4',
+          ],
+          hoverBackgroundColor: [
+            '#501800',
+            '#4B5000',
+            '#175000',
+            '#003350',
+            '#35014F',
+          ],
           borderWidth: 4,
         },
       ],
@@ -40,7 +40,14 @@ function PieChart({ profile }) {
 
   return (
     <div>
-      <div style={{ height: '500px', width: '500px' }}>
+      <div
+        style={{
+          height: '500px',
+          width: '500px',
+          textAlign: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <Pie
           data={chartData}
           options={{

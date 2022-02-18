@@ -1,0 +1,371 @@
+.body-blogs-Box {
+  box-sizing: border-box;
+  height: auto;
+}
+.blogs-Outer-Box {
+  box-sizing: border-box;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  height: auto;
+}
+.discuss-Inner-Box {
+  height: auto;
+  width: 100%;
+}
+.blogs-Heading {
+  font-size: 40px;
+  font-weight: 700;
+}
+.writeBlogsButton {
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  z-index: 990;
+  cursor: pointer;
+
+  width: 105px;
+  height: 7vh;
+  border-style: none;
+  background: rgb(233, 70, 70);
+  color: white;
+  border-radius: 10px;
+  transition: 0.5s ease-in-out;
+}
+.writeBlogsButton:hover {
+  transform: scale(1.3, 1.2);
+  background: rgb(201, 41, 41);
+}
+.blogs-HorizontalLine {
+  width: 90%;
+  height: 2px;
+  background-color: rgb(124, 122, 122);
+  margin-top: 0.2rem;
+  margin-left: 0;
+}
+.blogs-Container-Box {
+  margin-top: 1rem;
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+.blogs-content-Box {
+  width: 85%;
+}
+.blogs-Delete-Edit-Box {
+  width: 15%;
+}
+.blogs-userImage-Name-Time {
+  padding-left: 2rem;
+  padding-top: 1rem;
+  display: flex;
+}
+.blogs-User-Image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-image: none;
+  vertical-align: middle;
+}
+.blogs-userName {
+  margin-left: 15px;
+  padding-top: 0.5rem;
+  font-size: 19px;
+  font-weight: 700;
+}
+.blogs-postTime {
+  margin-left: 550px;
+  display: flex;
+  padding-top: 0.5rem;
+}
+.blogs-Post-Heading-Content {
+  font-weight: 500;
+  margin-left: 80px;
+  margin-bottom: 1rem;
+}
+.blogs-Post-Content {
+  font-weight: 400;
+  margin-left: 100px;
+  margin-bottom: 1rem;
+}
+.blogs-Delete-Edit-Box {
+  text-align: center;
+  justify-content: center;
+  padding-top: 2rem;
+}
+.blogs-EditBtn {
+  width: 7rem;
+  margin-bottom: 1rem;
+  height: 2.5rem;
+  background: green;
+  border-radius: 20px;
+  border: none;
+  color: white;
+  font-weight: 700;
+}
+.blogs-DeleteBtn {
+  width: 7rem;
+  height: 2.5rem;
+  background: red;
+  border-radius: 20px;
+  border: none;
+  color: white;
+  font-weight: 700;
+}
+.blogs-end-Line {
+  width: 92%;
+  height: 2px;
+  background-color: rgb(124, 122, 122);
+  margin-top: 1rem;
+  margin-left: 0;
+}
+@media screen and (max-width: 400px) {
+  .blogs-Outer-Box {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .blogs-Heading {
+    font-size: 20px;
+  }
+  .blogs-Container-Box {
+    margin-top: 1rem;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .blogs-content-Box {
+    width: 100%;
+  }
+  .blogs-userImage-Name-Time {
+    padding-left: 5px;
+    padding-top: 10px;
+    display: flex;
+  }
+  .blogs-userName {
+    margin-left: 5px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .blogs-postTime {
+    margin-left: 10px;
+  }
+  .blogs-Post-Heading-Content {
+    margin-left: 50px;
+  }
+  .blogs-Post-Content {
+    margin-left: 30px;
+  }
+  .blogs-Delete-Edit-Box {
+    display: flex;
+    margin-left: 7.5rem;
+    padding-top: 2rem;
+  }
+  .blogs-EditBtn {
+    margin-bottom: 0;
+    margin-right: 5px;
+  }
+}
+@media only screen and (min-width: 401px) and (max-width: 500px) {
+  .blogs-Outer-Box {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .blogs-Heading {
+    font-size: 20px;
+  }
+  .blogs-Container-Box {
+    margin-top: 1rem;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .blogs-content-Box {
+    width: 100%;
+  }
+  .blogs-userImage-Name-Time {
+    padding-left: 5px;
+    padding-top: 10px;
+    display: flex;
+  }
+  .blogs-userName {
+    margin-left: 5px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .blogs-postTime {
+    margin-left: 20%;
+  }
+  .blogs-Post-Heading-Content {
+    margin-left: 50px;
+  }
+  .blogs-Post-Content {
+    margin-left: 30px;
+  }
+  .blogs-Delete-Edit-Box {
+    display: flex;
+    margin-left: 7.5rem;
+    padding-top: 2rem;
+  }
+  .blogs-EditBtn {
+    margin-bottom: 0;
+    margin-right: 5px;
+  }
+}
+@media only screen and (min-width: 501px) and (max-width: 600px) {
+  .blogs-Outer-Box {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .blogs-Heading {
+    font-size: 20px;
+  }
+  .blogs-Container-Box {
+    margin-top: 1rem;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .blogs-content-Box {
+    width: 100%;
+  }
+  .blogs-userImage-Name-Time {
+    padding-left: 5px;
+    padding-top: 10px;
+    display: flex;
+  }
+  .blogs-userName {
+    margin-left: 5px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .blogs-postTime {
+    margin-left: 30%;
+  }
+  .blogs-Post-Heading-Content {
+    margin-left: 50px;
+  }
+  .blogs-Post-Content {
+    margin-left: 30px;
+  }
+  .blogs-Delete-Edit-Box {
+    display: flex;
+    margin-left: 7.5rem;
+    padding-top: 2rem;
+  }
+  .blogs-EditBtn {
+    margin-bottom: 0;
+    margin-right: 5px;
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 765px) {
+  .blogs-Outer-Box {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .blogs-Heading {
+    font-size: 20px;
+  }
+  .blogs-Container-Box {
+    margin-top: 1rem;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .blogs-content-Box {
+    width: 100%;
+  }
+  .blogs-userImage-Name-Time {
+    padding-left: 5px;
+    padding-top: 10px;
+    display: flex;
+  }
+  .blogs-userName {
+    margin-left: 5px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .blogs-postTime {
+    margin-left: 50%;
+  }
+  .blogs-Post-Heading-Content {
+    margin-left: 50px;
+  }
+  .blogs-Post-Content {
+    margin-left: 30px;
+  }
+  .blogs-Delete-Edit-Box {
+    display: flex;
+    margin-left: 7.5rem;
+    padding-top: 2rem;
+  }
+  .blogs-EditBtn {
+    margin-bottom: 0;
+    margin-right: 5px;
+  }
+}
+@media only screen and (min-width: 765px) and (max-width: 1001px) {
+  .blogs-Outer-Box {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .blogs-Heading {
+    font-size: 30px;
+  }
+  .blogs-Container-Box {
+    margin-top: 1rem;
+    width: 100%;
+    height: auto;
+  }
+  .blogs-userImage-Name-Time {
+    padding-left: 1rem;
+    padding-top: 1rem;
+    display: flex;
+  }
+  .blogs-userName {
+    margin-left: 10px;
+    padding-top: 0.5rem;
+    font-size: 19px;
+    font-weight: 700;
+  }
+  .blogs-postTime {
+    margin-left: 40%;
+  }
+  .blogs-Delete-Edit-Box {
+    margin-left: 1rem;
+  }
+}
+@media only screen and (min-width: 1001px) and (max-width: 1200px) {
+  .blogs-Outer-Box {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .blogs-Heading {
+    font-size: 30px;
+  }
+  .blogs-Container-Box {
+    margin-top: 1rem;
+    width: 100%;
+    height: auto;
+  }
+  .blogs-userImage-Name-Time {
+    padding-left: 1rem;
+    padding-top: 1rem;
+    display: flex;
+  }
+  .blogs-userName {
+    margin-left: 10px;
+    padding-top: 0.5rem;
+    font-size: 19px;
+    font-weight: 700;
+  }
+  .blogs-postTime {
+    margin-left: 55%;
+  }
+  .blogs-Delete-Edit-Box {
+    margin-left: 1rem;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .blogs-postTime {
+    margin-left: 59%;
+  }
+}

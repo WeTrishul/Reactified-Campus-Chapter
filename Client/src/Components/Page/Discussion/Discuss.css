@@ -1,0 +1,298 @@
+.body-Discussion-Box {
+  box-sizing: border-box;
+  height: auto;
+}
+.discussion-Outer-Box {
+  box-sizing: border-box;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  height: auto;
+}
+.discuss-Inner-Box {
+  height: auto;
+  width: 100%;
+}
+.discuss-Container-Box {
+  overflow-y: auto;
+  height: 76vh;
+}
+.Discuss-post-comment-Box {
+  padding-top: 1rem;
+}
+.discussion-UserImg-Name-Time {
+  padding-left: 2rem;
+  display: flex;
+}
+/* .discussion-Image-Container {
+  margin-left: 2rem;
+} */
+
+.discussion-User-Image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-image: none;
+  vertical-align: middle;
+}
+.discussion-User-Name {
+  margin-left: 15px;
+  padding-top: 0.5rem;
+  font-size: 19px;
+  font-weight: 600;
+}
+.discussion-Post-Time {
+  margin-left: 550px;
+  display: flex;
+  padding-top: 0.5rem;
+}
+.discussion-Post-Content {
+  margin-left: 60px;
+}
+.discussion-Like-Comment-Share {
+  margin-top: 1rem;
+  display: flex;
+}
+.discussion-Like-Button {
+  display: flex;
+  margin-left: 60px;
+}
+.discussion-Comment-Button {
+  display: flex;
+  margin-left: 40px;
+}
+.discussion-Report-Button {
+  display: flex;
+  margin-left: 550px;
+}
+.discussion-Delete-Button {
+  margin-left: 30px;
+}
+.discussion-Posted-Comment-Container-Section {
+  height: auto;
+}
+.discussion-Posted-Comment-Section {
+  margin-left: 8rem;
+  margin-top: 1rem;
+}
+.discuss-Comment-Design {
+  display: flex;
+}
+.discuss-person-Logo {
+  width: 3.5%;
+}
+.discuss-Comment-Box {
+  width: 95%;
+}
+.discuss-Comment-Username {
+  margin-left: 10px;
+  font-weight: 700;
+}
+.discuss-Comment-of-user {
+  margin-left: 12px;
+}
+.discuss-Comment-Like-and-Report {
+  margin-top: 10px;
+  display: flex;
+}
+.comment-Box-Like-and-Count {
+  margin-left: 10px;
+  display: flex;
+}
+.comment-Box-Report-and-Count {
+  margin-left: 30px;
+  display: flex;
+}
+.write-Comment-for-Post {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+}
+.write-Discuss-Post-Box {
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+/* .discussion-UserImg-Name-Time {
+} */
+@media screen and (max-width: 300px) {
+  .discussion-Outer-Box {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .discussion-UserImg-Name-Time {
+    padding-left: 1px;
+  }
+  .discussion-User-Name {
+    margin-left: 2px;
+  }
+  .discussion-Post-Time {
+    margin-left: 20px;
+  }
+  .discussion-Post-Content {
+    margin-left: 30px;
+  }
+  .discussion-Like-Button {
+    margin-left: 20px;
+  }
+  .discussion-Comment-Button {
+    margin-left: 15px;
+  }
+  .discussion-Report-Button {
+    margin-left: 10px;
+  }
+  .discussion-Delete-Button {
+    margin-left: 10px;
+  }
+  .discussion-Posted-Comment-Section {
+    margin-left: 2rem;
+  }
+  .discuss-person-Logo {
+    width: 10%;
+  }
+  .discuss-Comment-Box {
+    width: 90%;
+  }
+}
+@media only screen and (min-width: 301px) and (max-width: 600px) {
+  .discussion-Outer-Box {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .discussion-UserImg-Name-Time {
+    padding-left: 3px;
+  }
+  .discussion-User-Name {
+    margin-left: 5px;
+  }
+  .discussion-Post-Time {
+    margin-left: 20px;
+  }
+  .discussion-Post-Content {
+    margin-left: 50px;
+  }
+  .discussion-Like-Button {
+    margin-left: 40px;
+  }
+  .discussion-Comment-Button {
+    margin-left: 20px;
+  }
+  .discussion-Report-Button {
+    margin-left: 20px;
+  }
+  .discussion-Delete-Button {
+    margin-left: 20px;
+  }
+  .discussion-Posted-Comment-Section {
+    margin-left: 3rem;
+  }
+  .discuss-person-Logo {
+    width: 10%;
+  }
+  .discuss-Comment-Box {
+    width: 90%;
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+  .discussion-Outer-Box {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .discussion-Post-Time {
+    margin-left: 340px;
+  }
+  .discussion-Like-Button {
+    margin-left: 40px;
+  }
+  .discussion-Comment-Button {
+    margin-left: 30px;
+  }
+  .discussion-Report-Button {
+    margin-left: 340px;
+  }
+  .discussion-Delete-Button {
+    margin-left: 30px;
+  }
+}
+@media only screen and (min-width: 769px) and (max-width: 800px) {
+  .discussion-Outer-Box {
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+  .discussion-Post-Time {
+    margin-left: 160px;
+  }
+  .discussion-Like-Button {
+    margin-left: 50px;
+  }
+  .discussion-Comment-Button {
+    margin-left: 30px;
+  }
+  .discussion-Report-Button {
+    margin-left: 180px;
+  }
+  .discussion-Delete-Button {
+    margin-left: 30px;
+  }
+  .discussion-Posted-Comment-Section {
+    margin-left: 2.5rem;
+  }
+  .discuss-person-Logo {
+    width: 5%;
+  }
+  .discuss-Comment-Box {
+    width: 95%;
+  }
+}
+@media only screen and (min-width: 801px) and (max-width: 992px) {
+  .discussion-Outer-Box {
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+  .discussion-Post-Time {
+    margin-left: 40%;
+  }
+  .discussion-Like-Button {
+    margin-left: 50px;
+  }
+  .discussion-Comment-Button {
+    margin-left: 30px;
+  }
+  .discussion-Report-Button {
+    margin-left: 40%;
+  }
+  .discussion-Delete-Button {
+    margin-left: 30px;
+  }
+  .discussion-Posted-Comment-Section {
+    margin-left: 2.5rem;
+  }
+  .discuss-person-Logo {
+    width: 5%;
+  }
+  .discuss-Comment-Box {
+    width: 95%;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .discussion-Post-Time {
+    margin-left: 45%;
+  }
+  .discussion-Report-Button {
+    margin-left: 45%;
+  }
+  .discuss-person-Logo {
+    width: 5%;
+  }
+  .discuss-Comment-Box {
+    width: 95%;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .discussion-Post-Time {
+    margin-left: 50%;
+  }
+  .discussion-Report-Button {
+    margin-left: 45%;
+  }
+}
