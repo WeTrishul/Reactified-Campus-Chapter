@@ -58,6 +58,7 @@ function Resource() {
                 bgcolor: 'background.paper',
                 display: 'flex',
                 height: '70vh',
+                marginTop: '1rem',
               }}
             >
               <Tabs

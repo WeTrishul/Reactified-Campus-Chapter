@@ -1,0 +1,27 @@
+.resourceDisplay-body-Box {
+  box-sizing: border-box;
+  height: auto;
+}
+.resourceDisplay-Outer-Box {
+  box-sizing: border-box;
+  margin-left: 5rem;
+  margin-right: 5rem;
+
+  height: auto;
+}
+.resourceDisplay-Inner-Box {
+  height: auto;
+  width: 100%;
+}
+@media screen and (max-width: 400px) {
+  .resourceDisplay-Outer-Box {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+@media only screen and (min-width: 400px) and (max-width: 600px) {
+  .resourceDisplay-Outer-Box {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}

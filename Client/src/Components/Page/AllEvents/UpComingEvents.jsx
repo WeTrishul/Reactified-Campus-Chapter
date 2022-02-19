@@ -50,7 +50,7 @@ function UpComingEvents() {
             <Box sx={{ width: 1 }}>
               <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
                 <Box gridColumn='span 12'>
-                  <Item sx={{ height: '70vh' }}>
+                  <Item sx={{ height: 'auto' }}>
                     <Box sx={{ display: 'flex' }}>
                       <Box>
                         <GroupsIcon sx={{ fontSize: '30px' }} />
@@ -115,7 +115,7 @@ function UpComingEvents() {
           <Box sx={{ width: 1, marginTop: '1rem' }}>
             <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
               <Box gridColumn='span 12'>
-                <Item sx={{ height: '30vh' }}>
+                <Item sx={{ height: 'auto' }}>
                   <Box sx={{ display: 'flex' }}>
                     <Box sx={{ maxWidth: '30%' }}>
                       <img
@@ -185,7 +185,7 @@ function UpComingEvents() {
           <Box sx={{ width: 1, marginTop: '1rem' }}>
             <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
               <Box gridColumn='span 12'>
-                <Item sx={{ height: '30vh' }}>
+                <Item sx={{ height: 'auto' }}>
                   <Box sx={{ display: 'flex' }}>
                     <Box sx={{ maxWidth: '30%' }}>
                       <img
@@ -259,7 +259,7 @@ function UpComingEvents() {
           <Box sx={{ width: 1, marginTop: '1rem' }}>
             <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
               <Box gridColumn='span 12'>
-                <Item sx={{ height: '30vh' }}>
+                <Item sx={{ height: 'auto' }}>
                   <Box sx={{ display: 'flex' }}>
                     <Box sx={{ maxWidth: '20%' }}>
                       <img

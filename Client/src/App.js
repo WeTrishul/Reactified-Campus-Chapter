@@ -53,6 +53,8 @@ import Setquestions from './Components/Page/set questions/Setquestions';
 import UpComingEvents from './Components/Page/AllEvents/UpComingEvents';
 
 import Apply from './Components/Forms/Apply';
+import ResourceUpload from './Components/Page/resources/ResourceUpload';
+import ResourceDisplay from './Components/Page/resources/ResourceDisplay';
 function App() {
 
   const authCtx = useContext(AuthContext)
@@ -232,8 +234,14 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/Resources/:categoryname'>
           <Resources/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
+        {/* {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
           <UploadResources/>
+        </Route>} */}
+        {/* {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
+          <ResourceUpload/>
+        </Route>} */}
+        {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
+          <ResourceDisplay/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/ViewCategory/:categoryname'>
           <ViewCategory/>
