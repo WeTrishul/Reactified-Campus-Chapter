@@ -55,6 +55,7 @@ import UpComingEvents from './Components/Page/AllEvents/UpComingEvents';
 import Apply from './Components/Forms/Apply';
 import ResourceUpload from './Components/Page/resources/ResourceUpload';
 import ResourceDisplay from './Components/Page/resources/ResourceDisplay';
+import PollList from './Components/Page/polling/PollList';
 function App() {
 
   const authCtx = useContext(AuthContext)
@@ -180,8 +181,11 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/WriteBlogs'>
           <WriteBlogs/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/Polling'>
+        {/* {authCtx.isLoggedIn &&<Route exact path='/Polling'>
           <Polling/>
+        </Route>} */}
+        {authCtx.isLoggedIn &&<Route exact path='/Polling'>
+          <PollList/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/ViewAllPoll'>
           <ViewAllPoll/>
