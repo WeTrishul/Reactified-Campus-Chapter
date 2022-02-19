@@ -6,8 +6,14 @@ import { useHistory } from 'react-router-dom';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Grid from '@mui/material/Grid';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import GroupsIcon from '@mui/icons-material/Groups';
+import ReplyIcon from '@mui/icons-material/Reply';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -31,12 +37,11 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
 
   const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
-    padding: theme.spacing(5),
-    // textAlign: 'center',
-
-    borderRadius: '30px',
-    color: theme.palette.text.primary,
+    padding: theme.spacing(1),
+    borderRadius: '20px',
+    color: theme.palette.text.secondary,
   }));
 
   const items = [
@@ -134,6 +139,299 @@ function Dashboard() {
     console.log(val);
     console.log(current);
   };
+
+  const dashBoardEventsRendering = () => {
+    if (window.innerWidth <= 431) {
+      return (
+        <Box>
+          <Box>
+            <Box sx={{ width: 1 }}>
+              <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
+                <Box gridColumn='span 12'>
+                  <Item sx={{ height: 'auto' }}>
+                    <Box sx={{ display: 'flex' }}>
+                      <Box>
+                        <GroupsIcon sx={{ fontSize: '30px' }} />
+                      </Box>
+                      <Box sx={{ marginLeft: '2px' }}>120</Box>
+                      <Box sx={{ display: 'flex', marginLeft: '60px' }}>
+                        <Box>
+                          <EditIcon />
+                        </Box>
+                        <Box sx={{ marginLeft: '20px' }}>
+                          <DeleteIcon />
+                        </Box>
+                        <Box sx={{ marginLeft: '20px' }}>
+                          <ReplyIcon />
+                        </Box>
+                      </Box>
+                    </Box>
+                    <Box sx={{ width: '100%' }}>
+                      <img
+                        style={{
+                          width: '100%',
+                          height: '200px',
+                          borderRadius: '20px',
+                        }}
+                        src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+                        alt=''
+                      />
+                    </Box>
+                    <Box>
+                      <Typography
+                        sx={{ fontWeight: '600', fontSize: '15px' }}
+                        variant='h7'
+                      >
+                        UPCOMING EVENT HEADING
+                      </Typography>
+                    </Box>
+                    <Box sx={{ fontSize: '10px' }}>
+                      College Event |{' '}
+                      <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} /> 08:00
+                    </Box>
+                    <Box
+                      sx={{
+                        marginTop: '20px',
+                        textAlign: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Button variant='contained' color='success'>
+                        Register
+                      </Button>
+                    </Box>
+                  </Item>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      );
+    } else if (window.innerWidth >= 431 && window.innerWidth < 768) {
+      return (
+        <Box>
+          <Box sx={{ width: 1, marginTop: '1rem' }}>
+            <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
+              <Box gridColumn='span 12'>
+                <Item sx={{ height: 'auto' }}>
+                  <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ maxWidth: '30%' }}>
+                      <img
+                        style={{
+                          width: '100%',
+                          height: '140px',
+                          borderRadius: '20px',
+                        }}
+                        src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+                        alt=''
+                      />
+                    </Box>
+                    <Box sx={{ width: '50%' }}>
+                      <Box sx={{ marginLeft: '20px' }}>
+                        <Box>
+                          <Typography sx={{ fontWeight: '600' }} variant='h7'>
+                            UPCOMING EVENT HEADING
+                          </Typography>
+                        </Box>
+                        <Box>
+                          College Event |{' '}
+                          <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} />{' '}
+                          08:00
+                        </Box>
+
+                        <Box sx={{ marginTop: '5px' }}>
+                          <Box>Starts 19 feb </Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                    <Box sx={{ marginLeft: '20px' }}>
+                      <Box sx={{ display: 'flex', marginLeft: '30px' }}>
+                        <Box>
+                          <GroupsIcon sx={{ fontSize: '30px' }} />
+                        </Box>
+                        <Box sx={{ marginLeft: '2px' }}>120</Box>
+                      </Box>
+                      <Box sx={{ marginTop: '20px' }}>
+                        <Box sx={{ display: 'flex' }}>
+                          <Box>
+                            <EditIcon />
+                          </Box>
+                          <Box sx={{ marginLeft: '20px' }}>
+                            <DeleteIcon />
+                          </Box>
+                          <Box sx={{ marginLeft: '20px' }}>
+                            <ReplyIcon />
+                          </Box>
+                        </Box>
+                      </Box>
+                      <Box sx={{ marginTop: '20px' }}>
+                        <Button variant='contained' color='success'>
+                          Register
+                        </Button>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Item>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      );
+    } else if (window.innerWidth >= 768 && window.innerWidth < 1000) {
+      return (
+        <Box>
+          <Box sx={{ width: 1, marginTop: '1rem' }}>
+            <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
+              <Box gridColumn='span 12'>
+                <Item sx={{ height: 'auto' }}>
+                  <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ maxWidth: '30%' }}>
+                      <img
+                        style={{
+                          width: '100%',
+                          height: '140px',
+                          borderRadius: '20px',
+                        }}
+                        src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+                        alt=''
+                      />
+                    </Box>
+                    <Box sx={{ width: '50%' }}>
+                      <Box sx={{ marginLeft: '20px' }}>
+                        <Box>
+                          <Typography sx={{ fontWeight: '600' }} variant='h6'>
+                            UPCOMING EVENT HEADING
+                          </Typography>
+                        </Box>
+                        <Box>
+                          COLLEGE EVENT |{' '}
+                          <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} />{' '}
+                          08:00
+                        </Box>
+
+                        <Box sx={{ marginTop: '10px' }}>
+                          <Box>
+                            Starts 19 feb{' '}
+                            <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} />
+                            08:00
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                    <Box sx={{ marginLeft: '20px' }}>
+                      <Box sx={{ display: 'flex', marginLeft: '30px' }}>
+                        <Box>
+                          <GroupsIcon sx={{ fontSize: '30px' }} />
+                        </Box>
+                        <Box sx={{ marginLeft: '2px' }}>120</Box>
+                      </Box>
+                      <Box sx={{ marginTop: '20px' }}>
+                        <Box sx={{ display: 'flex' }}>
+                          <Box>
+                            <EditIcon />
+                          </Box>
+                          <Box sx={{ marginLeft: '20px' }}>
+                            <DeleteIcon />
+                          </Box>
+                          <Box sx={{ marginLeft: '20px' }}>
+                            <ReplyIcon />
+                          </Box>
+                        </Box>
+                      </Box>
+                      <Box sx={{ marginTop: '20px' }}>
+                        <Button variant='contained' color='success'>
+                          Register
+                        </Button>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Item>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      );
+    } else if (window.innerWidth > 1000) {
+      return (
+        <Box>
+          <Box sx={{ width: 1, marginTop: '1rem' }}>
+            <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
+              <Box gridColumn='span 12'>
+                <Item sx={{ height: 'auto' }}>
+                  <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ maxWidth: '20%' }}>
+                      <img
+                        style={{
+                          width: '100%',
+                          height: '165px',
+                          borderRadius: '20px',
+                        }}
+                        src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+                        alt=''
+                      />
+                    </Box>
+                    <Box sx={{ width: '60%' }}>
+                      <Box sx={{ marginLeft: '20px' }}>
+                        <Box>
+                          <Typography sx={{ fontWeight: '600' }} variant='h6'>
+                            UPCOMING EVENT HEADING
+                          </Typography>
+                        </Box>
+                        <Box>
+                          COLLEGE EVENT |{' '}
+                          <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} />{' '}
+                          08:00
+                        </Box>
+                        <Box sx={{ marginTop: '10px' }}>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. A perferendis cupiditate vitae ex, quo nihil?
+                          Ullam error magnam possimus, quos quod repudiandae
+                          iste, iure, alias autem sequi unde praesentium non.
+                        </Box>
+                        <Box sx={{ marginTop: '5px' }}>
+                          <Box>
+                            Starts 19 feb{' '}
+                            <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} />
+                            08:00
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                    <Box sx={{ marginLeft: '20px' }}>
+                      <Box sx={{ display: 'flex', marginLeft: '30px' }}>
+                        <Box>
+                          <GroupsIcon sx={{ fontSize: '30px' }} />
+                        </Box>
+                        <Box sx={{ marginLeft: '2px' }}>120</Box>
+                      </Box>
+                      <Box sx={{ marginTop: '20px' }}>
+                        <Box sx={{ display: 'flex' }}>
+                          <Box>
+                            <EditIcon />
+                          </Box>
+                          <Box sx={{ marginLeft: '20px' }}>
+                            <DeleteIcon />
+                          </Box>
+                          <Box sx={{ marginLeft: '20px' }}>
+                            <ReplyIcon />
+                          </Box>
+                        </Box>
+                      </Box>
+                      <Box sx={{ marginTop: '20px' }}>
+                        <Button variant='contained' color='success'>
+                          Register
+                        </Button>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Item>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      );
+    }
+  };
   return (
     <div>
       <div className='body-outer-Box'>
@@ -181,49 +479,7 @@ function Dashboard() {
                 <hr className='Events-horizontal-line' />
               </div>
               <div className='dashBoard-Events-Content'>
-                <Box sx={{ flexGrow: 1, marginBottom: '2rem' }}>
-                  <Grid container spacing={2}>
-                    <Grid style={{ width: '100%' }}>
-                      <Item>
-                        <div className='v1'></div>
-                        <Box>
-                          STARTS ON
-                          <span className='dashBoardEventsHeading'>
-                            <u>UPCOMING EVENTS HEADING</u>
-                          </span>
-                        </Box>
-                        <Box>06</Box>
-                        <Box>
-                          {/* <span>06,</span> */}
-                          February
-                          <span className='dashBoardContestDivider'></span>
-                          <span className='dashBoardContestTiming'>
-                            CONTEST
-                          </span>
-                          {/* <AccessTimeFilledIcon
-                            style={{ marginLeft: '3rem' }}
-                          /> */}
-                          <span className='contestTimimg'>
-                            <AccessTimeFilledIcon
-                              style={{ paddingTop: '8px' }}
-                            />
-                            08:00 PM IST
-                          </span>
-                          <span className='dashBoardRegisterButton'>
-                            REGISTER HERE
-                            <ArrowForwardIcon
-                              style={{
-                                marginLeft: '0.5rem',
-                                paddingTop: '6px',
-                              }}
-                            />
-                          </span>
-                        </Box>
-                        {/* <AccessTimeFilledIcon style={{ marginLeft: '14rem' }} /> */}
-                      </Item>
-                    </Grid>
-                  </Grid>
-                </Box>
+                {dashBoardEventsRendering()}
               </div>
             </div>
             <div className='dashBoardAnnouncementHeading'>
@@ -236,8 +492,16 @@ function Dashboard() {
                 {items.map((item) => {
                   return (
                     <Card
+                      sx={{
+                        width: '100%',
+                        height: 'auto',
+                        display: 'flex',
+                        marginLeft: '10px',
+
+                        marginRight: '10px',
+                        borderRadius: '20px',
+                      }}
                       className='dashboard-Cards'
-                      style={{ borderRadius: '20px' }}
                       key={item.id}
                     >
                       <div className='AnnouncementCarouselDesign'>
@@ -245,7 +509,10 @@ function Dashboard() {
                           <span>
                             <CampaignIcon />
                           </span>
-                          <span style={{ textAlign: 'center' }}>
+                          <span
+                            className='dashBoardAnncouncement-Heading'
+                            style={{ textAlign: 'center' }}
+                          >
                             <h2>
                               <u>{item.title}</u>
                             </h2>
@@ -281,11 +548,17 @@ function Dashboard() {
               <Carousel breakPoints={breakpoints}>
                 {items.map((item) => {
                   return (
-                    <Card className='dashBoard-cards-second' key={item.id}>
+                    <Card
+                      sx={{ width: '100%', height: 'auto' }}
+                      className='dashBoard-cards-second'
+                      key={item.id}
+                    >
                       <div className='recentBlogsCarouselDesign'>
                         <div
                           className='blogsHeading'
-                          style={{ marginTop: '2rem' }}
+                          style={{
+                            marginTop: '2rem',
+                          }}
                         >
                           <span style={{ fontWeight: '800' }}>
                             <u>{item.title}</u>
@@ -300,12 +573,12 @@ function Dashboard() {
                           elit. Illum, facere!
                         </div>
                         <div className='blogsUserName'>
-                          <divs style={{ marginLeft: '1rem' }}>
+                          <div style={{ marginLeft: '1rem' }}>
                             <span>
                               <AccountCircleSharpIcon />
                             </span>
                             <span>By Anand </span>
-                          </divs>
+                          </div>
                         </div>
                       </div>
                     </Card>
@@ -322,7 +595,11 @@ function Dashboard() {
               <Carousel breakPoints={breakpoints}>
                 {items.map((item) => {
                   return (
-                    <Card className='dashBoard-cards-second' key={item.id}>
+                    <Card
+                      sx={{ width: '100%', height: 'auto' }}
+                      className='dashBoard-cards-second'
+                      key={item.id}
+                    >
                       <div className='recentDiscussionCarouselDesign'>
                         <div
                           className='dashboardDiscussionHeading'
@@ -333,32 +610,33 @@ function Dashboard() {
                         >
                           <h2>{item.title}</h2>
                         </div>
-                        <div className='dashBoardDiscussionUserDetails'>
+                        <div
+                          style={{ display: 'flex' }}
+                          className='dashBoardDiscussionUserDetails'
+                        >
                           <div
-                            style={{
-                              width: '100px',
-                              marginRight: '20px',
-                            }}
+                            style={{ width: '50px' }}
+                            className='dashBoard-Discussion-Image-Container'
                           >
                             <img
+                              style={{
+                                width: '100%',
+                                height: '50px',
+                                borderRadius: '50%',
+                              }}
                               src={HomeImage}
                               alt=''
-                              style={{
-                                width: '100px',
-                                borderRadius: '10%',
-                              }}
                             />
                           </div>
-                          <div>
-                            <div
-                              style={{
-                                marginTop: '12px',
-                                fontWeight: '800',
-                                fontSize: '20px',
-                              }}
-                            >
-                              Anand kumar Choudhary
-                            </div>
+                          <div
+                            style={{
+                              fontWeight: '700',
+                              paddingTop: '10px',
+                              marginLeft: '1rem',
+                            }}
+                            className='dashBoard-Discussion-UserName'
+                          >
+                            Anand Choudhary
                           </div>
                         </div>
                         <div className='discussionContent'>
