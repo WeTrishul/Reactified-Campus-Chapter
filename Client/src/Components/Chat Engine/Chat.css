@@ -67,6 +67,7 @@
   vertical-align: middle;
 }
 .second-User-Message {
+  width: 100%;
   background: lightgreen;
   padding: 0.5rem;
   border-radius: 17px;

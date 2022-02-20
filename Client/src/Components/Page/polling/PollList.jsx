@@ -111,6 +111,8 @@ function PollList() {
 
     Axios({
       method: 'POST',
+      'Access-Control-Allow-Origin': 'http://localhost:3000',
+      Vary: 'Origin',
       data: {
         pollName: enteredpollName,
         question: enteredQuestion,
