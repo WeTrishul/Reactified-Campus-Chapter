@@ -8,6 +8,10 @@ import Button from '@mui/material/Button';
 import CreateIcon from '@mui/icons-material/Create';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import Axios from 'axios';
+import { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './PollList.css';
 
@@ -27,12 +31,33 @@ function PollList() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [allpolls, setPolls] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const [value, setValue] = React.useState('Question');
 
   const handleMultilineChange = (event) => {
     setValue(event.target.value);
   };
+
+  useEffect(() => {
+    Axios({
+      method: 'GET',
+
+      withCredentials: true,
+      url: 'http://localhost:3000/viewAllPolls',
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+        setIsLoading(false);
+        setPolls(data.data.allPolls);
+        //     // console.log(data)
+      });
+  }, []);
 
   return (
     <div>
@@ -49,22 +74,47 @@ function PollList() {
                 <u> POLLING LIST</u>
               </h2>
             </div>
-            <Box sx={{ width: '100%' }} className='polling-List-Display'>
-              <Card sx={{ marginTop: '1rem', width: '100%', height: 'auto' }}>
-                <Box sx={{ display: 'flex' }}>
-                  <Box
-                    sx={{ width: '70%', padding: '15px', fontWeight: '700' }}
+            {allpolls.map((data) => {
+              return (
+                <Box
+                  id={'poll-' + data._id}
+                  sx={{ width: '100%' }}
+                  key={data._id}
+                  className='polling-List-Display'
+                >
+                  <Card
+                    sx={{ marginTop: '1rem', width: '100%', height: 'auto' }}
                   >
-                    Anand
-                  </Box>
-                  <Box
-                    sx={{ width: '20%', textAlign: 'right', padding: '15px' }}
-                  >
-                    <DeleteIcon sx={{ color: 'red' }} />
-                  </Box>
+                    <Box sx={{ display: 'flex' }}>
+                      <Box
+                        sx={{
+                          width: '70%',
+                          padding: '15px',
+                          fontWeight: '700',
+                        }}
+                      >
+                        <Link
+                          style={{ textDecoration: 'none', color: 'black' }}
+                          className='blogsTitleLink'
+                          to={'/DisplayPoll/' + data._id}
+                        >
+                          {data.pollName}
+                        </Link>
+                      </Box>
+                      <Box
+                        sx={{
+                          width: '20%',
+                          textAlign: 'right',
+                          padding: '15px',
+                        }}
+                      >
+                        <DeleteIcon sx={{ color: 'red' }} />
+                      </Box>
+                    </Box>
+                  </Card>
                 </Box>
-              </Card>
-            </Box>
+              );
+            })}
             <div className='polling-List-Modal'>
               <Modal
                 aria-labelledby='transition-modal-title'

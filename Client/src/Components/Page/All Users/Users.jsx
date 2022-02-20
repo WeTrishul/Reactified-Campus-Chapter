@@ -9,11 +9,17 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import EditIcon from '@mui/icons-material/Edit';
+import { useEffect, useState } from 'react';
+import Axios from 'axios';
+import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 function Users() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [allusers, setAllUsers] = useState([]);
+
+  const [isLoading, setLoading] = useState(true);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -22,6 +28,59 @@ function Users() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+  useEffect(() => {
+    // axios.get('http://localhost:3000/listUsers')
+    // .then(response => {
+    //     return response.data
+    // }).then(data =>{
+    //     console.log(data)
+    //     setAllUsers(data.data.users)
+    // });
+
+    Axios({
+      method: 'GET',
+
+      withCredentials: true,
+      url: 'http://localhost:3000/listUsers',
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+        setLoading(false);
+        setAllUsers(data.data.users);
+        //     // console.log(data)
+      });
+  }, []);
+
+  const deleteHandler = (name) => {
+    name.preventDefault();
+    console.log(name.target.id);
+
+    // axios.get('http://localhost:3000/delete/?username='+name.target.id)
+    // .then(response => {
+    //     return response.data
+    // }).then(data =>{
+    //     console.log(data)
+    //     document.getElementById('tr-'+ name.target.id).remove()
+    // });
+
+    Axios({
+      method: 'GET',
+
+      withCredentials: true,
+      url: 'http://localhost:3000/delete/?username=' + name.target.id,
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+        document.getElementById('tr-' + name.target.id).remove();
+        //     // console.log(data)
+      });
   };
 
   return (
@@ -65,55 +124,40 @@ function Users() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {/* {rows
+                    {allusers
                       .slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
-                      .map((row) => {
+                      .map((result) => {
                         return (
-                          <TableRow
-                            hover
-                            role='checkbox'
-                            tabIndex={-1}
-                            key={row.code}
-                          >
-                            {columns.map((column) => {
-                              const value = row[column.id];
-                              return (
-                                <TableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === 'number'
-                                    ? column.format(value)
-                                    : value}
-                                </TableCell>
-                              );
-                            })}
+                          <TableRow key={result._id}>
+                            <TableCell>{result.name}</TableCell>
+                            <TableCell>{result.UserType}</TableCell>
+                            <TableCell style={{ textAlign: 'right' }}>
+                              <div className='users-Edit-Delete'>
+                                <div className='user-Edit-Btn'>
+                                  <EditIcon style={{ color: 'green' }} />
+                                </div>
+                                <div className='user-Delete-Btn'>
+                                  <DeleteIcon
+                                    onClick={deleteHandler}
+                                    id={result.username}
+                                    style={{ color: 'red' }}
+                                  />
+                                </div>
+                              </div>
+                            </TableCell>
                           </TableRow>
                         );
-                      })} */}
-                    <TableRow>
-                      <TableCell>Anand</TableCell>
-                      <TableCell>
-                        Admin, Question Setter, Executive, Core
-                      </TableCell>
-                      <TableCell style={{ textAlign: 'right' }}>
-                        <div className='users-Edit-Delete'>
-                          <div className='user-Edit-Btn'>
-                            <EditIcon style={{ color: 'green' }} />
-                          </div>
-                          <div className='user-Delete-Btn'>
-                            <DeleteIcon style={{ color: 'red' }} />
-                          </div>
-                        </div>
-                      </TableCell>
-                    </TableRow>
+                      })}
                   </TableBody>
                 </Table>
               </TableContainer>
               <TablePagination
                 rowsPerPageOptions={[10, 25, 50, 100]}
                 component='div'
-                // count={rows.length}
+                count={allusers.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
