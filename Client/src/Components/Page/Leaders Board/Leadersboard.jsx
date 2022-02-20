@@ -8,6 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import Axios from 'axios';
+import { useEffect, useState } from 'react';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 function Leadersboard() {
@@ -22,6 +24,53 @@ function Leadersboard() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const rankRendering = (index) => {
+    if (index == 0) {
+      return (
+        <>
+          <EmojiEventsIcon style={{ color: 'gold' }} />;
+        </>
+      );
+    } else if (index == 1) {
+      return (
+        <>
+          <EmojiEventsIcon style={{ color: 'gold' }} />;
+        </>
+      );
+    } else if (index == 2) {
+      return (
+        <>
+          <EmojiEventsIcon style={{ color: 'gold' }} />;
+        </>
+      );
+    } else {
+      return <>{index}</>;
+    }
+  };
+  const [board, setBoard] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Axios({
+      method: 'GET',
+
+      withCredentials: true,
+      url: 'http://localhost:3000/Leaderboards',
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        setLoading(false);
+        console.log(data);
+        setBoard(data.data.LeaderBoards);
+        // setBlogs(data.data.blogs)
+        // setEvents(data.data.events)
+        // setPosts(data.data.posts)
+        //     // console.log(data)
+      });
+  }, []);
   return (
     <div>
       <div className='leaderboards-body-Box'>
@@ -94,42 +143,17 @@ function Leadersboard() {
                           </TableRow>
                         );
                       })} */}
-                    <TableRow>
-                      <TableCell>
-                        <EmojiEventsIcon style={{ color: 'gold' }} />
-                      </TableCell>
-                      <TableCell>Anand</TableCell>
-                      <TableCell>1200</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>
-                        <EmojiEventsIcon style={{ color: 'silver' }} />
-                      </TableCell>
-                      <TableCell>Anand</TableCell>
-                      <TableCell>1200</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>
-                        <EmojiEventsIcon style={{ color: 'brown' }} />
-                      </TableCell>
-                      <TableCell>Anand</TableCell>
-                      <TableCell>1200</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>4</TableCell>
-                      <TableCell>Anand</TableCell>
-                      <TableCell>1200</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>5</TableCell>
-                      <TableCell>Anand</TableCell>
-                      <TableCell>1200</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>6</TableCell>
-                      <TableCell>Anand</TableCell>
-                      <TableCell>1200</TableCell>
-                    </TableRow>
+                    {board.map((leader, index) => {
+                      <TableRow>
+                        <TableCell>
+                          {/* <EmojiEventsIcon style={{ color: 'gold' }} />
+                           */}
+                          {rankRendering(index)}
+                        </TableCell>
+                        <TableCell>{leader.userid.name}</TableCell>
+                        <TableCell>{leader.userid.CurrentRating}</TableCell>
+                      </TableRow>;
+                    })}
                   </TableBody>
                 </Table>
               </TableContainer>

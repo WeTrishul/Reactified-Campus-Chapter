@@ -51,6 +51,7 @@ import Userprofile from './Components/Page/profile/Userprofile';
 import Resource from './Components/Page/resources/Resource';
 import Setquestions from './Components/Page/set questions/Setquestions';
 import UpComingEvents from './Components/Page/AllEvents/UpComingEvents';
+import PollList from './Components/Page/polling/PollList';
 
 import Apply from './Components/Forms/Apply';
 function App() {
@@ -178,8 +179,11 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/WriteBlogs'>
           <WriteBlogs/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/Polling'>
+        {/* {authCtx.isLoggedIn &&<Route exact path='/Polling'>
           <Polling/>
+        </Route>} */}
+        {authCtx.isLoggedIn &&<Route exact path='/Polling'>
+          <PollList/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/ViewAllPoll'>
           <ViewAllPoll/>
