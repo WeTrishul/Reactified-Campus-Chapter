@@ -12,7 +12,9 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import Axios from 'axios';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useRef } from 'react';
 import './PollList.css';
 
 const style = {
@@ -23,7 +25,7 @@ const style = {
   width: 400,
   bgcolor: 'background.paper',
   border: '1px solid #000',
-  height: '510px',
+  height: '550px',
   boxShadow: 24,
   p: 4,
 };
@@ -40,6 +42,15 @@ function PollList() {
   const handleMultilineChange = (event) => {
     setValue(event.target.value);
   };
+
+  const pollnameInputRef = useRef();
+  const questionInputRef = useRef();
+  const optionAInputRef = useRef();
+  const optionBInputRef = useRef();
+  const optionCInputRef = useRef();
+  const optionDInputRef = useRef();
+
+  let history = useHistory();
 
   useEffect(() => {
     Axios({
@@ -58,6 +69,73 @@ function PollList() {
         //     // console.log(data)
       });
   }, []);
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const enteredpollName = pollnameInputRef.current.value;
+    const enteredQuestion = questionInputRef.current.value;
+    const enteredOptionA = optionAInputRef.current.value;
+    const enteredOptionB = optionBInputRef.current.value;
+    const enteredOptionC = optionCInputRef.current.value;
+    const enteredOptionD = optionDInputRef.current.value;
+
+    // const pollName = pollnameInputRef.current.value;
+
+    const pollData = {
+      pollName: enteredpollName,
+      Question: enteredQuestion,
+      optionA: enteredOptionA,
+      optionB: enteredOptionB,
+      optionC: enteredOptionC,
+      optionD: enteredOptionD,
+    };
+
+    // axios.post('http://localhost:3000/poll/createpoll',pollData,
+
+    // ).then((response) =>{
+
+    //     console.log(response)
+
+    //     return response.data
+
+    // })
+    // .then(data =>{
+
+    //     history.push("/Polling")
+
+    // })
+    // .catch(err =>{
+    //     console.log("error")
+    //     alert("Poll Failed!!");
+    // })
+
+    Axios({
+      method: 'POST',
+      data: {
+        pollName: enteredpollName,
+        question: enteredQuestion,
+        optionA: enteredOptionA,
+        optionB: enteredOptionB,
+        optionC: enteredOptionC,
+        optionD: enteredOptionD,
+      },
+
+      withCredentials: true,
+      url: 'http://localhost:3000/poll/createpoll',
+    })
+      .then((response) => {
+        console.log(response);
+
+        return response.data;
+      })
+      .then((data) => {
+        history.push('/Polling');
+      })
+      .catch((err) => {
+        console.log('error');
+        alert('Poll Failed!!');
+      });
+  };
 
   return (
     <div>
@@ -160,6 +238,7 @@ function PollList() {
                           <TextField
                             id='outlined-multiline-flexible'
                             label='Write your Question'
+                            ref={questionInputRef}
                             multiline
                             maxRows={4}
                             value={value}
@@ -169,8 +248,17 @@ function PollList() {
                         <Box sx={{ marginTop: '10px' }}>
                           <TextField
                             id='outlined-basic'
+                            label='Poll Name'
+                            variant='outlined'
+                            ref={pollnameInputRef}
+                          />
+                        </Box>
+                        <Box sx={{ marginTop: '10px' }}>
+                          <TextField
+                            id='outlined-basic'
                             label='First Option'
                             variant='outlined'
+                            ref={optionAInputRef}
                           />
                         </Box>
                         <Box sx={{ marginTop: '10px' }}>
@@ -178,6 +266,7 @@ function PollList() {
                             id='outlined-basic'
                             label='Second Option'
                             variant='outlined'
+                            ref={optionBInputRef}
                           />
                         </Box>
                         <Box sx={{ marginTop: '10px' }}>
@@ -185,6 +274,7 @@ function PollList() {
                             id='outlined-basic'
                             label='Third Option'
                             variant='outlined'
+                            ref={optionCInputRef}
                           />
                         </Box>
                         <Box sx={{ marginTop: '10px' }}>
@@ -192,6 +282,7 @@ function PollList() {
                             id='outlined-basic'
                             label='Fourth Option'
                             variant='outlined'
+                            ref={optionDInputRef}
                           />
                         </Box>
                         <Box
@@ -201,7 +292,9 @@ function PollList() {
                             justifyContent: 'center',
                           }}
                         >
-                          <Button variant='contained'>Submit</Button>
+                          <Button onClick={submitHandler} variant='contained'>
+                            Submit
+                          </Button>
                         </Box>
                       </Typography>
                     </Box>

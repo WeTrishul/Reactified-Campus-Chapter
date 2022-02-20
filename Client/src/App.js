@@ -179,12 +179,12 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/WriteBlogs'>
           <WriteBlogs/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/Polling'>
-          <Polling/>
-        </Route>}
         {/* {authCtx.isLoggedIn &&<Route exact path='/Polling'>
-          <PollList/>
+          <Polling/>
         </Route>} */}
+        {authCtx.isLoggedIn &&<Route exact path='/Polling'>
+          <PollList/>
+        </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/ViewAllPoll'>
           <ViewAllPoll/>
         </Route>}
