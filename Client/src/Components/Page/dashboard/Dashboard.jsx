@@ -145,7 +145,7 @@ function Dashboard() {
     console.log(current);
   };
 
-  const dashBoardEventsRendering = () => {
+  const dashBoardEventsRendering = (element) => {
     if (window.innerWidth <= 431) {
       return (
         <Box>
@@ -158,8 +158,10 @@ function Dashboard() {
                       <Box>
                         <GroupsIcon sx={{ fontSize: '30px' }} />
                       </Box>
-                      <Box sx={{ marginLeft: '2px' }}>120</Box>
-                      <Box sx={{ display: 'flex', marginLeft: '60px' }}>
+                      <Box sx={{ marginLeft: '2px' }}>
+                        {element.Registeredusers.length}
+                      </Box>
+                      {/* <Box sx={{ display: 'flex', marginLeft: '60px' }}>
                         <Box>
                           <EditIcon />
                         </Box>
@@ -169,7 +171,7 @@ function Dashboard() {
                         <Box sx={{ marginLeft: '20px' }}>
                           <ReplyIcon />
                         </Box>
-                      </Box>
+                      </Box> */}
                     </Box>
                     <Box sx={{ width: '100%' }}>
                       <img
@@ -178,7 +180,7 @@ function Dashboard() {
                           height: '200px',
                           borderRadius: '20px',
                         }}
-                        src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+                        src={'http://localhost:3000' + element.eventbanner}
                         alt=''
                       />
                     </Box>
@@ -187,12 +189,13 @@ function Dashboard() {
                         sx={{ fontWeight: '600', fontSize: '15px' }}
                         variant='h7'
                       >
-                        UPCOMING EVENT HEADING
+                        {element.eventname}
                       </Typography>
                     </Box>
                     <Box sx={{ fontSize: '10px' }}>
                       College Event |{' '}
-                      <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} /> 08:00
+                      <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} />{' '}
+                      {element.eventStartTime}-{element.eventEndTime}
                     </Box>
                     <Box
                       sx={{
@@ -202,7 +205,7 @@ function Dashboard() {
                       }}
                     >
                       <Button variant='contained' color='success'>
-                        Register
+                        Events
                       </Button>
                     </Box>
                   </Item>
@@ -227,7 +230,7 @@ function Dashboard() {
                           height: '140px',
                           borderRadius: '20px',
                         }}
-                        src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+                        src={'http://localhost:3000' + element.eventbanner}
                         alt=''
                       />
                     </Box>
@@ -235,17 +238,17 @@ function Dashboard() {
                       <Box sx={{ marginLeft: '20px' }}>
                         <Box>
                           <Typography sx={{ fontWeight: '600' }} variant='h7'>
-                            UPCOMING EVENT HEADING
+                            {element.eventname}
                           </Typography>
                         </Box>
                         <Box>
                           College Event |{' '}
                           <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} />{' '}
-                          08:00
+                          {element.eventStartTime}-{element.eventEndTime}
                         </Box>
 
                         <Box sx={{ marginTop: '5px' }}>
-                          <Box>Starts 19 feb </Box>
+                          <Box>Starts {element.eventDate} </Box>
                         </Box>
                       </Box>
                     </Box>
@@ -254,10 +257,12 @@ function Dashboard() {
                         <Box>
                           <GroupsIcon sx={{ fontSize: '30px' }} />
                         </Box>
-                        <Box sx={{ marginLeft: '2px' }}>120</Box>
+                        <Box sx={{ marginLeft: '2px' }}>
+                          {element.Registeredusers.length}
+                        </Box>
                       </Box>
                       <Box sx={{ marginTop: '20px' }}>
-                        <Box sx={{ display: 'flex' }}>
+                        {/* <Box sx={{ display: 'flex' }}>
                           <Box>
                             <EditIcon />
                           </Box>
@@ -267,11 +272,11 @@ function Dashboard() {
                           <Box sx={{ marginLeft: '20px' }}>
                             <ReplyIcon />
                           </Box>
-                        </Box>
+                        </Box> */}
                       </Box>
                       <Box sx={{ marginTop: '20px' }}>
                         <Button variant='contained' color='success'>
-                          Register
+                          Events
                         </Button>
                       </Box>
                     </Box>
@@ -297,7 +302,7 @@ function Dashboard() {
                           height: '140px',
                           borderRadius: '20px',
                         }}
-                        src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+                        src={'http://localhost:3000' + element.eventbanner}
                         alt=''
                       />
                     </Box>
@@ -305,20 +310,20 @@ function Dashboard() {
                       <Box sx={{ marginLeft: '20px' }}>
                         <Box>
                           <Typography sx={{ fontWeight: '600' }} variant='h6'>
-                            UPCOMING EVENT HEADING
+                            {element.eventname}
                           </Typography>
                         </Box>
                         <Box>
                           COLLEGE EVENT |{' '}
                           <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} />{' '}
-                          08:00
+                          {element.eventStartTime}-{element.eventEndTime}
                         </Box>
 
                         <Box sx={{ marginTop: '10px' }}>
                           <Box>
-                            Starts 19 feb{' '}
+                            Starts {element.eventDate}{' '}
                             <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} />
-                            08:00
+                            {element.eventStartTime}
                           </Box>
                         </Box>
                       </Box>
@@ -328,10 +333,12 @@ function Dashboard() {
                         <Box>
                           <GroupsIcon sx={{ fontSize: '30px' }} />
                         </Box>
-                        <Box sx={{ marginLeft: '2px' }}>120</Box>
+                        <Box sx={{ marginLeft: '2px' }}>
+                          {element.Registeredusers.length}
+                        </Box>
                       </Box>
                       <Box sx={{ marginTop: '20px' }}>
-                        <Box sx={{ display: 'flex' }}>
+                        {/* <Box sx={{ display: 'flex' }}>
                           <Box>
                             <EditIcon />
                           </Box>
@@ -341,11 +348,11 @@ function Dashboard() {
                           <Box sx={{ marginLeft: '20px' }}>
                             <ReplyIcon />
                           </Box>
-                        </Box>
+                        </Box> */}
                       </Box>
                       <Box sx={{ marginTop: '20px' }}>
                         <Button variant='contained' color='success'>
-                          Register
+                          Events
                         </Button>
                       </Box>
                     </Box>
@@ -371,7 +378,7 @@ function Dashboard() {
                           height: '165px',
                           borderRadius: '20px',
                         }}
-                        src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+                        src={'http://localhost:3000' + element.eventbanner}
                         alt=''
                       />
                     </Box>
@@ -379,25 +386,22 @@ function Dashboard() {
                       <Box sx={{ marginLeft: '20px' }}>
                         <Box>
                           <Typography sx={{ fontWeight: '600' }} variant='h6'>
-                            UPCOMING EVENT HEADING
+                            {element.eventname}
                           </Typography>
                         </Box>
                         <Box>
                           COLLEGE EVENT |{' '}
                           <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} />{' '}
-                          08:00
+                          {element.eventStartTime}-{element.eventEndTime}
                         </Box>
                         <Box sx={{ marginTop: '10px' }}>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. A perferendis cupiditate vitae ex, quo nihil?
-                          Ullam error magnam possimus, quos quod repudiandae
-                          iste, iure, alias autem sequi unde praesentium non.
+                          {element.aboutevent}
                         </Box>
                         <Box sx={{ marginTop: '5px' }}>
                           <Box>
-                            Starts 19 feb{' '}
+                            Starts {element.eventDate}{' '}
                             <AccessTimeFilledIcon sx={{ paddingTop: '8px' }} />
-                            08:00
+                            {element.eventStartTime}
                           </Box>
                         </Box>
                       </Box>
@@ -407,10 +411,12 @@ function Dashboard() {
                         <Box>
                           <GroupsIcon sx={{ fontSize: '30px' }} />
                         </Box>
-                        <Box sx={{ marginLeft: '2px' }}>120</Box>
+                        <Box sx={{ marginLeft: '2px' }}>
+                          {element.Registeredusers.length}
+                        </Box>
                       </Box>
                       <Box sx={{ marginTop: '20px' }}>
-                        <Box sx={{ display: 'flex' }}>
+                        {/* <Box sx={{ display: 'flex' }}>
                           <Box>
                             <EditIcon />
                           </Box>
@@ -420,11 +426,11 @@ function Dashboard() {
                           <Box sx={{ marginLeft: '20px' }}>
                             <ReplyIcon />
                           </Box>
-                        </Box>
+                        </Box> */}
                       </Box>
                       <Box sx={{ marginTop: '20px' }}>
                         <Button variant='contained' color='success'>
-                          Register
+                          Events
                         </Button>
                       </Box>
                     </Box>
@@ -483,9 +489,13 @@ function Dashboard() {
                 <h2>Upcoming Events</h2>
                 <hr className='Events-horizontal-line' />
               </div>
-              <div className='dashBoard-Events-Content'>
-                {dashBoardEventsRendering()}
-              </div>
+              {events.map((element) => {
+                return (
+                  <div className='dashBoard-Events-Content'>
+                    {dashBoardEventsRendering(element)}
+                  </div>
+                );
+              })}
             </div>
             <div className='dashBoardAnnouncementHeading'>
               <h2>
