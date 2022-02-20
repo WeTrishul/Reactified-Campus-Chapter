@@ -5,7 +5,8 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import Grid from '@mui/material/Grid';
+import AuthContext from '../../../Service/auth-context';
+import { useContext } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -28,6 +29,10 @@ import Axios from 'axios';
 import CommentBankIcon from '@mui/icons-material/CommentBank';
 
 function Dashboard() {
+  const authCtx = useContext(AuthContext);
+  let userId = authCtx.id;
+  let userName = authCtx.username;
+  let usertype = authCtx.usertype;
   let history = useHistory();
 
   const [blogs, setBlogs] = useState([]);
@@ -546,7 +551,7 @@ function Dashboard() {
             </div>
             <div className='dashBoardBlogsCarousel'>
               <Carousel breakPoints={breakpoints}>
-                {items.map((item) => {
+                {blogs.map((item) => {
                   return (
                     <Card
                       sx={{ width: '100%', height: 'auto' }}
@@ -593,7 +598,7 @@ function Dashboard() {
             </div>
             <div className='dashBoardDiscussionCarousel'>
               <Carousel breakPoints={breakpoints}>
-                {items.map((item) => {
+                {posts.map((item) => {
                   return (
                     <Card
                       sx={{ width: '100%', height: 'auto' }}
@@ -636,18 +641,16 @@ function Dashboard() {
                             }}
                             className='dashBoard-Discussion-UserName'
                           >
-                            Anand Choudhary
+                            {item.userid.name}
                           </div>
                         </div>
                         <div className='discussionContent'>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Veritatis dicta deserunt illo, officia dolorum
-                          voluptate?{' '}
+                          {item.postBody}{' '}
                         </div>
                         <div className='discussionCommentCount'>
                           <div style={{ float: 'right' }}>
                             <CommentBankIcon />
-                            450
+                            {item.comments.length}
                           </div>
                         </div>
                       </div>

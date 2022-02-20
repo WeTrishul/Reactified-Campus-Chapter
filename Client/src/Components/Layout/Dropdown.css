@@ -44,7 +44,9 @@
   /* margin: 100px auto; */
   /* position: relative; */
 }
-
+.notification-Dropdown {
+  width: 15px;
+}
 .dropdown .dropdown-btn {
   /* padding: 15px 20px; */
   /* background: #fff; */
@@ -64,7 +66,7 @@
   padding-right: 50px;
   position: absolute;
   z-index: 998;
-  width: 155px;
+  width: 160px;
   justify-content: left;
   background: rgb(224, 217, 217);
   border-radius: 7px;
@@ -167,14 +169,14 @@
   z-index: 990;
   width: 255px;
   justify-content: left;
-  background: rgb(224, 217, 217);
+  background: rgb(211, 206, 206);
   border-radius: 7px;
 }
 
 .notifydropdown-item {
   border-radius: 7px;
   width: 253px;
-  padding: 20px 0px 0px 20px;
+  padding: 2px 2px 0px 2px;
   cursor: pointer;
   height: 10rem;
   margin: 1px;
@@ -183,9 +185,9 @@
 
 .notify-border {
   width: 200px;
-  height: 0.1rem;
-  color: black;
-  background: black;
+  height: 1px;
+  color: rgb(224, 217, 217);
+  background: rgb(224, 217, 217);
 }
 
 .Resourcesdropdown-content {

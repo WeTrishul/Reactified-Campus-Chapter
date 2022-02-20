@@ -177,8 +177,13 @@ module.exports.dashboard = async (req,res)=>{
     console.log(req.user)
     try { 
         
-        const posts = await Post.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(8)
-        
+        // const posts = await Post.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(8)
+        const posts = await Post.find({}).populate('userid')
+        console.log(posts);
+        // posts = await posts.populate('userid')
+        // const kuchbhi = posts.populate('comments')
+        // console.log(kuchbhi, "kuchbhi");
+        // console.log(posts, "posts");
         const events = await Event.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(4)
 
         const blog = await Blog.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(8)

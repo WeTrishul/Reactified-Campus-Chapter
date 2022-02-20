@@ -53,9 +53,6 @@ import Setquestions from './Components/Page/set questions/Setquestions';
 import UpComingEvents from './Components/Page/AllEvents/UpComingEvents';
 
 import Apply from './Components/Forms/Apply';
-import ResourceUpload from './Components/Page/resources/ResourceUpload';
-import ResourceDisplay from './Components/Page/resources/ResourceDisplay';
-import PollList from './Components/Page/polling/PollList';
 function App() {
 
   const authCtx = useContext(AuthContext)
@@ -145,8 +142,8 @@ function App() {
         {/* {authCtx.isLoggedIn && socket && <Route exact path='/DashBoard'>
           <DashBoard socket={socket}/>
         </Route>} */}
-        {authCtx.isLoggedIn && <Route exact path='/UpcomingEvent'>
-          <UpComingEvents/>
+        {authCtx.isLoggedIn && socket &&  <Route exact path='/UpcomingEvent'>
+          <UpComingEvents  socket={socket}/>
         </Route>}
         {authCtx.isLoggedIn && <Route exact path='/Apply'>
           <Apply/>
@@ -157,8 +154,8 @@ function App() {
         {authCtx.isLoggedIn && <Route exact path='/GlobalEvents/:platform'>
           <GlobalEvents/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/AllEvents'>
-          <AllEvents/>
+        {authCtx.isLoggedIn && socket && <Route exact path='/AllEvents'>
+          <AllEvents socket={socket}/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/Dashboard'>
           <Dashboard/>
@@ -181,11 +178,8 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/WriteBlogs'>
           <WriteBlogs/>
         </Route>}
-        {/* {authCtx.isLoggedIn &&<Route exact path='/Polling'>
-          <Polling/>
-        </Route>} */}
         {authCtx.isLoggedIn &&<Route exact path='/Polling'>
-          <PollList/>
+          <Polling/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/ViewAllPoll'>
           <ViewAllPoll/>
@@ -238,14 +232,8 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/Resources/:categoryname'>
           <Resources/>
         </Route>}
-        {/* {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
-          <UploadResources/>
-        </Route>} */}
-        {/* {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
-          <ResourceUpload/>
-        </Route>} */}
         {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
-          <ResourceDisplay/>
+          <UploadResources/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/ViewCategory/:categoryname'>
           <ViewCategory/>
@@ -254,7 +242,7 @@ function App() {
           <Discussion socket={socket}/>
         </Route>} */}
         {authCtx.isLoggedIn && socket &&<Route exact path='/Discussion'>
-          <Discuss />
+          <Discuss socket={socket} />
         </Route>}
         {/* {authCtx.isLoggedIn &&<Route exact path='/Leaderboard'>
           <Leaderboard/>
@@ -271,18 +259,18 @@ function App() {
         <Route exact path='/SignupData'>
           <SignupData/>
         </Route>
-        <Route exact path='/Corechat'>
-          <Corechat/>
-        </Route>
-        <Route exact path='/Executivechat'>
-          <Executivechat/>
-        </Route>
-        {authCtx.isLoggedIn && socket &&<Route exact path='/ExecutiveChat'>
+        {authCtx.isLoggedIn && socket && <Route exact path='/Corechat'>
+          <Corechat socket={socket}/>
+        </Route>}
+        {authCtx.isLoggedIn && socket && <Route exact path='/Executivechat'>
+          <Executivechat socket={socket} /> 
+        </Route>}
+        {/* {authCtx.isLoggedIn && socket &&<Route exact path='/ExecutiveChati'>
           <ExecutiveChat socket={socket}/>
-        </Route>}
-        {authCtx.isLoggedIn && socket &&<Route exact path='/CoreChat'>
+        </Route>} */}
+        {/* {authCtx.isLoggedIn && socket &&<Route exact path='/CoreChati'>
           <CoreChat socket={socket} />
-        </Route>}
+        </Route>} */}
         <Route exact path='*'>
         <LoginForm/>
         </Route>

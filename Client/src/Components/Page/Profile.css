@@ -101,50 +101,34 @@
   grid-area: only-space;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 780px) {
   .profile-page {
     height: 150vh;
     grid-template-columns: 1fr;
-    grid-template-rows: 1.5fr 1.2fr 3fr;
+    grid-template-rows: 1fr 1fr 3fr;
     grid-template-areas:
       'side-img-display'
       'achievements'
       'personal-details';
     grid-gap: 0.7rem;
   }
-
+  .side-img-display {
+    grid-area: side-img-display;
+  }
   .profile-img {
-    width: 100%;
+    /* width: 100%; */
     margin-top: 0;
     margin-right: 0;
     margin-left: 0;
     height: 30vh;
   }
 
-  .profile-details {
-    height: 2rem;
-  }
-
   .achievements {
+    grid-area: achievements;
     margin-left: 1rem;
-    margin-right: 0;
   }
-
-  .achievement-box {
-    flex-direction: column;
-  }
-
   .personal-details {
+    grid-area: personal-details;
     margin-left: 1rem;
-    margin-right: 0;
-  }
-  .rating {
-    top: 10px;
-    width: 90%;
-  }
-  .contribution {
-    top: 20px;
-    margin-left: 1rem;
-    width: 90%;
   }
 }

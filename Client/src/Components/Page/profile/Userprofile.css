@@ -12,6 +12,7 @@
   height: auto;
   width: 100%;
 }
+
 @media screen and (max-width: 600px) {
   .userProfile-outer-Box {
     margin-left: 5px;
