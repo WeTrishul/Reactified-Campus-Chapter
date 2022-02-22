@@ -5,6 +5,12 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import './Setquestions.css';
+import { useEffect, useRef } from 'react';
+import { useState, useContext } from 'react';
+import AuthContext from '../../../Service/auth-context';
+import Axios from 'axios';
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -14,7 +20,67 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 function Setquestions() {
-  const questionsCardRendering = () => {
+  const authCtx = useContext(AuthContext);
+  let userid = authCtx.id;
+
+  const [allques, setAllQues] = useState([]);
+
+  let history = useHistory();
+
+  useEffect(() => {
+    console.log(userid);
+    Axios({
+      method: 'GET',
+
+      withCredentials: true,
+      url: 'http://localhost:3000/seeQ/' + userid,
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+
+        //     // console.log(data)
+        // setLoading(false);
+
+        setAllQues(data.arr);
+      });
+  }, []);
+
+  const submitHandler = () => {
+    // e.preventDefault();
+
+    var form_data = new FormData();
+
+    const inpfiles = document.getElementById('multiFiles');
+
+    for (var f of inpfiles.files) {
+      form_data.append('questions', f);
+    }
+
+    Axios({
+      method: 'POST',
+
+      data: form_data,
+      headers: { 'Content-Type': 'multipart/form-data' },
+
+      withCredentials: true,
+      url: 'http://localhost:3000/fileupload/setquestions/' + userid,
+    })
+      .then((res) => {
+        console.log(res);
+        console.log('upload hogya');
+        setAllQues((c) => [...c, res.data.ele]);
+        history.push('/SetQuestions');
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log('main nhi chal rha hoon bhai');
+      });
+  };
+
+  const questionsCardRendering = (data, index) => {
     if (window.innerWidth <= 600) {
       return (
         <Box sx={{ height: '70vh', overflowY: 'auto' }}>
@@ -32,22 +98,8 @@ function Setquestions() {
                       alt=''
                     />
                   </Box>
-                  <Box sx={{ marginTop: '1rem' }}>CP Question Set 2</Box>
-                </Item>
-              </Box>
-              <Box gridColumn='span 6'>
-                <Item sx={{ height: '30vh' }}>
-                  <Box sx={{ border: '1px solid black' }}>
-                    <img
-                      style={{
-                        width: '100px',
-                        height: '100px',
-                      }}
-                      src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Icon_pdf_file.svg/1200px-Icon_pdf_file.svg.png'
-                      alt=''
-                    />
-                  </Box>
-                  <Box sx={{ marginTop: '1rem' }}>CP Question Set 2</Box>
+
+                  <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
                 </Item>
               </Box>
             </Box>
@@ -71,37 +123,7 @@ function Setquestions() {
                       alt=''
                     />
                   </Box>
-                  <Box sx={{ marginTop: '1rem' }}>CP Question Set 2</Box>
-                </Item>
-              </Box>
-              <Box gridColumn='span 4'>
-                <Item sx={{ height: '30vh' }}>
-                  <Box sx={{ border: '1px solid black' }}>
-                    <img
-                      style={{
-                        width: '100px',
-                        height: '100px',
-                      }}
-                      src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Icon_pdf_file.svg/1200px-Icon_pdf_file.svg.png'
-                      alt=''
-                    />
-                  </Box>
-                  <Box sx={{ marginTop: '1rem' }}>CP Question Set 2</Box>
-                </Item>
-              </Box>
-              <Box gridColumn='span 4'>
-                <Item sx={{ height: '30vh' }}>
-                  <Box sx={{ border: '1px solid black' }}>
-                    <img
-                      style={{
-                        width: '100px',
-                        height: '100px',
-                      }}
-                      src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Icon_pdf_file.svg/1200px-Icon_pdf_file.svg.png'
-                      alt=''
-                    />
-                  </Box>
-                  <Box sx={{ marginTop: '1rem' }}>CP Question Set 2</Box>
+                  <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
                 </Item>
               </Box>
             </Box>
@@ -137,70 +159,7 @@ function Setquestions() {
                       alt=''
                     />
                   </Box>
-                  <Box sx={{ marginTop: '1rem' }}>CP Question Set 1</Box>
-                </Item>
-              </Box>
-              <Box gridColumn='span 3'>
-                <Item
-                  sx={{
-                    height: '40vh',
-                    borderRadius: '20px',
-                    border: '1px solid black',
-                  }}
-                >
-                  <Box>
-                    <img
-                      style={{
-                        width: '100px',
-                        height: '100px',
-                      }}
-                      src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Icon_pdf_file.svg/1200px-Icon_pdf_file.svg.png'
-                      alt=''
-                    />
-                  </Box>
-                  <Box sx={{ marginTop: '1rem' }}>CP Question Set 2</Box>
-                </Item>
-              </Box>
-              <Box gridColumn='span 3'>
-                <Item
-                  sx={{
-                    height: '40vh',
-                    borderRadius: '20px',
-                    border: '1px solid black',
-                  }}
-                >
-                  <Box>
-                    <img
-                      style={{
-                        width: '100px',
-                        height: '100px',
-                      }}
-                      src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Icon_pdf_file.svg/1200px-Icon_pdf_file.svg.png'
-                      alt=''
-                    />
-                  </Box>
-                  <Box sx={{ marginTop: '1rem' }}>CP Question Set 3</Box>
-                </Item>
-              </Box>
-              <Box gridColumn='span 3'>
-                <Item
-                  sx={{
-                    height: '40vh',
-                    borderRadius: '20px',
-                    border: '1px solid black',
-                  }}
-                >
-                  <Box>
-                    <img
-                      style={{
-                        width: '100px',
-                        height: '100px',
-                      }}
-                      src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Icon_pdf_file.svg/1200px-Icon_pdf_file.svg.png'
-                      alt=''
-                    />
-                  </Box>
-                  <Box sx={{ marginTop: '1rem' }}>CP Question Set 4</Box>
+                  <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
                 </Item>
               </Box>
             </Box>
@@ -209,6 +168,7 @@ function Setquestions() {
       );
     }
   };
+
   return (
     <div>
       <div className='setquestions-body-Box'>
@@ -226,7 +186,10 @@ function Setquestions() {
                   <u>SET QUESTIONS</u>
                 </h2>
               </div>
-              {questionsCardRendering()}
+              {allques &&
+                allques.map((data, index) => {
+                  return <div>{questionsCardRendering(data, index)}</div>;
+                })}
             </div>
             <div
               style={{ textAlign: 'center', justifyContent: 'center' }}
@@ -239,11 +202,22 @@ function Setquestions() {
                 <Box>
                   <Button variant='contained' size='large' component='label'>
                     Add more Files <AddIcon />
-                    <input type='file' hidden />
+                    <input
+                      type='file'
+                      type='file'
+                      name='questions'
+                      id='multiFiles'
+                      multiple
+                      hidden
+                    />
                   </Button>
                 </Box>
                 <Box sx={{ marginTop: '1rem' }}>
-                  <Button variant='contained' size='large'>
+                  <Button
+                    onClick={submitHandler}
+                    variant='contained'
+                    size='large'
+                  >
                     Submit
                   </Button>
                 </Box>

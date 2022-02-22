@@ -82,7 +82,8 @@ module.exports.upload = async(req,res)=>{
                         console.log('yahan aagya')
                         return res.status(200).json({
                             data: {
-                                done: 'yes'
+                                done: 'yes',
+                                ele:ele
                             },
                             message: "uploaded!"
                         });
@@ -173,6 +174,4 @@ module.exports.uploadDp = async(req,res)=>{
         res.redirect('back')
     }
 }
-
-
 
