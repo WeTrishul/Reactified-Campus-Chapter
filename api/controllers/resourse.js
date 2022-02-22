@@ -149,8 +149,8 @@ module.exports.deleteResource = async (req,res)=>{
           return   res.redirect('/login')
        }
 
-    //    let rid1 = '\\uploads\\resources/'
-    let rid1 = '/uploads/resources/'
+       let rid1 = '\\uploads\\resources/' // ye wala windows me chalega.
+    // let rid1 = '/uploads/resources/' // ye wala linux me chalega
        let fileName = req.params.rid
       console.log('cuta hua string',fileName)
        rid1+=fileName
@@ -174,6 +174,7 @@ module.exports.deleteResource = async (req,res)=>{
                
                 if(obj.ele!==rid1)
                 {
+                    console.log("main hoon khalnayak");
                     console.log(obj.ele)
                     Newarr.push(obj)
                 }
@@ -226,6 +227,7 @@ module.exports.postresourses = async(req,res)=>{
         }
 
         var paths,arr=[];
+        var fd;
         resourses.uploadedResources(req,res,async function(error){
 
             try {
@@ -273,6 +275,9 @@ module.exports.postresourses = async(req,res)=>{
                 arr.forEach((ele,i=1) =>{
                     var fileName= name+' '+i;
                     catData.files.push({ele,user:req.user.username,name:fileName})
+                    fd={ele:ele,
+                        user:req.user.username,
+                        name:fileName}
                     i++;
                 })
 
@@ -339,14 +344,21 @@ module.exports.postresourses = async(req,res)=>{
 
                 console.log(catData)
                 await catData.save()
-
+            //    const fd =  {
+            //        ele :ele,
+            //        user:req.user.username,
+            //        name:fileName
+            //     }
                 // if (req.body.flag){
+
+                // console.log('Idhar hoon mai bhai', fd)
                 
                     console.log('yahan aagya 1')
                    return res.status(200).json({
                         data: {
                             done: 'yes'
                         },
+                        fd,
                         message: "uploaded!"
                     });
                 // }

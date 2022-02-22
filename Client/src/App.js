@@ -52,6 +52,7 @@ import Resource from './Components/Page/resources/Resource';
 import Setquestions from './Components/Page/set questions/Setquestions';
 import UpComingEvents from './Components/Page/AllEvents/UpComingEvents';
 import PollList from './Components/Page/polling/PollList';
+import ResourceDisplay from "./Components/Page/resources/ResourceDisplay"
 
 import Apply from './Components/Forms/Apply';
 import ResourceUpload from './Components/Page/resources/ResourceUpload';
@@ -234,8 +235,11 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/ViewFiles/:foldername'>
           <ViewFiles/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/Resources/:categoryname'>
+        {/* {authCtx.isLoggedIn &&<Route exact path='/Resources/:categoryname'>
           <Resources/>
+        </Route>} */}
+        {authCtx.isLoggedIn &&<Route exact path='/Resources/:categoryname'>
+          <ResourceDisplay/>
         </Route>}
         {/* {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
           <UploadResources/>

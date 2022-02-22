@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import './ResourceUpload.css';
+import { Link } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -18,7 +19,7 @@ function ResourceUpload() {
         <Box sx={{ height: 'auto' }}>
           <Box sx={{ width: 1, marginTop: '1rem' }}>
             <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
-              <Box gridColumn='span 6'>
+              <Box to='/Resources/CP' component={Link} gridColumn='span 6'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -30,10 +31,11 @@ function ResourceUpload() {
                       alt=''
                     />
                   </Box>
+
                   <Box sx={{ marginTop: '1rem' }}>COMPETITIVE PROGRAMMING</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 6'>
+              <Box to='/Resources/DSA' component={Link} gridColumn='span 6'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -50,7 +52,7 @@ function ResourceUpload() {
                   </Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 6'>
+              <Box to='/Resources/CORE' component={Link} gridColumn='span 6'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -65,7 +67,7 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>CORE SUBJECTS</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 6'>
+              <Box to='/Resources/APTI' component={Link} gridColumn='span 6'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -80,7 +82,7 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>APTITUDE</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 6'>
+              <Box to='/Resources/DEV' component={Link} gridColumn='span 6'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -95,7 +97,7 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>DEVELOPMENT</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 6'>
+              <Box to='/Resources/GATE' component={Link} gridColumn='span 6'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -110,7 +112,11 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>GATE</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 6'>
+              <Box
+                to='/Resources/PLACEMENTS'
+                component={Link}
+                gridColumn='span 6'
+              >
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -134,7 +140,7 @@ function ResourceUpload() {
         <Box sx={{ height: 'auto' }}>
           <Box sx={{ width: 1, marginTop: '1rem' }}>
             <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
-              <Box gridColumn='span 4'>
+              <Box to='/Resources/CP' component={Link} gridColumn='span 4'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -149,7 +155,7 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>COMPETITIVE PROGRAMMING</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 4'>
+              <Box to='/Resources/DSA' component={Link} gridColumn='span 4'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -166,7 +172,7 @@ function ResourceUpload() {
                   </Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 4'>
+              <Box to='/Resources/CORE' component={Link} gridColumn='span 4'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -181,7 +187,7 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>CORE SUBJECTS</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 4'>
+              <Box to='/Resources/APTI' component={Link} gridColumn='span 4'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -196,7 +202,7 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>APTITUDE</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 4'>
+              <Box to='/Resources/DEV' component={Link} gridColumn='span 4'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -211,7 +217,7 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>DEVELOPMENT</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 4'>
+              <Box to='/Resources/GATE' component={Link} gridColumn='span 4'>
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -226,7 +232,11 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>GATE</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 4'>
+              <Box
+                to='/Resources/PLACEMENTS'
+                component={Link}
+                gridColumn='span 4'
+              >
                 <Item sx={{ height: 'auto' }}>
                   <Box sx={{ border: '1px solid black' }}>
                     <img
@@ -255,7 +265,7 @@ function ResourceUpload() {
         >
           <Box sx={{ width: 1, marginTop: '1rem' }}>
             <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
-              <Box gridColumn='span 3'>
+              <Box to='/Resources/CP' component={Link} gridColumn='span 3'>
                 <Item
                   sx={{
                     height: '40vh',
@@ -276,7 +286,7 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>COMPETITIVE PROGRAMMING</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 3'>
+              <Box to='/Resources/DSA' component={Link} gridColumn='span 3'>
                 <Item
                   sx={{
                     height: '40vh',
@@ -299,7 +309,7 @@ function ResourceUpload() {
                   </Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 3'>
+              <Box to='/Resources/CORE' component={Link} gridColumn='span 3'>
                 <Item
                   sx={{
                     height: '40vh',
@@ -320,7 +330,7 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>CORE SUBJECTS</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 3'>
+              <Box to='/Resources/APTI' component={Link} gridColumn='span 3'>
                 <Item
                   sx={{
                     height: '40vh',
@@ -341,7 +351,7 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>APTITUDE</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 3'>
+              <Box to='/Resources/DEV' component={Link} gridColumn='span 3'>
                 <Item
                   sx={{
                     height: '40vh',
@@ -362,7 +372,7 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>DEVELOPMENT</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 3'>
+              <Box to='/Resources/GATE' component={Link} gridColumn='span 3'>
                 <Item
                   sx={{
                     height: '40vh',
@@ -383,7 +393,11 @@ function ResourceUpload() {
                   <Box sx={{ marginTop: '1rem' }}>GATE</Box>
                 </Item>
               </Box>
-              <Box gridColumn='span 3'>
+              <Box
+                to='/Resources/PLACEMENTS'
+                component={Link}
+                gridColumn='span 3'
+              >
                 <Item
                   sx={{
                     height: '40vh',

@@ -83,87 +83,63 @@ function Setquestions() {
   const questionsCardRendering = (data, index) => {
     if (window.innerWidth <= 600) {
       return (
-        <Box sx={{ height: '70vh', overflowY: 'auto' }}>
-          <Box sx={{ width: 1, marginTop: '1rem' }}>
-            <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
-              <Box gridColumn='span 6'>
-                <Item sx={{ height: '30vh' }}>
-                  <Box sx={{ border: '1px solid black' }}>
-                    <img
-                      style={{
-                        width: '100px',
-                        height: '100px',
-                      }}
-                      src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Icon_pdf_file.svg/1200px-Icon_pdf_file.svg.png'
-                      alt=''
-                    />
-                  </Box>
-
-                  <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
-                </Item>
-              </Box>
+        <Box gridColumn='span 6'>
+          <Item sx={{ height: 'auto' }}>
+            <Box sx={{ border: '1px solid black' }}>
+              <img
+                style={{
+                  width: '100px',
+                  height: '100px',
+                }}
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png'
+                alt=''
+              />
             </Box>
-          </Box>
+
+            <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
+          </Item>
         </Box>
       );
     } else if (window.innerWidth > 600 && window.innerWidth <= 800) {
       return (
-        <Box sx={{ height: '70vh', overflowY: 'auto' }}>
-          <Box sx={{ width: 1, marginTop: '1rem' }}>
-            <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
-              <Box gridColumn='span 4'>
-                <Item sx={{ height: '30vh' }}>
-                  <Box sx={{ border: '1px solid black' }}>
-                    <img
-                      style={{
-                        width: '100px',
-                        height: '100px',
-                      }}
-                      src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Icon_pdf_file.svg/1200px-Icon_pdf_file.svg.png'
-                      alt=''
-                    />
-                  </Box>
-                  <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
-                </Item>
-              </Box>
+        <Box gridColumn='span 4'>
+          <Item sx={{ height: 'auto' }}>
+            <Box sx={{ border: '1px solid black' }}>
+              <img
+                style={{
+                  width: '100px',
+                  height: '100px',
+                }}
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png'
+                alt=''
+              />
             </Box>
-          </Box>
+            <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
+          </Item>
         </Box>
       );
     } else if (window.innerWidth >= 800) {
       return (
-        <Box
-          sx={{
-            maxHeight: '70vh',
-            marginTop: '2rem',
-            overflowY: 'auto',
-          }}
-        >
-          <Box sx={{ width: 1, marginTop: '1rem' }}>
-            <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={2}>
-              <Box gridColumn='span 3'>
-                <Item
-                  sx={{
-                    height: '40vh',
-                    borderRadius: '20px',
-                    border: '1px solid black',
-                  }}
-                >
-                  <Box>
-                    <img
-                      style={{
-                        width: '100px',
-                        height: '100px',
-                      }}
-                      src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Icon_pdf_file.svg/1200px-Icon_pdf_file.svg.png'
-                      alt=''
-                    />
-                  </Box>
-                  <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
-                </Item>
-              </Box>
+        <Box gridColumn='span 3'>
+          <Item
+            sx={{
+              height: 'auto',
+              borderRadius: '20px',
+              border: '1px solid black',
+            }}
+          >
+            <Box sx={{ width: '100%' }}>
+              <img
+                style={{
+                  width: '70%',
+                  height: '35vh',
+                }}
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png'
+                alt=''
+              />
             </Box>
-          </Box>
+            <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
+          </Item>
         </Box>
       );
     }
@@ -186,10 +162,20 @@ function Setquestions() {
                   <u>SET QUESTIONS</u>
                 </h2>
               </div>
-              {allques &&
-                allques.map((data, index) => {
-                  return <div>{questionsCardRendering(data, index)}</div>;
-                })}
+              <Box sx={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                <Box sx={{ width: 1, marginTop: '1rem' }}>
+                  <Box
+                    display='grid'
+                    gridTemplateColumns='repeat(12, 1fr)'
+                    gap={2}
+                  >
+                    {allques &&
+                      allques.map((data, index) => {
+                        return <>{questionsCardRendering(data, index)}</>;
+                      })}
+                  </Box>
+                </Box>
+              </Box>
             </div>
             <div
               style={{ textAlign: 'center', justifyContent: 'center' }}
