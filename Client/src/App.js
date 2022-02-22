@@ -54,6 +54,7 @@ import UpComingEvents from './Components/Page/AllEvents/UpComingEvents';
 import PollList from './Components/Page/polling/PollList';
 
 import Apply from './Components/Forms/Apply';
+import ResourceUpload from './Components/Page/resources/ResourceUpload';
 function App() {
 
   const authCtx = useContext(AuthContext)
@@ -236,8 +237,11 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/Resources/:categoryname'>
           <Resources/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
+        {/* {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
           <UploadResources/>
+        </Route>} */}
+        {authCtx.isLoggedIn &&<Route exact path='/UploadResources'>
+          <ResourceUpload/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/ViewCategory/:categoryname'>
           <ViewCategory/>
