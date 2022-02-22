@@ -90,6 +90,8 @@ function PollList() {
       optionD: enteredOptionD,
     };
 
+    console.log(pollData);
+
     // axios.post('http://localhost:3000/poll/createpoll',pollData,
 
     // ).then((response) =>{
@@ -131,7 +133,9 @@ function PollList() {
         return response.data;
       })
       .then((data) => {
-        history.push('/Polling');
+        setPolls((c) => [...c, data.data.savedPoll]);
+        handleClose();
+        // history.push('/Polling');
       })
       .catch((err) => {
         console.log('error');
@@ -240,7 +244,7 @@ function PollList() {
                           <TextField
                             id='outlined-multiline-flexible'
                             label='Write your Question'
-                            ref={questionInputRef}
+                            inputRef={questionInputRef}
                             multiline
                             maxRows={4}
                             value={value}
@@ -252,7 +256,7 @@ function PollList() {
                             id='outlined-basic'
                             label='Poll Name'
                             variant='outlined'
-                            ref={pollnameInputRef}
+                            inputRef={pollnameInputRef}
                           />
                         </Box>
                         <Box sx={{ marginTop: '10px' }}>
@@ -260,7 +264,7 @@ function PollList() {
                             id='outlined-basic'
                             label='First Option'
                             variant='outlined'
-                            ref={optionAInputRef}
+                            inputRef={optionAInputRef}
                           />
                         </Box>
                         <Box sx={{ marginTop: '10px' }}>
@@ -268,7 +272,7 @@ function PollList() {
                             id='outlined-basic'
                             label='Second Option'
                             variant='outlined'
-                            ref={optionBInputRef}
+                            inputRef={optionBInputRef}
                           />
                         </Box>
                         <Box sx={{ marginTop: '10px' }}>
@@ -276,7 +280,7 @@ function PollList() {
                             id='outlined-basic'
                             label='Third Option'
                             variant='outlined'
-                            ref={optionCInputRef}
+                            inputRef={optionCInputRef}
                           />
                         </Box>
                         <Box sx={{ marginTop: '10px' }}>
@@ -284,7 +288,7 @@ function PollList() {
                             id='outlined-basic'
                             label='Fourth Option'
                             variant='outlined'
-                            ref={optionDInputRef}
+                            inputRef={optionDInputRef}
                           />
                         </Box>
                         <Box

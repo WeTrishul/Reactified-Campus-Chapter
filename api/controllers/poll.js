@@ -33,7 +33,7 @@ module.exports.savePoll = async (req,res)=>{
        return res.status(200).json({
         data: {
             done:"yes",
-            
+            savedPoll
         },
         message: "Applied Successfully!"
     });

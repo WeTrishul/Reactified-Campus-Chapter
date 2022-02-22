@@ -4,14 +4,31 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import Axios from 'axios';
 import PieChart from './PieChart';
-
+import Box from '@mui/material/Box';
 import { useState } from 'react';
 import { useContext } from 'react';
 import AuthContext from '../../Service/auth-context';
 import { useParams } from 'react-router-dom';
 
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
+const style = {
+  position: 'absolute',
+  top: '55%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 550,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 function DisplayPoll() {
+  const [open, setOpen] = React.useState(false);
   const [poll, setPoll] = useState();
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
 
   const [pollresult, setPollResult] = useState();
 
@@ -66,9 +83,11 @@ function DisplayPoll() {
           alert('Kitni baar krega ?');
           setPoll(undefined);
           setPollResult(res.data.arr);
+          handleOpen();
         } else {
           setPollResult(res.data.arr);
           setPoll(undefined);
+          handleOpen();
         }
       })
       .catch((err) => {
@@ -130,13 +149,30 @@ function DisplayPoll() {
           </div>
         </div>
       )}
-      <div
-        style={{
-          textAlign: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <div>{pollresult && <PieChart profile={pollresult} />}</div>
+      <div>
+        {/* <Button onClick={Submitpollans}>Open modal</Button> */}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='modal-modal-title'
+          aria-describedby='modal-modal-description'
+        >
+          <Box sx={style}>
+            <Typography id='modal-modal-title' variant='h6' component='h2'>
+              Poll Chart
+            </Typography>
+            <Typography id='modal-modal-description' sx={{ mt: 2 }}>
+              <div
+                style={{
+                  textAlign: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <div>{pollresult && <PieChart profile={pollresult} />}</div>
+              </div>
+            </Typography>
+          </Box>
+        </Modal>
       </div>
     </div>
   );
