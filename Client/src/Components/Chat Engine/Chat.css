@@ -21,62 +21,7 @@
   height: 71vh;
   /* background: blue; */
 }
-.chat-Messages {
-  padding: 1rem;
-  overflow-y: auto;
-}
-.chat-First-User-Div {
-  display: flex;
-  float: left;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.first-User-image-container {
-  margin-right: 10px;
-}
-.chat-first-User-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border-image: none;
-  vertical-align: middle;
-}
-.first-User-Message {
-  background: lightblue;
-  padding: 0.5rem;
-  border-radius: 17px;
-}
-.first-User-Message-Time {
-  padding: 2px;
-  float: right;
-}
-.chat-Second-User-Div {
-  display: flex;
-  float: right;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.Second-User-image-container {
-  margin-left: 5px;
-}
-.chat-second-User-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border-image: none;
-  vertical-align: middle;
-}
-.second-User-Message {
-  width: 100%;
-  background: lightgreen;
-  padding: 0.5rem;
-  border-radius: 17px;
-  margin-right: 7px;
-}
-.second-User-Message-Time {
-  float: left;
-  padding: 2px;
-}
+
 .write-chat-Message {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -88,30 +33,12 @@
     margin-left: 5px;
     margin-right: 5px;
   }
-  .chat-Messages {
-    padding: 10px;
-  }
-  .first-User-image-container {
-    margin-right: 8px;
-  }
-  .second-User-Message {
-    margin-right: 6px;
-  }
 }
 @media only screen and (min-width: 301px) and (max-width: 768px) {
   .corechat-outer-box {
     margin-left: 5px;
     margin-right: 5px;
   }
-  /* .chat-Messages {
-    padding: 10px;
-  }
-  .first-User-image-container {
-    margin-right: 8px;
-  }
-  .second-User-Message {
-    margin-right: 6px;
-  } */
 }
 @media only screen and (min-width: 769px) and (max-width: 992px) {
   .corechat-outer-box {

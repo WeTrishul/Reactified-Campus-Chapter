@@ -166,12 +166,12 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/Reports'>
           <Reports/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/Profile'>
-          <Profile/>
-        </Route>}
         {/* {authCtx.isLoggedIn &&<Route exact path='/Profile'>
-          <Userprofile/>
+          <Profile/>
         </Route>} */}
+        {authCtx.isLoggedIn &&<Route exact path='/Profile'>
+          <Userprofile/>
+        </Route>}
         {authCtx.isLoggedIn && socket &&<Route exact path='/AddEvent'>
           <AddEvent socket={socket}/>
         </Route>}

@@ -27,7 +27,7 @@ function Chart({ profile }) {
 
   return (
     <div>
-      <div style={{ height: '500px', width: '500px' }}>
+      <div style={{ height: '50%', width: '100%' }}>
         <Line
           data={chartData}
           options={{
