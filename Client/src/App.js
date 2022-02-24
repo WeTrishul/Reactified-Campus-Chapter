@@ -56,6 +56,8 @@ import ResourceDisplay from "./Components/Page/resources/ResourceDisplay"
 
 import Apply from './Components/Forms/Apply';
 import ResourceUpload from './Components/Page/resources/ResourceUpload';
+import Viewfiles from './Components/Page/resources/Viewfiles';
+import Viewquestions from './Components/Page/set questions/Viewquestions';
 function App() {
 
   const authCtx = useContext(AuthContext)
@@ -224,7 +226,7 @@ function App() {
           <Setquestions/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/ViewQuestions'>
-          <ViewQuestions/>
+          <Viewquestions/>
         </Route>}
         {/* {authCtx.isLoggedIn &&<Route exact path='/ViewResources'>
           <ViewResources/>
@@ -232,8 +234,11 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/ViewResources'>
           <Resource/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/ViewFiles/:foldername'>
+        {/* {authCtx.isLoggedIn &&<Route exact path='/ViewFiles/:foldername'>
           <ViewFiles/>
+        </Route>} */}
+        {authCtx.isLoggedIn &&<Route exact path='/ViewFiles/:foldername'>
+          <Viewfiles/>
         </Route>}
         {/* {authCtx.isLoggedIn &&<Route exact path='/Resources/:categoryname'>
           <Resources/>

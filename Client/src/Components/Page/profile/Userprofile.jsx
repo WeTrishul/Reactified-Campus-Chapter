@@ -1,12 +1,9 @@
 import React from 'react';
 import './Userprofile.css';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Chart from '../Chart';
-import Paper from '@mui/material/Paper';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
-import Avatar from '@mui/material/Avatar';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import Typography from '@mui/material/Typography';

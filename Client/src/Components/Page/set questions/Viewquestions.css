@@ -1,0 +1,20 @@
+.viewquestions-body-Box {
+  box-sizing: border-box;
+  height: auto;
+}
+.viewquestions-outer-Box {
+  box-sizing: border-box;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  height: auto;
+}
+.viewquestions-inner-Box {
+  height: auto;
+  width: 100%;
+}
+@media screen and (max-width: 300px) {
+  .viewquestions-outer-Box {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
