@@ -2,9 +2,13 @@ import React from 'react';
 import './Chat.css';
 import { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
+
 import { useContext } from 'react';
 import AuthContext from '../../Service/auth-context';
 
@@ -105,108 +109,104 @@ function Executivechat({ socket }) {
   const rendermessage = (data) => {
     if (data.userid._id == userId) {
       return (
-        <div
-          style={{
-            display: 'flex',
-            float: 'right',
-            marginTop: '10px',
-            marginBottom: '10px',
-          }}
-          className='chat-Second-User-Div'
-        >
-          <div
-            style={{
-              background: 'lightgreen',
-              padding: '0.5rem',
-              borderRadius: '17px',
-              marginRight: '7px',
-              width: '100%',
-            }}
-            className='second-User-Message'
-          >
-            <div style={{ width: '100%' }}>
-              <span
-                style={{ fontWeight: '700', color: 'black', width: '100%' }}
-              >
-                Anand kumar Choudhary
-              </span>
-            </div>
-            <div>
-              <span style={{ width: '100%', fontSize: '20px', color: 'black' }}>
-                {data.message}
-              </span>
-            </div>
-            <div
-              style={{ fontSize: '12px', color: 'black' }}
-              className='second-User-Message-Time'
-            >
-              09:45
-            </div>
-          </div>
-          <div
-            style={{ marginLeft: '5px' }}
-            className='Second-User-image-container'
-          >
-            <img
-              style={{
-                width: '50px',
-                height: '50px',
-                borderRadius: '50%',
-                borderImage: 'none',
-                verticalAlign: 'middle',
+        <Box>
+          <Typography>
+            <Box
+              sx={{
+                float: 'right',
+                marginBottom: '5px',
+                margoinTop: '5px',
+                display: 'table',
+                clear: 'both',
               }}
-              className='chat-second-User-image'
-              src='https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg'
-              alt=''
-            />
-          </div>
-        </div>
+            >
+              <Box sx={{ display: 'flex' }}>
+                <Box
+                  style={{
+                    color: 'text.secondary',
+                    marginRight: '7px',
+                  }}
+                >
+                  <Card
+                    sx={{
+                      padding: '5px',
+                      marginTop: '2px',
+                      marginBottom: '2px',
+                      borderRadius: '15px',
+                      background: 'lightgreen',
+                    }}
+                  >
+                    <Box sx={{ color: 'text.secondary' }}>
+                      {data.userid.username}
+                    </Box>
+                    <Box sx={{ color: 'text.primary' }}>{data.message}</Box>
+                    <Box
+                      sx={{
+                        float: 'right',
+                        color: 'text.secondary',
+                      }}
+                    >
+                      09:45
+                    </Box>
+                  </Card>
+                </Box>
+                <Box sx={{ color: 'text.secondary' }}>
+                  <Avatar alt='demo' src={data.userid.dp} />
+                </Box>
+              </Box>
+            </Box>
+          </Typography>
+        </Box>
       );
     } else {
       return (
-        <div
-          style={{
-            display: 'flex',
-            float: 'left',
-            marginTop: '10px',
-            marginBottom: '10px',
-          }}
-          className='chat-First-User-Div'
-        >
-          <div className='first-User-image-container'>
-            <img
-              style={{
-                width: '50px',
-                height: '50px',
-                borderRadius: '50%',
-                borderImage: 'none',
-                verticalAlign: 'middle',
+        <Box>
+          <Typography>
+            <Box
+              sx={{
+                marginBottom: '5px',
+                margoinTop: '5px',
+                display: 'Table',
+                clear: 'both',
               }}
-              className='chat-first-User-image'
-              src='https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg'
-              alt=''
-            />
-          </div>
-          <div
-            style={{
-              background: 'lightblue',
-              padding: '0.5rem',
-              borderRadius: '17px',
-            }}
-            className='first-User-Message'
-          >
-            <span style={{ fontWeight: '700' }}>Anand kumar Choudhary</span>
-            <div>
-              <span>{data.message}</span>
-            </div>
-            <div
-              style={{ padding: '2px', float: 'right' }}
-              className='first-User-Message-Time'
             >
-              09:45
-            </div>
-          </div>
-        </div>
+              <Box sx={{ display: 'flex' }}>
+                <Box sx={{ color: 'text.secondary' }}>
+                  <Avatar alt='demo' src={data.userid.dp} />
+                </Box>
+                <Box
+                  style={{
+                    color: 'text.secondary',
+                    marginLeft: '7px',
+                  }}
+                >
+                  <Card
+                    sx={{
+                      padding: '5px',
+                      marginTop: '2px',
+                      marginBottom: '2px',
+                      borderRadius: '15px',
+                      background: 'lightblue',
+                    }}
+                  >
+                    <Box sx={{ color: 'text.secondary' }}>
+                      {data.userid.username}
+                    </Box>
+                    <Box sx={{ color: 'text.primary' }}>{data.message}</Box>
+                    <Box
+                      sx={{
+                        float: 'right',
+                        color: 'text.secondary',
+                      }}
+                    >
+                      09:45
+                    </Box>
+                  </Card>
+                </Box>
+              </Box>
+            </Box>
+          </Typography>
+        </Box>
       );
     }
   };
@@ -230,11 +230,18 @@ function Executivechat({ socket }) {
                     overflowY: 'auto',
                   }}
                 >
-                  <div className='chat-Messages'>
+                  <Box
+                    sx={{
+                      padding: '10px',
+                      overflowY: 'auto',
+                    }}
+                  >
+                    {/* yahan */}
+
                     {chat.map((data) => {
-                      return <div className='msg'>{rendermessage(data)}</div>;
+                      return rendermessage(data);
                     })}
-                  </div>
+                  </Box>
                 </Card>
               </div>
               <div className='write-chat-Message'>

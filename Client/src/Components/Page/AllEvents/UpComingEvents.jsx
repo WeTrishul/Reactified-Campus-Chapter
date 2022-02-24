@@ -47,7 +47,11 @@ function UpComingEvents({ socket }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [event, setEditEvent] = useState();
+  const [event, setEditEvent] = useState({});
+
+  // for edit usestates
+
+  // for edit usestates
 
   // for edit event modal form
 
@@ -81,13 +85,54 @@ function UpComingEvents({ socket }) {
   let userId = authCtx.id;
   let userName = authCtx.username;
 
+  // for creation
+
   const AboutEventRef = useRef();
   const EventNameRef = useRef();
   const EventDateRef = useRef();
   const EventStartTimeRef = useRef();
   const EventEndTimeRef = useRef();
 
+  // for editing
+
+  const EditAboutEventRef = useRef();
+  const EditEventNameRef = useRef();
+  const EditEventDateRef = useRef();
+  const EditEventStartTimeRef = useRef();
+  const EditEventEndTimeRef = useRef();
+
   let history = useHistory();
+
+  // methods to handle change
+
+  const handleNameChange = (e) => {
+    let x = event;
+    x.eventname = e.target.value;
+    setEditEvent({ ...event, x });
+  };
+
+  const handleAboutChange = (e) => {
+    let x = event;
+    x.aboutevent = e.target.value;
+    setEditEvent({ ...event, x });
+  };
+  const handleDateChange = (e) => {
+    let x = event;
+    x.eventDate = e.target.value;
+    setEditEvent({ ...event, x });
+  };
+  const handleEndtimeChange = (e) => {
+    let x = event;
+    x.eventEndTime = e.target.value;
+    setEditEvent({ ...event, x });
+  };
+  const handleStarttimeChange = (e) => {
+    let x = event;
+    x.eventStartTime = e.target.value;
+    setEditEvent({ ...event, x });
+  };
+
+  // methods to handle change
 
   function submitHandler(e) {
     e.preventDefault();
@@ -272,12 +317,14 @@ function UpComingEvents({ socket }) {
     //     console.log(key[0] + ', ' + key[1]);
     // }
 
-    const eneteredAboutEvents = AboutEventRef.current.value;
-    const enteredEventName = EventNameRef.current.value;
-    const enteredEventDate = EventDateRef.current.value;
-    const enteredStartTime = EventStartTimeRef.current.value;
-    const enteredEndTime = EventEndTimeRef.current.value;
+    console.log('mai event id hoon', event._id);
+    const eneteredAboutEvents = EditAboutEventRef.current.value;
+    const enteredEventName = EditEventNameRef.current.value;
+    const enteredEventDate = EditEventDateRef.current.value;
+    const enteredStartTime = EditEventStartTimeRef.current.value;
+    const enteredEndTime = EditEventEndTimeRef.current.value;
 
+    console.log('Mai change hogya hoon ', enteredEventName);
     var form_data = new FormData();
 
     const inpfiles = document.getElementById('multiFiles');
@@ -287,6 +334,7 @@ function UpComingEvents({ socket }) {
     form_data.append('eventStartTime', enteredStartTime);
     form_data.append('eventEndTime', enteredEndTime);
     form_data.append('eventDate', enteredEventDate);
+    form_data.append('id', event._id);
 
     Axios({
       method: 'POST',
@@ -299,7 +347,7 @@ function UpComingEvents({ socket }) {
     })
       .then((res) => {
         console.log(res);
-        history.push('/UpcomingEvent');
+        history.push('/Dashboard');
       })
       .catch((err) => {
         console.log(err);
@@ -755,13 +803,9 @@ function UpComingEvents({ socket }) {
                               id='outlined-basic'
                               label='Event Name'
                               variant='outlined'
-                              inputRef={EventNameRef}
+                              inputRef={EditEventNameRef}
                               value={event.eventname}
-                              onChange={(event) => {
-                                let x = event;
-                                x.eventname = event.target.value;
-                                setEditEvent(x);
-                              }}
+                              onChange={handleNameChange}
                             />
                           </Box>
                           <Box sx={{ marginTop: '10px' }}>
@@ -769,13 +813,9 @@ function UpComingEvents({ socket }) {
                               id='outlined-basic'
                               label='About Event'
                               variant='outlined'
-                              inputRef={AboutEventRef}
+                              inputRef={EditAboutEventRef}
                               value={event.aboutevent}
-                              onChange={(event) => {
-                                let x = event;
-                                x.aboutevent = event.target.value;
-                                setEditEvent(x);
-                              }}
+                              onChange={handleAboutChange}
                             />
                           </Box>
                           <Box sx={{ marginTop: '10px' }}>
@@ -783,13 +823,9 @@ function UpComingEvents({ socket }) {
                               id='outlined-basic'
                               label='Start Time'
                               variant='outlined'
-                              inputRef={EventStartTimeRef}
+                              inputRef={EditEventStartTimeRef}
                               value={event.eventStartTime}
-                              onChange={(event) => {
-                                let x = event;
-                                x.eventStartTime = event.target.value;
-                                setEditEvent(x);
-                              }}
+                              onChange={handleStarttimeChange}
                             />
                           </Box>
                           <Box sx={{ marginTop: '10px' }}>
@@ -797,13 +833,9 @@ function UpComingEvents({ socket }) {
                               id='outlined-basic'
                               label='End Time'
                               variant='outlined'
-                              inputRef={EventEndTimeRef}
+                              inputRef={EditEventEndTimeRef}
                               value={event.eventEndTime}
-                              onChange={(event) => {
-                                let x = event;
-                                x.eventEndTime = event.target.value;
-                                setEditEvent(x);
-                              }}
+                              onChange={handleEndtimeChange}
                             />
                           </Box>
                           <Box sx={{ marginTop: '10px' }}>
@@ -811,13 +843,9 @@ function UpComingEvents({ socket }) {
                               id='outlined-basic'
                               label='Event Date'
                               variant='outlined'
-                              inputRef={EventDateRef}
+                              inputRef={EditEventDateRef}
                               value={event.eventDate}
-                              onChange={(event) => {
-                                let x = event;
-                                x.eventDate = event.target.value;
-                                setEditEvent(x);
-                              }}
+                              onChange={handleDateChange}
                             />
                           </Box>
                           <Box

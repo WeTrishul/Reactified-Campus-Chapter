@@ -35,13 +35,13 @@ function Leadersboard() {
     } else if (index == 1) {
       return (
         <>
-          <EmojiEventsIcon style={{ color: 'gold' }} />;
+          <EmojiEventsIcon style={{ color: 'silver' }} />;
         </>
       );
     } else if (index == 2) {
       return (
         <>
-          <EmojiEventsIcon style={{ color: 'gold' }} />;
+          <EmojiEventsIcon style={{ color: 'brown' }} />;
         </>
       );
     } else {
@@ -117,50 +117,31 @@ function Leadersboard() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {/* {rows
+                    {board
                       .slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
-                      .map((row) => {
+                      .map((leader, index) => {
                         return (
-                          <TableRow
-                            hover
-                            role='checkbox'
-                            tabIndex={-1}
-                            key={row.code}
-                          >
-                            {columns.map((column) => {
-                              const value = row[column.id];
-                              return (
-                                <TableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === 'number'
-                                    ? column.format(value)
-                                    : value}
-                                </TableCell>
-                              );
-                            })}
+                          <TableRow>
+                            <TableCell>
+                              {/* <EmojiEventsIcon style={{ color: 'gold' }} />
+                               */}
+                              {rankRendering(index)}
+                            </TableCell>
+                            <TableCell>{leader.userid.name}</TableCell>
+                            <TableCell>{leader.userid.CurrentRating}</TableCell>
                           </TableRow>
                         );
-                      })} */}
-                    {board.map((leader, index) => {
-                      <TableRow>
-                        <TableCell>
-                          {/* <EmojiEventsIcon style={{ color: 'gold' }} />
-                           */}
-                          {rankRendering(index)}
-                        </TableCell>
-                        <TableCell>{leader.userid.name}</TableCell>
-                        <TableCell>{leader.userid.CurrentRating}</TableCell>
-                      </TableRow>;
-                    })}
+                      })}
                   </TableBody>
                 </Table>
               </TableContainer>
               <TablePagination
                 rowsPerPageOptions={[10, 25, 50, 100]}
                 component='div'
-                // count={rows.length}
+                count={board.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
