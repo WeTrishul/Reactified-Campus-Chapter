@@ -2,13 +2,66 @@ import { Card } from '@mui/material';
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import CreateIcon from '@mui/icons-material/Create';
+import AuthContext from '../../../Service/auth-context';
+import { useContext } from 'react';
+import { useState, useEffect } from 'react';
+import Axios from 'axios';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import './Viewblogs.css';
+
 function Viewblogs() {
   let history = useHistory();
-  const blogsDisplay = () => {
-    history.push('/DisplayBlogs');
+
+  const authCtx = useContext(AuthContext);
+  let userId = authCtx.id;
+  let username = authCtx.username;
+
+  const [blogs, setBlogs] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Axios({
+      method: 'GET',
+
+      withCredentials: true,
+      url: 'http://localhost:3000/allblogs',
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+        setLoading(false);
+        setBlogs(data.data.blogs);
+      });
+  }, []);
+
+  const blogsDeleteHandler = (blog) => {
+    const blogData = {
+      userid: userId,
+      blogid: blog.target.id,
+    };
+
+    Axios({
+      method: 'POST',
+      data: {
+        userid: userId,
+        blogid: blog.target.id,
+      },
+
+      withCredentials: true,
+      url: 'http://localhost:3000/deleteblog/',
+    })
+      .then((res) => {
+        console.log(res);
+        document.getElementById('blog-' + blog.target.id).remove();
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log('main nhi chal rha hoon bhai');
+      });
   };
+
   return (
     <div>
       <div className='body-blogs-Box'>
@@ -18,51 +71,72 @@ function Viewblogs() {
               <h2>Latest Blogs</h2>
               <hr className='blogs-HorizontalLine' />
             </div>
-            <div className='blogs-Container-Box'>
-              <div onClick={blogsDisplay} className='blogs-content-Box'>
-                <Card
-                  style={{
-                    height: 'auto',
-                    borderRadius: '20px',
-                  }}
+            {blogs.map((data) => {
+              return (
+                <div
+                  className='blogs-Container-Box'
+                  id={'blog-' + data._id}
+                  key={data._id}
                 >
-                  <div className='blogs-userImage-Name-Time'>
-                    <div className='blogs-userImg-Container'>
-                      <img
-                        className='blogs-User-Image'
-                        src='https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
-                        alt=''
-                      />
+                  {/* <div onClick={blogsDisplay} className='blogs-content-Box'> */}
+                  <div className='blogs-content-Box'>
+                    <Link
+                      className='blogsTitleLink'
+                      to={{ pathname: '/DisplayBlogs', state: data._id }}
+                    >
+                      <Card
+                        style={{
+                          height: 'auto',
+                          borderRadius: '20px',
+                        }}
+                      >
+                        <div className='blogs-userImage-Name-Time'>
+                          <div className='blogs-userImg-Container'>
+                            <img
+                              className='blogs-User-Image'
+                              src={data.userid.dp}
+                              alt=''
+                            />
+                          </div>
+                          <div className='blogs-userName'>
+                            {data.userid.username}
+                          </div>
+                          <div className='blogs-postTime'>
+                            <span>
+                              <AccessTimeFilledIcon />
+                            </span>
+                            <span>1hr ago</span>
+                          </div>
+                        </div>
+                        <div className='blogs-Post-Heading-Content'>
+                          {data.title}
+                        </div>
+                        <div className='blogs-Post-Content'>
+                          {data.description}
+                        </div>
+                      </Card>
+                    </Link>
+                  </div>
+                  <div className='blogs-Delete-Edit-Box'>
+                    <div>
+                      <Link to={{ pathname: '/EditBlog', state: data._id }}>
+                        <button className='blogs-EditBtn'>EDIT</button>
+                      </Link>
                     </div>
-                    <div className='blogs-userName'>ANAND CHOUDHARY</div>
-                    <div className='blogs-postTime'>
-                      <span>
-                        <AccessTimeFilledIcon />
-                      </span>
-                      <span>1hr ago</span>
+                    <div>
+                      <button
+                        className='blogs-DeleteBtn'
+                        onClick={blogsDeleteHandler}
+                        id={data._id}
+                      >
+                        DELETE
+                      </button>
                     </div>
                   </div>
-                  <div className='blogs-Post-Heading-Content'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nisi, iusto?
-                  </div>
-                  <div className='blogs-Post-Content'>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Ipsam nemo at aspernatur dolores temporibus necessitatibus
-                    nesciunt asperiores delectus quidem! Rerum sed aspernatur
-                    eius voluptate non.
-                  </div>
-                </Card>
-              </div>
-              <div className='blogs-Delete-Edit-Box'>
-                <div>
-                  <button className='blogs-EditBtn'>EDIT</button>
                 </div>
-                <div>
-                  <button className='blogs-DeleteBtn'>DELETE</button>
-                </div>
-              </div>
-            </div>
+              );
+            })}
+
             <div>
               <hr className='blogs-end-Line' />
             </div>

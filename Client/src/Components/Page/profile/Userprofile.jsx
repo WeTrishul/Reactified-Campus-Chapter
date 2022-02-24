@@ -3,6 +3,7 @@ import './Userprofile.css';
 import Box from '@mui/material/Box';
 import Chart from '../Chart';
 import Card from '@mui/material/Card';
+import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
@@ -16,7 +17,7 @@ function Userprofile() {
           <div className='userProfile-inner-Box'>
             <Typography>
               <Grid sx={{ marginTop: '1rem' }} container>
-                <Grid item xs={12} sm={6} md={4} lg={4}>
+                <Grid item xs={12} sm={12} md={6} lg={4}>
                   <Card
                     sx={{
                       margin: '10px',
@@ -38,6 +39,21 @@ function Userprofile() {
                         src='https://wallpaperaccess.com/full/359168.jpg'
                         alt=''
                       />
+                      <Box>
+                        <Button
+                          size='small'
+                          variant='contained'
+                          component='label'
+                        >
+                          Picture
+                          <input
+                            type='file'
+                            name='profilePic'
+                            id='multiFiles'
+                            hidden
+                          />
+                        </Button>
+                      </Box>
                       <Box sx={{ color: 'text.secondary' }}>ADMIN</Box>
                     </Box>
                     <Box
@@ -45,7 +61,7 @@ function Userprofile() {
                         textAlign: 'center',
                         justifyContent: 'center',
                         width: '60%',
-                        marginTop: '2rem',
+                        marginTop: '5px',
                       }}
                     >
                       <Box
@@ -79,10 +95,35 @@ function Userprofile() {
                         INSTITUTE:UNIVERSITY OF ENGINEERING & MANAGEMENT,
                         KOLKATA
                       </Box>
+                      <Box sx={{ display: 'flex', marginTop: '5px' }}>
+                        <Box>
+                          <Button size='small' variant='contained'>
+                            Admin
+                          </Button>
+                        </Box>
+                        <Box sx={{ marginLeft: '1rem' }}>
+                          <Button size='small' variant='contained'>
+                            Setter
+                          </Button>
+                        </Box>
+                      </Box>
+                      <Box sx={{ display: 'flex', marginTop: '5px' }}>
+                        <Box>
+                          <Button size='small' variant='contained'>
+                            Events
+                          </Button>
+                        </Box>
+                        <Box sx={{ marginLeft: '1rem' }}>
+                          {' '}
+                          <Button size='small' variant='contained'>
+                            Media
+                          </Button>
+                        </Box>
+                      </Box>
                     </Box>
                   </Card>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={4}>
+                <Grid item xs={12} sm={12} md={6} lg={4}>
                   <Card
                     sx={{
                       margin: '10px',
@@ -103,7 +144,7 @@ function Userprofile() {
                     </Box>
                   </Card>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={4}>
+                <Grid item xs={12} sm={12} md={6} lg={4}>
                   <Card
                     sx={{
                       margin: '10px',
@@ -124,7 +165,7 @@ function Userprofile() {
                     </Box>
                   </Card>
                 </Grid>
-                <Grid item xs={12} sm={6} md={12} lg={12}>
+                <Grid item xs={12} sm={12} md={6} lg={12}>
                   <Card
                     sx={{
                       width: '100%',

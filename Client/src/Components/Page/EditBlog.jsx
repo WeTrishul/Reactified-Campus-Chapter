@@ -13,6 +13,8 @@ function EditBlog() {
   const location = useLocation();
   const [displayBlogs, setDisplayBlogs] = useState({});
 
+  const [parsedContent, setParsedContent] = useState();
+
   const [editor, setEditor] = useState({});
   let history = useHistory();
 
@@ -131,6 +133,7 @@ function EditBlog() {
       .then((data) => {
         console.log(data);
         setDisplayBlogs(data.blogs);
+        setParsedContent(ReactHtmlParser(displayBlogs.content));
         console.log('yahan');
         // console.log(displayBlogs)
         //     // console.log(data)
@@ -139,50 +142,52 @@ function EditBlog() {
 
   return (
     <div>
-      <div className='App'>
-        {/* <h2>Using CKEditor 5 build in React</h2> */}
-        <input type='text' value={displayBlogs.title} ref={titleInputRef} />
-        <input
-          type='text'
-          value={displayBlogs.description}
-          placeholder='Description'
-          ref={descriptionInputRef}
-        />
-        {/* <input type="hidden" id="cont" value={displayBlogs.content}/> */}
-        <CKEditor
-          editor='null'
-          initData={ReactHtmlParser(displayBlogs.content)}
-          // data="{<p>{displayBlogs.title}</p>}"
-          onReady={(editor) => {
-            console.log(document.getElementById('cont').value);
-            // editor.editor.setData("hello")
+      {parsedContent && (
+        <div className='App'>
+          {/* <h2>Using CKEditor 5 build in React</h2> */}
+          <input type='text' value={displayBlogs.title} ref={titleInputRef} />
+          <input
+            type='text'
+            value={displayBlogs.description}
+            placeholder='Description'
+            ref={descriptionInputRef}
+          />
+          {/* <input type="hidden" id="cont" value={displayBlogs.content}/> */}
+          <CKEditor
+            editor='null'
+            initData={ReactHtmlParser(displayBlogs.content)}
+            // data="{<p>{displayBlogs.title}</p>}"
+            onReady={(editor) => {
+              console.log(document.getElementById('cont').value);
+              // editor.editor.setData("hello")
 
-            // You can store the "editor" and use when it is needed.
-            console.log('Editor is ready to use!', editor);
-          }}
-          // onChange={ ( event, editor ) => {
-          //     const data = editor.getData();
-          //     console.log( { event, editor, data } );
-          // } }
-          // onChange ={(e) => {setEditor(e.target.value)}}
+              // You can store the "editor" and use when it is needed.
+              console.log('Editor is ready to use!', editor);
+            }}
+            // onChange={ ( event, editor ) => {
+            //     const data = editor.getData();
+            //     console.log( { event, editor, data } );
+            // } }
+            // onChange ={(e) => {setEditor(e.target.value)}}
 
-          onChange={(evt) => {
-            const editorValue = evt.editor.getData();
-            setEditor(editorValue);
-          }}
-        />
+            onChange={(evt) => {
+              const editorValue = evt.editor.getData();
+              setEditor(editorValue);
+            }}
+          />
 
-        {/* onBlur={ ( event, editor ) => {
+          {/* onBlur={ ( event, editor ) => {
                         console.log( 'Blur.', editor );
                     } }
                     onFocus={ ( event, editor ) => {
                         console.log( 'Focus.', editor );
                     } } */}
-        {/* /> */}
-        <div className='submitBlog'>
-          <button onClick={blogSubmitHandler}>Submit</button>
+          {/* /> */}
+          <div className='submitBlog'>
+            <button onClick={blogSubmitHandler}>Submit</button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

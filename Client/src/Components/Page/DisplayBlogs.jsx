@@ -46,7 +46,7 @@ function DisplayBlogs() {
                   className='DisplayblogsTitle'
                   style={{ textAlign: 'center' }}
                 >
-                  <h2>Title: Anand</h2>
+                  <h2>{displayBlogs.title}</h2>
                 </div>
                 <div
                   className='DisplayblogsDescription'
@@ -55,7 +55,7 @@ function DisplayBlogs() {
                     paddingLeft: '6rem',
                   }}
                 >
-                  <h4>Description: kumar</h4>
+                  <h4>Description: {displayBlogs.description} </h4>
                 </div>
                 <div
                   className='DisplayblogsContent'
