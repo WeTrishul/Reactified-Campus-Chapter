@@ -29,6 +29,16 @@ function FloatingBtn() {
             </div>
           </li>
           <li>
+            <span className='myname'>Applications</span>
+            <div className='fab-holder'>
+              <Link to='/Applications'>
+                <i className='add-icon'>
+                  <GroupIcon />
+                </i>
+              </Link>
+            </div>
+          </li>
+          <li>
             <span className='myname'>Core Chat</span>
             <div className='fab-holder'>
               <Link to='/Corechat'>

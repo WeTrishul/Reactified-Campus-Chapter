@@ -12,6 +12,7 @@ import ReactHtmlParser from 'react-html-parser';
 function EditBlog() {
   const location = useLocation();
   const [displayBlogs, setDisplayBlogs] = useState({});
+  const [changedcontent, setChangedCont] = useState(false);
 
   const [parsedContent, setParsedContent] = useState();
 
@@ -24,102 +25,71 @@ function EditBlog() {
   const titleInputRef = useRef();
   const descriptionInputRef = useRef();
 
+  const handleTitlechange = (e) => {
+    let x = displayBlogs;
+    x.title = e.target.value;
+    setDisplayBlogs({ ...displayBlogs, x });
+  };
+
+  const handledescchange = (e) => {
+    let x = displayBlogs;
+    console.log(x);
+    x.description = e.target.value;
+    setDisplayBlogs({ ...displayBlogs, x });
+  };
+
   const blogSubmitHandler = () => {
-    const enteredTitle = titleInputRef.current.value;
-    const enteredDescription = descriptionInputRef.current.value;
+    // const enteredTitle = titleInputRef.current.value;
+    // const enteredDescription = descriptionInputRef.current.value;
 
-    const blogDetails = {
-      title: enteredTitle,
-      description: enteredDescription,
-      content: editor,
-      userid: userId,
-    };
+    const enteredTitle = document.getElementById('editedtitle').value;
+    const enteredDescription = document.getElementById('editeddesc').value;
 
-    // axios.post('http://localhost:3000/updateblog',blogDetails,{
-    //     headers: {
-    //         "Access-Control-Allow-Origin": "*",
-    //     }
-    // })
-    // .then(res => {
-    //     console.log(res);
-    //     history.push("/Blogs")
+    var blogDetails;
 
-    // }).catch(err => {
-    //     console.log(err);
-    //     console.log("main nhi chal rha hoon bhai")
-    // });
-
-    // Axios({
-    //   method: 'POST',
-    //   headers: {
-    //     'Access-Control-Allow-Origin': '*',
-    //   },
-    //   data: {
-    //     title: enteredTitle,
-    //     description: enteredDescription,
-    //     content: editor,
-    //     userid: userId,
-    //   },
-
-    //   withCredentials: true,
-    //   url: 'http://localhost:3000/updateblog',
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //     history.push('/Blogs');
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     console.log('main nhi chal rha hoon bhai');
-    //   });
-    Axios({
-      method: 'POST',
-
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-      data: {
+    if (changedcontent) {
+      blogDetails = {
         title: enteredTitle,
         description: enteredDescription,
         content: editor,
         userid: userId,
+      };
+    } else {
+      blogDetails = {
+        title: enteredTitle,
+        description: enteredDescription,
+        content: displayBlogs.content,
+        userid: userId,
+      };
+    }
+
+    console.log(blogDetails);
+
+    Axios({
+      method: 'POST',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
       },
+      params: {
+        id: displayBlogs._id,
+      },
+      data: blogDetails,
 
       withCredentials: true,
-      credentials: 'same-origin',
       url: 'http://localhost:3000/updateblog',
     })
-      .then((response) => {
-        console.log(response);
-
-        return response.data;
-      })
-      .then((data) => {
-        console.log(data);
+      .then((res) => {
+        console.log(res);
         history.push('/Blogs');
       })
       .catch((err) => {
-        console.log('error', err);
-        // alert("Poll Failed!!");
+        console.log(err);
+        console.log('main nhi chal rha hoon bhai');
       });
   };
 
   useEffect(() => {
     console.log('main id', location.state);
-
-    // axios.get('http://localhost:3000/showblog/'+location.state)
-    // .then(response => {
-    //     return response.data
-    // }).then(data =>{
-    //     console.log(data)
-    //     setDisplayBlogs(data.blogs)
-    //     console.log("yahan")
-    //     console.log(displayBlogs)
-    //     // let main = document.querySelector("main")
-    //     // let str = data.blogs.content
-    //     // let strhtml = str;
-    //     // main.innerHTML=strhtml;
-    // });
 
     Axios({
       method: 'GET',
@@ -142,15 +112,19 @@ function EditBlog() {
 
   return (
     <div>
-      {parsedContent && (
+      {parsedContent && displayBlogs && (
         <div className='App'>
           {/* <h2>Using CKEditor 5 build in React</h2> */}
-          <input type='text' value={displayBlogs.title} ref={titleInputRef} />
           <input
             type='text'
-            value={displayBlogs.description}
+            defaultValue={displayBlogs.title}
+            id='editedtitle'
+          />
+          <input
+            type='text'
+            defaultValue={displayBlogs.description}
             placeholder='Description'
-            ref={descriptionInputRef}
+            id='editeddesc'
           />
           {/* <input type="hidden" id="cont" value={displayBlogs.content}/> */}
           <CKEditor
@@ -172,6 +146,7 @@ function EditBlog() {
 
             onChange={(evt) => {
               const editorValue = evt.editor.getData();
+              setChangedCont(true);
               setEditor(editorValue);
             }}
           />

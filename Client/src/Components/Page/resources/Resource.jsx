@@ -223,6 +223,8 @@ function Resource() {
                             width: '100%',
                             textAlign: 'center',
                             padding: '5px',
+                            textDecoration: 'none',
+                            color: 'black',
                           }}
                           to={'/ViewFiles/' + data.name}
                           component={Link}
@@ -241,6 +243,8 @@ function Resource() {
                             width: '100%',
                             textAlign: 'center',
                             padding: '5px',
+                            textDecoration: 'none',
+                            color: 'black',
                           }}
                           to={'/ViewFiles/' + data.name}
                           component={Link}
@@ -259,6 +263,8 @@ function Resource() {
                             width: '100%',
                             textAlign: 'center',
                             padding: '5px',
+                            textDecoration: 'none',
+                            color: 'black',
                           }}
                           to={'/ViewFiles/' + data.name}
                           component={Link}
@@ -277,6 +283,8 @@ function Resource() {
                             width: '100%',
                             textAlign: 'center',
                             padding: '5px',
+                            textDecoration: 'none',
+                            color: 'black',
                           }}
                           to={'/ViewFiles/' + data.name}
                           component={Link}
@@ -295,6 +303,8 @@ function Resource() {
                             width: '100%',
                             textAlign: 'center',
                             padding: '5px',
+                            textDecoration: 'none',
+                            color: 'black',
                           }}
                           to={'/ViewFiles/' + data.name}
                           component={Link}
@@ -313,6 +323,8 @@ function Resource() {
                             width: '100%',
                             textAlign: 'center',
                             padding: '5px',
+                            textDecoration: 'none',
+                            color: 'black',
                           }}
                           to={'/ViewFiles/' + data.name}
                           component={Link}
@@ -331,6 +343,8 @@ function Resource() {
                             width: '100%',
                             textAlign: 'center',
                             padding: '5px',
+                            textDecoration: 'none',
+                            color: 'black',
                           }}
                           to={'/ViewFiles/' + data.name}
                           component={Link}

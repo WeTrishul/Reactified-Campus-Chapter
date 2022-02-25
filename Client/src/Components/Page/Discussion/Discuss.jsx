@@ -16,13 +16,24 @@ import { useContext } from 'react';
 import Axios from 'axios';
 
 function Discuss({ socket }) {
-  const [comment, setComment] = useState(false);
-
+  const [comment, setComment] = useState(true);
+  let [count, setCount] = useState(0);
   const [like, setLike] = useState(false);
   const likeHandler = {
     color: 'blue',
   };
-  const viewAllComment = () => setComment(!comment);
+  const viewAllComment = (postid) => {
+    // document.getElementById('commentsof-' + postid).style.display = 'block';
+
+    if (count == 0) {
+      document.getElementById('commentsof-' + postid).style.display = 'block';
+      setCount(count++);
+    } else if (count == 1) {
+      count = 0;
+      document.getElementById('commentsof-' + postid).style.display = 'none';
+    }
+    setCount(count);
+  };
 
   // Connection code
 
@@ -38,7 +49,6 @@ function Discuss({ socket }) {
 
   const commentViewHandler = () => setViewComment(!viewComment);
   const [Discuss, setDiscuss] = useState([]);
-  let count = 0;
   const [likePost, setLikePost] = useState(count);
 
   const [notifications, setnotifications] = useState([]);
@@ -511,7 +521,9 @@ function Discuss({ socket }) {
                               </span>
                             </div>
                             <div className='discussion-Comment-Button'>
-                              <AddCommentIcon onClick={viewAllComment} />
+                              <AddCommentIcon
+                                onClick={() => viewAllComment(data._id)}
+                              />
                               <span>{data.comments.length}</span>
                             </div>
                             <dv className='discussion-Report-Button'>
@@ -559,7 +571,10 @@ function Discuss({ socket }) {
                       </div>
 
                       {comment && (
-                        <div id={'commentsof-' + data._id}>
+                        <div
+                          style={{ display: 'none' }}
+                          id={'commentsof-' + data._id}
+                        >
                           <div className='discussion-Posted-Comment-Container-Section'>
                             {data.comments.map((value) => {
                               return (

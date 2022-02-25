@@ -16,8 +16,19 @@ import AuthContext from '../../../Service/auth-context';
 import { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import Axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-function Userprofile() {
+function OtherProfile() {
+  const { userkaname } = useParams();
+
+  var cat = { userkaname };
+  var userkausername = cat.userkaname;
+
+  const [role, setRole] = React.useState('');
+
+  const handleChange = (event) => {
+    setRole(event.target.value);
+  };
   const [userProfile, setUserProfile] = useState();
 
   const authCtx = useContext(AuthContext);
@@ -29,7 +40,7 @@ function Userprofile() {
       method: 'GET',
 
       withCredentials: true,
-      url: 'http://localhost:3000/profilepage/' + userName,
+      url: 'http://localhost:3000/profilepage/' + userkausername,
     })
       .then((response) => {
         return response.data;
@@ -41,26 +52,18 @@ function Userprofile() {
       });
   }, []);
 
-  const uploadHandler = () => {
-    var form_data = new FormData();
-
-    const inpfiles = document.getElementById('multiFiles');
-    form_data.append('dp', inpfiles.files[0]);
-
+  const changeRolehandler = () => {
     Axios({
-      method: 'POST',
-
-      data: form_data,
+      method: 'GET',
       headers: { 'Content-Type': 'multipart/form-data' },
-
+      params: {
+        username: userkausername,
+        role: role,
+      },
       withCredentials: true,
-      url: 'http://localhost:3000/profilepage/setdp/' + userId,
+      url: 'http://localhost:3000/userrole',
     })
       .then((res) => {
-        console.log(res.data.photu);
-        document.getElementById('userkadp').src =
-          'http://localhost:3000' + res.data.photu;
-
         console.log('Hi');
       })
       .catch((err) => {
@@ -121,34 +124,38 @@ function Userprofile() {
                           marginTop: '5px',
                         }}
                       >
-                        <Box sx={{ marginTop: '10px' }}>
-                          <Box>
-                            <Button
-                              size='small'
-                              variant='contained'
-                              component='label'
-                            >
-                              Profile pic
-                              <input
-                                type='file'
-                                name='dp'
-                                id='multiFiles'
-                                hidden
-                              />
-                            </Button>
-                          </Box>
-                          <Button
-                            size='small'
-                            sx={{ marginTop: '10px' }}
-                            variant='contained'
-                            onClick={uploadHandler}
-                          >
-                            Upload
-                          </Button>
-                        </Box>
                         <Box sx={{ minWidth: 80, marginTop: '10px' }}>
                           {/* maybe write here something */}
+                          <FormControl fullWidth>
+                            <InputLabel id='demo-simple-select-autowidth-label'>
+                              Role
+                            </InputLabel>
+                            <Select
+                              labelId='demo-simple-select-autowidth-label'
+                              id='demo-simple-select-autowidth'
+                              value={role}
+                              label='Role'
+                              onChange={handleChange}
+                            >
+                              <MenuItem value='QuestionSetter'>
+                                Question Setter
+                              </MenuItem>
+                              <MenuItem value='EventsLead'>
+                                Events Lead
+                              </MenuItem>
+                              <MenuItem value='MediaLead'>Media Lead</MenuItem>
+                              <MenuItem value='Executive'>Executive</MenuItem>
+                            </Select>
+                          </FormControl>
                         </Box>
+                        <Button
+                          size='small'
+                          sx={{ marginTop: '10px' }}
+                          variant='contained'
+                          onClick={changeRolehandler}
+                        >
+                          Promote
+                        </Button>
                       </Box>
                     </Card>
                   </Grid>
@@ -219,4 +226,4 @@ function Userprofile() {
   );
 }
 
-export default Userprofile;
+export default OtherProfile;

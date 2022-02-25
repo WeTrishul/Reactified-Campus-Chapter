@@ -325,9 +325,20 @@ else
 }
 
 module.exports.updatecoderhandles = async (req,res)=>{
-    const user =  await User.findOne({email:req.params.email})
-    console.log(user)
+    const user =  await User.findById(req.user._id)
+    // console.log(user)
     try {
+        // if someone requests for usertype change
+        if(req.body['UserType'])
+        {
+               
+               return res.status(200).json({
+            
+                message: "Error"
+            });
+        }
+
+        console.log('Hackers ko harao',req.body)
         const updates = Object.keys(req.body)
         updates.forEach((update) => user[update] = req.body[update])
         await user.save()
@@ -338,7 +349,11 @@ module.exports.updatecoderhandles = async (req,res)=>{
       
         console.log(req.user.username)
 
-       res.redirect('/profilepage')
+        return res.status(200).json({
+            message: "updated Successfully!"
+        });
+
+    //    res.redirect('/profilepage')
         
     } catch (err) {
        console.log(err) 
@@ -537,13 +552,13 @@ module.exports.changeRole = async(req,res)=>{
         }
 
         const user = await User.findOne({username:req.query.username})
-        console.log('User from changeRole',user)
-        if(req.query.role==='events')
+        
+        if(req.query.role==='EventsLead')
             {
                 user.UserType='EventsLead'
                 await user.save();
          }
-         else if(req.query.role==='questionsetter')
+         else if(req.query.role==='QuestionSetter')
          {
             user.UserType='QuestionSetter'
             await user.save();
@@ -552,7 +567,11 @@ module.exports.changeRole = async(req,res)=>{
             user.UserType='MediaLead'
             await user.save();
          }
-         return res.redirect('/listUsers')
+        //  return res.redirect('/listUsers')
+         return res.status(200).json({
+            message: "aagya!"
+        });
+
     } catch (error) {
         console.log('Error in changing role',error)
         res.render('error_page')

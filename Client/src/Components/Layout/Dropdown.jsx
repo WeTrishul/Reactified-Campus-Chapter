@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import AuthContext from '../../Service/auth-context';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 import PersonIcon from '@mui/icons-material/Person';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import WorkIcon from '@mui/icons-material/Work';
@@ -39,18 +40,46 @@ function Dropdown(props) {
     setRole(event.target.value);
   };
 
-  const [value, setValue] = React.useState('Reason');
-
+  const [value, setValue] = React.useState('');
   const handleMultilineChange = (event) => {
     setValue(event.target.value);
+  };
+
+  const [linkval, setLinkVal] = React.useState('');
+  const handleLinkChange = (event) => {
+    setLinkVal(event.target.value);
   };
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const authCtx = useContext(AuthContext);
+  let userId = authCtx.id;
 
   let history = useHistory();
+
+  const applyNowSubmit = () => {
+    // /applied/:id
+    Axios({
+      method: 'POST',
+      data: {
+        appliedRole: role,
+        reason: value,
+        link1: linkval,
+      },
+      withCredentials: true,
+      url: 'http://localhost:3000/applied/' + userId,
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        if (data.data.done != 'yes') {
+          alert('Bas hogya yaar ab baar nhi hoga');
+        }
+        handleClose();
+      });
+  };
 
   const logoutHandler = () => {
     authCtx.logout();
@@ -109,10 +138,12 @@ function Dropdown(props) {
                         label='Role'
                         onChange={handleChange}
                       >
-                        <MenuItem value={10}>Question Setter</MenuItem>
-                        <MenuItem value={20}>Events Lead</MenuItem>
-                        <MenuItem value={30}>Media Lead</MenuItem>
-                        <MenuItem value={30}>Executive</MenuItem>
+                        <MenuItem value='QuestionSetter'>
+                          Question Setter
+                        </MenuItem>
+                        <MenuItem value='EventsLead'>Events Lead</MenuItem>
+                        <MenuItem value='MediaLead'>Media Lead</MenuItem>
+                        <MenuItem value='Executive'>Executive</MenuItem>
                       </Select>
                     </FormControl>
                   </div>
@@ -132,6 +163,8 @@ function Dropdown(props) {
                       id='outlined-basic'
                       label='Link'
                       variant='outlined'
+                      value={linkval}
+                      onChange={handleLinkChange}
                     />
                   </Box>
                   <Box
@@ -141,7 +174,9 @@ function Dropdown(props) {
                       justifyContent: 'center',
                     }}
                   >
-                    <Button variant='contained'>Submit</Button>
+                    <Button onClick={applyNowSubmit} variant='contained'>
+                      Submit
+                    </Button>
                   </Box>
                 </Typography>
               </Box>

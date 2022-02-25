@@ -11,6 +11,8 @@ import Discussion from './Components/Page/Discussion'
 import Leaderboard from './Components/Page/Leaderboard';
 import EventForm from './Components/Forms/EventForm';
 import LoginForm from './Components/Forms/LoginForm';
+import Otherprofile from './Components/Page/profile/Otherprofile';
+import Editprofile from './Components/Page/profile/Editprofile';
 import SignupForm from './Components/Forms/SignupForm';
 import ExecutiveChat from './Components/Chat Apps/ExecutiveChat';
 import CoreChat from './Components/Chat Apps/CoreChat';
@@ -58,7 +60,8 @@ import Apply from './Components/Forms/Apply';
 import ResourceUpload from './Components/Page/resources/ResourceUpload';
 import Viewfiles from './Components/Page/resources/Viewfiles';
 import Viewquestions from './Components/Page/set questions/Viewquestions';
-import Editprofile from './Components/Page/profile/Editprofile';
+
+import Applications from './Components/Page/Application/Applications';
 function App() {
 
   const authCtx = useContext(AuthContext)
@@ -218,7 +221,16 @@ function App() {
           <EditBlog/>
         </Route>}
         {authCtx.isLoggedIn && <Route exact path='/EditProfile'>
+        <Editprofile/>
+        </Route>}
+        {authCtx.isLoggedIn &&<Route exact path='/Otherprofile/:userkaname'>
+        <Otherprofile/>
+        </Route>}
+        {authCtx.isLoggedIn && <Route exact path='/EditProfile'>
           <Editprofile/>
+        </Route>}
+        {authCtx.isLoggedIn && socket && <Route exact path='/Applications'>
+          <Applications socket={socket}/>
         </Route>}
         {!authCtx.isLoggedIn &&<Route exact path='/TeamChat'>
           <TeamChat/>

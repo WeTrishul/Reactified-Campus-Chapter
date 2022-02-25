@@ -155,9 +155,9 @@ function UpComingEvents({ socket }) {
     form_data.append('eventEndTime', enteredEndTime);
     form_data.append('eventDate', enteredEventDate);
 
-    for (var key of form_data.entries()) {
-      console.log(key[0] + ', ' + key[1]);
-    }
+    // for (var key of form_data.entries()) {
+    //   console.log(key[0] + ', ' + key[1]);
+    // }
 
     Axios({
       method: 'POST',

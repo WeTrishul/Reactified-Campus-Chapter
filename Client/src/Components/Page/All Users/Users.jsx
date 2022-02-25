@@ -10,7 +10,6 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
 import Axios from 'axios';
 import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -57,8 +56,8 @@ function Users() {
   }, []);
 
   const deleteHandler = (name) => {
-    name.preventDefault();
-    console.log(name.target.id);
+    // name.preventDefault();
+    console.log(name);
 
     // axios.get('http://localhost:3000/delete/?username='+name.target.id)
     // .then(response => {
@@ -72,14 +71,15 @@ function Users() {
       method: 'GET',
 
       withCredentials: true,
-      url: 'http://localhost:3000/delete/?username=' + name.target.id,
+      url: 'http://localhost:3000/delete/?username=' + name,
     })
       .then((response) => {
         return response.data;
       })
       .then((data) => {
         console.log(data);
-        document.getElementById('tr-' + name.target.id).remove();
+        document.getElementById('tr-' + name).remove();
+
         //     // console.log(data)
       });
   };
@@ -132,7 +132,10 @@ function Users() {
                       )
                       .map((result) => {
                         return (
-                          <TableRow key={result._id}>
+                          <TableRow
+                            id={'tr-' + result.username}
+                            key={result._id}
+                          >
                             <TableCell>{result.name}</TableCell>
                             <TableCell>{result.UserType}</TableCell>
                             <TableCell style={{ textAlign: 'right' }}>
@@ -142,7 +145,9 @@ function Users() {
                                 </div>
                                 <div className='user-Delete-Btn'>
                                   <DeleteIcon
-                                    onClick={deleteHandler}
+                                    onClick={() =>
+                                      deleteHandler(result.username)
+                                    }
                                     id={result.username}
                                     style={{ color: 'red' }}
                                   />

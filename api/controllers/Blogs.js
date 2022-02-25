@@ -176,18 +176,19 @@ module.exports.editblog =  async (req,res) =>{
     try {
 
         // res.setHeader("Access-Control-Allow-Origin", "*")
-res.setHeader("Access-Control-Allow-Credentials", "true");
-res.setHeader("Access-Control-Max-Age", "1800");
-res.setHeader("Access-Control-Allow-Headers", "content-type");
-res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
 
-        // if(!req.isAuthenticated())
-        // {
-        //   return   res.redirect('/login')
-        // }
+        if(!req.isAuthenticated())
+        {
+          return   res.redirect('/login')
+        }
+
+        console.log('Please chalja',req.body)
        
-        const blog = await Blog.findByIdAndUpdate(req.params.id,req.body)
+        console.log('Please chalja yaaaaarr',req.query.id)
+
+        const blog = await Blog.findByIdAndUpdate(req.query.id,req.body)
         blog.save()
+        console.log('Naya blog')
 
         return res.status(200).json({
             
@@ -198,6 +199,7 @@ res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, O
 
     // res.send(blog.content)
     } catch (error) {
+        console.log(error)
        res.redirect('back')
     }
 }

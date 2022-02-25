@@ -70,7 +70,7 @@ module.exports.appliedForm=async (req,res)=>{
 
         console.log(appliedData)
 
-        if (req.xhr){
+        // if (req.xhr){
             
             const ajaxdata = await appliedData.populate('userid').execPopulate();
             return res.status(200).json({
@@ -80,14 +80,14 @@ module.exports.appliedForm=async (req,res)=>{
                 },
                 message: "Applied Successfully!"
             });
-        }
+        // }
 
         }
 
         else{
             console.log('Hi')
 
-        if (req.xhr){
+        // if (req.xhr){
             
             
             return res.status(200).json({
@@ -98,7 +98,7 @@ module.exports.appliedForm=async (req,res)=>{
             });
         }
 
-        }
+        // }
     } catch (error) {
         res.render('error_page' + error)
     }
@@ -115,12 +115,23 @@ module.exports.viewApplications = async(req,res)=>{
 
         const AllUsers = await apply.find({}).populate('userid')
 
-        res.render('ViewApplication',{
+        // res.render('ViewApplication',{
+        //     arr:AllUsers,
+        //     l:AllUsers.length
+        // })
+
+        return res.status(200).json({
             arr:AllUsers,
-            l:AllUsers.length
-        })
+            l:AllUsers.length,
+            message: "user accepted"
+        });
+
     } catch (error) {
-        res.render('error_page')
+        // res.render('error_page')
+        return res.status(200).json({
+            message: "error"
+        });
+        
     }
 }
 
@@ -150,7 +161,7 @@ module.exports.accept = async(req,res)=>{
             const selectedUser = await apply.deleteOne({userid:id})
             console.log(selectedUser)
 
-            if (req.xhr){
+            // if (req.xhr){
                 console.log('aagya')
                 return res.status(200).json({
                     data: {
@@ -161,7 +172,7 @@ module.exports.accept = async(req,res)=>{
                     },
                     message: "user accepted"
                 });
-            }
+            // }
 
             res.redirect('back')
         }
@@ -169,7 +180,7 @@ module.exports.accept = async(req,res)=>{
     
             const selectedUser = await apply.deleteOne({userid:id})
 
-            if (req.xhr){
+            // if (req.xhr){
                 console.log('aagya')
                 return res.status(200).json({
                     data: {
@@ -178,7 +189,7 @@ module.exports.accept = async(req,res)=>{
                     },
                     message: "user accepted"
                 });
-            }
+           // }
             console.log('bhak bey')
         }
     } catch (error) {
@@ -202,7 +213,7 @@ module.exports.reject = async(req,res)=>{
 
             const selectedUser = await apply.deleteOne({userid:id})
 
-            if (req.xhr){
+            // if (req.xhr){
                 console.log('aagya')
                 return res.status(200).json({
                     data: {
@@ -211,7 +222,7 @@ module.exports.reject = async(req,res)=>{
                     },
                     message: "user deleted"
                 });
-            }
+           // }
     } catch (error) {
         res.render('error_page')
         console.log('error_page')

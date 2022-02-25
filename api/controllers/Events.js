@@ -178,6 +178,8 @@ module.exports.updateevent = async(req,res)=>{
                 console.log('Some error : '+error)  
             }
 
+            console.log('Here in the update event',req.body.eventname)
+            console.log(req.body.id)
             var currevent= await Event.findByIdAndUpdate(req.body.id,{
                 creatorid:req.user._id,
                 eventname:req.body.eventname,

@@ -461,23 +461,26 @@ function Dashboard() {
                         className='right-arrow'
                         onClick={nextSlide}
                       />
-                      {events.map((slide, index) => {
-                        return (
-                          <div
-                            className={index === val ? 'slide-active' : 'slide'}
-                            key={index}
-                          >
-                            {index === val && (
-                              <img
-                                src={
-                                  'http://localhost:3000' + slide.eventbanner
-                                }
-                                className='img-image'
-                              />
-                            )}
-                          </div>
-                        );
-                      })}
+                      {events &&
+                        events.map((slide, index) => {
+                          return (
+                            <div
+                              className={
+                                index === val ? 'slide-active' : 'slide'
+                              }
+                              key={index}
+                            >
+                              {index === val && (
+                                <img
+                                  src={
+                                    'http://localhost:3000' + slide.eventbanner
+                                  }
+                                  className='img-image'
+                                />
+                              )}
+                            </div>
+                          );
+                        })}
                     </div>
                   </div>
                 </div>
@@ -489,13 +492,14 @@ function Dashboard() {
                 <h2>Upcoming Events</h2>
                 <hr className='Events-horizontal-line' />
               </div>
-              {events.map((element) => {
-                return (
-                  <div className='dashBoard-Events-Content'>
-                    {dashBoardEventsRendering(element)}
-                  </div>
-                );
-              })}
+              {events &&
+                events.map((element) => {
+                  return (
+                    <div className='dashBoard-Events-Content'>
+                      {dashBoardEventsRendering(element)}
+                    </div>
+                  );
+                })}
             </div>
             <div className='dashBoardAnnouncementHeading'>
               <h2>
@@ -561,44 +565,45 @@ function Dashboard() {
             </div>
             <div className='dashBoardBlogsCarousel'>
               <Carousel breakPoints={breakpoints}>
-                {blogs.map((item) => {
-                  return (
-                    <Card
-                      sx={{ width: '100%', height: 'auto' }}
-                      className='dashBoard-cards-second'
-                      key={item.id}
-                    >
-                      <div className='recentBlogsCarouselDesign'>
-                        <div
-                          className='blogsHeading'
-                          style={{
-                            marginTop: '2rem',
-                          }}
-                        >
-                          <span style={{ fontWeight: '800' }}>
-                            <u>{item.title}</u>
-                          </span>
-                          <span style={{ float: 'right', fontWeight: '700' }}>
-                            <AccessTimeFilledIcon />1 hr ago
-                          </span>
-                        </div>
-                        <div className='blogsDescription'>{item.desc}</div>
-                        <div className='blogsLines'>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Illum, facere!
-                        </div>
-                        <div className='blogsUserName'>
-                          <div style={{ marginLeft: '1rem' }}>
-                            <span>
-                              <AccountCircleSharpIcon />
+                {blogs &&
+                  blogs.map((item) => {
+                    return (
+                      <Card
+                        sx={{ width: '100%', height: 'auto' }}
+                        className='dashBoard-cards-second'
+                        key={item.id}
+                      >
+                        <div className='recentBlogsCarouselDesign'>
+                          <div
+                            className='blogsHeading'
+                            style={{
+                              marginTop: '2rem',
+                            }}
+                          >
+                            <span style={{ fontWeight: '800' }}>
+                              <u>{item.title}</u>
                             </span>
-                            <span>By Anand </span>
+                            <span style={{ float: 'right', fontWeight: '700' }}>
+                              <AccessTimeFilledIcon />1 hr ago
+                            </span>
+                          </div>
+                          <div className='blogsDescription'>{item.desc}</div>
+                          <div className='blogsLines'>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Illum, facere!
+                          </div>
+                          <div className='blogsUserName'>
+                            <div style={{ marginLeft: '1rem' }}>
+                              <span>
+                                <AccountCircleSharpIcon />
+                              </span>
+                              <span>By Anand </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </Card>
-                  );
-                })}
+                      </Card>
+                    );
+                  })}
               </Carousel>
             </div>
             <div className='recentDiscussionHeading'>
@@ -608,65 +613,66 @@ function Dashboard() {
             </div>
             <div className='dashBoardDiscussionCarousel'>
               <Carousel breakPoints={breakpoints}>
-                {posts.map((item) => {
-                  return (
-                    <Card
-                      sx={{ width: '100%', height: 'auto' }}
-                      className='dashBoard-cards-second'
-                      key={item.id}
-                    >
-                      <div className='recentDiscussionCarouselDesign'>
-                        <div
-                          className='dashboardDiscussionHeading'
-                          style={{
-                            marginTop: '2rem',
-                            textAlign: 'center',
-                          }}
-                        >
-                          <h2>{item.title}</h2>
-                        </div>
-                        <div
-                          style={{ display: 'flex' }}
-                          className='dashBoardDiscussionUserDetails'
-                        >
+                {posts &&
+                  posts.map((item) => {
+                    return (
+                      <Card
+                        sx={{ width: '100%', height: 'auto' }}
+                        className='dashBoard-cards-second'
+                        key={item.id}
+                      >
+                        <div className='recentDiscussionCarouselDesign'>
                           <div
-                            style={{ width: '50px' }}
-                            className='dashBoard-Discussion-Image-Container'
-                          >
-                            <img
-                              style={{
-                                width: '100%',
-                                height: '50px',
-                                borderRadius: '50%',
-                              }}
-                              src={HomeImage}
-                              alt=''
-                            />
-                          </div>
-                          <div
+                            className='dashboardDiscussionHeading'
                             style={{
-                              fontWeight: '700',
-                              paddingTop: '10px',
-                              marginLeft: '1rem',
+                              marginTop: '2rem',
+                              textAlign: 'center',
                             }}
-                            className='dashBoard-Discussion-UserName'
                           >
-                            {item.userid.name}
+                            <h2>{item.title}</h2>
+                          </div>
+                          <div
+                            style={{ display: 'flex' }}
+                            className='dashBoardDiscussionUserDetails'
+                          >
+                            <div
+                              style={{ width: '50px' }}
+                              className='dashBoard-Discussion-Image-Container'
+                            >
+                              <img
+                                style={{
+                                  width: '100%',
+                                  height: '50px',
+                                  borderRadius: '50%',
+                                }}
+                                src={HomeImage}
+                                alt=''
+                              />
+                            </div>
+                            <div
+                              style={{
+                                fontWeight: '700',
+                                paddingTop: '10px',
+                                marginLeft: '1rem',
+                              }}
+                              className='dashBoard-Discussion-UserName'
+                            >
+                              {item.userid.name}
+                            </div>
+                          </div>
+                          <div className='discussionContent'>
+                            {item.postBody}{' '}
+                          </div>
+                          <div className='discussionCommentCount'>
+                            <div style={{ float: 'right' }}>
+                              <CommentBankIcon />
+                              {item.comments.length}
+                            </div>
                           </div>
                         </div>
-                        <div className='discussionContent'>
-                          {item.postBody}{' '}
-                        </div>
-                        <div className='discussionCommentCount'>
-                          <div style={{ float: 'right' }}>
-                            <CommentBankIcon />
-                            {item.comments.length}
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  );
-                })}
+                      </Card>
+                    );
+                  })}
               </Carousel>
             </div>
           </div>
