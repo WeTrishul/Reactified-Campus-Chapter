@@ -5,11 +5,20 @@ import Chart from '../Chart';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import Typography from '@mui/material/Typography';
 
 function Userprofile() {
+  const [role, setRole] = React.useState('');
+
+  const handleChange = (event) => {
+    setRole(event.target.value);
+  };
   return (
     <div>
       <div className='userProfile-body-Box'>
@@ -39,22 +48,16 @@ function Userprofile() {
                         src='https://wallpaperaccess.com/full/359168.jpg'
                         alt=''
                       />
-                      <Box>
-                        <Button
-                          size='small'
-                          variant='contained'
-                          component='label'
-                        >
-                          Picture
-                          <input
-                            type='file'
-                            name='profilePic'
-                            id='multiFiles'
-                            hidden
-                          />
-                        </Button>
-                      </Box>
                       <Box sx={{ color: 'text.secondary' }}>ADMIN</Box>
+                      <Box
+                        sx={{
+                          color: 'text.secondary',
+                          textAlign: 'left',
+                          fontSize: '15px',
+                        }}
+                      >
+                        Name: Anand
+                      </Box>
                     </Box>
                     <Box
                       sx={{
@@ -64,59 +67,55 @@ function Userprofile() {
                         marginTop: '5px',
                       }}
                     >
-                      <Box
-                        sx={{
-                          color: 'text.secondary',
-                          fontSize: '12px',
-                          width: '100%',
-                          marginTop: '5px',
-                        }}
-                      >
-                        ROLE: ADMIN
-                      </Box>
-                      <Box
-                        sx={{
-                          color: 'text.secondary',
-                          width: '100%',
-                          fontSize: '12px',
-                          marginTop: '5px',
-                        }}
-                      >
-                        NAME:ANAND CHOUDHARY
-                      </Box>
-                      <Box
-                        sx={{
-                          color: 'text.secondary',
-                          fontSize: '12px',
-                          width: '100%',
-                          marginTop: '5px',
-                        }}
-                      >
-                        INSTITUTE:UNIVERSITY OF ENGINEERING & MANAGEMENT,
-                        KOLKATA
-                      </Box>
-                      <Box sx={{ display: 'flex', marginTop: '5px' }}>
+                      <Box sx={{ marginTop: '10px' }}>
                         <Box>
-                          <Button size='small' variant='contained'>
-                            Admin
+                          <Button
+                            size='small'
+                            variant='contained'
+                            component='label'
+                          >
+                            Profile pic
+                            <input
+                              type='file'
+                              name='profile pic'
+                              id='multiFiles'
+                              hidden
+                            />
                           </Button>
                         </Box>
-                        <Box sx={{ marginLeft: '1rem' }}>
-                          <Button size='small' variant='contained'>
-                            Setter
-                          </Button>
-                        </Box>
+                        <Button
+                          size='small'
+                          sx={{ marginTop: '10px' }}
+                          variant='contained'
+                        >
+                          Upload
+                        </Button>
                       </Box>
-                      <Box sx={{ display: 'flex', marginTop: '5px' }}>
+                      <Box sx={{ minWidth: 80, marginTop: '10px' }}>
+                        <FormControl fullWidth>
+                          <InputLabel id='demo-simple-select-autowidth-label'>
+                            Role
+                          </InputLabel>
+                          <Select
+                            labelId='demo-simple-select-autowidth-label'
+                            id='demo-simple-select-autowidth'
+                            value={role}
+                            label='Role'
+                            onChange={handleChange}
+                          >
+                            <MenuItem value={10}>Question Setter</MenuItem>
+                            <MenuItem value={20}>Events Lead</MenuItem>
+                            <MenuItem value={30}>Media Lead</MenuItem>
+                            <MenuItem value={40}>Executive</MenuItem>
+                          </Select>
+                        </FormControl>
                         <Box>
-                          <Button size='small' variant='contained'>
-                            Events
-                          </Button>
-                        </Box>
-                        <Box sx={{ marginLeft: '1rem' }}>
-                          {' '}
-                          <Button size='small' variant='contained'>
-                            Media
+                          <Button
+                            size='small'
+                            sx={{ marginTop: '10px' }}
+                            variant='contained'
+                          >
+                            Upload
                           </Button>
                         </Box>
                       </Box>

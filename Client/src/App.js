@@ -58,6 +58,7 @@ import Apply from './Components/Forms/Apply';
 import ResourceUpload from './Components/Page/resources/ResourceUpload';
 import Viewfiles from './Components/Page/resources/Viewfiles';
 import Viewquestions from './Components/Page/set questions/Viewquestions';
+import Editprofile from './Components/Page/profile/Editprofile';
 function App() {
 
   const authCtx = useContext(AuthContext)
@@ -215,6 +216,9 @@ function App() {
         </Route>}
         {authCtx.isLoggedIn && <Route exact path='/EditBlog'>
           <EditBlog/>
+        </Route>}
+        {authCtx.isLoggedIn && <Route exact path='/EditProfile'>
+          <Editprofile/>
         </Route>}
         {!authCtx.isLoggedIn &&<Route exact path='/TeamChat'>
           <TeamChat/>
