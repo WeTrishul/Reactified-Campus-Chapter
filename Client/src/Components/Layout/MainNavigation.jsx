@@ -418,7 +418,10 @@ function MainNavigation({ socket }) {
   return (
     <div>
       <nav className='navbar'>
-        <div className='logo'>CAMPUS-CHAPTER</div>
+        <div sx={{ flex: '1' }} className='logo'>
+          CAMPUS-CHAPTER
+        </div>
+
         <i className='icon' onClick={handleNavbar}>
           <MenuIcon />
         </i>

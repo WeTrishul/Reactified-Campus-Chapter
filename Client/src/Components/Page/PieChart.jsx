@@ -42,8 +42,8 @@ function PieChart({ profile }) {
     <div>
       <div
         style={{
-          height: '500px',
-          width: '500px',
+          height: '300px',
+          width: '300px',
           textAlign: 'center',
           justifyContent: 'center',
         }}
