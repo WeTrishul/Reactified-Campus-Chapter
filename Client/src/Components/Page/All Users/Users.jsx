@@ -1,5 +1,6 @@
 import React from 'react';
 import './Users.css';
+import { Link } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -125,38 +126,52 @@ function Users() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {allusers
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((result) => {
-                        return (
-                          <TableRow
-                            id={'tr-' + result.username}
-                            key={result._id}
-                          >
-                            <TableCell>{result.name}</TableCell>
-                            <TableCell>{result.UserType}</TableCell>
-                            <TableCell style={{ textAlign: 'right' }}>
-                              <div className='users-Edit-Delete'>
-                                <div className='user-Edit-Btn'>
-                                  <EditIcon style={{ color: 'green' }} />
+                    {allusers &&
+                      allusers
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                        .map((result) => {
+                          return (
+                            <TableRow
+                              id={'tr-' + result.username}
+                              key={result._id}
+                            >
+                              <TableCell>
+                                <Link
+                                  style={{
+                                    textDecoration: 'none',
+                                    color: 'black',
+                                    cursor: 'pointer',
+                                  }}
+                                  to={'/Otherprofile/' + result.username}
+                                >
+                                  {result.name}
+                                </Link>
+                              </TableCell>
+                              <TableCell>{result.UserType}</TableCell>
+                              <TableCell style={{ textAlign: 'right' }}>
+                                <div className='users-Edit-Delete'>
+                                  <div className='user-Edit-Btn'>
+                                    <Link to={'/ViewQuestions/' + result._id}>
+                                      <EditIcon style={{ color: 'green' }} />
+                                    </Link>
+                                  </div>
+                                  <div className='user-Delete-Btn'>
+                                    <DeleteIcon
+                                      onClick={() =>
+                                        deleteHandler(result.username)
+                                      }
+                                      id={result.username}
+                                      style={{ color: 'red' }}
+                                    />
+                                  </div>
                                 </div>
-                                <div className='user-Delete-Btn'>
-                                  <DeleteIcon
-                                    onClick={() =>
-                                      deleteHandler(result.username)
-                                    }
-                                    id={result.username}
-                                    style={{ color: 'red' }}
-                                  />
-                                </div>
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
                   </TableBody>
                 </Table>
               </TableContainer>

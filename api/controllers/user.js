@@ -589,6 +589,7 @@ module.exports.listUserQuestions = async (req,res)=>{
         }
 
         const _id = req.params.id
+        console.log(_id, "from user.js");
         const user = await User.findById(_id)
 
         const arr = user.arr;

@@ -241,7 +241,7 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/SetQuestions'>
           <Setquestions/>
         </Route>}
-        {authCtx.isLoggedIn &&<Route exact path='/ViewQuestions'>
+        {authCtx.isLoggedIn &&<Route exact path='/ViewQuestions/:userkaname'>
           <Viewquestions/>
         </Route>}
         {/* {authCtx.isLoggedIn &&<Route exact path='/ViewResources'>

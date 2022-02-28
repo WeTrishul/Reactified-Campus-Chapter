@@ -96,7 +96,11 @@ function Setquestions() {
               />
             </Box>
 
-            <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
+            <Box sx={{ marginTop: '1rem' }}>
+              <a href={'http://localhost:3000' + data} target='_blank'>
+                Question {index}
+              </a>{' '}
+            </Box>
           </Item>
         </Box>
       );
@@ -114,7 +118,11 @@ function Setquestions() {
                 alt=''
               />
             </Box>
-            <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
+            <Box sx={{ marginTop: '1rem' }}>
+              <a href={'http://localhost:3000' + data} target='_blank'>
+                Question {index}
+              </a>
+            </Box>
           </Item>
         </Box>
       );
@@ -138,7 +146,11 @@ function Setquestions() {
                 alt=''
               />
             </Box>
-            <Box sx={{ marginTop: '1rem' }}>Question {index}</Box>
+            <Box sx={{ marginTop: '1rem' }}>
+              <a href={'http://localhost:3000' + data} target='_blank'>
+                Question {index}
+              </a>
+            </Box>
           </Item>
         </Box>
       );
