@@ -117,12 +117,13 @@ function Viewblogs() {
                       </Card>
                     </Link>
                   </div>
+                  { (authCtx.usertype=='Admin' || authCtx.id==data.userid._id) &&
                   <div className='blogs-Delete-Edit-Box'>
-                    <div>
+                 <div>
                       <Link to={{ pathname: '/EditBlog', state: data._id }}>
                         <button className='blogs-EditBtn'>EDIT</button>
                       </Link>
-                    </div>
+                    </div> 
                     <div>
                       <button
                         className='blogs-DeleteBtn'
@@ -132,7 +133,7 @@ function Viewblogs() {
                         DELETE
                       </button>
                     </div>
-                  </div>
+                  </div> }
                 </div>
               );
             })}

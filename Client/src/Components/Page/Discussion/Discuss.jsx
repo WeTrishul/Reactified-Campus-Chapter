@@ -40,6 +40,8 @@ function Discuss({ socket }) {
   const authCtx = useContext(AuthContext);
   let userid = authCtx.id;
   let username = authCtx.username;
+  const UserType = authCtx.usertype;
+
   console.log(username);
 
   const postBody = useRef();
@@ -561,10 +563,11 @@ function Discuss({ socket }) {
                           >
                             Delete
                           </button> */}
-                              <DeleteIcon
+                          { (UserType=='Admin' || data.userid._id==authCtx.id )
+                              && <DeleteIcon
                                 style={{ color: 'red' }}
                                 onClick={() => deletePostHandler(data._id)}
-                              />
+                              /> }
                             </div>
                           </div>
                         </Card>
@@ -660,12 +663,13 @@ function Discuss({ socket }) {
                                     >
                                       Delete
                                     </button> */}
+                                    { (UserType=='Admin' || value.userid._id==authCtx.id ) &&
                                             <DeleteIcon
                                               style={{ color: 'red' }}
                                               onClick={() =>
                                                 deleteCommentHandler(value._id)
                                               }
-                                            />
+                                            /> }
                                           </div>
                                         </div>
                                       </Card>

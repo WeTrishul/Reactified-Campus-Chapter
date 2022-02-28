@@ -23,6 +23,8 @@ export default function Appbar({ socket }) {
   const authCtx = useContext(AuthContext);
   let username = authCtx.username;
   let userid = authCtx.id;
+  let UserType = authCtx.usertype;
+
   let history = useHistory();
   const [notify, setNotify] = useState(false);
 
@@ -76,12 +78,13 @@ export default function Appbar({ socket }) {
     history.push('/');
   };
 
-  const NotifyDrop = () => {
+  const NotifyDrop = (event) => {
     console.log('main click ho gya shivu');
     socket.emit('changebell', {
       userid: username,
     });
     setNotify(!notify);
+    handlenotifyMenuClick(event);
   };
 
   const notificationChecked = () => {
@@ -109,7 +112,8 @@ export default function Appbar({ socket }) {
               aria-controls={openNotify ? 'notify-menu' : undefined}
               aria-haspopup='true'
               aria-expanded={openNotify ? 'true' : undefined}
-              onClick={handlenotifyMenuClick}
+              // onClick={handlenotifyMenuClick}
+              onClick={NotifyDrop}
             />
           </Typography>
         </Toolbar>
@@ -442,9 +446,9 @@ export default function Appbar({ socket }) {
           <Typography sx={{ marginRight: '1rem', display: 'none' }}>
             Discussion
           </Typography>
-          <Typography sx={{ marginRight: '1rem', display: 'none' }}>
+           {  (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive' || UserType=='QuestionSetter' ) && <Typography sx={{ marginRight: '1rem', display: 'none' }}>
             Set Questions
-          </Typography>
+          </Typography> }
           <Typography sx={{ marginRight: '1rem', display: 'none' }}>
             Blogs
           </Typography>
@@ -630,10 +634,11 @@ export default function Appbar({ socket }) {
           MenuListProps={{
             'aria-labelledby': 'notify-button',
           }}
+          sx={{ overflowX: 'auto' }}
         >
           {notifications.map((value, index) => {
             return (
-              <MenuItem sx={{ overflowX: 'auto' }} key={index}>
+              <MenuItem key={index}>
                 <Link
                   style={{ color: 'black', textDecoration: 'none' }}
                   to={'' + value.placetogo}
@@ -674,7 +679,7 @@ export default function Appbar({ socket }) {
           <MenuItem onClick={handleProfileClose}>
             <Link
               style={{ textDecoration: 'none', color: '#1b1b1b' }}
-              to='Apply'
+              to='/Apply'
             >
               Apply
             </Link>

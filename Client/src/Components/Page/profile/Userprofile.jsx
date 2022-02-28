@@ -24,11 +24,60 @@ function Userprofile() {
   let userId = authCtx.id;
   let userName = authCtx.username;
   let usertype = authCtx.usertype;
-
   const [array, setArray] = useState([1, 2, 3, 4]);
+
+
+  const [userProfile, setUserProfile] = useState();
+
+
+  useEffect(() => {
+    Axios({
+      method: 'GET',
+
+      withCredentials: true,
+      url: 'http://localhost:3000/profilepage/' + userName,
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+
+        setUserProfile(data.searchuser);
+      });
+  }, []);
+
+  const uploadHandler = () => {
+    var form_data = new FormData();
+
+    const inpfiles = document.getElementById('multiFiles');
+    form_data.append('dp', inpfiles.files[0]);
+
+    Axios({
+      method: 'POST',
+
+      data: form_data,
+      headers: { 'Content-Type': 'multipart/form-data' },
+
+      withCredentials: true,
+      url: 'http://localhost:3000/profilepage/setdp/' + userId,
+    })
+      .then((res) => {
+        console.log(res.data.photu);
+        document.getElementById('userkadp').src =
+          'http://localhost:3000' + res.data.photu;
+
+        console.log('Hi');
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log('main nhi chal rha hoon bhai');
+      });
+  };
+
   return (
     <div>
-      <div className='userProfile-body-Box'>
+     {userProfile && <div className='userProfile-body-Box'>
         <div className='userProfile-outer-Box'>
           <div className='userProfile-inner-Box'>
             <div className='profile-Grid-View-Container'>
@@ -49,7 +98,7 @@ function Userprofile() {
                         height: '100%',
                         borderRadius: '50%',
                       }}
-                      src='https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1140180560?k=20&m=1140180560&s=612x612&w=0&h=X_400OQDFQGqccORnKt2PHYvTZ3dBLeEnCH_hRiUQrY='
+                      src={'http://localhost:3000' + userProfile.dp}
                       alt=''
                     />
                   </Box>
@@ -62,7 +111,7 @@ function Userprofile() {
                         component='label'
                       >
                         Edit picture
-                        <input type='file' name='dp' id='multiFiles' hidden />
+                        <input type='file' name='dp' id='multiFiles' hidden  />
                       </Button>
                     </Box>
                     <Box sx={{ marginLeft: '10px' }}>
@@ -70,14 +119,15 @@ function Userprofile() {
                         size='small'
                         sx={{ fontSize: '10px' }}
                         variant='contained'
+                        onClick={uploadHandler}
                       >
                         Upload
                       </Button>
                     </Box>
                   </Box>
-                  <Box sx={{ marginTop: '8px' }}>Role</Box>
-                  <Box>{usertype}</Box>
-                  <Box>Institute</Box>
+                  <Box sx={{ marginTop: '8px' }}>{userProfile.UserType}</Box>
+                  {/* <Box>{usertype}</Box> */}
+                  <Box>{userProfile.username}</Box>
                 </Card>
               </div>
               <div className='profile-Rating'>
@@ -93,7 +143,7 @@ function Userprofile() {
                       <StarRoundedIcon />
                       Rating <StarRoundedIcon />
                     </Box>
-                    <Box sx={{ marginTop: '1rem' }}>1200</Box>
+                    <Box sx={{ marginTop: '1rem' }}>{userProfile.CurrentRating}</Box>
                   </Typography>
                 </Card>
               </div>
@@ -110,7 +160,7 @@ function Userprofile() {
                       <VolunteerActivismIcon />
                       Contibution <VolunteerActivismIcon />
                     </Box>
-                    <Box sx={{ marginTop: '1rem' }}>1200</Box>
+                    <Box sx={{ marginTop: '1rem' }}>{userProfile.arr.length}</Box>
                   </Typography>
                 </Card>
               </div>
@@ -127,7 +177,7 @@ function Userprofile() {
                       <LibraryBooksIcon />
                       Resources
                     </Box>
-                    <Box sx={{ marginTop: '1rem' }}>1200</Box>
+                    <Box sx={{ marginTop: '1rem' }}>{userProfile.arr.length}</Box>
                   </Typography>
                 </Card>
               </div>
@@ -141,7 +191,7 @@ function Userprofile() {
                     borderRadius: '20px',
                   }}
                 >
-                  <Chart />
+                  <Chart profile={userProfile.OverallRatings} />
                 </Card>
               </div>
               <div className='profile-Graph-Two'>
@@ -161,7 +211,7 @@ function Userprofile() {
             </div>
           </div>
         </div>
-      </div>
+      </div> }
     </div>
   );
 }
