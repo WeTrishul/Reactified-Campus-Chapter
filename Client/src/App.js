@@ -55,7 +55,7 @@ import Setquestions from './Components/Page/set questions/Setquestions';
 import UpComingEvents from './Components/Page/AllEvents/UpComingEvents';
 import PollList from './Components/Page/polling/PollList';
 import ResourceDisplay from "./Components/Page/resources/ResourceDisplay"
-
+import Appbar from "./Components/Layout/Appbar"
 import Apply from './Components/Forms/Apply';
 import ResourceUpload from './Components/Page/resources/ResourceUpload';
 import Viewfiles from './Components/Page/resources/Viewfiles';
@@ -145,7 +145,7 @@ function App() {
 <Blogs/> 
    </SocketContext.Provider> */}
 
-      {authCtx.isLoggedIn && socket && <MainNavigation socket={socket} />}
+      {authCtx.isLoggedIn && socket && <Appbar socket={socket} />}
       {authCtx.isLoggedIn && <FloatingBtn/>}
       <Switch>
         {/* {authCtx.isLoggedIn && socket && <Route exact path='/DashBoard'>
