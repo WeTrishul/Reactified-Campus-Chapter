@@ -585,11 +585,13 @@ module.exports.listUserQuestions = async (req,res)=>{
     try {
         if(!req.isAuthenticated())
         {
+            console.log("yaha")
             res.redirect('/login')
         }
 
+        
         const _id = req.params.id
-        console.log(_id, "from user.js");
+        console.log('The id of user is ', _id)
         const user = await User.findById(_id)
 
         const arr = user.arr;

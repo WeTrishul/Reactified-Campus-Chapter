@@ -13,20 +13,24 @@ function Viewquestions() {
   const [allques, setAllQues] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
-  const { usersQuestionView } = useParams();
+  const { userkaname } = useParams();
 
-  var show = { usersQuestionView };
-  var userkaname = show.usersQuestionView;
+  var show = { userkaname };
+  var userkanaam = show.userkaname;
+
+
 
   const authCtx = useContext(AuthContext);
   let userId = authCtx.id;
 
   useEffect(() => {
+
+    console.log(userkanaam)
     Axios({
       method: 'GET',
       // params:{},
       withCredentials: true,
-      url: 'http://localhost:3000/seeQ/' + userkaname,
+      url: 'http://localhost:3000/seeQ/' + userkanaam,
     })
       .then((response) => {
         return response.data;
@@ -72,7 +76,7 @@ function Viewquestions() {
                           <Box
                             sx={{ color: 'text.secondary', marginTop: '1rem' }}
                           >
-                            <a
+                            {/* <a
                               style={{
                                 textDecoration: 'none',
                                 color: 'black',
@@ -81,7 +85,10 @@ function Viewquestions() {
                               target='_blank'
                             >
                               Question-{index}
-                            </a>
+                            </a> */}
+                            <a href={'http://localhost:3000' + data} target='_blank'>
+                Question {index}
+              </a>{' '}
                           </Box>
                         </Card>
                       </Grid>
