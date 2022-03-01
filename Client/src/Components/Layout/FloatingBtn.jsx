@@ -4,10 +4,16 @@ import ChatIcon from '@material-ui/icons/Chat';
 import GroupIcon from '@material-ui/icons/Group';
 import PollIcon from '@mui/icons-material/Poll';
 import ReportIcon from '@mui/icons-material/Report';
+import AuthContext from '../../Service/auth-context';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './FloatingBtn.css';
-
 function FloatingBtn() {
+  const authCtx = useContext(AuthContext);
+  const UserType = authCtx.usertype;
+
+
+
   return (
     <div>
       <div className='fab-container'>
@@ -18,7 +24,9 @@ function FloatingBtn() {
         </div>
 
         <ul className='icon-option'>
-          <li>
+          { UserType=='Admin'
+
+          && <li>
             <span className='myname'>All User</span>
             <div className='fab-holder'>
               <Link to='/AllUsers'>
@@ -27,7 +35,8 @@ function FloatingBtn() {
                 </i>
               </Link>
             </div>
-          </li>
+          </li> }
+          {UserType=='Admin' &&
           <li>
             <span className='myname'>Applications</span>
             <div className='fab-holder'>
@@ -37,7 +46,8 @@ function FloatingBtn() {
                 </i>
               </Link>
             </div>
-          </li>
+          </li> }
+          { (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead') &&
           <li>
             <span className='myname'>Core Chat</span>
             <div className='fab-holder'>
@@ -47,7 +57,8 @@ function FloatingBtn() {
                 </i>
               </Link>
             </div>
-          </li>
+          </li> }
+          { (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive') &&
           <li>
             <span className='myname'>Executive Chat</span>
             <div className='fab-holder'>
@@ -57,7 +68,8 @@ function FloatingBtn() {
                 </i>
               </Link>
             </div>
-          </li>
+          </li> }
+          { (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead') &&
           <li>
             <span className='myname'>Polling</span>
             <div className='fab-holder'>
@@ -67,7 +79,8 @@ function FloatingBtn() {
                 </i>
               </Link>
             </div>
-          </li>
+          </li> }
+          { (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead') &&
           <li>
             <span className='myname'>Reports</span>
             <div className='fab-holder'>
@@ -77,7 +90,7 @@ function FloatingBtn() {
                 </i>
               </Link>
             </div>
-          </li>
+          </li> }
         </ul>
       </div>
     </div>

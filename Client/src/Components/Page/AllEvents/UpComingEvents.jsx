@@ -84,6 +84,7 @@ function UpComingEvents({ socket }) {
   const authCtx = useContext(AuthContext);
   let userId = authCtx.id;
   let userName = authCtx.username;
+  let UserType=authCtx.usertype;
 
   // for creation
 
@@ -286,7 +287,7 @@ function UpComingEvents({ socket }) {
   };
 
   const renderPriviledgeButton = (data) => {
-    if (1) {
+    if (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive' ) {
       return (
         <Box sx={{ display: 'flex' }}>
           <Box>
@@ -869,9 +870,10 @@ function UpComingEvents({ socket }) {
 
             {/*================== Edit event modal from =============*/}
 
-            <button onClick={handleOpen} className='create-Events-Button'>
+           { (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive' ) 
+            && <button onClick={handleOpen} className='create-Events-Button'>
               <CreateIcon /> <span className='event-Create-btn'>Event</span>
-            </button>
+            </button> }
           </div>
         </div>
       </div>

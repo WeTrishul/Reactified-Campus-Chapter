@@ -23,6 +23,8 @@ export default function Appbar({ socket }) {
   const authCtx = useContext(AuthContext);
   let username = authCtx.username;
   let userid = authCtx.id;
+  let UserType = authCtx.usertype;
+
   let history = useHistory();
   const [notify, setNotify] = useState(false);
 
@@ -444,9 +446,9 @@ export default function Appbar({ socket }) {
           <Typography sx={{ marginRight: '1rem', display: 'none' }}>
             Discussion
           </Typography>
-          <Typography sx={{ marginRight: '1rem', display: 'none' }}>
+           {  (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive' || UserType=='QuestionSetter' ) && <Typography sx={{ marginRight: '1rem', display: 'none' }}>
             Set Questions
-          </Typography>
+          </Typography> }
           <Typography sx={{ marginRight: '1rem', display: 'none' }}>
             Blogs
           </Typography>
@@ -677,7 +679,7 @@ export default function Appbar({ socket }) {
           <MenuItem onClick={handleProfileClose}>
             <Link
               style={{ textDecoration: 'none', color: '#1b1b1b' }}
-              to='Apply'
+              to='/Apply'
             >
               Apply
             </Link>

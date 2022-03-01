@@ -75,13 +75,14 @@ function Dropdown(props) {
       })
       .then((data) => {
         if (data.data.done != 'yes') {
-          alert('Bas hogya yaar ab baar nhi hoga');
+          alert('Bas hogya yaar ab baar baar nhi hoga');
         }
         handleClose();
       });
   };
 
   const logoutHandler = () => {
+    console.log("I am called")
     authCtx.logout();
     history.push('/');
   };
