@@ -72,6 +72,7 @@ export default function Appbar({ socket }) {
   }, []);
 
   const logoutHandler = () => {
+    setprofileMenu(null);
     authCtx.logout();
     history.push('/');
   };
@@ -521,7 +522,7 @@ export default function Appbar({ socket }) {
   };
   return (
     <div>
-      <AppBar sx={{ background: '#1b1b1b' }} position='sticky'>
+      <AppBar sx={{ background: '#1b1b1b', position: 'sticky' }}>
         <Toolbar>
           <Typography sx={{ flex: '1' }}>Campus-Chapter</Typography>
           {displayNavComponent()}
@@ -650,6 +651,7 @@ export default function Appbar({ socket }) {
       </div>
       <div>
         <Menu
+          sx={{ maxWidth: '250px' }}
           id='profile-menu'
           anchorEl={profileMenu}
           open={openProfileMenu}
@@ -682,9 +684,7 @@ export default function Appbar({ socket }) {
               Apply
             </Link>
           </MenuItem>
-          <MenuItem onClick={handleProfileClose} onClick={logoutHandler}>
-            Logout
-          </MenuItem>
+          <MenuItem onClick={logoutHandler}>Logout</MenuItem>
         </Menu>
       </div>
     </div>
