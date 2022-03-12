@@ -60,9 +60,9 @@ import Apply from './Components/Forms/Apply';
 import ResourceUpload from './Components/Page/resources/ResourceUpload';
 import Viewfiles from './Components/Page/resources/Viewfiles';
 import Viewquestions from './Components/Page/set questions/Viewquestions';
-
-import Applications from './Components/Page/Application/Applications';
 import Navbar from './Components/Layout/Navbar';
+import Applications from './Components/Page/Application/Applications';
+
 function App() {
 
   const authCtx = useContext(AuthContext)
@@ -146,10 +146,11 @@ function App() {
 <Blogs/> 
    </SocketContext.Provider> */}
 
-      {/* {authCtx.isLoggedIn && socket && <MainNavigation socket={socket} />} */}
+      {authCtx.isLoggedIn && socket && <Navbar socket={socket} />}
       {authCtx.isLoggedIn && <FloatingBtn/>}
       {/* {authCtx.isLoggedIn && <Navbar/>} */}
-      {authCtx.isLoggedIn && socket && <Navbar socket={socket}/>}
+      {/* {authCtx.isLoggedIn && socket && <Navbar socket={socket}/>} */}
+
       <Switch>
         {/* {authCtx.isLoggedIn && socket && <Route exact path='/DashBoard'>
           <DashBoard socket={socket}/>

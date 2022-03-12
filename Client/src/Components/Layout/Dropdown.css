@@ -1,55 +1,20 @@
-/* .dropdown-menu {
-  width: 250px;
-  position: absolute;
-  top: 50px;
-  right: 70px;
-  list-style: none;
-  text-align: start;
-  border-radius: 50px;
-}
-
-.dropdown-menu li {
-  background: grey;
-  cursor: pointer;
-}
-
-.dropdown-menu li :hover {
-  background: #5cabff;
-}
-
-.dropdown-link {
-  display: block;
-  height: 100%;
-  width: 100%;
-  text-decoration: none;
-  color: #fff;
-  padding: 16px;
-} */
+/* 
 * {
   margin: 0;
   padding: 0;
 }
 
-/* body {
-  background: #fcfcfc;
-} */
 
-/* .container {
-  width: 100%;
-  height: 100vh;
-} */
 
 .dropdown {
   width: 15px;
-  /* margin: 100px auto; */
-  /* position: relative; */
+ 
 }
 .notification-Dropdown {
   width: 15px;
 }
 .dropdown .dropdown-btn {
-  /* padding: 15px 20px; */
-  /* background: #fff; */
+  
   box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
   font-weight: bold;
   color: #fff;
@@ -71,21 +36,17 @@
   background: rgb(224, 217, 217);
   border-radius: 7px;
 
-  /* align-items: flex-end; */
 }
 
 .dropdown .dropdown-item {
-  /* position: absolute; */
-  /* padding-top: 5px;
-  padding-left: 15px; */
+  
   border-radius: 7px;
   width: 153px;
   padding: 20px 0px 0px 20px;
   cursor: pointer;
   height: 4rem;
   margin: 1px;
-  /* border-bottom: 1px solid rgb(206, 204, 204); */
-  /* background: rgb(233, 232, 232); */
+  
 }
 
 .dropdown-item:hover {
@@ -124,14 +85,6 @@
   border-radius: 7px;
 }
 
-/* .Eventsdropdown-item {
-  border-radius: 7px;
-  width: 153px;
-  padding: 20px 0px 0px 20px;
-  cursor: pointer;
-  height: 4rem;
-  margin: 1px;
-} */
 
 .Questiondropdown-content {
   margin-top: 10px;
@@ -214,4 +167,4 @@
 .Resourcesdropdown-item:hover {
   background-color: rgb(185, 183, 183);
   border-radius: 7px;
-}
+} */
