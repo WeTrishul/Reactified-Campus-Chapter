@@ -41,14 +41,18 @@ const EventSchema = new  mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
       
         ref:'User'
-        
+  
     }],
     eventbanner:{
         type:String,
         
         required:true
+    },
+    eventLink:{
+        type:String,
+        default:'https://www.instagram.com/',
+        required:true  
     }
-
 },{
     timestamps:true
 })

@@ -231,9 +231,14 @@ module.exports.upcomingevents = async (req,res)=>{
         var myevents = []
         await Event.find({},(error,event)=>{
           myevents = event
-        }) 
+        })
+        
+       
+     const arrayEvents =  await Event.find({}).populate('Registeredusers','username email',).exec()
+     console.log('mai eventwa hu' ,arrayEvents)
 
        
+        res.setHeader('Content-Type', 'application/vnd.ms-excel')
         // res.render('UpcomingEvents',{
           
         //     myevents:myevents
@@ -241,8 +246,7 @@ module.exports.upcomingevents = async (req,res)=>{
         return res.status(200).json({
             data: {
                 title:'UpcomingEvents',
-            events : myevents
-                
+            events : arrayEvents, 
             },
             message: "Applied Successfully!"
         });
