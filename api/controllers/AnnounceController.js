@@ -81,12 +81,9 @@ module.exports.delAnnounce = async(req,res) =>{
             });
         }
         
-        if(req.user.UserType!='Admin' || req.user.UserType!='EventsLead' || req.user.UserType!='MediaLead' )
+        if(req.user.UserType=='Admin' || req.user.UserType=='EventsLead' || req.user.UserType=='MediaLead' )
         {
-            return res.status(200).json({
-                msg:"Auth Failed"
-            });
-        }
+            
 
         const announceId = req.params.id;
 
@@ -95,6 +92,8 @@ module.exports.delAnnounce = async(req,res) =>{
         return res.status(200).json({
             msg:"Done"
         });
+        
+        }
 
     } catch (error) {
         res.redirect('back')
