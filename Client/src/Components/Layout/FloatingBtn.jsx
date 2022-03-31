@@ -69,6 +69,7 @@ function FloatingBtn() {
               </Link>
             </div>
           </li> }
+
           { (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead') &&
           <li>
             <span className='myname'>Polling</span>
@@ -76,6 +77,17 @@ function FloatingBtn() {
               <Link to='/Polling'>
                 <i className='add-icon'>
                   <PollIcon />
+                </i>
+              </Link>
+            </div>
+          </li> }
+          { (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive') &&
+          <li>
+            <span className='myname'>Announcement</span>
+            <div className='fab-holder'>
+              <Link to='/AnnouncementPage'>
+                <i className='add-icon'>
+                  <ChatIcon />
                 </i>
               </Link>
             </div>

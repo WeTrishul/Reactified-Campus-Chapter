@@ -31,12 +31,21 @@ module.exports.allAnnouncement= async (req,res)=>{
 module.exports.Announce = async(req,res) =>{
 
     try {
-        // if(!req.isAuthenticated())
-        // {
-        //   return   res.redirect('/login')
-        // }
-
-      const  Announce = await Announcements.create(req.body);
+        if(!req.isAuthenticated())
+        {
+            return res.status(200).json({
+                msg:"login please"
+            });
+        }
+        console.log(req.body)
+        console.log(req.body.description)
+        const v = {
+            userid:req.user.id,
+            title:req.body.title,
+            description:req.body.description,
+           
+        }
+      const  Announce = await Announcements.create(v);
 
 
         return res.status(200).json({

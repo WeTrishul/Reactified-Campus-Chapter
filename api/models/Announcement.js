@@ -5,7 +5,8 @@ const db = require('../config/db')
 announcementSchema = mongoose.Schema({
     userid:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        ref:'User',
+        required:true
     },
     title:{
         type:String,

@@ -42,6 +42,7 @@ import ViewFiles from './Components/Page/ViewFiles';
 import DisplayPoll from './Components/Page/DisplayPoll'
 import GlobalEvents from './Components/Page/GlobalEvents'
 import Reports from './Components/Page/Reports';
+import AnnouncementPage from './Components/Page/AnnouncementPage/AnnouncementPage';
 import upComingEvents from "./Components/Page/AllEvents/UpComingEvents"
 import Discuss from './Components/Page/Discussion/Discuss';
 import Corechat from './Components/Chat Engine/Corechat';
@@ -163,6 +164,10 @@ function App() {
         {authCtx.isLoggedIn && <Route exact path='/GlobalEvents/:platform'>
           <GlobalEvents/>
         </Route>}
+        {authCtx.isLoggedIn && <Route exact path='/AnnouncementPage'>
+          <AnnouncementPage/>
+        </Route>}
+        
         {authCtx.isLoggedIn && socket && <Route exact path='/AllEvents'>
           <AllEvents socket={socket}/>
         </Route>}
