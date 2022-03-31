@@ -39,6 +39,7 @@ function Dashboard() {
   const [events, setEvents] = useState([]);
   const [current, setCurrent] = useState(0);
   const [posts, setPosts] = useState([]);
+  const [announce,setAnnounce] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -124,7 +125,7 @@ function Dashboard() {
         setBlogs(data.data.blogs);
         setEvents(data.data.events);
         setCurrent(data.data.events.length);
-
+        setAnnounce(data.data.announce);
         setPosts(data.data.posts);
         setIsLoading(false);
         //     // console.log(data)
@@ -508,7 +509,7 @@ function Dashboard() {
             </div>
             <div className='dashboardAnnouncementCarousel'>
               <Carousel breakPoints={breakpoints}>
-                {items.map((item) => {
+                {announce && announce.map((item) => {
                   return (
                     <Card
                       sx={{
@@ -521,7 +522,7 @@ function Dashboard() {
                         borderRadius: '20px',
                       }}
                       className='dashboard-Cards'
-                      key={item.id}
+                      key={item._id}
                     >
                       <div className='AnnouncementCarouselDesign'>
                         <div className='announcementHeading'>
@@ -538,16 +539,16 @@ function Dashboard() {
                           </span>
                         </div>
                         <div className='announcementDescription'>
-                          {item.desc}
+                          {item.description}
                         </div>
                         <div className='announcementDateandTime'>
-                          {item.date}
+                          {item.createdAt}
                         </div>
                         <div className='announcementLikeandShare'>
                           <span>
                             <FavoriteBorderIcon />
                           </span>
-                          <span>{item.like}</span>
+                          {/* <span>{item.like}</span> */}
                           <span style={{ float: 'right' }}>
                             <ReplySharpIcon />
                           </span>

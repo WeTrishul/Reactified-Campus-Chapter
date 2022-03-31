@@ -3,6 +3,7 @@ const express = require('express')
 const Env = require('../config/environment')
 const db = require('../config/db')
 const mongoose = require('mongoose')
+const Announcements = require('../models/Announcement')
 const User = require('../models/user')
 const Event = require('../models/events')
 const Blog = require('../models/blog')
@@ -174,7 +175,7 @@ module.exports.postsignup = async (req,res)=>{
 
 module.exports.dashboard = async (req,res)=>{
     console.log("inside dashboard")
-    console.log(req.user)
+   
     try { 
         
         // const posts = await Post.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(8)
@@ -187,6 +188,8 @@ module.exports.dashboard = async (req,res)=>{
         const events = await Event.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(4)
 
         const blog = await Blog.find({}, {}, { sort: { 'createdAt' : -1 }}).limit(8)
+
+        const announce = await Announcements.find({}).populate('userid','username UserType dp').exec()
 
 
         // res.render('dashboard',{
@@ -203,10 +206,11 @@ module.exports.dashboard = async (req,res)=>{
                     title:'Dasboard',
                 posts : posts,
                 events : events,
-                blogs : blog
+                blogs : blog,
+                announce:announce
                     
-                },
-                message: "Applied Successfully!"
+                }
+               
             });
         // }
         // else{

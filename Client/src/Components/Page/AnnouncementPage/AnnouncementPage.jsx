@@ -57,7 +57,10 @@ function AnnouncementPage() {
     })
       .then((res) => {
         console.log(res.data.data);
+        if(annId)
+        {
         document.getElementById("ann-"+annId).remove()
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -73,12 +76,7 @@ function AnnouncementPage() {
     const eneteredtitle = SubjectRef.current.value;
     const enteredbody = BodyRef.current.value;
 
-    console.log(eneteredtitle)
-    console.log(enteredbody)
-    var form_data = new FormData();
-
-    form_data.append('title', eneteredtitle);
-    form_data.append('description', enteredbody);
+ 
 
     
     Axios({
@@ -92,6 +90,7 @@ function AnnouncementPage() {
     })
       .then((res) => {
         console.log(res.data.data);
+        setAnnouncements((c) => [...c, res.data.data]);
         // socket.emit('notify', {
         //   to: undefined,
         //   from: userName,

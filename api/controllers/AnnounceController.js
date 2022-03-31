@@ -9,10 +9,14 @@ module.exports.allAnnouncement= async (req,res)=>{
 
 
     try {
-        // if(!req.isAuthenticated())
-        // {
-        //   return   res.redirect('/login')
-        // }
+        if(!req.isAuthenticated())
+        {
+            return res.status(200).json({
+                msg:"Auth Failed"
+            });
+        }
+        
+    
         const Announcement = await Announcements.find({}).populate('userid','username UserType dp').exec()
 
         return res.status(200).json({
@@ -34,11 +38,14 @@ module.exports.Announce = async(req,res) =>{
         if(!req.isAuthenticated())
         {
             return res.status(200).json({
-                msg:"login please"
+                msg:"Auth Failed"
             });
         }
-        console.log(req.body)
-        console.log(req.body.description)
+        
+        if(req.user.UserType=='Admin' || req.user.UserType=='EventsLead' || req.user.UserType=='MediaLead' )
+        {
+            
+        
         const v = {
             userid:req.user.id,
             title:req.body.title,
@@ -52,6 +59,7 @@ module.exports.Announce = async(req,res) =>{
             data: Announce,
             msg:"success"
         });
+    }
 
     } catch (error) {
         res.redirect('back')
@@ -65,10 +73,20 @@ module.exports.Announce = async(req,res) =>{
 module.exports.delAnnounce = async(req,res) =>{
 
     try {
-        // if(!req.isAuthenticated())
-        // {
-        //   return   res.redirect('/login')
-        // }
+        
+        if(!req.isAuthenticated())
+        {
+            return res.status(200).json({
+                msg:"Auth Failed"
+            });
+        }
+        
+        if(req.user.UserType!='Admin' || req.user.UserType!='EventsLead' || req.user.UserType!='MediaLead' )
+        {
+            return res.status(200).json({
+                msg:"Auth Failed"
+            });
+        }
 
         const announceId = req.params.id;
 
