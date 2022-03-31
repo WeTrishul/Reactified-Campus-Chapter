@@ -22,6 +22,25 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import ReplyIcon from '@mui/icons-material/Reply';
 import { Link } from 'react-router-dom';
 import './Events.css';
+import * as FileSaver from "file-saver";
+import * as XLSX from "xlsx";
+
+const fileType ="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+const fileExtension = ".xlsx";
+
+const exportToCSV = (arrayOfObject,fileName) => {
+  console.log(fileExtension)
+  const ws = XLSX.utils.json_to_sheet(arrayOfObject);
+  const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+  const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+  const data = new Blob([excelBuffer], { type: fileType });
+  FileSaver.saveAs(data, fileName + fileExtension);
+};
+
+const ExportToExcel = (arrayOfObject,fileName)=>{
+  exportToCSV(arrayOfObject,fileName)
+};
+  
 
 const style = {
   position: 'absolute',
@@ -56,6 +75,19 @@ function UpComingEvents({ socket }) {
   // for edit event modal form
 
   const [editopen, setEditOpen] = React.useState(false);
+  const samplejson1 = [
+    { label: "C" },
+    { label: "Java" },
+    { label: "Go" },
+    { label: "Javascript" },
+    { label: "HTML" },
+    { label: "CSS" },
+    { label: "REACT" },
+    { label: "JQUERY" }
+  ];
+
+  
+
   const handleEditOpen = (eveid) => {
     Axios({
       method: 'GET',
@@ -90,6 +122,7 @@ function UpComingEvents({ socket }) {
 
   const AboutEventRef = useRef();
   const EventNameRef = useRef();
+  const EventLink = useRef();
   const EventDateRef = useRef();
   const EventStartTimeRef = useRef();
   const EventEndTimeRef = useRef();
@@ -101,6 +134,7 @@ function UpComingEvents({ socket }) {
   const EditEventDateRef = useRef();
   const EditEventStartTimeRef = useRef();
   const EditEventEndTimeRef = useRef();
+  const EditEventLink = useRef();
 
   let history = useHistory();
 
@@ -133,6 +167,12 @@ function UpComingEvents({ socket }) {
     setEditEvent({ ...event, x });
   };
 
+  const handleLinkChange = (e) => {
+    let x = event;
+    x.eventLink = e.target.value;
+    setEditEvent({ ...event, x });
+  };
+
   // methods to handle change
 
   function submitHandler(e) {
@@ -145,6 +185,7 @@ function UpComingEvents({ socket }) {
     const enteredEventDate = EventDateRef.current.value;
     const enteredStartTime = EventStartTimeRef.current.value;
     const enteredEndTime = EventEndTimeRef.current.value;
+    const enteredEventLink = EventLink.current.value;
 
     var form_data = new FormData();
 
@@ -155,6 +196,8 @@ function UpComingEvents({ socket }) {
     form_data.append('eventStartTime', enteredStartTime);
     form_data.append('eventEndTime', enteredEndTime);
     form_data.append('eventDate', enteredEventDate);
+    form_data.append('eventLink', enteredEventLink);
+
 
     // for (var key of form_data.entries()) {
     //   console.log(key[0] + ', ' + key[1]);
@@ -193,6 +236,13 @@ function UpComingEvents({ socket }) {
 
   const [isLoading, setIsLoading] = useState(true);
   const [eve, setEve] = useState([]);
+
+  /*const ExportToExcel = (data1) => {  
+    let x=JSON.stringify(data1)
+    let y = JSON.parse(x)
+    console.log(x,'Sristi Rai')
+    //exportFromJSON({ y, fileName, exportType })  
+  }  */
 
   useEffect(() => {
     // axios.get('http://localhost:3000/UpcomingEvents')
@@ -266,7 +316,7 @@ function UpComingEvents({ socket }) {
   };
 
   const renderButton = (data) => {
-    if (data.Registeredusers.includes(userId)) {
+    if (data.Registeredusers.find(e => e._id === userId)) {
       return (
         <Button variant='contained' color='error' id={'regbtn' + data._id}>
           Registered
@@ -287,7 +337,7 @@ function UpComingEvents({ socket }) {
   };
 
   const renderPriviledgeButton = (data) => {
-    if (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive' ) {
+    if (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead' || UserType==='Executive' ) {
       return (
         <Box sx={{ display: 'flex' }}>
           <Box>
@@ -300,7 +350,7 @@ function UpComingEvents({ socket }) {
             />
           </Box>
           <Box sx={{ marginLeft: '20px' }}>
-            <ReplyIcon />
+            <ReplyIcon onClick={() => ExportToExcel(data.Registeredusers,data.eventname+' Registration')}/>
           </Box>
         </Box>
       );
@@ -324,7 +374,7 @@ function UpComingEvents({ socket }) {
     const enteredEventDate = EditEventDateRef.current.value;
     const enteredStartTime = EditEventStartTimeRef.current.value;
     const enteredEndTime = EditEventEndTimeRef.current.value;
-
+    const enteredEventLink = EditEventLink.current.value;
     console.log('Mai change hogya hoon ', enteredEventName);
     var form_data = new FormData();
 
@@ -336,6 +386,7 @@ function UpComingEvents({ socket }) {
     form_data.append('eventEndTime', enteredEndTime);
     form_data.append('eventDate', enteredEventDate);
     form_data.append('id', event._id);
+    form_data.append('eventLink', enteredEventLink);
 
     Axios({
       method: 'POST',
@@ -620,6 +671,7 @@ function UpComingEvents({ socket }) {
   };
   return (
     <div>
+    <button type="button" onClick={ExportToExcel}>Export To Excel</button>
       <div className='upComingEvents-Body-Box'>
         <div className='upComingEvents-Outer-Box'>
           <div className='upComingEvents-Inner-Box'>
@@ -723,6 +775,14 @@ function UpComingEvents({ socket }) {
                               label='Event Date'
                               variant='outlined'
                               inputRef={EventDateRef}
+                            />
+                          </Box>
+                          <Box sx={{ marginTop: '10px' }}>
+                            <TextField
+                              id='outlined-basic'
+                              label='EventLink'
+                              variant='outlined'
+                              inputRef={EventLink}
                             />
                           </Box>
                           <Box
@@ -847,6 +907,16 @@ function UpComingEvents({ socket }) {
                               inputRef={EditEventDateRef}
                               value={event.eventDate}
                               onChange={handleDateChange}
+                            />
+                          </Box>
+                          <Box sx={{ marginTop: '10px' }}>
+                            <TextField
+                              id='outlined-basic'
+                              label='Event Link'
+                              variant='outlined'
+                              inputRef={EditEventLink}
+                              value={event.eventLink}
+                              onChange={handleLinkChange}
                             />
                           </Box>
                           <Box

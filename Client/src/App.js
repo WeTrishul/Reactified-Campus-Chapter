@@ -145,12 +145,15 @@ function App() {
    </SocketContext.Provider> */}
 
       {authCtx.isLoggedIn && socket && <Appbar socket={socket} />}
-      {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' 
-      || UserType=='Executive' )  && <FloatingBtn/>}
+      {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead' 
+      || UserType==='Executive' )  && <FloatingBtn/>}
       <Switch>
         {/* {authCtx.isLoggedIn && socket && <Route exact path='/DashBoard'>
           <DashBoard socket={socket}/>
         </Route>} */}
+
+        
+       
         {authCtx.isLoggedIn && socket &&  <Route exact path='/UpcomingEvent'>
           <UpComingEvents  socket={socket}/>
         </Route>}
@@ -169,7 +172,7 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/Dashboard'>
           <Dashboard/>
         </Route>}
-        {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead') &&<Route exact path='/Reports'>
+        {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead') &&<Route exact path='/Reports'>
           <Reports/>
         </Route>}
         {/* {authCtx.isLoggedIn &&<Route exact path='/Profile'>
@@ -178,10 +181,10 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/Profile'>
           <Userprofile/>
         </Route>}
-        {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive' ) && socket &&<Route exact path='/AddEvent'>
+        {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead' || UserType==='Executive' ) && socket &&<Route exact path='/AddEvent'>
           <AddEvent socket={socket}/>
         </Route>}
-        {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive' ) &&<Route exact path='/EditEventPage'>
+        {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead' || UserType==='Executive' ) &&<Route exact path='/EditEventPage'>
           <EditEventPage/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/WriteBlogs'>
@@ -190,22 +193,22 @@ function App() {
         {/* {authCtx.isLoggedIn &&<Route exact path='/Polling'>
           <Polling/>
         </Route>} */}
-        {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' ) &&<Route exact path='/Polling'>
+        {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead' ) &&<Route exact path='/Polling'>
           <PollList/>
         </Route>}
-        {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' ) &&<Route exact path='/ViewAllPoll'>
+        {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead' ) &&<Route exact path='/ViewAllPoll'>
           <ViewAllPoll/>
         </Route>}
         {authCtx.isLoggedIn &&<Route exact path='/DisplayPoll/:pollID'>
           <DisplayPoll/>
         </Route>}
-        {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' ) &&<Route exact path='/PollCreate'>
+        {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead' ) &&<Route exact path='/PollCreate'>
           <PollCreate/>
         </Route>}
         {/* {authCtx.isLoggedIn && <Route exact path='/AllUsers'>
           <AllUsers/>
         </Route>} */}
-        {authCtx.isLoggedIn && UserType=='Admin' && <Route exact path='/AllUsers'>
+        {authCtx.isLoggedIn && UserType==='Admin' && <Route exact path='/AllUsers'>
           <Users/>
         </Route>}
         {/* {authCtx.isLoggedIn && <Route exact path='/Blogs'>
@@ -229,7 +232,7 @@ function App() {
         {authCtx.isLoggedIn && <Route exact path='/EditProfile'>
           <Editprofile/>
         </Route>}
-        {authCtx.isLoggedIn && UserType=='Admin' && socket && <Route exact path='/Applications'>
+        {authCtx.isLoggedIn && UserType==='Admin' && socket && <Route exact path='/Applications'>
           <Applications socket={socket}/>
         </Route>}
         {!authCtx.isLoggedIn &&<Route exact path='/TeamChat'>
@@ -238,11 +241,11 @@ function App() {
         {/* {authCtx.isLoggedIn &&<Route exact path='/SetQuestions'>
           <SetQuestions/>
         </Route>} */}
-        {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive' || UserType=='QuestionSetter' ) &&<Route exact path='/SetQuestions'>
+        {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead' || UserType==='Executive' || UserType==='QuestionSetter' ) &&<Route exact path='/SetQuestions'>
           <Setquestions/>
         </Route>}
  
-        {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='EventsLead' ) &&<Route exact path='/ViewQuestions/:userkaname'>
+        {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='EventsLead' ) &&<Route exact path='/ViewQuestions/:userkaname'>
           <Viewquestions/>
         </Route>}
         {/* {authCtx.isLoggedIn &&<Route exact path='/ViewResources'>
@@ -284,7 +287,7 @@ function App() {
         {authCtx.isLoggedIn &&<Route exact path='/Leaderboard'>
           <Leadersboard/>
         </Route>}
-        {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive' ) &&<Route exact path='/EventForm'>
+        {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead' || UserType==='Executive' ) &&<Route exact path='/EventForm'>
           <EventForm/>
         </Route>}
          <Route exact path='/'>
@@ -293,10 +296,10 @@ function App() {
         <Route exact path='/SignupData'>
           <SignupData/>
         </Route>
-        {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead') && socket && <Route exact path='/Corechat'>
+        {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead') && socket && <Route exact path='/Corechat'>
           <Corechat socket={socket}/>
         </Route>}
-        {authCtx.isLoggedIn && (UserType=='Admin' || UserType=='MediaLead' || UserType=='EventsLead' || UserType=='Executive') && socket && <Route exact path='/Executivechat'>
+        {authCtx.isLoggedIn && (UserType==='Admin' || UserType==='MediaLead' || UserType==='EventsLead' || UserType==='Executive') && socket && <Route exact path='/Executivechat'>
           <Executivechat socket={socket} /> 
         </Route>}
         {/* {authCtx.isLoggedIn && socket &&<Route exact path='/ExecutiveChati'>
