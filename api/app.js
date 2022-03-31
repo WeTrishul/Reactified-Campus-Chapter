@@ -27,6 +27,7 @@ const User = require('./models/user')
 const Noticleaner = require('./config/Noti_cleaner')
 const globalEventMethods = require('./config/GlobaleventMethods')
 const applyrouter = require('./routes/applyRouter')
+const AnnounceRouter = require('./routes/announcement')
 
 
 
@@ -91,7 +92,7 @@ app.use(passport.setAuthenticatedUser)
 
 app.use(express.static(Env.asset_path))
 app.use(EventRouter)
-
+app.use(AnnounceRouter)
 app.use(UserRouter)
 app.use(DiscussRouter)
 app.use(LeaderboardsRouter)
