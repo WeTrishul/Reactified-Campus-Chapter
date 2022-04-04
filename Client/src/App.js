@@ -167,8 +167,8 @@ function App() {
         {authCtx.isLoggedIn && <Route exact path='/GlobalEvents/:platform'>
           <GlobalEvents/>
         </Route>}
-        {authCtx.isLoggedIn && <Route exact path='/AnnouncementPage'>
-          <AnnouncementPage/>
+        {authCtx.isLoggedIn &&  socket &&<Route exact path='/AnnouncementPage'>
+          <AnnouncementPage socket={socket}/>
         </Route>}
         
         {authCtx.isLoggedIn && socket && <Route exact path='/AllEvents'>

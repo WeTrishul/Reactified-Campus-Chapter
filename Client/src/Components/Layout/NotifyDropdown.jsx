@@ -19,13 +19,15 @@ function NotifyDropdown({ notifications }) {
                     padding: '10px',
                     marginBottom: '1px',
                   }}
+
+                   onClick={() => window.location.replace(value.placetogo)}
                 >
-                  <Link
+                  {/*<Link
                     style={{ color: 'black', textDecoration: 'none' }}
                     to={'' + value.placetogo}
-                  >
+                  >*/}
                     {value.msg}
-                  </Link>
+                  {/*</Link>*/}
                 </Card>
                 {/* <hr className='notify-border' /> */}
               </div>

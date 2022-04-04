@@ -524,7 +524,7 @@ function Dashboard() {
                       className='dashboard-Cards'
                       key={item._id}
                     >
-                      <div className='AnnouncementCarouselDesign'>
+                      <div id = {'ann-'+item._id} className='AnnouncementCarouselDesign'>
                         <div className='announcementHeading'>
                           <span>
                             <CampaignIcon />

@@ -10,6 +10,10 @@ const fetch = require('node-fetch')
 const User = require('../models/user')
 
 
+
+
+
+
 router.get('/fileupload',passport.checkAuthentication,UploadController.setQuestions)
 router.post('/fileupload/setquestions/:id',UploadController.upload)
 router.get('/profilepage',passport.checkAuthentication,UploadController.profile)

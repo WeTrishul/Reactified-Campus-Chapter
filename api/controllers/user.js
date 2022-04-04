@@ -31,6 +31,7 @@ const signup_mailer = require('../mailers/signup_mailer')
 const jwt  = require('jsonwebtoken');
 const { findOneAndDelete } = require('../models/user');
 
+
 module.exports.getlogin=(req,res)=>{
 
     if(req.isAuthenticated())
@@ -63,6 +64,8 @@ module.exports.postlogin = async(req,res)=>{
             },
             message: "Applied Successfully!"
         });
+
+        
     } catch (error) {
         
         console.log("post login ka naya natak wala error");

@@ -128,25 +128,13 @@ function LoginForm() {
     // });
   };
 
-  const responseSuccessGoogle = (response) => {
-    // console.log(response);
-    // console.log(response.tokenId)
-    console.log(response);
-    console.log(response.tokenId);
-    // const userToken= {
-    //     token:response.tokenId
-    // }
-
-    // axios.post("http://localhost:3000/login/createsession/",userToken
-    // ).then (response =>{
-    //     console.log(response);
-    // })
+  
+  const google = () => {
+    window.open("http://localhost:3000/users/auth/google", "_self");
   };
+  
 
-  const responseFailGoogle = (response) => {
-    console.log(response);
-  };
-
+  
   return (
     <div>
       <section>
@@ -180,13 +168,7 @@ function LoginForm() {
                 </p>
               </div>
             </form>
-            <GoogleLogin
-              clientId='538926290930-la7j10mp0gjt8c3uq9h0bbrt4lutgn0g.apps.googleusercontent.com'
-              buttonText='Login with google Account'
-              onSuccess={responseSuccessGoogle}
-              onFailure={responseFailGoogle}
-              cookiePolicy={'single_host_origin'}
-            />
+            <button onClick={google}>G</button>
             {/* <h3>Login With Google Account</h3> */}
           </div>
         </div>

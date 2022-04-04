@@ -3,6 +3,7 @@ import './AnnouncementPage.css';
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { useRef } from 'react';
+import AuthContext from '../../../Service/auth-context';
 import { useContext} from 'react';
 import { useHistory } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
@@ -16,6 +17,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import { Link } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
+import io from 'socket.io-client';
 
 const style = {
   position: 'absolute',
@@ -37,13 +39,20 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function AnnouncementPage() {
+function AnnouncementPage({socket}) {
+  
   const [announcements, setAnnouncements] = useState([]);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const SubjectRef = useRef();
   const BodyRef = useRef();
+
+
+  const authCtx = useContext(AuthContext);
+  let userId = authCtx.id;
+  let userName = authCtx.username;
+  let UserType=authCtx.usertype;
 
 
   let history = useHistory();
@@ -91,16 +100,15 @@ function AnnouncementPage() {
       .then((res) => {
         console.log(res.data.data);
         setAnnouncements((c) => [...c, res.data.data]);
-        // socket.emit('notify', {
-        //   to: undefined,
-        //   from: userName,
-        //   msg:
-        //     'event: ' +
-        //     res.data.data.eventname +
-        //     ' on ' +
-        //     res.data.data.eventdate,
-        //   placetogo: '/UpcomingEvent/' + '#event-' + res.data.data.eventid,
-        // });
+         socket.emit('notify', {
+           to: undefined,
+           from: userName,
+           msg:
+            'Announcement: ' +
+             res.data.data.title +
+             '!',
+          placetogo: '/Dashboard/' + '#ann-' + res.data.data._id,
+         });
         setOpen(false);
       })
       .catch((err) => {
