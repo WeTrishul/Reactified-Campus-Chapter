@@ -26,7 +26,7 @@ const development = {
         secure: false, // true for 465, false for other ports
         auth: {
           user: 'team.wetrishul@gmail.com', 
-          pass: '12019009001418',
+          pass: 'tszxvuqtfjzitgdc',
         },
       },
     google_client_ID:'724954914773-8tgpsd25gtsegic3g6g1jom7sslie8e9.apps.googleusercontent.com',
