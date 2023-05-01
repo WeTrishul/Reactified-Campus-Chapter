@@ -144,7 +144,7 @@ app.listen(port,()=>{
 
         setTimeout(() => RatingsHandler.updateLeaderboards(), t) 
         
-    },604800000);//604800000
+    },100000);//604800000
     
 
     console.log('Server is up on port '+ port)

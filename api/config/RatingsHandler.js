@@ -1,119 +1,91 @@
-const Leaderboards = require('../models/Leaderboards')
-const User = require('../models/user')
-const fetch = require('node-fetch')
-const fetchRatings = require('./fetchRatings')
+const Leaderboards = require("../models/Leaderboards");
+const User = require("../models/user");
+const fetch = require("node-fetch");
+const fetchRatings = require("./fetchRatings");
 
+const getRatings = async (user) => {
+  try {
+    // for codeforces
 
-getRatings=async (user)=>{
-    try{
-        // for codeforces 
-        
-        const codeforcesRatings = await fetchRatings.codeforecesRating(user)
+    const codeforcesRatings = await fetchRatings.codeforecesRating(user);
 
-        // 5 req in 1 sec
-       
-        //for codechef
-        const codechefRatings = await fetchRatings.codeChefRating(user)
+    // 5 req in 1 sec
 
-         // 6 req in 1 min
+    //for codechef
+    const codechefRatings = await fetchRatings.codeChefRating(user);
 
-        //for leetcode
-        const leetcodeRatings = await fetchRatings.leetCodeRating(user)
+    // 6 req in 1 min
 
-         // 5 req in 1 min
+    //for leetcode
+    const leetcodeRatings = await fetchRatings.leetCodeRating(user);
 
-        console.log(codeforcesRatings)
-        console.log(codechefRatings)
-        console.log(leetcodeRatings)
+    // 5 req in 1 min
 
-        return codeforcesRatings + codechefRatings + parseInt(leetcodeRatings)
-    }catch(error)
-    {
-        console.log('Could not fetch' + error)       
-    }    
-}
+    console.log(codeforcesRatings);
+    console.log(codechefRatings);
+    console.log(leetcodeRatings);
+
+    return codeforcesRatings + codechefRatings + parseInt(leetcodeRatings);
+  } catch (error) {
+    console.log("Could not fetch" + error);
+  }
+};
 
 // var i = 0
 
-
-const fun = async (allusers,i) =>{
-      
+const fun = async (allusers, i) => {
   try {
+    console.log("Idhar aaya");
 
-    console.log('Idhar aaya')
+    const overallrating = await getRatings(allusers[i]);
 
-    const overallrating = await getRatings(allusers[i])
-
-    if(allusers[i].OverallRatings.length>=4)
-    {
-      allusers[i].OverallRatings = []
+    if (allusers[i].OverallRatings.length >= 4) {
+      allusers[i].OverallRatings = [];
     }
-    allusers[i].OverallRatings.push(overallrating)
-    allusers[i].CurrentRating=overallrating
-    allusers[i].save()
-        console.log('done adding')
+    allusers[i].OverallRatings.push(overallrating);
+    allusers[i].CurrentRating = overallrating;
+    allusers[i].save();
+    console.log("done adding");
 
-     
+    // return i
+    // if(i===allusers.length-1)
+    // {
 
-      // return i
-      // if(i===allusers.length-1)
-      // {
-       
-      //    return i
-    
-      // }
-    
+    //    return i
+
+    // }
   } catch (error) {
-
-    console.log('Node ke bas ka nahi' + error)
-    
+    console.log("Node ke bas ka nahi" + error);
   }
- 
+};
 
-  
-  }
-
-module.exports.updateRatingsOfAllUsers = async ()=>{
-//  var allusers = []
-//   await User.find({},(error,user)=>{
-//     allusers = user
-//   }) 
-
- 
+module.exports.updateRatingsOfAllUsers = async () => {
+  //  var allusers = []
+  //   await User.find({},(error,user)=>{
+  //     allusers = user
+  //   })
 
   // allusers.forEach(async (user)=>{
 
-    // console.log(allusers[0])
-  
+  // console.log(allusers[0])
+
   try {
-    const allusers = await User.find({})
+    const allusers = await User.find({});
 
-    var i = 0
-    
-   var c =  setInterval(()=>{
-      
-    fun(allusers,i)
-    if(++i==allusers.length)
-    {
-      clearInterval(c)
-    }
-    
-    
+    var i = 0;
 
-    }
-      ,15000)
-
-    
-     
-    
+    var c = setInterval(() => {
+      fun(allusers, i);
+      if (++i == allusers.length) {
+        clearInterval(c);
+      }
+    }, 15000);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-  
-  
 
-// })
-  
+  // })
+
   // allusers.forEach(async (user)=>{
   //      const overallrating = await this.getRatings(user)
   //      User.findById(user._id,async(error,user)=>{
@@ -130,65 +102,57 @@ module.exports.updateRatingsOfAllUsers = async ()=>{
   //     })
 
   // })
+};
 
+module.exports.updateLeaderboards = async () => {
+  // var allusers = []
 
-}
+  // await User.find({},(error,users)=>{
+  //     allusers=users
+  // })
+  const allusers = await User.find({});
+  console.log(allusers.length);
 
+  allusers.sort(compare);
 
-module.exports.updateLeaderboards = async () =>{
+  await Leaderboards.deleteMany({});
 
-        // var allusers = []
+  allusers.forEach(async (user) => {
+    const updateduser = {
+      userid: user._id,
+      CurrentRating: user.CurrentRating,
+    };
+    await Leaderboards.create(updateduser, (error, result) => {
+      if (error) {
+        return console.log("cannot insert");
+      }
+    });
+  });
 
-        // await User.find({},(error,users)=>{
-        //     allusers=users
-        // })
-        const allusers = await User.find({})
-        console.log(allusers.length)
-        
-        allusers.sort(compare)
+  // Leaderboards.deleteMany({},(error,lboard)=>{
+  //     if(error){return console.log('cannot delete')}
+  //     allusers.forEach(async (user)=>{
 
-        await Leaderboards.deleteMany({})
+  //         const updateduser = {
+  //             userid:user._id,
+  //             CurrentRating:user.CurrentRating
+  //         }
 
-        allusers.forEach(async (user)=>{
-                  const updateduser = {
-                      userid:user._id,
-                      CurrentRating:user.CurrentRating
-                  }
-                 await Leaderboards.create(updateduser,(error,result)=>{
-                      if(error){return console.log('cannot insert')}
-                  })
-              })
+  //        await Leaderboards.create(updateduser,(error,result)=>{
+  //             if(error){return console.log('cannot insert')}
+  //         })
+  //     })
+  // })
 
-        // Leaderboards.deleteMany({},(error,lboard)=>{
-        //     if(error){return console.log('cannot delete')}
-        //     allusers.forEach(async (user)=>{
+  console.log("Leaderboards updated");
+};
 
-        //         const updateduser = {
-        //             userid:user._id,
-        //             CurrentRating:user.CurrentRating
-        //         }
-               
-        //        await Leaderboards.create(updateduser,(error,result)=>{
-        //             if(error){return console.log('cannot insert')}
-        //         })
-        //     })
-        // })  
-
-        console.log("Leaderboards updated")
-
-}
-
-
-const compare = ( a, b ) =>{
-    
-    if ( parseInt(a.CurrentRating) < parseInt(b.CurrentRating) ){
-      return 1;
-    }
-    if ( parseInt(a.CurrentRating) > parseInt(b.CurrentRating) ){
-      return -1;
-    }
-    return 0;
+const compare = (a, b) => {
+  if (parseInt(a.CurrentRating) < parseInt(b.CurrentRating)) {
+    return 1;
   }
-
-
-  
+  if (parseInt(a.CurrentRating) > parseInt(b.CurrentRating)) {
+    return -1;
+  }
+  return 0;
+};

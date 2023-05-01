@@ -70,7 +70,7 @@ module.exports.upload = async(req,res)=>{
                     console.log(paths,'bhai node hai yeh')
                     await user.save()
     
-                    arr = await paths.split(',')
+                    arr =  paths.split(',')
                     arr.forEach(ele => user.arr.push(ele))
     
                     await user.save()

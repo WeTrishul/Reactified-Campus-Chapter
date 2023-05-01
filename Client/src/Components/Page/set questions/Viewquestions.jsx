@@ -52,7 +52,7 @@ function Viewquestions() {
           <div className='viewquestions-inner-Box'>
             <Typography>
               <Grid container>
-                {allques &&
+                {allques && userId &&
                   allques.map((data, index) => {
                     return (
                       <Grid item xs={12} sm={6} md={4} lg={3} key={index}>

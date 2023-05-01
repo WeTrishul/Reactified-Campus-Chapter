@@ -94,7 +94,7 @@ function Viewblogs() {
                           <div className='blogs-userImg-Container'>
                             <img
                               className='blogs-User-Image'
-                              src={data.userid.dp}
+                              src={'http://localhost:3000'+data.userid.dp}
                               alt=''
                             />
                           </div>
